@@ -1,5 +1,4 @@
 # encoding: utf-8
-
 class DataUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:

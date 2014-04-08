@@ -5,6 +5,7 @@ CarrierWave.configure do |config|
     aws_secret_access_key: ENV['AWS_SECRET']
   }
   config.fog_directory = Rails.application.secrets.aws_bucket
-  include CarrierWave::MimeTypes
-  process :set_content_type
 end
+
+# include CarrierWave::MimeTypes
+# process :set_content_type
