@@ -2,7 +2,19 @@ Rails.application.routes.draw do
   devise_for :people
   root "family#index"
 
-  get '/person/:id' => "person#show", as: 'person_path'
+  get '/person/:id' => "person#show", as: 'person'
+
+
+  get '/albums' => "albums#index", as: 'albums'
+  get '/albums/new' => "albums#new", as: 'new_album'
+  get '/albums/:id/edit' => "albums#edit", as: 'edit_album'
+  get '/albums/:id' => "albums#show", as: 'album'
+  
+  post '/albums' => "albums#create"
+  patch '/albums' => "albums#update"
+  delete '/albums/:id' => "albums#destroy"
+  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
