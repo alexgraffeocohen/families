@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '/albums/:id' => "albums#show", as: 'album'
   
   post '/albums' => "albums#create"
-  patch '/albums' => "albums#update"
+  patch '/albums/:id' => "albums#update"
   delete '/albums/:id' => "albums#destroy", as: 'destroy_album'
   
 
