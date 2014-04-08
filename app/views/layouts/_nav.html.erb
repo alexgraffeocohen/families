@@ -1,0 +1,5 @@
+<% if person_signed_in? %>
+  <%= link_to "Sign Out", destroy_person_session_path, method: :delete %>
+<% else %>
+  <%= link_to "Sign In", new_person_session_path %>
+<% end %>

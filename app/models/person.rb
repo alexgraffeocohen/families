@@ -46,8 +46,4 @@ class Person < ActiveRecord::Base
   def grandfathers
     {maternal: mother.father, paternal: father.father}
   end
-
-  def default_family
-    self.families[0]
-  end
 end
