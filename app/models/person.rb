@@ -11,11 +11,11 @@ class Person < ActiveRecord::Base
   belongs_to :spouse, :class_name => Person, :foreign_key => :spouse_id
 
   def siblings
-    Person.where(mother_id: ? OR father_id: ?, mother_id, father_id)
+    Person.where("mother_id: ? OR father_id: ?", mother_id, father_id)
   end
 
   def children
-    Person.where(mother_id: ? OR father_id: ?, self.id, self.id)
+    Person.where("mother_id: ? OR father_id: ?", self.id, self.id)
   end
 
   def mother
