@@ -34,6 +34,8 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'figaro', git: 'https://github.com/laserlemon/figaro.git'
+
 group :test, :development do
   gem "rspec-rails"
   gem "capybara"
