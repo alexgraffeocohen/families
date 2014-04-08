@@ -1,1 +1,9 @@
-form.html.erb
+<%= form_for @album do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name, placeholder: "My Album" if !@album.name %>
+
+  <%= f.label :date %>
+  <%= f.date_select :date, :start_year => 2000, :end_year => Time.now.year %>
+
+  <%= f.submit %>
+<% end %>

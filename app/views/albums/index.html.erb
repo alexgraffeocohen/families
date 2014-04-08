@@ -1,1 +1,14 @@
-index.html.erb
+<% @albums.each do |album| %>
+  <%= album.name %>
+  <p><%=@album.photos.count%> Photos</p>
+  <%= album.date %>
+
+  <%= link_to "View", album_path(album) %>
+  <%= link_to "Edit", edit_album_path(album) %>
+  <%= link_to "Delete", destroy_album_path(album), method: :delete %>
+<% end %>
+
+
+<%= link_to "Create an album!", new_album_path %>
+
+

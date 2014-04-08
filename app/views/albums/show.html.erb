@@ -1,1 +1,8 @@
-show.html.erb
+<p><%= @album.name %></p>
+<p><%=@album.photos.count%> Photos</p>
+<p><%= @album.date.strftime("%m/%d/%Y") %></p>
+<p><%= @album.created_at.strftime("Uploaded %m/%d/%Y") %></p>
+
+<% @album.photos.each do |photo| %>
+  <%#= render 'photo', locals: photo = photo %>
+<% end %>
