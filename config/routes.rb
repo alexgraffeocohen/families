@@ -1,10 +1,18 @@
 Rails.application.routes.draw do
-  devise_for :people
+  
+  devise_for :people, :skip => [:sessions]
+  as :person do
+    get 'login' => 'devise/sessions#new', :as => :new_person_session
+    post 'logout' => 'devise/sessions#create', :as => :person_session
+    delete 'logout' => 'devise/sessions#destroy', :as => :destroy_person_session
+  end
+
   root "family#index"
 
-  post '/families' => "family#create", as: 'new_family'
+  get '/families/new' => "family#new", as: "new_family"
+  post '/families' => "family#create"
 
-  get '/person/:id' => "person#show", as: 'person_path'
+  get '/person/:id' => "person#show", as: 'person'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
