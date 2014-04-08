@@ -1,7 +1,10 @@
-<p><%= @album.name %></p>
+<h1><%= @album.name %></h1>
 <p><%=@album.photos.count%> Photos</p>
 <p><%= @album.date.strftime("%m/%d/%Y") %></p>
 <p><%= @album.created_at.strftime("Uploaded %m/%d/%Y") %></p>
+<%= link_to "Edit", edit_album_path(@album) %> |
+<%= link_to "Delete", destroy_album_path(@album), method: :delete %> |
+<%= link_to "All Albums", albums_path %>
 
 <% @album.photos.each do |photo| %>
   <%#= render 'photo', locals: photo = photo %>

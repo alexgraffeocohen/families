@@ -16,7 +16,7 @@ class AlbumsController < ApplicationController
   def create
     album = Album.create(album_params)
     redirect_to album_path(album)
-
+    album.owner = current_user
   end
 
   def update
@@ -31,8 +31,13 @@ class AlbumsController < ApplicationController
   end
 
   def destroy
-    @album.destroy
-    redirect_to albums_path
+    if current_user == album.owner
+      @album.destroy
+      redirect_to albums_path
+    else
+      flash[:alert] = "Sorry, you do not own this album."
+      redirect_to :back
+    end
   end
 
   def index

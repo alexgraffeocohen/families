@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   
   post '/albums' => "albums#create"
   patch '/albums' => "albums#update"
-  delete '/albums/:id' => "albums#destroy"
+  delete '/albums/:id' => "albums#destroy", as: 'destroy_album'
   
 
   # The priority is based upon order of creation: first created -> highest priority.
