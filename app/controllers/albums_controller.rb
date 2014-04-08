@@ -5,25 +5,25 @@ class AlbumsController < ApplicationController
   end
 
   def edit
-    render 'form'
   end
 
   def new
     @album = Album.new
-    render 'form'
   end
 
   def create
-    album = Album.create(album_params)
-    redirect_to album_path(album)
-    album.owner = current_person
+    album = Album.new(album_params)
+    album.family_id = params[:family_id]
+    album.save
+    current_person.albums << album
+    redirect_to album_path(Family.find(params[:id]),album)
   end
 
   def update
     @album.update(album_params)
 
     if @album.save
-      redirect_to @album, :notice => "User successfully edited"
+      redirect_to albums_path(@family, @album), :notice => "User successfully edited"
     else
       render 'form' 
       flash[:alert] = "Sorry, could not update."
@@ -47,7 +47,8 @@ class AlbumsController < ApplicationController
   private
 
   def set_album
-    @album = Album.find(params[:id])
+    @family = Family.find(params[:id])
+    @album = Album.find(params[:album_id])
   end
 
   def album_params

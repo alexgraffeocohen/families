@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  get 'welcome/index'
+
   devise_for :people, :skip => [:sessions]
   as :person do
     get 'login' => 'devise/sessions#new', :as => :new_person_session
@@ -7,21 +9,22 @@ Rails.application.routes.draw do
     delete 'logout' => 'devise/sessions#destroy', :as => :destroy_person_session
   end
 
-  root "family#index"
+  root "welcome#index"
+  get "families/:id" => "family#show", as: "family"
   
-  get '/families/new' => "family#new", as: "new_family"
-  post '/families' => "family#create"
+  get 'families/new' => "family#new", as: "new_family"
+  post 'families' => "family#create"
 
-  get '/person/:id' => "person#show", as: 'person'
+  get 'person/:id' => "person#show", as: 'person'
 
-  get '/albums' => "albums#index", as: 'albums'
-  get '/albums/new' => "albums#new", as: 'new_album'
-  get '/albums/:id/edit' => "albums#edit", as: 'edit_album'
-  get '/albums/:id' => "albums#show", as: 'album'
+  get 'families/:id/albums' => "albums#index", as: 'albums'
+  get 'families/:id/albums/new' => "albums#new", as: 'new_album'
+  get 'families/:id/albums/:album_id/edit' => "albums#edit", as: 'edit_album'
+  get 'families/:id/albums/:album_id' => "albums#show", as: 'album'
   
-  post '/albums' => "albums#create"
-  patch '/albums/:id' => "albums#update"
-  delete '/albums/:id' => "albums#destroy", as: 'destroy_album'
+  post 'families/:id/albums' => "albums#create"
+  patch 'families/:id/albums/:album_id' => "albums#update", as: "family_album"
+  delete 'families/:id/albums/:album_id' => "albums#destroy", as: 'destroy_album'
   
 
 

@@ -1,4 +1,4 @@
-<%= form_for @album do |f| %>
+<%= form_for [@family, @album] do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name, prompt: "My Album" %>
 

@@ -2,9 +2,9 @@
 <p><%=@album.photos.count%> Photos</p>
 <p><%= @album.date.strftime("%b %Y") %></p>
 <p>Uploaded <%= time_ago_in_words(@album.created_at) %></p>
-<%= link_to "Edit", edit_album_path(@album) %> |
-<%= link_to "Delete", destroy_album_path(@album), method: :delete %> |
-<%= link_to "All Albums", albums_path %>
+<%= link_to "Edit", edit_album_path(Family.find(params[:id]),@album) %> |
+<%= link_to "Delete", destroy_album_path(Family.find(params[:id]),@album), method: :delete %> |
+<%= link_to "All Albums", albums_path(Family.find(params[:id]),@album) %>
 
 <% @album.photos.each do |photo| %>
   <%#= render 'photo', locals: photo = photo %>
