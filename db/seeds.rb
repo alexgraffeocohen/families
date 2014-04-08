@@ -5,56 +5,73 @@
 #
 #   cities = City.create!([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
 connie = Person.create!(
-  name: "Connie Hutchins",
+  first_name: "Connie",
+  last_name: "Hutchins",
   email: "connie@brady.com",
   password: "foobar12",
   password_confirmation: "foobar12",
-  gender: "F"
+  gender: "F",
+  admin: 0
   )
 
 harold = Person.create!(
-  name: "Harold Hutchins",
+  first_name: "Harold",
+  last_name: "Hutchins",
   email: "harold@brady.com",
   password: "foobar12",
   password_confirmation: "foobar12",
-  gender: "M"
+  gender: "M",
+  admin: 0
   )
 
 carol = Person.create!(
-  name: "Carol Brady",
+  first_name: "Carol",
   email: "carol@brady.com",
   password: "foobar12",
   password_confirmation: "foobar12",
   gender: "F",
   mother_id: connie.id,
-  father_id: harold.id
+  father_id: harold.id,
+  admin: 1
   )
 
 mike = Person.create!(
-  name: "Mike Brady",
+  first_name: "Mike",
   email: "mike@brady.com",
   password: "foobar12",
   password_confirmation: "foobar12",
-  gender: "M"
+  gender: "M",
+  admin: 0
   )
+
 greg = Person.create!(
-  name: "Greg Brady",
+  first_name: "Greg",
   email: "greg@brady.com",
   password: "foobar12",
   password_confirmation: "foobar12",
   gender: "M",
   mother_id: carol.id,
-  father_id: mike.id
+  father_id: mike.id,
+  admin: 0
   )
+
 marcia = Person.create!(
-  name: "Marcia Brady",
+  first_name: "Marcia",
   email: "marcia@brady.com",
   password: "foobar12",
   password_confirmation: "foobar12",
   gender: "F",
   mother_id: carol.id,
-  father_id: mike.id
+  father_id: mike.id,
+  admin: 0
+  )
+
+brady = Family.find_or_create_by(
+  name: "Brady",
+  admin_id: carol.id
+  # people: [carol, marcia, greg, mike, connie, harold]
   )
 
 carol.spouse_id = mike.id
