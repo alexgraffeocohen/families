@@ -1,1 +1,19 @@
-index.html.erb
+<% if @albums.empty? %>
+<p>You have 0 albums.</p>
+<% else %>
+  <% @albums.each do |album| %>
+    <h2><%= album.name %></h2>
+    <p><%=album.photos.count%> Photos</p>
+    <%= album.date.strftime("%b %Y") %>
+
+    <%= link_to "View", album_path(album) %> |
+    <%= link_to "Edit", edit_album_path(album) %> |
+    <%= link_to "Delete", destroy_album_path(album), method: :delete %>
+    <br>
+  <% end %>
+<% end %>
+
+
+<%= link_to "Create an album!", new_album_path %>
+
+

@@ -8,11 +8,23 @@ Rails.application.routes.draw do
   end
 
   root "family#index"
-
+  
   get '/families/new' => "family#new", as: "new_family"
   post '/families' => "family#create"
 
   get '/person/:id' => "person#show", as: 'person'
+
+  get '/albums' => "albums#index", as: 'albums'
+  get '/albums/new' => "albums#new", as: 'new_album'
+  get '/albums/:id/edit' => "albums#edit", as: 'edit_album'
+  get '/albums/:id' => "albums#show", as: 'album'
+  
+  post '/albums' => "albums#create"
+  patch '/albums/:id' => "albums#update"
+  delete '/albums/:id' => "albums#destroy", as: 'destroy_album'
+  
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
