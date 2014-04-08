@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe Album do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "has photos" do
+  end
+
+  it "belongs to a family" do
+  end
 end
