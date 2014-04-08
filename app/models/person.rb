@@ -9,6 +9,7 @@ class Person < ActiveRecord::Base
   belongs_to :mother, :class_name => Person, :foreign_key => :mother_id
   belongs_to :father, :class_name => Person, :foreign_key => :father_id
   belongs_to :spouse, :class_name => Person, :foreign_key => :spouse_id
+  
 
   def siblings
     Person.where("mother_id = ? OR father_id = ?", mother_id, father_id).where.not("id = ?", self.id)
@@ -32,5 +33,9 @@ class Person < ActiveRecord::Base
 
   def grandfathers
     {maternal: mother.father, paternal: father.father}
+  end
+
+  def default_family
+    self.families[0]
   end
 end
