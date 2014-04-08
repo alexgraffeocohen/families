@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140408140046) do
+ActiveRecord::Schema.define(version: 20140408144305) do
+
+  create_table "families", force: true do |t|
+    t.string   "name"
+    t.integer  "admin_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "people", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -26,9 +33,25 @@ ActiveRecord::Schema.define(version: 20140408140046) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
+    t.integer  "age"
+    t.datetime "birthday"
+    t.string   "location"
+    t.integer  "mother_id"
+    t.integer  "father_id"
+    t.integer  "admin"
+    t.integer  "spouse_id"
+    t.string   "gender"
   end
 
   add_index "people", ["email"], name: "index_people_on_email", unique: true
   add_index "people", ["reset_password_token"], name: "index_people_on_reset_password_token", unique: true
+
+  create_table "person_families", force: true do |t|
+    t.integer  "person_id"
+    t.integer  "family_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

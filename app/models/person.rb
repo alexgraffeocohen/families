@@ -11,19 +11,19 @@ class Person < ActiveRecord::Base
   belongs_to :spouse, :class_name => Person, :foreign_key => :spouse_id
 
   def siblings
-    Person.where("mother_id: ? OR father_id: ?", mother_id, father_id)
+    Person.where("mother_id = ? OR father_id = ?", mother_id, father_id).where.not("id = ?", self.id)
+  end
+
+  def brothers
+    siblings.select {|sibling| sibling.gender == "M"}
+  end
+
+  def sisters
+    siblings.select {|sibling| sibling.gender == "F"}
   end
 
   def children
-    Person.where("mother_id: ? OR father_id: ?", self.id, self.id)
-  end
-
-  def mother
-    Person.find(mother_id)
-  end
-
-  def father
-    Person.find(father_id)
+    Person.where("mother_id = ? OR father_id = ?", self.id, self.id)
   end
 
   def grandmothers
