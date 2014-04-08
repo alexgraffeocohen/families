@@ -18,6 +18,10 @@
         <li><%= link_to "About", "#" %></li>
         <li>
           <% if person_signed_in? %>
+            <a>Signed in as <%= current_person.first_name.capitalize if current_person.first_name %></a>
+          <% end %>
+        <li>
+          <% if person_signed_in? %>
             <%= link_to "Sign Out", destroy_person_session_path, method: :delete %>
           <% else %>
             <%= link_to "Sign In", new_person_session_path %>
