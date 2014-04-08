@@ -17,12 +17,22 @@
  //= depend_on_asset "bootstrap/glyphicons-halflings-regular.ttf"
  //= depend_on_asset "bootstrap/glyphicons-halflings-regular.svg"
  */
-@import "bootstrap";
+
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700);
+
+$body-bg: #ecf0f1;
+$font-family-sans-serif: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$navbar-height: 45px;
+$navbar-default-bg: white;
+$navbar-default-brand-color: rgba(52, 152, 219,1.0);
+$brand-primary: rgba(52, 152, 219,1.0);
+$jumbotron-bg: white;
+ @import "bootstrap";
 /* Some Style from the Bootstrap Default Theme */
-body {
-  padding-top: 70px;
-  padding-bottom: 30px;
-}
+// body {
+//   padding-top: 70px;
+//   padding-bottom: 30px;
+// }
 
 .theme-dropdown .dropdown-menu {
   position: static;

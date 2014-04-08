@@ -8,18 +8,13 @@
   <%= analytics_init if Rails.env.production? %>
 </head>
 <body>
-  <% flash.each do |level, message| %>
-    <div class="<%= flash_class(level) %>">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-        &times;
-      </button>
-      <%= message %>
-    </div>
-  <% end %>
+  <div class="container">
+    <% flash.each do |name, msg| %>
+       <%= content_tag(:div, msg, class: flash_class(name)) %>
+    <% end %>
+    <%= render "layouts/nav" %>
 
-  <%= render "layouts/nav" %>
-
-<%= yield %>
-
+    <%= yield %>
+  </div>
 </body>
 </html>
