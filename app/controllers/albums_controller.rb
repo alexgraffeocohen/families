@@ -16,7 +16,7 @@ class AlbumsController < ApplicationController
   def create
     album = Album.create(album_params)
     redirect_to album_path(album)
-    album.owner = current_user
+    album.owner = current_person
   end
 
   def update
