@@ -1,2 +1,6 @@
-<h1>Family#index</h1>
+<h1><%= @family.name %></h1>
 <p>Find me in app/views/family/index.html.erb</p>
+
+<% family.people.each do |person| %>
+  <%= person.name %>
+<% end %>
