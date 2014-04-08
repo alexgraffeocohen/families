@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140408144305) do
+ActiveRecord::Schema.define(version: 20140408151122) do
+
+  create_table "albums", force: true do |t|
+    t.string   "name"
+    t.integer  "family_id"
+    t.datetime "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "families", force: true do |t|
     t.string   "name"
@@ -42,6 +50,7 @@ ActiveRecord::Schema.define(version: 20140408144305) do
     t.integer  "admin"
     t.integer  "spouse_id"
     t.string   "gender"
+    t.string   "phone"
   end
 
   add_index "people", ["email"], name: "index_people_on_email", unique: true
@@ -52,6 +61,14 @@ ActiveRecord::Schema.define(version: 20140408144305) do
     t.integer  "family_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "photos", force: true do |t|
+    t.string   "image_url"
+    t.integer  "album_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "caption"
   end
 
 end
