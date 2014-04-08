@@ -31,7 +31,7 @@ class AlbumsController < ApplicationController
   end
 
   def destroy
-    if current_user == album.owner
+    if current_person == @album.owner
       @album.destroy
       redirect_to albums_path
     else
