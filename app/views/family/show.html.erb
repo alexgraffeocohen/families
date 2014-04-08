@@ -1,0 +1,6 @@
+<h1><%= @family.name %></h1>
+<p>Find me in app/views/family/index.html.erb</p>
+
+<% family.people.each do |person| %>
+<%= link_to person.name, person_path(person) %>
+<% end %>

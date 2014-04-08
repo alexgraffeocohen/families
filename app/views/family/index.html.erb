@@ -1,6 +1,3 @@
-<h1><%= @family.name %></h1>
-<p>Find me in app/views/family/index.html.erb</p>
-
-<% family.people.each do |person| %>
-  <%= person.name %>
+<% current_user.families.each do |family|  %>
+<%= family.name %>
 <% end %>

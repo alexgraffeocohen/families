@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :people
   root "family#index"
+
+  get '/person/:id' => "person#show", as: 'person_path'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

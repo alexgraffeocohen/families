@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140408151122) do
+ActiveRecord::Schema.define(version: 20140408153903) do
 
   create_table "albums", force: true do |t|
     t.string   "name"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20140408151122) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
+    t.string   "first_name"
     t.integer  "age"
     t.datetime "birthday"
     t.string   "location"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20140408151122) do
     t.integer  "spouse_id"
     t.string   "gender"
     t.string   "phone"
+    t.string   "last_name"
   end
 
   add_index "people", ["email"], name: "index_people_on_email", unique: true
