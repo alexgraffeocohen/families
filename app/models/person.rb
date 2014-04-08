@@ -26,6 +26,18 @@ class Person < ActiveRecord::Base
     Person.where("mother_id = ? OR father_id = ?", self.id, self.id)
   end
 
+  def grandparents
+    grandmothers.values + grandfathers.values
+  end
+
+  # def paternal_grandparents
+  #   [grandmothers[:paternal], grandfathers[:paternal]]
+  # end
+
+  # def maternal_grandparents
+  #   [grandmothers[:maternal], grandfathers[:maternal]]
+  # end
+
   def grandmothers
     {maternal: mother.mother, paternal: father.mother}
   end
