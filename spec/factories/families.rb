@@ -2,7 +2,6 @@
 
 FactoryGirl.define do
   factory :family do
-    name "MyString"
-    admin_id 1
+    name Faker::Name.last_name
   end
 end
