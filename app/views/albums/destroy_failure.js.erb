@@ -1,2 +1,2 @@
-var div = $("div.alert.alert-info.alert-dismissable");
-debugger;
+$("div.container").prepend("<%= j render(:partial => 'layouts/flash', locals: {msg: msge, name: 'alert'}) %>")
+$("div.alert").fadeOut(1500);

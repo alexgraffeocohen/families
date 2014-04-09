@@ -9,6 +9,7 @@ class AlbumsController < ApplicationController
 
   def new
     @album = Album.new
+    @photo = Photo.new
   end
 
   def create
@@ -38,7 +39,7 @@ class AlbumsController < ApplicationController
         f.js {render 'destroy', locals: {album: @album, family: @family}}
       else
         @msg = "Sorry, you do not own this album."
-        f.js {render 'destroy_failure', locals: {msg: @msg}}
+        f.js {render 'destroy_failure', locals: {msge: @msg}}
       end
     end
   end
