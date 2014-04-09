@@ -14,7 +14,8 @@ class AlbumsController < ApplicationController
 
   def create
     album = Album.new(album_params)
-    album.family_id = params[:family_id]
+    binding.pry
+    album.family_id = params[:id]
     album.save
     current_person.albums << album
     redirect_to album_path(Family.find(params[:id]),album)
