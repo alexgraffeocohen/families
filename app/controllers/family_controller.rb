@@ -10,6 +10,8 @@ class FamilyController < ApplicationController
   end
 
   def create
+    @family = Family.create(family_params)
+    redirect_to family_path(@family)
   end
 
   def about_us
@@ -21,4 +23,7 @@ class FamilyController < ApplicationController
     @family = Family.find(params[:id])
   end
 
+  def family_params
+    params.require(:family).permit(:name)
+  end
 end
