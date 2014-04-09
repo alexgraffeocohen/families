@@ -4,7 +4,6 @@ class PhotosController < ActionController::Base
     @photo = Photo.new(photo_params)
     @photo.album_id = params[:album_id]
     @photo.save
-    redirect_to albums_path
   end
 
   private

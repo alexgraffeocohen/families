@@ -1,0 +1,4 @@
+<div data-id="<%= photo.id %>">
+  <%= image_tag(photo.data_url(:thumb).to_s) %>
+  <%= content_tag(:p, photo.caption) %>
+</div>
