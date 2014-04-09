@@ -31,12 +31,15 @@ class AlbumsController < ApplicationController
   end
 
   def destroy
-    if current_person == @album.owner
-      @album.destroy
-      redirect_to albums_path
-    else
-      flash[:alert] = "Sorry, you do not own this album."
-      redirect_to :back
+    respond_to do |f|
+      if current_person == @album.owner
+        @album.destroy
+        f.html {redirect_to albums_path}
+        f.js {render 'destroy', locals: {album: @album, family: @family}}
+      else
+        flash[:alert] = "Sorry, you do not own this album."
+        f.js {render 'destroy_failure'}
+      end
     end
   end
 

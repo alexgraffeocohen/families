@@ -2,14 +2,16 @@
 <p>You have 0 albums.</p>
 <% else %>
   <% @albums.each do |album| %>
+  <div data-id= "<%= album.id %>">
     <h2><%= album.name %></h2>
     <p><%=album.photos.count%> Photos</p>
     <%= album.date.strftime("%b %Y") %>
 
     <%= link_to "View", album_path(Family.find(params[:id]),album) %> |
     <%= link_to "Edit", edit_album_path(Family.find(params[:id]),album) %> |
-    <%= link_to "Delete", destroy_album_path(Family.find(params[:id]),album), method: :delete %>
-    <br>
+    <%= link_to "Delete", destroy_album_path(Family.find(params[:id]),album), remote: true, method: :delete %>
+  </div>
+  <br>
   <% end %>
 <% end %>
 
