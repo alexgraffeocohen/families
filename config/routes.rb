@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get "families/:id" => "family#show", as: "family"
   
   get 'families/new' => "family#new", as: "new_family"
+  get 'families/:id/about_us' => "family#about_us", as: "about_us"
   post 'families' => "family#create"
 
   get 'person/:id' => "person#show", as: 'person'

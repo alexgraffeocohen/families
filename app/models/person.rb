@@ -51,4 +51,27 @@ class Person < ActiveRecord::Base
   def default_family
     self.families[0]
   end
+
+  def relationship_to(person)
+    "mother"  if mother?(person)
+    "father"  if father?(person)
+    "brother" if brother?(person)
+    "sister"  if sister?(person)
+  end
+
+  def mother?(person)
+    person.id == self.mother_id
+  end
+
+  def father?(person)
+    person.id == self.father_id
+  end
+
+  def brother?(person)
+    brothers.include?(person)
+  end
+
+  def sister?(person)
+    sisters.include?(person)
+  end
 end

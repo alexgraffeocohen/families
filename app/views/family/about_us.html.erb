@@ -1,0 +1,11 @@
+<% @family.people.each do |person| %>
+  <% if person != current_person %>
+    <div>
+      <p><%= person.name %>, your <%= current_person.relationship_to(person)%><p>
+      <p>Age <%= person.age %></p>
+      <p>Birthday <%= person.birthday %></p>
+      <p>Phone <%= person.phone %></p>
+      <p>Location <%= person.location %></p>
+    </div>
+  <% end %>
+<% end %>

@@ -1,6 +1,6 @@
 class FamilyController < ApplicationController
   before_filter :authenticate_person!
-  before_action :set_family, only: [:show]
+  before_action :set_family, only: [:show, :about_us]
 
   def index
   end
@@ -13,7 +13,9 @@ class FamilyController < ApplicationController
   end
 
   def create
-    binding.pry
+  end
+
+  def about_us
   end
 
   private
