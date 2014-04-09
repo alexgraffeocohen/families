@@ -1,8 +1,11 @@
 module Relationable
   extend ActiveSupport::Concern
-  
+  # relations []
   def relationship_to(person)
     case 
+      # relations_array.each do |relation|
+      # when send("#{relation}_to", person) then relation
+      # end  
       when wife_to(person)            then "wife"
       when husband_to(person)         then "husband"
       when mother_to(person)          then "mother"

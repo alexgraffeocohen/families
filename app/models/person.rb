@@ -42,6 +42,14 @@ class Person < ActiveRecord::Base
     (grandmothers.values + grandfathers.values).compact
   end
 
+  def male?
+    gender == "M"
+  end
+
+  def female?
+    gender == "F"
+  end
+
   # def paternal_grandparents
   #   [grandmothers[:paternal], grandfathers[:paternal]]
   # end
@@ -49,6 +57,11 @@ class Person < ActiveRecord::Base
   # def maternal_grandparents
   #   [grandmothers[:maternal], grandfathers[:maternal]]
   # end
+
+  def maternal_grandmother(person)
+    #self.mother_id = Person.create(name: 'Empty') if !self.mother
+    self.mother.mother_id == person.id
+  end
 
   def grandmothers
     {maternal: (mother.mother unless mother.nil?), paternal: (father.mother unless father.nil?)}
