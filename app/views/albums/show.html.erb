@@ -1,5 +1,5 @@
 <h1><%= @album.name %></h1>
-<p><%=@album.photos.count%> Photos</p>
+<p>Photos: <span><%=@album.photos.count%></span></p>
 <p><%= @album.date.strftime("%b %Y") %></p>
 <p>Uploaded <%= time_ago_in_words(@album.created_at) %></p>
 <%= link_to "Edit", edit_album_path(Family.find(params[:id]),@album) %> |
@@ -8,7 +8,7 @@
 
 <br><br>
 
-<%= form_tag(create_photo_path, remote: true, multipart: true) do %>
+<%= form_tag(create_photo_path(@family, @album), remote: true, multipart: true) do %>
   <%= label_tag "photo[data]", "Add a Photo" %>
   <%= file_field_tag "photo[data]" %> <br>
   <%= text_field_tag "photo[caption]", "", placeholder: "Add Caption", autofocus: true %> <br>
@@ -17,7 +17,7 @@
   <div class="photos">
     <% unless @album.photos.empty? %>
       <% @album.photos.reverse.each do |photo| %>
-      <%= render "photos/show_photo", {photo: photo} %>
+      <%= render "photos/show_photo", {family: @family, album: @album, photo: photo} %>
       <% end %>
     <% end %>
   </div>
