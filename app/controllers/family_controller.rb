@@ -13,7 +13,13 @@ class FamilyController < ApplicationController
   end
 
   def create
-    binding.pry
+    @family = Family.create(family_params)
+    redirect_to family_path(@family)
   end
 
+  private
+
+  def family_params
+    params.require(:family).permit(:name)
+  end
 end

@@ -10,9 +10,9 @@ Rails.application.routes.draw do
   end
 
   root "welcome#index"
-  get "families/:id" => "family#show", as: "family"
-  
+
   get 'families/new' => "family#new", as: "new_family"
+  get "families/:id" => "family#show", as: "family"
   post 'families' => "family#create"
 
   get 'person/:id' => "person#show", as: 'person'
