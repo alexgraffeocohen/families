@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   root "welcome#index"
 
   get 'families/new' => "family#new", as: "new_family"
+  get 'families/add_member' => "family#add_member_input", as: "add_member"
   get 'families/:id/about_us' => "family#about_us", as: "about_us"
   get "families/:id" => "family#show", as: "family"
   post 'families' => "family#create"

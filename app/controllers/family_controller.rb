@@ -4,12 +4,23 @@ class FamilyController < ApplicationController
 
   def new
     @family = Family.new
+    respond_to do |f|
+      f.html
+      f.js
+    end
+  end
+
+  def add_member_input
+    respond_to do |f|
+      f.js
+    end
   end
 
   def show 
   end
 
   def create
+    binding.pry
     @family = Family.create(family_params)
     redirect_to family_path(@family)
   end
