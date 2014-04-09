@@ -1,9 +1,10 @@
 # encoding: utf-8
 class DataUploader < CarrierWave::Uploader::Base
+  include CarrierWave::MiniMagick
 
-  # Include RMagick or MiniMagick support:
-  # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  version :thumb do
+    process :resize_to_limit => [300, 300]
+  end
 
   # Choose what kind of storage to use for this uploader:
   # storage :file

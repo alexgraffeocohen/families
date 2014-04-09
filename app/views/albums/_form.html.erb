@@ -3,7 +3,7 @@
   <%= f.text_field :name, prompt: "My Album" %>
 
   <%= f.label :date %>
-  <%= f.date_select :date, :start_year => 2000, :end_year => Time.now.year, :discard_day => true %>
+  <%= f.date_select :date, :start_year => 2000, :end_year => Time.now.year, :discard_day => true %><br><br>
 
   <%= f.submit %>
 <% end %>

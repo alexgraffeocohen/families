@@ -69,10 +69,10 @@ marcia = Person.create!(
   )
 
 brady = Family.find_or_create_by(
-  name: "Brady",
-  admin_id: carol.id
-  # people: [carol, marcia, greg, mike, connie, harold]
+  name: "Brady"
   )
+
+brady.add_members([marcia, greg, mike, carol, harold, connie])
 
 carol.spouse_id = mike.id
 mike.spouse_id = carol.id

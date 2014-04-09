@@ -9,6 +9,7 @@ class AlbumsController < ApplicationController
 
   def new
     @album = Album.new
+    @photo = Photo.new
   end
 
   def create
