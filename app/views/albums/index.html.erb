@@ -4,7 +4,7 @@
   <% @albums.each do |album| %>
   <div data-id= "<%= album.id %>">
     <h2><%= album.name %></h2>
-    <p><%=album.photos.count%> Photos</p>
+    <p>Photos: <%=album.photos.count%></p>
     <%= album.date.strftime("%b %Y") %>
 
     <%= link_to "View", album_path(Family.find(params[:id]),album) %> |
