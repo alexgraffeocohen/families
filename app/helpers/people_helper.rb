@@ -8,7 +8,20 @@ module PeopleHelper
 
   end
 
+  def rearrange_grandparents(members)
+    grandparents = members.select do |pair|
+      pair.each do |member, relation|
+        relation[0] == "g"
+      end
+    end
+  end
+
+
+
   def set_relations(nested_array, admin)
+
+
+
     nested_array.each do |pair|
       pair.each do |member, relation|
         if ["son", "daughter"].include?(relation)
@@ -43,8 +56,6 @@ module PeopleHelper
 
 
         
-      end
-    end
-  end
+    
 
 end
