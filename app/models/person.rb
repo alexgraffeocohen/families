@@ -58,6 +58,11 @@ class Person < ActiveRecord::Base
   #   [grandmothers[:maternal], grandfathers[:maternal]]
   # end
 
+  def maternal_grandmother(person)
+    #self.mother_id = Person.create(name: 'Empty') if !self.mother
+    self.mother.mother_id == person.id
+  end
+
   def grandmothers
     {maternal: (mother.mother unless mother.nil?), paternal: (father.mother unless father.nil?)}
   end

@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :photo do
-    image_url "MyString"
     album_id 1
+    caption {Faker::Lorem.sentence}
   end
 end

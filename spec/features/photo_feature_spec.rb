@@ -1,13 +1,14 @@
-feature "Album" do
+feature "Photo" do
   before :each do
     album = create(:album)
-    album2 = create(:album)
-    visit '/albums'
+    photo = create(:photo, )
+    photo2 = create(:photo)
+    visit '/albums/1'
   end
 
-  scenario "album index displays all albums" do
-    expect(page).to have_content("album.name")
-    expect(page).to have_content("album2.name")
+  scenario "album show displays all photos" do
+    expect(page).to have_content("photo.caption")
+    expect(page).to have_content("photo2.caption")
   end
 
   scenario "album index displays when no albums exist" do

@@ -1,6 +1,6 @@
 module Relationable
   extend ActiveSupport::Concern
-  relations []
+  # relations []
   def relationship_to(person)
     case 
       # relations_array.each do |relation|
