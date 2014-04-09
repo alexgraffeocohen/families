@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   get 'welcome/index'
 
-  devise_for :people, :skip => [:sessions]
+  devise_for :people, :skip => [:sessions], :controllers => {:registrations => "registrations"}
   as :person do
     get 'login' => 'devise/sessions#new', :as => :new_person_session
     post 'logout' => 'devise/sessions#create', :as => :person_session
