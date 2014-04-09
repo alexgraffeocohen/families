@@ -17,7 +17,8 @@ module Relationable
       when grandmother_to(person)     then "grandmother" 
       when son_in_law_to(person)      then "son-in-law" 
       when daughter_in_law_to(person) then "daughter-in-law" 
-      else "I don't know what..."
+    else 
+      "I don't know what..."
     end
   end
 

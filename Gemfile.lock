@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/laserlemon/figaro.git
-  revision: 7261234e1415f429bd2c972b568e89d639127b46
+  revision: 8a144633dc0969de4e74b833f0beb0e53b1f9312
   specs:
     figaro (0.7.0)
       rails (>= 3, < 5)
@@ -163,6 +163,7 @@ GEM
     rake (10.2.2)
     rdoc (4.1.1)
       json (~> 1.4)
+    remotipart (1.2.1)
     rspec-core (2.14.8)
     rspec-expectations (2.14.5)
       diff-lcs (>= 1.1.3, < 2.0)
@@ -220,6 +221,9 @@ GEM
     uglifier (2.5.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unf (0.1.3)
+      unf_ext
+    unf_ext (0.0.6)
     warden (1.2.3)
       rack (>= 1.0)
     websocket (1.0.7)
@@ -250,6 +254,7 @@ DEPENDENCIES
   pry
   rails (= 4.1.0.rc2)
   rails_12factor
+  remotipart
   rspec-rails
   sass-rails (~> 4.0.2)
   sdoc (~> 0.4.0)
@@ -258,3 +263,4 @@ DEPENDENCIES
   sprockets_better_errors
   sqlite3
   uglifier (>= 1.3.0)
+  unf

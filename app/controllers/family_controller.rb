@@ -10,6 +10,7 @@ class FamilyController < ApplicationController
   end
 
   def show
+    @family = Family.find(params[:id])
   end
 
   def create
@@ -18,9 +19,4 @@ class FamilyController < ApplicationController
   def about_us
   end
 
-  private
-
-  def set_family
-    @family = Family.find(params[:id])
-  end
 end
