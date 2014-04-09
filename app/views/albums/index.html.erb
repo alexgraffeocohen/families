@@ -7,7 +7,7 @@
     <h2><%= album.name %></h2>
     <p>Photos: <%=album.photos.count%></p>
     <%= album.date.strftime("%b %Y") %>
-
+    <br><br>
     <%= link_to "View", album_path(Family.find(params[:id]),album) %> |
     <%= link_to "Edit", edit_album_path(Family.find(params[:id]),album) %> |
     <%= link_to "Delete", destroy_album_path(Family.find(params[:id]),album), remote: true, method: :delete %>
