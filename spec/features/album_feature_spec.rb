@@ -1,8 +1,11 @@
 feature "Album" do
   before :each do
+    family = create(:family)
     album = create(:album)
     album2 = create(:album)
-    visit '/albums'
+    family << album
+    family << album 2
+    visit 'families/1/albums'
   end
 
   scenario "album index displays all albums" do
@@ -10,17 +13,19 @@ feature "Album" do
     expect(page).to have_content("album2.name")
   end
 
-  scenario "album index displays when no albums exist" do
+  scenario "album index displays when no albums exist", :js => true do
     Album.destroy_all
+    visit '/albums'
     expect(page).to have_content("You have 0 albums.")
   end
 
-  scenario "can delete album from index" do
+  scenario "shows 0 albums in index with ajax if all deleted", :js => true do
     within ("div[data-id=1]") do
       click_link "Delete"
     end
-    expect(Album.all.length).to eq(1)
-    expect(page).to_not have_content(album.name)
+    click_link "Delete"
+    expect(Album.all.length).to eq(0)
+    expect(page).to have_content("You have 0 albums.")
   end
 
   scenario "can view ablum from index" do
