@@ -4,14 +4,18 @@ class Person < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :person_families
-  has_many :families, :through => :person_families
-  has_many :albums
+  has_many   :person_families
+  has_many   :families, :through => :person_families
+  has_many   :albums
   belongs_to :mother, :class_name => Person, :foreign_key => :mother_id
   belongs_to :father, :class_name => Person, :foreign_key => :father_id
   belongs_to :spouse, :class_name => Person, :foreign_key => :spouse_id
 
-  after_save :check_for_spouse
+  after_save :check_for_spouse if :spouse_changed
+
+  def spouse_changed
+    changed_attributes.keys.include?('spouse_id')
+  end
   
   def parents
     [mother, father]
@@ -60,10 +64,10 @@ class Person < ActiveRecord::Base
   private
 
   def check_for_spouse
-    partner = Person.where(id: self.spouse_id)
+    partner = Person.where(id: self.spouse_id)[0]
     partner.spouse_id = self.id if partner
     #send notification
-    partner.save   
+    partner.save if partner && self.spouse_id != partner.id && self.id != partner.spouse_id  
   end
 end
 
