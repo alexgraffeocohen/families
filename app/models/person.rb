@@ -11,10 +11,12 @@ class Person < ActiveRecord::Base
   belongs_to :father, :class_name => Person, :foreign_key => :father_id
   belongs_to :spouse, :class_name => Person, :foreign_key => :spouse_id
 
-  after_save :check_for_spouse if :spouse_changed
-
-  def spouse_changed
-    changed_attributes.keys.include?('spouse_id')
+  def add_spouse(spouse)
+    self.spouse = spouse
+    spouse.spouse = self
+    binding.pry
+    self.save
+    spouse.save
   end
   
   def parents
@@ -60,14 +62,6 @@ class Person < ActiveRecord::Base
   def default_family
     self.families[0]
   end
-
-  private
-
-  def check_for_spouse
-    partner = Person.where(id: self.spouse_id)[0]
-    partner.spouse_id = self.id if partner
-    #send notification
-    partner.save if partner && self.spouse_id != partner.id && self.id != partner.spouse_id  
-  end
+  
 end
 
