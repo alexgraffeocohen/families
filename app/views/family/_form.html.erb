@@ -2,5 +2,12 @@
   <div><%= f.label :name %><br>
   <%= f.text_field :name %><br>
 
+  <h3>Add Family Members</h3>
+
+  <%= render "member_input" %><br>
+
+  <%= link_to("Add Member", add_member_path, remote: true) %><br><br>
+
   <%= f.submit %>
 <% end %>
+

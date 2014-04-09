@@ -11,5 +11,15 @@ require 'spec_helper'
 #   end
 # end
 describe PeopleHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "setting relations" do
+    it "assigns relations correctly given family members" do
+      admin = create(:person)
+      wife = create(:person)
+      son = create(:person)
+      daughter = create(:person)
+
+      members = [[wife, "wife"], [son, "son"], [daughter, "daughter"]]
+
+      helper.set_relations(members, admin)
+    end
 end
