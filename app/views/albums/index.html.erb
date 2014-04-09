@@ -1,6 +1,6 @@
 <div class="row">
 <% if @albums.empty? %>
-<p>You have 0 albums.</p>
+<div class="white_div" >You have 0 albums.</div>
 <% else %>
   <% @albums.each do |album| %>
   <div class="white_div" data-id= "<%= album.id %>">
