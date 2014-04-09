@@ -1,6 +1,6 @@
 class Person < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  include Relationable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -11,6 +11,9 @@ class Person < ActiveRecord::Base
   belongs_to :father, :class_name => Person, :foreign_key => :father_id
   belongs_to :spouse, :class_name => Person, :foreign_key => :spouse_id
   
+  def parents
+    [mother, father]
+  end
 
   def siblings
     Person.where("mother_id = ? OR father_id = ?", mother_id, father_id).where.not("id = ?", self.id)
@@ -29,7 +32,7 @@ class Person < ActiveRecord::Base
   end
 
   def grandparents
-    grandmothers.values + grandfathers.values
+    (grandmothers.values + grandfathers.values).compact
   end
 
   # def paternal_grandparents
@@ -41,37 +44,14 @@ class Person < ActiveRecord::Base
   # end
 
   def grandmothers
-    {maternal: mother.mother, paternal: father.mother}
+    {maternal: (mother.mother unless mother.nil?), paternal: (father.mother unless father.nil?)}
   end
 
   def grandfathers
-    {maternal: mother.father, paternal: father.father}
+    {maternal: (mother.father unless mother.nil?), paternal: (father.father unless father.nil?)}
   end
 
   def default_family
     self.families[0]
-  end
-
-  def relationship_to(person)
-    "mother"  if mother?(person)
-    "father"  if father?(person)
-    "brother" if brother?(person)
-    "sister"  if sister?(person)
-  end
-
-  def mother?(person)
-    person.id == self.mother_id
-  end
-
-  def father?(person)
-    person.id == self.father_id
-  end
-
-  def brother?(person)
-    brothers.include?(person)
-  end
-
-  def sister?(person)
-    sisters.include?(person)
   end
 end
