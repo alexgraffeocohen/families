@@ -14,7 +14,6 @@ class Person < ActiveRecord::Base
   def add_spouse(spouse)
     self.spouse = spouse
     spouse.spouse = self
-    binding.pry
     self.save
     spouse.save
   end
@@ -62,6 +61,6 @@ class Person < ActiveRecord::Base
   def default_family
     self.families[0]
   end
-  
+
 end
 
