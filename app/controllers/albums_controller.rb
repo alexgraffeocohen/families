@@ -37,8 +37,8 @@ class AlbumsController < ApplicationController
         f.html {redirect_to albums_path}
         f.js {render 'destroy', locals: {album: @album, family: @family}}
       else
-        flash[:alert] = "Sorry, you do not own this album."
-        f.js {render 'destroy_failure'}
+        @msg = "Sorry, you do not own this album."
+        f.js {render 'destroy_failure', locals: {msg: @msg}}
       end
     end
   end
