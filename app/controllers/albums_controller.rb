@@ -14,7 +14,6 @@ class AlbumsController < ApplicationController
 
   def create
     album = Album.new(album_params)
-    binding.pry
     album.family_id = params[:id]
     album.save
     current_person.albums << album
