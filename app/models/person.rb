@@ -2,7 +2,7 @@ class Person < ActiveRecord::Base
   include Relationable
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   has_many   :person_families
   has_many   :families, through: :person_families
