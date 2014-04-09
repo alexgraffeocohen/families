@@ -10,6 +10,8 @@ class Person < ActiveRecord::Base
   belongs_to :mother, :class_name => Person, :foreign_key => :mother_id
   belongs_to :father, :class_name => Person, :foreign_key => :father_id
   belongs_to :spouse, :class_name => Person, :foreign_key => :spouse_id
+
+  after_save :check_for_spouse
   
   def parents
     [mother, father]
@@ -54,4 +56,14 @@ class Person < ActiveRecord::Base
   def default_family
     self.families[0]
   end
+
+  private
+
+  def check_for_spouse
+    partner = Person.where(id: self.spouse_id)
+    partner.spouse_id = self.id if partner
+    #send notification
+    partner.save   
+  end
 end
+
