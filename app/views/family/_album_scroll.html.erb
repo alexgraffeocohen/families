@@ -1,7 +1,6 @@
-<div class="album_scroll">
-  <% family.albums.each do |album| %>
-    <%= link_to image_tag(photo.data_url(:tiny).to_s), album_path(album) %>
-    <%= album.name %>
-  <% end %>
-  <%= link_to "See All", albums_path %>
-</div>
+<%= link_to albums_path do %>
+  <div class="white_div">
+    <%= image_tag(family.albums.last.photos.last.data_url(:thumb).to_s) %>
+    <h1>ALBUMS</h1>
+  </div>
+<% end %>
