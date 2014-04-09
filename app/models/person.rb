@@ -42,6 +42,14 @@ class Person < ActiveRecord::Base
     (grandmothers.values + grandfathers.values).compact
   end
 
+  def male?
+    gender == "M"
+  end
+
+  def female?
+    gender == "F"
+  end
+
   # def paternal_grandparents
   #   [grandmothers[:paternal], grandfathers[:paternal]]
   # end
