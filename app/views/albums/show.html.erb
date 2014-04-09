@@ -8,16 +8,16 @@
 
 <br><br>
 
-<%= form_tag(create_photo_path, multipart: true) do %>
+<%= form_tag(create_photo_path, remote: true, multipart: true) do %>
   <%= label_tag "photo[data]", "Add a Photo" %>
   <%= file_field_tag "photo[data]" %> <br>
   <%= text_field_tag "photo[caption]", "", placeholder: "Add Caption", autofocus: true %> <br>
   <%= submit_tag "Upload Photo" %>
 <% end %>
-
-<% unless @album.photos.empty? %>
-  <% @album.photos.each do |photo| %>
-    <%= image_tag(photo.data_url(:thumb).to_s) %>
-    <%= content_tag(:p, photo.caption) %>
-  <% end %>
-<% end %>
+  <div class="photos">
+    <% unless @album.photos.empty? %>
+      <% @album.photos.reverse.each do |photo| %>
+      <%= render "photos/show_photo", {photo: photo} %>
+      <% end %>
+    <% end %>
+  </div>
