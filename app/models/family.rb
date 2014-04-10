@@ -12,4 +12,11 @@ class Family < ActiveRecord::Base
     self.name_slug = name.downcase
   end
 
+  def add_members(members)
+    members.each do |family_member|
+      person_families.create(person_id: family_member.id)
+      family_member.last_name ||= self.name
+    end
+  end
+
 end

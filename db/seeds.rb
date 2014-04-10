@@ -72,12 +72,9 @@ brady = Family.find_or_create_by(
   name: "Brady"
   )
 
-family_members = [marcia, greg, mike, carol, harold, connie]
+members = [marcia, greg, mike, carol, harold, connie]
 
-family_members.each do |family_member|
-  person_families.create(person_id: family_member.id)
-  family_member.last_name ||= self.name
-end
+brady.add_members(members)
 
 carol.spouse_id = mike.id
 mike.spouse_id = carol.id
