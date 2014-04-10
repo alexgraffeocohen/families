@@ -26,6 +26,7 @@ gem 'faker'
 gem 'unf'
 gem 'remotipart'
 gem 'magnific-popup-rails'
+gem 'friendly_id'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 # gem 'spring',        group: :development
