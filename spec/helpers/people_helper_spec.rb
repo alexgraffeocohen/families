@@ -40,16 +40,16 @@ describe PeopleHelper do
 
   describe "setting relations" do
     let(:admin)                {create(:person, gender: "M")} 
-    let(:wife)                 {create(:person, gender: "F")}
-    let(:son)                  {create(:person, gender: "M")}
-    let(:daughter)             {create(:person, gender: "F")}
-    let(:grandmother_maternal) {create(:person, gender: "F")}
-    let(:brother) {create(:person, gender: "M")}
-    let(:mother) {create(:person, gender: "F")}
+    let(:wife)                 {create(:person, gender: "F", first_name: "wife")}
+    let(:son)                  {create(:person, gender: "M", first_name: "son")}
+    let(:daughter)             {create(:person, gender: "F", first_name: "daughter")}
+    let(:grandmother_maternal) {create(:person, gender: "F", first_name: "grandmother_maternal")}
+    let(:brother) {create(:person, gender: "M", first_name: "brother")}
+    let(:mother) {create(:person, gender: "F", first_name: "mother")}
     let(:members) {[[wife, "wife"], [son, "son"], [daughter, "daughter"], [brother, "brother"], [mother, "mother"], [grandmother_maternal, "grandmother (maternal)"]]}
 
     before(:each) do
-      helper.set_relations(members, admin) 
+      helper.set_relations(helper.rearrange_members(members), admin) 
     end
 
     it 'assigns a mother to admin' do
