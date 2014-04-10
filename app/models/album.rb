@@ -20,7 +20,8 @@ class Album < ActiveRecord::Base
       "3" => ["son", "daughter"],
       "4" => ["grandmother", "grandfather"],
       "5" => ["granddaughter", "grandson"],
-      "6" => ["son-in-law", "daughter-in-law"]
+      "6" => ["son-in-law", "daughter-in-law"],
+      "7" => ["husband", "wife"]
     }
     
     permission_hash.map { |key, value| value if permissions.include?(key.to_s) }.compact.flatten
