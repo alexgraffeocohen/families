@@ -2,12 +2,13 @@ Rails.application.routes.draw do
   
   get 'welcome/index'
 
-  devise_for :people, :skip => [:sessions], :controllers => {:registrations => "registrations"}
   as :person do
     get 'login' => 'devise/sessions#new', :as => :new_person_session
     post 'logout' => 'devise/sessions#create', :as => :person_session
     delete 'logout' => 'devise/sessions#destroy', :as => :destroy_person_session
+    patch '/person/confirmation' => 'confirmations#update', :via => :patch, :as => :update_person_confirmation
   end
+  devise_for :people, :skip => [:sessions], :controllers => {:registrations => "registrations", :confirmations => "confirmations"}
 
   root "welcome#index"
 
