@@ -83,17 +83,16 @@ describe PeopleHelper do
     end
 
     it 'assigns admin\'s wife as mother' do
-      expect(son.mother).to eq(wife)
-      expect(daughter.mother).to eq(wife)
+      expect(admin.children.first.mother).to eq(wife)
+      expect(admin.children.second.mother).to eq(wife)
     end
 
-    xit 'assigns admin\'s mother as grandmother' do
+    it 'assigns admin\'s mother as grandmother' do
+      expect(admin.children.first.grandmothers).to include(admin.mother)
     end
 
-    xit 'assigns admin\'s children as grandchildren' do
-    end
-
-    xit 'assigns admin\'s wife as daughter-in-law' do
+    it 'assigns admin\'s wife as daughter-in-law' do
+      expect(admin.wife.relationship_to(admin.mother)).to eq("daughter-in-law")
     end
   end
 end

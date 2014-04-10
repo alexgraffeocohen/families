@@ -29,7 +29,7 @@ class Person < ActiveRecord::Base
   def parents
     [mother, father]
   end
-  
+
   def siblings
     Person.where("mother_id = ? OR father_id = ?", mother_id, father_id).where.not("id = ?", self.id)
   end
@@ -46,8 +46,18 @@ class Person < ActiveRecord::Base
     Person.where("mother_id = ? OR father_id = ?", self.id, self.id)
   end
 
+  def sons
+    people = Person.where("mother_id = ? OR father_id = ?", self.id, self.id)
+    people.select(&:male?)
+  end
+
+  def daughters
+    people = Person.where("mother_id = ? OR father_id = ?", self.id, self.id)
+    people.select(&:female?)
+  end
+
   def grandparents
-    (grandmothers.values + grandfathers.values).compact
+    (grandmothers + grandfathers).compact
   end
 
   def male?
@@ -83,11 +93,11 @@ class Person < ActiveRecord::Base
   end
 
   def grandmothers
-    {maternal: (mother.mother unless mother.nil?), paternal: (father.mother unless father.nil?)}
+    [(mother.mother unless mother.nil?), (father.mother unless father.nil?)]
   end
 
   def grandfathers
-    {maternal: (mother.father unless mother.nil?), paternal: (father.father unless father.nil?)}
+     [(mother.father unless mother.nil?), (father.father unless father.nil?)]
   end
 
   def default_family
