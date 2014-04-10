@@ -26,12 +26,12 @@ describe Person do
     expect(@carol.husband).to eq(@mike)
   end
 
-  it "can have a son" do
-    expect(@carol.son).to eq(@greg)
+  it "can have sons" do
+    expect(@carol.sons).to include(@greg)
   end
 
-  it "can have a daughter" do
-    expect(@carol.daughter).to eq(@marcia)
+  it "can have daughters" do
+    expect(@carol.daughters).to include(@marcia)
   end
 
   it "has father" do 
