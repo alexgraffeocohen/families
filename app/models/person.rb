@@ -57,7 +57,7 @@ class Person < ActiveRecord::Base
   end
 
   def grandparents
-    (grandmothers.values + grandfathers.values).compact
+    (grandmothers + grandfathers).compact
   end
 
   def male?
@@ -93,11 +93,11 @@ class Person < ActiveRecord::Base
   end
 
   def grandmothers
-    {maternal: (mother.mother unless mother.nil?), paternal: (father.mother unless father.nil?)}
+    [(mother.mother unless mother.nil?), (father.mother unless father.nil?)]
   end
 
   def grandfathers
-    {maternal: (mother.father unless mother.nil?), paternal: (father.father unless father.nil?)}
+     [(mother.father unless mother.nil?), (father.father unless father.nil?)]
   end
 
   def default_family
