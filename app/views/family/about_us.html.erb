@@ -1,6 +1,6 @@
 <% @family.people.each do |person| %>
   <% if person != current_person %>
-    <div>
+    <div class="white_div">
       <h4><%= person.first_name %>, your <%= person.relationship_to(current_person)%></h4>
       <p>Age <%= person.age %></p>
       <p>Birthday <%= person.birthday %></p>
