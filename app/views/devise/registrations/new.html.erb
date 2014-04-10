@@ -9,8 +9,10 @@
   <div><%= f.label :email %><br />
   <%= f.email_field :email %></div>
 
-  <div><%= f.label :gender %><br />
-  <%= f.text_field :gender %></div>
+  <div><%= f.label :gender, "Gender" %><br />
+    <p><%= f.radio_button :gender, "F", class:"radio" %></p>
+    <p><%= f.radio_button :gender, "M" %></p>
+  </div>
 
   <div><%= f.label :birthday %><br />
   <%= f.date_select :birthday, :start_year => Date.today.year - 100 %></div>

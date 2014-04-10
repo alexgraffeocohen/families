@@ -7,9 +7,11 @@
   
   <div><%= f.label :email %><br />
   <%= f.email_field :email %></div>
-
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+  
+  <div><%= f.label :gender, "Gender" %><br />
+    <p><%= f.radio_button :gender, "F", class:"radio" %></p>
+    <p><%= f.radio_button :gender, "M" %></p>
+  </div>
 
   <div><%= f.label :age %><br />
   <%= f.text_field :age %></div>
