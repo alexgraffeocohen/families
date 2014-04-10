@@ -1,4 +1,4 @@
-require 'spec_helper'
+require_relative '../feature_helper'
 
 feature "Album" do
   before :each do
@@ -14,21 +14,24 @@ feature "Album" do
     # fill_in "Email", with: person.email
     # fill_in "Password", with: person.password
     # click_button("Sign in")
-    visit 'families/1/albums'
+    
+
   end
 
-  scenario "album index displays all albums", :js => true do
+  scenario "album index displays all albums" do
+    visit 'families/1/albums'
     expect(page).to have_content(@album.name)
     expect(page).to have_content(@album2.name)
   end
 
-  scenario "album index displays when no albums exist", :js => true do
-    Album.destroy_all
-    visit '/albums'
+  scenario "album index displays when no albums exist" do
+    puts Album.all    
+    Album.all.delete_all
+    visit 'families/1/albums'
     expect(page).to have_content("You have 0 albums.")
   end
 
-  scenario "shows 0 albums in index with ajax if all deleted", :js => true do
+  scenario "shows 0 albums in index with ajax if all deleted" do
     within ("div['data-id'='1']") do
       click_link "Delete"
     end

@@ -1,4 +1,15 @@
 GIT
+  remote: git://github.com/jnicklas/capybara.git
+  revision: 59f751f1c4dcd570175cfc33d2a87da2f4ac7544
+  specs:
+    capybara (2.2.0)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
+
+GIT
   remote: https://github.com/laserlemon/figaro.git
   revision: 8a144633dc0969de4e74b833f0beb0e53b1f9312
   specs:
@@ -45,12 +56,6 @@ GEM
     bootstrap-sass (3.1.1.0)
       sass (~> 3.2)
     builder (3.2.2)
-    capybara (2.2.1)
-      mime-types (>= 1.16)
-      nokogiri (>= 1.3.3)
-      rack (>= 1.0.0)
-      rack-test (>= 0.5.4)
-      xpath (~> 2.0)
     carrierwave (0.10.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -238,7 +243,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass (~> 3.1.1)
-  capybara
+  capybara!
   carrierwave
   coffee-rails (~> 4.0.0)
   database_cleaner

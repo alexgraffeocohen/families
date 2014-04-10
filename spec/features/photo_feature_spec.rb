@@ -1,4 +1,4 @@
-require 'spec_helper'
+require_relative '../feature_helper'
 
 feature "Photo" do
   before :each do
