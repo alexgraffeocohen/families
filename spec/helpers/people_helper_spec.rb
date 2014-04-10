@@ -11,15 +11,39 @@ require 'spec_helper'
 #   end
 # end
 describe PeopleHelper do
+  describe "rearranging a new family array" do
+    it "puts grandparents at the end of the inputted array" do
+      mother = create(:person)
+      son = create(:person)
+      daughter = create(:person)
+      grandmother = create(:person)
+      members = [[grandmother, "grandmother"], [mother, "mother"], [son, "son"], [daughter, "daughter"]]
+      
+      rearranged_array = helper.rearrange_grandparents(members)
+
+      expect(rearranged_array.last).to eq([grandmother, "grandmother"])
+    end
+  end
+
   describe "setting relations" do
     it "assigns relations correctly given family members" do
       admin = create(:person)
       wife = create(:person)
       son = create(:person)
       daughter = create(:person)
+      grandmother = create(:person)
+      brother = create(:person)
+      mother = create(:person)
 
-      members = [[wife, "wife"], [son, "son"], [daughter, "daughter"]]
+      members = [[wife, "wife"], [son, "son"], [daughter, "daughter"], [brother, "brother"], [mother, "mother"], [grandmother, "grandmother"]]
 
       helper.set_relations(members, admin)
+
+      expect(admin.mother).to eq(mother)
+      expect(brother.mother).to eq(admin.mother)
+      expect(admin.children).to eq([son, daughter])
+      expect(admin.grandparents).to include(grandmother)
+      expect(admin.spouse_id).to eq(wife.id)
     end
+  end
 end
