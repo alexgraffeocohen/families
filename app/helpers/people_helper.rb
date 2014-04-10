@@ -38,19 +38,20 @@ module PeopleHelper
         admin.father_id = member.id
       elsif ["husband", "wife"].include?(relation)
         admin.add_spouse(member)
-      elsif relation == "maternal grandmother"
-        admin.maternal_grandmother(member)
-      elsif relation == "maternal grandfather"
-        admin.maternal_grandfather(member)
-      elsif relation == "paternal grandmother"
-        admin.paternal_grandmother(member)
-      elsif relation == "paternal grandfather"
-        admin.paternal_grandfather(member)
+      elsif relation == "grandmother (maternal)"
+        admin.maternal_grandmother = member
+      elsif relation == "grandfather (maternal)"
+        admin.maternal_grandfather = member
+      elsif relation == "grandmother (paternal)"
+        admin.paternal_grandmother = member
+      elsif relation == "grandfather (paternal)"
+        admin.paternal_grandfather = member
       elsif ["brother", "sister"].include?(relation)
         member.mother_id = admin.mother_id if admin.mother
         member.father_id = admin.father_id if admin.father
       end
     
+    member.save
     end
   end
 end
