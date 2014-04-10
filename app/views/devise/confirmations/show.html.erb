@@ -4,7 +4,7 @@
   <%= devise_error_messages! %>
   <fieldset>
     <legend>We just need a couple more pieces of information so you can activate your account.</legend>
-    <% binding.pry %>
+
   <% if resource.first_name.empty? %>
       <p><%= f.label :first_name,"What's your first name?" %> <%= f.text_field :first_name %></p>
   <% end %>
