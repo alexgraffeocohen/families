@@ -29,7 +29,7 @@ class Person < ActiveRecord::Base
   def parents
     [mother, father]
   end
-  
+
   def siblings
     Person.where("mother_id = ? OR father_id = ?", mother_id, father_id).where.not("id = ?", self.id)
   end
@@ -44,6 +44,14 @@ class Person < ActiveRecord::Base
 
   def children
     Person.where("mother_id = ? OR father_id = ?", self.id, self.id)
+  end
+
+  def son
+    Person.find_by("mother_id = ? OR father_id = ? AND gender = ?", self.id, self.id, "M")
+  end
+
+  def daughter
+    Person.find_by("mother_id = ? OR father_id = ? AND gender = ?", self.id, self.id, "F")
   end
 
   def grandparents

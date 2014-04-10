@@ -7,7 +7,7 @@ describe Person do
     @harold = create(:person, gender: "M")
     @carol = create(:person, mother_id: @connie.id, father_id: @harold.id, gender: "F")
     @mike = create(:person, gender: "M")
-    @greg = create(:person, mother_id: @carol.id, father_id: @mike.id, gender: "M")
+    @greg = create(:person, mother_id: @carol.id, father_id: @mike.id, gender: "M", email: "greg@greg.com")
     @marcia = create(:person, mother_id: @carol.id, father_id: @mike.id, gender: "F")
     @connie.add_spouse(@harold)
     @carol.add_spouse(@mike)
@@ -24,6 +24,14 @@ describe Person do
 
   it "can have a husband" do
     expect(@carol.husband).to eq(@mike)
+  end
+
+  it "can have a son" do
+    expect(@carol.son).to eq(@greg)
+  end
+
+  it "can have a daughter" do
+    expect(@carol.daughter).to eq(@marcia)
   end
 
   it "has father" do 

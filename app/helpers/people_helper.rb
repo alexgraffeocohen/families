@@ -57,6 +57,8 @@ module PeopleHelper
           child.father_id = admin.husband.id
         end
         child.save
+        admin.wife.save
+        admin.save
       end
     end
   end
