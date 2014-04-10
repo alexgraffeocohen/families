@@ -11,10 +11,13 @@
 }
 
 .photo_div {
+  display: inline-block;
+  padding: 20px;
   position: relative;
 }
 
 .delete_pic {
   position: absolute;
+  top: 5px;
   right: 0px;
 }
