@@ -3,15 +3,17 @@
 <div class="white_div" >You have 0 albums.</div>
 <% else %>
   <% @albums.each do |album| %>
-  <div class="white_div" data-id= "<%= album.id %>">
-    <h2><%= album.name %></h2>
-    <p>Photos: <%=album.photos.count%></p>
-    <%= album.date.strftime("%b %Y") %>
-    <br><br>
-    <%= link_to "View", album_path(Family.find(params[:id]),album) %> |
-    <%= link_to "Edit", edit_album_path(Family.find(params[:id]),album) %> |
-    <%= link_to "Delete", destroy_album_path(Family.find(params[:id]),album), remote: true, method: :delete %>
-  </div>
+    <% if current_person.can_see_album?(album) %>
+      <div class="white_div" data-id= "<%= album.id %>">
+        <h2><%= album.name %></h2>
+        <p>Photos: <%=album.photos.count%></p>
+        <%= album.created_at.strftime("%b %Y") %>
+        <br><br>
+        <%= link_to "View", album_path(Family.find(params[:id]),album) %> |
+        <%= link_to "Edit", edit_album_path(Family.find(params[:id]),album) %> |
+        <%= link_to "Delete", destroy_album_path(Family.find(params[:id]),album), remote: true, method: :delete %>
+      </div>
+    <% end %>
   <% end %>
 <% end %>
 </div>

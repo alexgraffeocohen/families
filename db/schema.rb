@@ -11,16 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140410155949) do
+ActiveRecord::Schema.define(version: 20140410172557) do
 
   create_table "albums", force: true do |t|
     t.string   "name"
     t.integer  "family_id"
-    t.datetime "date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "person_id"
-    t.integer  "permission"
+    t.string   "permissions"
   end
 
   create_table "families", force: true do |t|

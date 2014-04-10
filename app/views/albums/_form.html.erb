@@ -1,17 +1,14 @@
-<%= form_for [@family, @album] do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name, prompt: "My Album" %>
+<%= form_tag(create_album_path(@family)) do %>
+  <%= label_tag 'album[name]' %>
+  <%= text_field_tag 'album[name]'%><br><br>
 
-  <%= f.label :date %>
-  <%= f.date_select :date, :start_year => 2000, :end_year => Time.now.year, :discard_day => true %><br><br>
-
-  <%= label_tag 'permissions[]', 'Who can view my album?' %><br>
+  <%= label_tag 'album[parse_permission][]', 'Who can view my album?' %><br>
   <%= link_to "Entire Family", "#" %><br>
-  Siblings <%= check_box_tag('permissions[]', value = "1", checked = false) %><br>
-  Parents <%= check_box_tag('permissions[]', value = "2", checked = false) %><br>
-  Grandparents <%= check_box_tag('permissions[]', value = "3", checked = false) %><br>
-  Children <%= check_box_tag('permissions[]', value = "4", checked = false) %><br>
-  Daughter and Son In-Laws <%= check_box_tag('permissions[]', value = "5", checked = false) %><br><br>
+  Siblings <%= check_box_tag('album[parse_permission][]', value = "1", checked = false) %><br>
+  Parents <%= check_box_tag('album[parse_permission][]', value = "2", checked = false) %><br>
+  Grandparents <%= check_box_tag('album[parse_permission][]', value = "3", checked = false) %><br>
+  Children <%= check_box_tag('album[parse_permission][]', value = "4", checked = false) %><br>
+  Daughter and Son In-Laws <%= check_box_tag('album[parse_permission][]', value = "5", checked = false) %><br><br>
 
-  <%= f.submit %>
+  <%= submit_tag "Create Album" %>
 <% end %>
