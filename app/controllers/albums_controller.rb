@@ -8,16 +8,18 @@ class AlbumsController < ApplicationController
   end
 
   def new
+    @family = Family.find(params[:id])
     @album = Album.new
     @photo = Photo.new
   end
 
   def create
     album = Album.new(album_params)
+    album.permissions = album.parse_permission(params[:album][:parse_permission])
     album.family_id = params[:id]
     album.save
     current_person.albums << album
-    redirect_to album_path(Family.find(params[:id]),album)
+    redirect_to album_path(Family.find(params[:id]), album)
   end
 
   def update

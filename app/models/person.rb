@@ -34,32 +34,6 @@ class Person < ActiveRecord::Base
     Person.where("mother_id = ? OR father_id = ?", mother_id, father_id).where.not("id = ?", self.id)
   end
 
-  def brothers
-    siblings.select {|sibling| sibling.gender == "M"}
-  end
-
-  def sisters
-    siblings.select {|sibling| sibling.gender == "F"}
-  end
-
-  def children
-    Person.where("mother_id = ? OR father_id = ?", self.id, self.id)
-  end
-
-  def sons
-    people = Person.where("mother_id = ? OR father_id = ?", self.id, self.id)
-    people.select(&:male?)
-  end
-
-  def daughters
-    people = Person.where("mother_id = ? OR father_id = ?", self.id, self.id)
-    people.select(&:female?)
-  end
-
-  def grandparents
-    (grandmothers + grandfathers).compact
-  end
-
   def male?
     gender == "M"
   end
@@ -75,30 +49,6 @@ class Person < ActiveRecord::Base
   # def maternal_grandparents
   #   [grandmothers[:maternal], grandfathers[:maternal]]
   # end
-
-  def maternal_grandmother=(person) 
-    self.mother.mother = person
-  end
-
-  def maternal_grandfather=(person)
-    self.mother.father = person
-  end
-
-  def paternal_grandmother=(person)
-    self.father.mother_id = person.id
-  end
-
-  def paternal_grandfather=(person)
-    self.father.father_id = person.id
-  end
-
-  def grandmothers
-    [(mother.mother unless mother.nil?), (father.mother unless father.nil?)]
-  end
-
-  def grandfathers
-     [(mother.father unless mother.nil?), (father.father unless father.nil?)]
-  end
 
   def default_family
     self.families[0]
@@ -125,12 +75,15 @@ class Person < ActiveRecord::Base
 
   def password_required?
   # Password is required if it is being set, but not for new records
-  if !persisted? 
-    false
-  else
-    !password.nil? || !password_confirmation.nil?
+    if !persisted? 
+      false
+    else
+      !password.nil? || !password_confirmation.nil?
+    end
   end
-end
 
+  def can_see_album?(album)
+    album.relationships_permitted.include?(self.relationship_to(album.owner))
+  end
 end
 
