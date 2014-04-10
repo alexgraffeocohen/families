@@ -29,6 +29,10 @@ describe Album do
       expect(album2.relationships_permitted).to include("brother")
       expect(son.can_see_album?(album2)).to eq(true)
     end
+
+    it "including self" do
+      expect(daughter.can_see_album?(album2)).to eq(true)
+    end
   end
 
   context "supports multiple permissions" do

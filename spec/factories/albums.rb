@@ -6,5 +6,6 @@ FactoryGirl.define do
     name {Faker::Name.name}
     family_id 2
     permissions "1 2"
+    person_id 1
   end
 end

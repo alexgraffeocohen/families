@@ -82,8 +82,20 @@ class Person < ActiveRecord::Base
     end
   end
 
+  def permitted_albums
+    self.families.collect { |family|
+      family.albums.select do |album|
+        self.can_see_album?(album)
+      end
+    }.flatten
+  end
+
   def can_see_album?(album)
     album.relationships_permitted.include?(self.relationship_to(album.owner)) || album.owner == self
+  end
+
+  def cannot_see_any_albums?
+    permitted_albums.empty?
   end
 end
 

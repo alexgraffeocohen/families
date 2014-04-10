@@ -2,20 +2,19 @@ require_relative '../feature_helper'
 
 feature "Album" do
   before :each do
+    @person = create(:person)
     @family = create(:family)
+    @family.person_families.create(person: @person)
+
     @album = create(:album)
     @album2 = create(:album)
-    @family.albums << @album
-    @family.albums << @album2
 
-    person = create(:person)
     visit '/'
     click_link("Log in")
-    fill_in "Email", with: person.email
-    fill_in "Password", with: person.password
+    fill_in "Email", with: @person.email
+    fill_in "Password", with: @person.password
+    save_and_open_page
     click_button("Sign in")
-    
-
   end
 
   scenario "album index displays all albums" do
