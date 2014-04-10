@@ -56,13 +56,22 @@ describe PeopleHelper do
       expect(admin.mother).to eq(mother)
     end
 
+    it 'assigns the admin as the son' do
+      expect(mother.sons).to include(admin)
+    end
+
     it 'assigns a spouse to admin' do
-      expect(admin.spouse_id).to eq(wife.id)
+      expect(admin.spouse).to eq(wife)
     end
 
     it 'assigns children to admin' do
       expect(admin.children).to include(son)
       expect(admin.children).to include(daughter)
+    end
+
+    it 'gives the admin children' do
+      expect(son.father).to eq(admin)
+      expect(daughter.father).to eq(admin)
     end
 
     it 'assigns grandparents to admin' do

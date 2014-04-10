@@ -1,4 +1,6 @@
 class FamilyController < ApplicationController
+  include FamilyHelper
+  include PeopleHelper
   before_filter :authenticate_person!
   before_action :set_family, only: [:show, :about_us]
 
@@ -20,8 +22,21 @@ class FamilyController < ApplicationController
   end
 
   def create
-    binding.pry
+    # family is created
     @family = Family.create(family_params)
+    @family.person_families.build(person: current_person)
+
+    accounts = create_accounts(params, @family)
+    nested_array = members_array(accounts, params[:people][:relations])
+    set_relations(rearrange_members(nested_array), current_person)
+    # if he added family members
+      # create new accounts for each email inputted
+      # two attributes are created... email and gender
+      # all new accounts are assigned to the family just created
+      # grab relationships for each family and set two-way relationships for  the admin and the family member that was entered
+    # new members are emailed to confirm their account. they have all their information set with the exception of their first_name, password, birthday
+    # admin is redirected to the newly created family page
+    # new accounts confirm via email token and are redirected on confirmation to family page that was created by the admin.
     redirect_to family_path(@family)
   end
 
