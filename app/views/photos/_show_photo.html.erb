@@ -1,5 +1,5 @@
 <div data-id="<%= photo.id %>">
-  <%= image_tag(photo.data_url(:thumb).to_s) %>
+  <%= link_to image_tag(photo.data_url(:thumb).to_s), photo.data_url(:thumb).to_s, {class: "image_link"}  %>
   <%= content_tag(:p, photo.caption) %>
   <%= link_to "✖", destroy_photo_path(family, album, photo), remote: true, method: :delete %>
 </div>
