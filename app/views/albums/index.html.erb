@@ -6,6 +6,7 @@
     <% if current_person.can_see_album?(album) %>
       <div class="white_div" data-id= "<%= album.id %>">
         <h2><%= album.name %></h2>
+        <%= album.photos.last.data_url(:thumb).to_s %>
         <p>Photos: <%=album.photos.count%></p>
         <%= album.created_at.strftime("%b %Y") %>
         <br><br>

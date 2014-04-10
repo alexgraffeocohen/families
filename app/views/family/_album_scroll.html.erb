@@ -1,6 +1,6 @@
 <%= link_to albums_path do %>
   <div class="white_div">
-    <% if family.albums.empty? || family.albums.last.photos.empty? %>
+    <% if current_person.cannot_see_any_albums? || family.albums.last.photos.empty? %>
       <%= image_tag('hip_read.jpg') %>
     <% else %>
       <%= image_tag(family.albums.last.photos.last.data_url(:thumb).to_s) %>
