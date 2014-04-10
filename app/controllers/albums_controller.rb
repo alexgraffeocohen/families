@@ -56,6 +56,6 @@ class AlbumsController < ApplicationController
   end
 
   def album_params
-    params.require(:album).permit(:name, :date, :family_id)
+    params.require(:album).permit(:name, :date, :family_id, :permissions)
   end
 end

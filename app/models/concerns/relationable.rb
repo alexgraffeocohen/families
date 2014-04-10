@@ -84,4 +84,54 @@ module Relationable
       self.spouse.parents.include?(person) && self.gender == "F"
     end
   end
+
+  def brothers
+    siblings.select {|sibling| sibling.gender == "M"}
+  end
+
+  def sisters
+    siblings.select {|sibling| sibling.gender == "F"}
+  end
+
+  def children
+    Person.where("mother_id = ? OR father_id = ?", self.id, self.id)
+  end
+
+  def sons
+    people = Person.where("mother_id = ? OR father_id = ?", self.id, self.id)
+    people.select(&:male?)
+  end
+
+  def daughters
+    people = Person.where("mother_id = ? OR father_id = ?", self.id, self.id)
+    people.select(&:female?)
+  end
+
+  def grandparents
+    (grandmothers + grandfathers).compact
+  end
+
+  def grandmothers
+    [(mother.mother unless mother.nil?), (father.mother unless father.nil?)]
+  end
+
+  def grandfathers
+     [(mother.father unless mother.nil?), (father.father unless father.nil?)]
+  end
+  
+  def maternal_grandmother=(person) 
+    self.mother.mother = person
+  end
+
+  def maternal_grandfather=(person)
+    self.mother.father = person
+  end
+
+  def paternal_grandmother=(person)
+    self.father.mother_id = person.id
+  end
+
+  def paternal_grandfather=(person)
+    self.father.father_id = person.id
+  end
 end
