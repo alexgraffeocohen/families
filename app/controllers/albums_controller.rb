@@ -17,9 +17,10 @@ class AlbumsController < ApplicationController
     album = Album.new(album_params)
     album.permissions = album.parse_permission(params[:album][:parse_permission])
     album.family_id = get_id_from_slug(params[:id])
-    album.save
-    current_person.albums << album
-    redirect_to album_path(Family.friendly.find(params[:id]), album)
+    if album.save
+      current_person.albums << album
+      redirect_to album_path(Family.friendly.find(params[:id]), album)
+    end
   end
 
   def update
