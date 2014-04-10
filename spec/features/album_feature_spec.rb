@@ -1,16 +1,25 @@
+require 'spec_helper'
+
 feature "Album" do
   before :each do
-    family = create(:family)
-    album = create(:album)
-    album2 = create(:album)
-    family << album
-    family << album 2
+    @family = create(:family)
+    @album = create(:album)
+    @album2 = create(:album)
+    @family.albums << @album
+    @family.albums << @album2
+
+    # person = create(:person)
+    # visit '/'
+    # click_link("Log in")
+    # fill_in "Email", with: person.email
+    # fill_in "Password", with: person.password
+    # click_button("Sign in")
     visit 'families/1/albums'
   end
 
-  scenario "album index displays all albums" do
-    expect(page).to have_content("album.name")
-    expect(page).to have_content("album2.name")
+  scenario "album index displays all albums", :js => true do
+    expect(page).to have_content(@album.name)
+    expect(page).to have_content(@album2.name)
   end
 
   scenario "album index displays when no albums exist", :js => true do
@@ -20,7 +29,7 @@ feature "Album" do
   end
 
   scenario "shows 0 albums in index with ajax if all deleted", :js => true do
-    within ("div[data-id=1]") do
+    within ("div['data-id'='1']") do
       click_link "Delete"
     end
     click_link "Delete"
@@ -29,14 +38,14 @@ feature "Album" do
   end
 
   scenario "can view ablum from index" do
-    within ("div[data-id=1]") do
+    within ("div['data-id'='1']") do
       click_link "View"
     end
     expect(page).to have_content("Add a Photo")
   end
 
   scenario "can edit album from index" do
-    within ("div[data-id=1]") do
+    within ("div['data-id'='1']") do
       click_link "Edit"
     end
     expect(page).to have_button("Update Album")

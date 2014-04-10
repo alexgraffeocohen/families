@@ -4,6 +4,9 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 require 'simplecov'
+require 'capybara/rails'
+require 'selenium-webdriver'
+require 'database_cleaner'
 SimpleCov.start 'rails'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -13,6 +16,9 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
+
+# drop this into a file in spec/support or feature/support and you should be all set.
+ 
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
@@ -60,5 +66,5 @@ RSpec.configure do |config|
   # order dependency and want to debug it, you can fix the order by providing
   # the seed, which is printed after each run.
   #     --seed 1234
-  config.order = "random"
+  # config.order = "random"
 end

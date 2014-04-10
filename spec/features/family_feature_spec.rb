@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 feature "Photo" do
   before :each do
     @family = create(:family)
@@ -8,15 +10,14 @@ feature "Photo" do
     @granddaughter = create(:person, gender: "F", mother_id: @mom.id, father_id: @dad.id)
 
     visit '/'
-    clink_link("Log in")
+    click_link("Log in")
     fill_in "Email", with: @grandson.email
     fill_in "Password", with: @grandson.password
     click_button("Sign in")
   end
 
   scenario "about us page displays correctly" do
-
    visit 'families/1/about_us'
-   expect(page).to have_content()
+   expect(page).to have_content("#{@grandma.first_name}, your grandmother")
   end
 end

@@ -6,3 +6,4 @@ CarrierWave.configure do |config|
   }
   config.fog_directory = ENV['AWS_BUCKET']
 end
+fog_dir = ENV['AWS_BUCKET']
