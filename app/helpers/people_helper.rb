@@ -4,21 +4,16 @@ module PeopleHelper
     emails.zip(relations)
   end
 
-  def rearrange_grandparents(nested_array)
-    grandparents = []
-    indeces = []
-    nested_array.each_with_index do |pair, i|
-      if pair[1][0] == "g"
-        grandparents << pair
-        indeces << i
+  def rearrange_members(nested_array)
+    nested_array.each do |pair|
+      if pair[1] == "father" || pair[1] == "mother"
+        nested_array.delete(pair)
+        nested_array.unshift(pair)
+      elsif pair[1][0] == "g"
+        nested_array.delete(pair)
+        nested_array.push(pair)
       end
     end
-
-    indeces.each do |index|
-      nested_array.slice!(index)
-    end
-
-    nested_array << grandparents.flatten
   end
 
   def set_relations(ordered_nested_array, admin)
@@ -54,13 +49,14 @@ module PeopleHelper
     member.save
     end
 
-    if admin.children
+    if !admin.children.empty?
       admin.children.each do |child|
         if admin.wife
-          child.mother = admin.wife 
+          child.mother_id = admin.wife.id
         elsif admin.husband
-          child.father = admin.husband 
+          child.father_id = admin.husband.id
         end
+        child.save
       end
     end
   end

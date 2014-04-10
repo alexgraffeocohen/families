@@ -12,24 +12,37 @@ require 'spec_helper'
 # end
 describe PeopleHelper do
   describe "rearranging a new family array" do
-    it "puts grandparents at the end of the inputted array" do
-      mother = create(:person)
-      son = create(:person)
-      daughter = create(:person)
-      grandmother = create(:person)
-      members = [[grandmother, "grandmother"], [mother, "mother"], [son, "son"], [daughter, "daughter"]]
-      
-      rearranged_array = helper.rearrange_grandparents(members)
+    let(:mother)      {create(:person)}
+    let(:father)      {create(:person)}
+    let(:son)         {create(:person)}
+    let(:daughter)    {create(:person)}
+    let(:grandmother) {create(:person)}
+    let(:members) {[[grandmother, "grandmother"], [son, "son"], [daughter, "daughter"], [father, "father"], [mother, "mother"]]}
 
-      expect(rearranged_array.last).to eq([grandmother, "grandmother"])
+  before(:each) do
+    @rearranged_array = helper.rearrange_members(members)
+  end
+
+    it "puts grandparents at the end of the inputted array" do
+      expect(@rearranged_array.last).to eq([grandmother, "grandmother"])
+    end
+
+    it "puts mother toward the front" do
+      mother_index = @rearranged_array.index([mother, "mother"])
+      expect(0..1).to cover(mother_index)
+    end
+
+    it "puts father toward the front" do
+      father_index = @rearranged_array.index([father, "father"])
+      expect(0..1).to cover(father_index)
     end
   end
 
   describe "setting relations" do
-    let(:admin) {create(:person, gender: "M")} 
-    let(:wife) {create(:person, gender: "F")}
-    let(:son) {create(:person, gender: "M")}
-    let(:daughter) {create(:person, gender: "F")}
+    let(:admin)                {create(:person, gender: "M")} 
+    let(:wife)                 {create(:person, gender: "F")}
+    let(:son)                  {create(:person, gender: "M")}
+    let(:daughter)             {create(:person, gender: "F")}
     let(:grandmother_maternal) {create(:person, gender: "F")}
     let(:brother) {create(:person, gender: "M")}
     let(:mother) {create(:person, gender: "F")}
@@ -55,6 +68,14 @@ describe PeopleHelper do
     it 'assigns grandparents to admin' do
       expect(admin.grandparents).to include(grandmother_maternal)
     end
+
+    it 'assigns a sibling to admin' do
+      expect(admin.siblings).to include(brother)
+    end
+
+    # it 'expects proper save of wife' do
+    #   expect(wife).to eq(son.mother)
+    # end
 
     it 'assigns admin as a father' do
       expect(son.father).to eq(admin)
