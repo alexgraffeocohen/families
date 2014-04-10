@@ -66,7 +66,13 @@ describe PeopleHelper do
       expect(daughter.mother).to eq(wife)
     end
 
-      
-    
+    xit 'assigns admin\'s mother as grandmother' do
+    end
+
+    xit 'assigns admin\'s children as grandchildren' do
+    end
+
+    xit 'assigns admin\'s wife as daughter-in-law' do
+    end
   end
 end

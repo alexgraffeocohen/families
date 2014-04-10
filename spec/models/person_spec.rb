@@ -3,21 +3,27 @@ require 'spec_helper'
 describe Person do
   before :each do
     @brady = create(:family)
-    @connie = create(:person, last_name: "Hutchins")
-    @harold = create(:person)
-    @carol = create(:person, mother_id: @connie.id, father_id: @harold.id)
-    @mike = create(:person)
+    @connie = create(:person, last_name: "Hutchins", gender: "F")
+    @harold = create(:person, gender: "M")
+    @carol = create(:person, mother_id: @connie.id, father_id: @harold.id, gender: "F")
+    @mike = create(:person, gender: "M")
     @greg = create(:person, mother_id: @carol.id, father_id: @mike.id, gender: "M")
     @marcia = create(:person, mother_id: @carol.id, father_id: @mike.id, gender: "F")
-    @connie.spouse = @harold
-    @harold.spouse = @connie
-    @carol.spouse = @mike
-    @mike.spouse = @carol
+    @connie.add_spouse(@harold)
+    @carol.add_spouse(@mike)
     @brady.add_members([@harold, @carol, @mike, @greg, @marcia])
   end
   
   it "has mother" do
     expect(@marcia.mother).to eq(@carol)
+  end
+
+  it "can have a wife" do
+    expect(@harold.wife).to eq(@connie)
+  end
+
+  it "can have a husband" do
+    expect(@carol.husband).to eq(@mike)
   end
 
   it "has father" do 

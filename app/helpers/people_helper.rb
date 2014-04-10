@@ -53,5 +53,15 @@ module PeopleHelper
     
     member.save
     end
+
+    if admin.children
+      admin.children.each do |child|
+        if admin.wife
+          child.mother = admin.wife 
+        elsif admin.husband
+          child.father = admin.husband 
+        end
+      end
+    end
   end
 end

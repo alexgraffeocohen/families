@@ -17,15 +17,19 @@ class Person < ActiveRecord::Base
     self.save
     spouse.save
   end
+
+  def husband
+    Person.find_by(spouse_id: self.id, gender: "M")
+  end
+
+  def wife
+    Person.find_by(spouse_id: self.id, gender: "F")
+  end
   
   def parents
     [mother, father]
   end
-
-  # def mother=(person)
-  #   self.mother_id = person.id
-  # end
-
+  
   def siblings
     Person.where("mother_id = ? OR father_id = ?", mother_id, father_id).where.not("id = ?", self.id)
   end
