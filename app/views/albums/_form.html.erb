@@ -1,6 +1,6 @@
 <div class="white_div text-left">
 <%= form_tag(create_album_path(@family)) do %>
-  <%= label_tag 'album[name]', "Name" %>
+  <%= label_tag 'album[name]', "Album Name" %><br>
   <%= text_field_tag 'album[name]'%><br><br>
 
   <%= label_tag 'album[parse_permission][]', 'Who can view my album?' %><br>
@@ -27,5 +27,5 @@
   <%= submit_tag "Create Album" %>
 <% end %>
 <br>
-<%= link_to "All Albums", albums_path %>
+<%= button_to "Back to All Albums", albums_path %>
 </div>
