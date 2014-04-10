@@ -9,9 +9,7 @@
         <p>Photos: <%=album.photos.count%></p>
         <%= album.created_at.strftime("%b %Y") %>
         <br><br>
-        <%= link_to "View", album_path(Family.find(params[:id]),album) %> |
-        <%= link_to "Edit", edit_album_path(Family.find(params[:id]),album) %> |
-        <%= link_to "Delete", destroy_album_path(Family.find(params[:id]),album), remote: true, method: :delete %>
+        <%= link_to "✖", destroy_album_path(album.family, album), remote: true, method: :delete %>
       </div>
     <% end %>
   <% end %>

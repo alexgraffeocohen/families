@@ -53,7 +53,7 @@ class AlbumsController < ApplicationController
   private
 
   def set_album
-    @family = Family.find(params[:id])
+    @family = Family.friendly.find(params[:id])
     @album = Album.find(params[:album_id])
   end
 

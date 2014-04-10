@@ -26,7 +26,7 @@ class PhotosController < ActionController::Base
   def set_photo
     @photo = Photo.find(params[:photo_id]) if params[:photo_id]
     @album = Album.find(params[:album_id])
-    @family = Family.find(params[:id])
+    @family = Family.friendly.find(params[:id])
   end
 
   def photo_params

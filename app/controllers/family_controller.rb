@@ -37,7 +37,7 @@ class FamilyController < ApplicationController
   private
 
   def set_family
-    @family = Family.find(params[:id])
+    @family = Family.friendly.find(params[:id])
   end
 
   def family_params
