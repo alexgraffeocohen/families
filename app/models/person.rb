@@ -83,7 +83,6 @@ class Person < ActiveRecord::Base
   end
 
   def can_see_album?(album)
-    binding.pry
     album.relationships_permitted.include?(self.relationship_to(album.owner))
   end
 end

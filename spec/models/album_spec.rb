@@ -21,13 +21,13 @@ describe Album do
   context "supports single permissions" do
     let(:album2){create(:album, person_id: daughter.id, permissions: "1")}
     it "can block people" do
-      expect(album.relationships_permitted).to_not include("mother")
-      expect(mother.can_see_album?(album)).to eq(false)
+      expect(album2.relationships_permitted).to_not include("mother")
+      expect(mother.can_see_album?(album2)).to eq(false)
     end
 
     it "can allow people" do
-      expect(album.relationships_permitted).to include("brother")
-      expect(son.can_see_album?(album)).to eq(true)
+      expect(album2.relationships_permitted).to include("brother")
+      expect(son.can_see_album?(album2)).to eq(true)
     end
   end
 
