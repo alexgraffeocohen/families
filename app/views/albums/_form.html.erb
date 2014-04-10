@@ -1,5 +1,5 @@
 <%= form_tag(create_album_path(@family)) do %>
-  <%= label_tag 'album[name]' %>
+  <%= label_tag 'album[name]', "Name" %>
   <%= text_field_tag 'album[name]'%><br><br>
 
   <%= label_tag 'album[parse_permission][]', 'Who can view my album?' %><br>

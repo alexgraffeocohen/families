@@ -8,12 +8,12 @@ feature "Album" do
     @family.albums << @album
     @family.albums << @album2
 
-    # person = create(:person)
-    # visit '/'
-    # click_link("Log in")
-    # fill_in "Email", with: person.email
-    # fill_in "Password", with: person.password
-    # click_button("Sign in")
+    person = create(:person)
+    visit '/'
+    click_link("Log in")
+    fill_in "Email", with: person.email
+    fill_in "Password", with: person.password
+    click_button("Sign in")
     
 
   end

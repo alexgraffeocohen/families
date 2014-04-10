@@ -83,7 +83,7 @@ class Person < ActiveRecord::Base
   end
 
   def can_see_album?(album)
-    album.relationships_permitted.include?(self.relationship_to(album.owner))
+    album.relationships_permitted.include?(self.relationship_to(album.owner)) || album.owner == self
   end
 end
 
