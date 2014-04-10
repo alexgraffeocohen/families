@@ -9,3 +9,27 @@
 .navbar-brand {
      font-weight: bold;
 }    
+
+.white_div {
+  overflow: scroll;
+  width: 40%;
+  height: 20%;
+  margin: 20px;
+  background: white;
+  border-radius: 10px;
+  text-align: center;
+  padding: 20px;
+  float: left;
+}
+
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+.clearfix { display: inline-block; }
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }

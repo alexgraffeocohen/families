@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   delete 'families/:id/albums/:album_id' => "albums#destroy", as: 'destroy_album'
   
   post 'families/:id/albums/:album_id/photos' => "photos#create", as: "create_photo"
-
+  delete 'families/:id/albums/:album_id/photos/:photo_id' => "photos#destroy", as: "destroy_photo"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
