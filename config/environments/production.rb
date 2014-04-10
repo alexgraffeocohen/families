@@ -27,6 +27,15 @@ Rails.application.configure do
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
+  config.action_mailer.default_url_options = {:host => 'yourdomain.com'}
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+  address:              'smtp.gmail.com',
+  port:                 587,
+  user_name:            'allinthefamilyapp@gmail.com',
+  password:             'ENV[EMAIL_PASSWORD]',
+  authentication:       'plain',
+  enable_starttls_auto: true  }
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = true
