@@ -16,7 +16,7 @@ class AlbumsController < ApplicationController
   def create
     album = Album.new(album_params)
     album.permissions = album.parse_permission(params[:album][:parse_permission])
-    album.family_id = params[:id]
+    album.family_id = get_id_from_slug(params[:id])
     album.save
     current_person.albums << album
     redirect_to album_path(Family.friendly.find(params[:id]), album)
@@ -59,5 +59,9 @@ class AlbumsController < ApplicationController
 
   def album_params
     params.require(:album).permit(:name, :date, :family_id)
+  end
+
+  def get_id_from_slug(slug)
+    Family.find_by(name_slug: slug).id
   end
 end
