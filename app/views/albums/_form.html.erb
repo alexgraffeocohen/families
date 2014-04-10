@@ -1,9 +1,10 @@
+<div class="white_div text-left">
 <%= form_tag(create_album_path(@family)) do %>
-  <%= label_tag 'album[name]', "Name" %>
+  <%= label_tag 'album[name]', "Album Name" %><br>
   <%= text_field_tag 'album[name]'%><br><br>
 
   <%= label_tag 'album[parse_permission][]', 'Who can view my album?' %><br>
-  <%= link_to "Entire Family", "#" %><br>
+  <p><%= link_to "Entire Family", "#" %></p>
   <% unless current_person.siblings.empty? %>
     <p><%= check_box_tag('album[parse_permission][]', value = "1", checked = false) %> Siblings</p>
   <% end %>
@@ -25,3 +26,6 @@
   <br><br>
   <%= submit_tag "Create Album" %>
 <% end %>
+<br>
+<%= button_to "Back to All Albums", albums_path %>
+</div>
