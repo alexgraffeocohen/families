@@ -9,7 +9,6 @@ describe Album do
   it "has photos" do
     photo = create(:photo)
     album.photos << photo
-    # binding.pry
     expect(album.photos).to include photo
   end
 
@@ -19,9 +18,9 @@ describe Album do
     expect(album.family).to eq family
   end
 
-  context "has permissions" do
+  context "supports single permissions" do
+    let(:album2){create(:album, person_id: daughter.id, permissions: "1")}
     it "can block people" do
-      puts album.permissions
       expect(album.relationships_permitted).to_not include("mother")
       expect(mother.can_see_album?(album)).to eq(false)
     end
@@ -29,6 +28,19 @@ describe Album do
     it "can allow people" do
       expect(album.relationships_permitted).to include("brother")
       expect(son.can_see_album?(album)).to eq(true)
+    end
+  end
+
+  context "supports multiple permissions" do
+    let(:album3){create(:album, person_id: daughter.id, permissions: "1 2")}
+    it "can block people" do
+      expect(album.relationships_permitted).to include("mother")
+      expect(mother.can_see_album?(album3)).to eq(true)
+    end
+
+    it "can allow people" do
+      expect(album.relationships_permitted).to include("brother")
+      expect(son.can_see_album?(album3)).to eq(true)
     end
   end
 end

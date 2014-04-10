@@ -12,22 +12,17 @@ class Album < ActiveRecord::Base
   end
 
   def relationships_permitted
-    permission = permissions.split(" ")
-    members = []
-    if permission.include?("1")
-      members << ["brother", "sister"]
-    elsif permission.include("2")
-      members << ["mother", "father"]
-    elsif permission.include("3")
-      members << ["son", "daughter"]
-    elsif permission.include("4")
-      members << ["grandmother", "grandfather"]
-    elsif permission.include("5")
-      members << ["granddaughter", "grandson"]
-    elsif permission.include("6")
-      members << ["son-in-law", "daughter-in-law"]
-    end
-    binding.pry
-    members.flatten
+    album_permission = permissions.split(" ")
+    
+    permission_hash = {
+      "1": ["brother", "sister"],
+      "2": ["mother", "father"],
+      "3": ["son", "daughter"],
+      "4": ["grandmother", "grandfather"],
+      "5": ["granddaughter", "grandson"],
+      "6": ["son-in-law", "daughter-in-law"]
+    }
+    
+    permission_hash.map { |key, value| value if permission.include?(key) }.flatten
   end
 end
