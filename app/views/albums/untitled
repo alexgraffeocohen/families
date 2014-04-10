@@ -1,0 +1,11 @@
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#{destroy_album_path(Family.find(params[:id]),@album)}", method="delete">Delete</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#{albums_path(Family.find(params[:id]),@album)}">All Albums</a></li>
+    <li role="presentation" class="divider"></li>
+    <li role="presentation">
+      <%= form_tag(create_photo_path(@family, @album), remote: true, multipart: true) do %>
+        <%= label_tag "photo[data]", "Add a Photo" %>
+        <%= file_field_tag "photo[data]" %> <br>
+        <%= text_field_tag "photo[caption]", "", placeholder: "Add Caption", autofocus: true %> <br>
+        <%= submit_tag "Upload Photo" %>
+      <% end %>
+</li>

@@ -1,19 +1,27 @@
-<h1><%= @album.name %></h1>
-<p>Photos: <span><%=@album.photos.count%></span></p>
-<p><%= @album.date.strftime("%b %Y") %></p>
-<p>Uploaded <%= time_ago_in_words(@album.created_at) %></p>
-<%= link_to "Edit", edit_album_path(Family.find(params[:id]),@album) %> |
-<%= link_to "Delete", destroy_album_path(Family.find(params[:id]),@album), method: :delete %> |
-<%= link_to "All Albums", albums_path(Family.find(params[:id]),@album) %>
 
-<br><br>
+<p><span class="large_font"><%= @album.name %></span> <%= @album.date.strftime("%b %Y") %></p>
+<div class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+      Options
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><%= link_to "Delete", destroy_album_path(@family, @album), method: :delete %></li>
+      <li><%= link_to "All Albums", albums_path %></li>
+      <li class="divider"></li>
+      <li class="text-center">
+        <%= form_tag(create_photo_path(@family, @album), remote: true, multipart: true) do %>
+        <%= label_tag "photo[data]", "Add a Photo" %>
+        <%= file_field_tag "photo[data]" %><br>
+        <%= text_field_tag "photo[caption]", "", placeholder: "Add Caption", autofocus: true %><br><br>
+        <%= submit_tag "Upload Photo" %>
+      <% end %>
+      </li>
+    </ul>
+  </div>
+</div>
 
-<%= form_tag(create_photo_path(@family, @album), remote: true, multipart: true) do %>
-  <%= label_tag "photo[data]", "Add a Photo" %>
-  <%= file_field_tag "photo[data]" %> <br>
-  <%= text_field_tag "photo[caption]", "", placeholder: "Add Caption", autofocus: true %> <br>
-  <%= submit_tag "Upload Photo" %>
-<% end %>
+
   <div class="photos">
     <% unless @album.photos.empty? %>
       <% @album.photos.reverse.each do |photo| %>
