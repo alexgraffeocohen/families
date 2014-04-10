@@ -6,7 +6,7 @@
 #   cities = City.create!([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-connie = Person.create!(
+connie = Person.new(
   first_name: "Connie",
   last_name: "Hutchins",
   email: "connie@brady.com",
@@ -16,7 +16,7 @@ connie = Person.create!(
   admin: 0
   )
 
-harold = Person.create!(
+harold = Person.new(
   first_name: "Harold",
   last_name: "Hutchins",
   email: "harold@brady.com",
@@ -26,7 +26,7 @@ harold = Person.create!(
   admin: 0
   )
 
-carol = Person.create!(
+carol = Person.new(
   first_name: "Carol",
   email: "carol@brady.com",
   password: "foobar12",
@@ -37,7 +37,7 @@ carol = Person.create!(
   admin: 1
   )
 
-mike = Person.create!(
+mike = Person.new(
   first_name: "Mike",
   email: "mike@brady.com",
   password: "foobar12",
@@ -46,7 +46,7 @@ mike = Person.create!(
   admin: 0
   )
 
-greg = Person.create!(
+greg = Person.new(
   first_name: "Greg",
   email: "greg@brady.com",
   password: "foobar12",
@@ -57,7 +57,7 @@ greg = Person.create!(
   admin: 0
   )
 
-marcia = Person.create!(
+marcia = Person.new(
   first_name: "Marcia",
   email: "marcia@brady.com",
   password: "foobar12",
@@ -74,9 +74,10 @@ brady = Family.find_or_create_by(
 
 members = [marcia, greg, mike, carol, harold, connie]
 
-brady.add_members(members)
+members.each do |member|
+  member.skip_confirmation!
+  member.save
+end
 
-carol.spouse_id = mike.id
-mike.spouse_id = carol.id
-carol.save!
-mike.save!
+brady.add_members(members)
+carol.add_spouse(mike)
