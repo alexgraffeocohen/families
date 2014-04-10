@@ -45,7 +45,6 @@ module PeopleHelper
         member.mother_id = admin.mother_id if admin.mother
         member.father_id = admin.father_id if admin.father
       end
-    
     member.save
     end
 

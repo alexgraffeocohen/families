@@ -66,6 +66,12 @@ describe Person do
     expect(@connie.last_name).to eq("Hutchins")
   end
 
+  it "can mutually assign spouses" do
+    @carol.add_spouse(@mike)
+    expect(@carol.spouse).to eq(@mike)
+    expect(@mike.spouse).to eq(@carol)
+  end
+
   describe 'assigning maternal grandparents' do
     let(:maternal_grandmother) {create(:person)}
     let(:maternal_grandfather) {create(:person)}

@@ -1,5 +1,6 @@
 class Person < ActiveRecord::Base
   include Relationable
+  include PeopleHelper
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
@@ -10,6 +11,8 @@ class Person < ActiveRecord::Base
   belongs_to :mother, :class_name => Person, :foreign_key => :mother_id
   belongs_to :father, :class_name => Person, :foreign_key => :father_id
   belongs_to :spouse, :class_name => Person, :foreign_key => :spouse_id
+
+  validates :gender, presence: :true
 
   def add_spouse(spouse)
     self.spouse = spouse
@@ -114,7 +117,7 @@ class Person < ActiveRecord::Base
     p[:password_confirmation] = params[:password_confirmation]
     update_attributes(p)
   end
-  # new function to return whether a password has been set
+
   def has_no_password?
     self.encrypted_password.blank?
   end
@@ -124,7 +127,6 @@ class Person < ActiveRecord::Base
   end
 
   def password_required?
-  # Password is required if it is being set, but not for new records
   if !persisted? 
     false
   else

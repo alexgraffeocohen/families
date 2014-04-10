@@ -1,5 +1,6 @@
 class FamilyController < ApplicationController
   include FamilyHelper
+  include PeopleHelper
   before_filter :authenticate_person!
   before_action :set_family, only: [:show, :about_us]
 
@@ -24,9 +25,10 @@ class FamilyController < ApplicationController
     # family is created
     @family = Family.create(family_params)
     @family.person_families.build(person: current_person)
-    binding.pry
-    
-    create_accounts(params, @family)
+
+    accounts = create_accounts(params, @family)
+    nested_array = members_array(accounts, params[:people][:relations])
+    set_relations(rearrange_members(nested_array), current_person)
     # if he added family members
       # create new accounts for each email inputted
       # two attributes are created... email and gender

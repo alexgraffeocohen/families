@@ -9,4 +9,5 @@ class Family < ActiveRecord::Base
       family_member.last_name ||= self.name
     end
   end
+
 end
