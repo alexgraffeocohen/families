@@ -2,10 +2,10 @@ class Person < ActiveRecord::Base
   include Relationable
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   has_many   :person_families
-  has_many   :families, :through => :person_families
+  has_many   :families, through: :person_families
   has_many   :albums
   belongs_to :mother, :class_name => Person, :foreign_key => :mother_id
   belongs_to :father, :class_name => Person, :foreign_key => :father_id
@@ -16,6 +16,14 @@ class Person < ActiveRecord::Base
     spouse.spouse = self
     self.save
     spouse.save
+  end
+
+  def husband
+    Person.find_by(spouse_id: self.id, gender: "M")
+  end
+
+  def wife
+    Person.find_by(spouse_id: self.id, gender: "F")
   end
   
   def parents
@@ -38,8 +46,18 @@ class Person < ActiveRecord::Base
     Person.where("mother_id = ? OR father_id = ?", self.id, self.id)
   end
 
+  def sons
+    people = Person.where("mother_id = ? OR father_id = ?", self.id, self.id)
+    people.select(&:male?)
+  end
+
+  def daughters
+    people = Person.where("mother_id = ? OR father_id = ?", self.id, self.id)
+    people.select(&:female?)
+  end
+
   def grandparents
-    (grandmothers.values + grandfathers.values).compact
+    (grandmothers + grandfathers).compact
   end
 
   def male?
@@ -58,22 +76,61 @@ class Person < ActiveRecord::Base
   #   [grandmothers[:maternal], grandfathers[:maternal]]
   # end
 
-  def maternal_grandmother(person)
-    #self.mother_id = Person.create(name: 'Empty') if !self.mother
-    self.mother.mother_id == person.id
+  def maternal_grandmother=(person) 
+    self.mother.mother = person
+  end
+
+  def maternal_grandfather=(person)
+    self.mother.father = person
+  end
+
+  def paternal_grandmother=(person)
+    self.father.mother_id = person.id
+  end
+
+  def paternal_grandfather=(person)
+    self.father.father_id = person.id
   end
 
   def grandmothers
-    {maternal: (mother.mother unless mother.nil?), paternal: (father.mother unless father.nil?)}
+    [(mother.mother unless mother.nil?), (father.mother unless father.nil?)]
   end
 
   def grandfathers
-    {maternal: (mother.father unless mother.nil?), paternal: (father.father unless father.nil?)}
+     [(mother.father unless mother.nil?), (father.father unless father.nil?)]
   end
 
   def default_family
     self.families[0]
   end
+
+  def only_if_unconfirmed
+    pending_any_confirmation {yield}
+  end
+
+  def attempt_set_password(params)
+    p = {}
+    p[:password] = params[:password]
+    p[:password_confirmation] = params[:password_confirmation]
+    update_attributes(p)
+  end
+  # new function to return whether a password has been set
+  def has_no_password?
+    self.encrypted_password.blank?
+  end
+
+  def password_match?(params)
+    params[:password] == params[:password_confirmation]
+  end
+
+  def password_required?
+  # Password is required if it is being set, but not for new records
+  if !persisted? 
+    false
+  else
+    !password.nil? || !password_confirmation.nil?
+  end
+end
 
 end
 

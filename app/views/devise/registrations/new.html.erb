@@ -9,8 +9,8 @@
   <div><%= f.label :email %><br />
   <%= f.email_field :email %></div>
 
-  <div><%= f.label :age %><br />
-  <%= f.text_field :age %></div>
+  <div><%= f.label :gender %><br />
+  <%= f.text_field :gender %></div>
 
   <div><%= f.label :birthday %><br />
   <%= f.date_select :birthday, :start_year => Date.today.year - 100 %></div>
@@ -23,6 +23,8 @@
 
   <div><%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %></div><br />
+
+  <%= f.hidden_field :admin, :value => 1 %>
 
   <div><%= f.submit "Sign up" %></div><br />
 <% end %>
