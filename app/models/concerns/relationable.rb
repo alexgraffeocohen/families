@@ -107,6 +107,14 @@ module Relationable
     people.select(&:female?)
   end
 
+  def children_in_laws
+    children.collect { |child| child.spouse } if children  
+  end
+
+  def grandchildren
+    children.collect { |child| child.children }.flatten if children 
+  end
+
   def grandparents
     (grandmothers + grandfathers).compact
   end
