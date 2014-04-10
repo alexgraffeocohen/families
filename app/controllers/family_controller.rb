@@ -28,6 +28,12 @@ class FamilyController < ApplicationController
   def about_us
   end
 
+  def invite_members
+    @members.each do |member|
+      WelcomeMailer.invite(member.email).deliver
+    end
+  end
+
   private
 
   def set_family
