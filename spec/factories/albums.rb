@@ -5,6 +5,6 @@ FactoryGirl.define do
   factory :album do
     name {Faker::Name.name}
     family_id 2
-    date "2014-04-08 11:11:22"
+    permissions "1 2"
   end
 end

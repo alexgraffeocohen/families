@@ -6,9 +6,10 @@
   <%= link_to "Entire Family", "#" %><br>
   Siblings <%= check_box_tag('album[parse_permission][]', value = "1", checked = false) %><br>
   Parents <%= check_box_tag('album[parse_permission][]', value = "2", checked = false) %><br>
-  Grandparents <%= check_box_tag('album[parse_permission][]', value = "3", checked = false) %><br>
-  Children <%= check_box_tag('album[parse_permission][]', value = "4", checked = false) %><br>
-  Daughter and Son In-Laws <%= check_box_tag('album[parse_permission][]', value = "5", checked = false) %><br><br>
+  Children <%= check_box_tag('album[parse_permission][]', value = "3", checked = false) %><br>
+  Grandparents <%= check_box_tag('album[parse_permission][]', value = "4", checked = false) %><br>
+  Grandchildren <%= check_box_tag('album[parse_permission][]', value = "5", checked = false) %><br>
+  Daughter and Son In-Laws <%= check_box_tag('album[parse_permission][]', value = "6", checked = false) %><br><br>
 
   <%= submit_tag "Create Album" %>
 <% end %>

@@ -27,6 +27,7 @@ class Album < ActiveRecord::Base
     elsif permission.include("6")
       members << ["son-in-law", "daughter-in-law"]
     end
+    binding.pry
     members.flatten
   end
 end
