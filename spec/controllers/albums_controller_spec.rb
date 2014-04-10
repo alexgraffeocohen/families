@@ -3,7 +3,7 @@ require 'spec_helper'
 describe AlbumsController do
   describe 'GET #index' do
     before :each do
-      brady = create(:family)
+      @brady = create(:family)
       @album1 = create(:album)
       @album2 = create(:album)
       get :index, id: brady.id

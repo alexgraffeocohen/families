@@ -1,15 +1,31 @@
+<div class="white_div text-left">
 <%= form_tag(create_album_path(@family)) do %>
-  <%= label_tag 'album[name]', "Name" %>
+  <%= label_tag 'album[name]', "Album Name" %><br>
   <%= text_field_tag 'album[name]'%><br><br>
 
   <%= label_tag 'album[parse_permission][]', 'Who can view my album?' %><br>
-  <%= link_to "Entire Family", "#" %><br>
-  Siblings <%= check_box_tag('album[parse_permission][]', value = "1", checked = false) %><br>
-  Parents <%= check_box_tag('album[parse_permission][]', value = "2", checked = false) %><br>
-  Children <%= check_box_tag('album[parse_permission][]', value = "3", checked = false) %><br>
-  Grandparents <%= check_box_tag('album[parse_permission][]', value = "4", checked = false) %><br>
-  Grandchildren <%= check_box_tag('album[parse_permission][]', value = "5", checked = false) %><br>
-  Daughter and Son In-Laws <%= check_box_tag('album[parse_permission][]', value = "6", checked = false) %><br><br>
-
+  <p><%= link_to "Entire Family", "#" %></p>
+  <% unless current_person.siblings.empty? %>
+    <p><%= check_box_tag('album[parse_permission][]', value = "1", checked = false) %> Siblings</p>
+  <% end %>
+  <% unless current_person.parents.empty? %>
+    <p><%= check_box_tag('album[parse_permission][]', value = "2", checked = false) %> Parents</p>
+  <% end %>
+  <% unless current_person.children.empty? %>
+    <p><%= check_box_tag('album[parse_permission][]', value = "3", checked = false) %> Children</p>
+  <% end %>
+  <% unless current_person.grandparents.empty? %>
+    <p><%= check_box_tag('album[parse_permission][]', value = "4", checked = false) %> Grandparents</p>
+  <% end %>
+  <% unless current_person.grandchildren.empty? %>
+    <p><%= check_box_tag('album[parse_permission][]', value = "5", checked = false) %> Grandchildren</p>
+  <% end %>
+  <% unless current_person.children_in_laws.empty? %>
+    <p><%= check_box_tag('album[parse_permission][]', value = "6", checked = false) %> Daughter and Son In-Laws</p>
+  <% end %>
+  <br><br>
   <%= submit_tag "Create Album" %>
 <% end %>
+<br>
+<%= button_to "Back to All Albums", albums_path %>
+</div>
