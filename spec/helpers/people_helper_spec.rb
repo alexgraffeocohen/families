@@ -26,14 +26,14 @@ describe PeopleHelper do
   end
 
   describe "setting relations" do
-    let(:admin) {create(:person)} 
-    let(:wife) {create(:person)}
-    let(:son) {create(:person)}
-    let(:daughter) {create(:person)}
-    let(:grandmother) {create(:person)}
-    let(:brother) {create(:person)}
-    let(:mother) {create(:person)}
-    let(:members) {[[wife, "wife"], [son, "son"], [daughter, "daughter"], [brother, "brother"], [mother, "mother"], [grandmother, "grandmother"]]}
+    let(:admin) {create(:person, gender: "M")} 
+    let(:wife) {create(:person, gender: "F")}
+    let(:son) {create(:person, gender: "M")}
+    let(:daughter) {create(:person, gender: "F")}
+    let(:grandmother_maternal) {create(:person, gender: "F")}
+    let(:brother) {create(:person, gender: "M")}
+    let(:mother) {create(:person, gender: "F")}
+    let(:members) {[[wife, "wife"], [son, "son"], [daughter, "daughter"], [brother, "brother"], [mother, "mother"], [grandmother_maternal, "grandmother (maternal)"]]}
 
     before(:each) do
       helper.set_relations(members, admin) 
@@ -53,12 +53,26 @@ describe PeopleHelper do
     end
 
     it 'assigns grandparents to admin' do
-      expect(admin.grandparents).to include(grandmother)
+      expect(admin.grandparents).to include(grandmother_maternal)
     end
 
+    it 'assigns admin as a father' do
+      expect(son.father).to eq(admin)
+      expect(daughter.father).to eq(admin)
+    end
 
-      # expect(brother.mother).to eq(admin.mother)
-      
-    
+    it 'assigns admin\'s wife as mother' do
+      expect(son.mother).to eq(wife)
+      expect(daughter.mother).to eq(wife)
+    end
+
+    xit 'assigns admin\'s mother as grandmother' do
+    end
+
+    xit 'assigns admin\'s children as grandchildren' do
+    end
+
+    xit 'assigns admin\'s wife as daughter-in-law' do
+    end
   end
 end

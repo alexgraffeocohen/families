@@ -17,11 +17,19 @@ class Person < ActiveRecord::Base
     self.save
     spouse.save
   end
+
+  def husband
+    Person.find_by(spouse_id: self.id, gender: "M")
+  end
+
+  def wife
+    Person.find_by(spouse_id: self.id, gender: "F")
+  end
   
   def parents
     [mother, father]
   end
-
+  
   def siblings
     Person.where("mother_id = ? OR father_id = ?", mother_id, father_id).where.not("id = ?", self.id)
   end
@@ -58,24 +66,20 @@ class Person < ActiveRecord::Base
   #   [grandmothers[:maternal], grandfathers[:maternal]]
   # end
 
-  def maternal_grandmother(person)
-    #self.mother_id = Person.create(name: 'Empty') if !self.mother
-    self.mother.mother_id == person.id
+  def maternal_grandmother=(person) 
+    self.mother.mother = person
   end
 
-  def maternal_grandfather(person)
-    #self.mother_id = Person.create(name: 'Empty') if !self.mother
-    self.mother.father_id == person.id
+  def maternal_grandfather=(person)
+    self.mother.father = person
   end
 
-  def paternal_grandmother(person)
-    #self.mother_id = Person.create(name: 'Empty') if !self.mother
-    self.father.mother_id == person.id
+  def paternal_grandmother=(person)
+    self.father.mother_id = person.id
   end
 
-  def paternal_grandfather(person)
-    #self.mother_id = Person.create(name: 'Empty') if !self.mother
-    self.father.father_id == person.id
+  def paternal_grandfather=(person)
+    self.father.father_id = person.id
   end
 
   def grandmothers
