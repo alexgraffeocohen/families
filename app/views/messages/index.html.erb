@@ -1,13 +1,14 @@
-<%= @conversation.title %>
-<% @conversations.messages.each do |message| %>
-<%= message %>
-<%= message.person %>
-<% end %>
+<div class="message_all">
+  <h2>Current Conversation: <%= @conversation.title %></h2>
+  <% @conversation.messages.each do |message| %>
+    <%= render "show_message", {message: message} %>
+  <% end %>
+</div>
 
 
-<%= form_for @message do |f| %>
-<%= f.label %>
-<%= f.text_field :content %>
+<%= form_for [@family, @conversation, @message], remote: true do |f| %>
+<%= f.label :content, "Write a new message" %><br>
+<%= f.text_field :content %><br><br>
 
-<%= f.submit %>
+<%= f.submit class: "btn btn-primary" %>
 <% end %>
