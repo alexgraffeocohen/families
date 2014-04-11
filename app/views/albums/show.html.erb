@@ -21,10 +21,10 @@
   <li><%= link_to "Back to All Albums", albums_path %></li>
 </div>
 
-  <div class="photos">
-    <% unless @album.photos.empty? %>
-      <% @album.photos.reverse.each do |photo| %>
-      <%= render "photos/show_photo", {family: @family, album: @album, photo: photo} %>
-      <% end %>
+<div class="photos">
+  <% unless @album.photos.empty? %>
+    <% @album.photos.reverse.each do |photo| %>
+    <%= render "photos/show_photo", {family: @family, album: @album, photo: photo} %>
     <% end %>
-  </div>
+  <% end %>
+</div>

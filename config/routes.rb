@@ -25,8 +25,7 @@ Rails.application.routes.draw do
   get 'families/:id/albums/:album_id/edit' => "albums#edit", as: 'edit_album'
   get 'families/:id/albums/:album_id' => "albums#show", as: 'album'
   
-  post 'families/:id/albums' => "albums#create", as: "create_album"
-  patch 'families/:id/albums/:album_id' => "albums#update", as: "family_album"
+  post 'families/:id/albums' => "albums#create", as: "family_albums"
   delete 'families/:id/albums/:album_id' => "albums#destroy", as: 'destroy_album'
   
   post 'families/:id/albums/:album_id/photos' => "photos#create", as: "create_photo"

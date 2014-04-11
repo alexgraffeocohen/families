@@ -1,34 +1,26 @@
 <div class="white_div text-left">
-<%= form_tag(create_album_path(@family)) do %>
-  <%= label_tag 'album[name]', "Album Name" %><br>
-  <%= text_field_tag 'album[name]'%><br><br>
-
-  <%= label_tag 'album[parse_permission][]', 'Who can view my album?' %><br>
-  <p><%= link_to "Entire Family", "#" %></p>
-  <% unless current_person.siblings.empty? %>
-    <p><%= check_box_tag('album[parse_permission][]', value = "1", checked = false) %> Siblings</p>
+<%= form_for [@family, @album] do |f| %>
+  <%= f.label :name, "Name" %>
+  <%= f.text_field :name %>
+  <br>
+  <% ["siblings", "parents", "children", "grandparents", "grandchildren", "children_in_laws", "spouse"].each_with_index do |relation, index| %>
+    <% unless current_person.send("#{relation}").blank?  %>
+      <%= f.check_box :parse_permission, {multiple: true}, (index+1), nil %> <%= relation.capitalize %><br>
+    <% end %>
   <% end %>
-  <% unless current_person.parents.empty? %>
-    <p><%= check_box_tag('album[parse_permission][]', value = "2", checked = false) %> Parents</p>
-  <% end %>
-  <% unless current_person.children.empty? %>
-    <p><%= check_box_tag('album[parse_permission][]', value = "3", checked = false) %> Children</p>
-  <% end %>
-  <% unless current_person.grandparents.empty? %>
-    <p><%= check_box_tag('album[parse_permission][]', value = "4", checked = false) %> Grandparents</p>
-  <% end %>
-  <% unless current_person.grandchildren.empty? %>
-    <p><%= check_box_tag('album[parse_permission][]', value = "5", checked = false) %> Grandchildren</p>
-  <% end %>
-  <% unless current_person.children_in_laws.empty? %>
-    <p><%= check_box_tag('album[parse_permission][]', value = "6", checked = false) %> Daughter and Son In-Laws</p>
-  <% end %>
-  <% unless current_person.spouse.nil? %>
-    <p><%= check_box_tag('album[parse_permission][]', value = "7", checked = false) %> Spouse</p>
-  <% end %>
+  <div class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+      Custom
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><%= f.text_field :family_id %></li>
+    </ul>
+  </div>
   <br><br>
-  <%= submit_tag "Create Album" %>
+  <%= f.submit %>
 <% end %>
+
 <br>
 <%= button_to "Back to All Albums", albums_path %>
 </div>

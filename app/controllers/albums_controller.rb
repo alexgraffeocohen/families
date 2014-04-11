@@ -14,8 +14,9 @@ class AlbumsController < ApplicationController
   end
 
   def create
+    binding.pry
     album = Album.new(album_params)
-    album.permissions = album.parse_permission(params[:album][:parse_permission])
+    album.permissions = album.parse(params[:album][:parse_permission])
     album.family_id = get_id_from_slug(params[:id])
     album.save
     current_person.albums << album
