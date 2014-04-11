@@ -134,6 +134,14 @@ module Relationable
   def uncles
     [(mother.brothers unless mother.nil?), (father.brothers unless father.nil?)].flatten.compact
   end
+
+  def brothers_in_law
+    [(wife.brothers unless wife.nil?), (husband.brothers unless husband.nil?)].flatten.compact
+  end
+
+  def sisters_in_law
+    [(wife.sisters unless wife.nil?), (husband.sisters unless husband.nil?)].flatten.compact
+  end
   
   def maternal_grandmother=(person) 
     self.mother.mother = person
