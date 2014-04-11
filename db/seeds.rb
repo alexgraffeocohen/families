@@ -6,27 +6,29 @@
 #   cities = City.create!([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-connie = Person.new(
+connie = Person.create!(
   first_name: "Connie",
   last_name: "Hutchins",
   email: "connie@brady.com",
   password: "foobar12",
   password_confirmation: "foobar12",
   gender: "F",
-  admin: 0
+  admin: 0,
+  confirmed_at: Time.now
   )
 
-harold = Person.new(
+harold = Person.create!(
   first_name: "Harold",
   last_name: "Hutchins",
   email: "harold@brady.com",
   password: "foobar12",
   password_confirmation: "foobar12",
   gender: "M",
-  admin: 0
+  admin: 0,
+  confirmed_at: Time.now
   )
 
-carol = Person.new(
+carol = Person.create!(
   first_name: "Carol",
   email: "carol@brady.com",
   password: "foobar12",
@@ -34,19 +36,21 @@ carol = Person.new(
   gender: "F",
   mother_id: connie.id,
   father_id: harold.id,
-  admin: 1
+  admin: 1,
+  confirmed_at: Time.now
   )
 
-mike = Person.new(
+mike = Person.create!(
   first_name: "Mike",
   email: "mike@brady.com",
   password: "foobar12",
   password_confirmation: "foobar12",
   gender: "M",
-  admin: 0
+  admin: 0,
+  confirmed_at: Time.now
   )
 
-greg = Person.new(
+greg = Person.create!(
   first_name: "Greg",
   email: "greg@brady.com",
   password: "foobar12",
@@ -54,10 +58,11 @@ greg = Person.new(
   gender: "M",
   mother_id: carol.id,
   father_id: mike.id,
-  admin: 0
+  admin: 0,
+  confirmed_at: Time.now
   )
 
-marcia = Person.new(
+marcia = Person.create!(
   first_name: "Marcia",
   email: "marcia@brady.com",
   password: "foobar12",
@@ -65,19 +70,15 @@ marcia = Person.new(
   gender: "F",
   mother_id: carol.id,
   father_id: mike.id,
-  admin: 0
+  admin: 0,
+  confirmed_at: Time.now
   )
 
 brady = Family.find_or_create_by(
   name: "Brady"
   )
 
-members = [marcia, greg, mike, carol, harold, connie]
-
-members.each do |member|
-  member.skip_confirmation!
-  member.save
-end
-
+members = [connie, harold, carol, mike, greg, marcia]
 brady.add_members(members)
+
 carol.add_spouse(mike)

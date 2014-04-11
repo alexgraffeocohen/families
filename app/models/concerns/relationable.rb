@@ -72,12 +72,28 @@ module Relationable
     end
   end
 
+  def husband
+    Person.find_by(spouse_id: self.id, gender: "M")
+  end
+
+  def wife
+    Person.find_by(spouse_id: self.id, gender: "F")
+  end
+
+  def parents
+    [mother, father].compact
+  end
+
   def brothers
     siblings.select {|sibling| sibling.gender == "M"}
   end
 
   def sisters
     siblings.select {|sibling| sibling.gender == "F"}
+  end
+  
+  def siblings
+    Person.where("mother_id = ? OR father_id = ?", mother_id, father_id).where.not("id = ?", self.id)
   end
 
   def children
