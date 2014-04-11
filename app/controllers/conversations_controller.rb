@@ -8,6 +8,8 @@ class ConversationsController < ApplicationController
 
   def create
     @conversation = Conversation.create(conversation_params)
+    @conversation.family_id = @family.id
+    @conversation.save
   end
 
   def destroy

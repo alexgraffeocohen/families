@@ -8,6 +8,9 @@ class MessagesController < ApplicationController
 
   def create
     @message = Message.create(message_params)
+    @message.conversation_id = params[:conversation_id]
+    @message.person = current_person
+    @message.save
   end
 
   def destroy

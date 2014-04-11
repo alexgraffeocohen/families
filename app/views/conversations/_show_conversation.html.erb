@@ -1,4 +1,10 @@
 <div class="convo">
-  <%= link_to convo.title, family_messages_path(@family, convo) %>
-  <%= convo.messages.last %>
+  <h3>
+    <%= link_to convo.title, family_messages_path(@family, convo) %>
+  </h3>
+  <% if convo.messages.blank? %>
+    <p>No Messages Yet :( </p>
+  <% else %>
+    <p><%= convo.messages.last.content %></p>
+  <% end %>
 </div>
