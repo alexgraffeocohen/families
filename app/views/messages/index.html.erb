@@ -1,2 +1,13 @@
-<h1>Messages#index</h1>
-<p>Find me in app/views/messages/index.html.erb</p>
+<%= @conversation.title %>
+<% @conversations.messages.each do |message| %>
+<%= message %>
+<%= message.person %>
+<% end %>
+
+
+<%= form_for @message do |f| %>
+<%= f.label %>
+<%= f.text_field :content %>
+
+<%= f.submit %>
+<% end %>

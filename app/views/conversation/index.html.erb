@@ -1,2 +1,6 @@
-<h1>Conversation#index</h1>
-<p>Find me in app/views/conversation/index.html.erb</p>
+<% @conversations.each do |convo| %>
+<div class="convo">
+<%= convo.title %>
+<%= convo.messages.last %>
+</div>
+<% end %>
