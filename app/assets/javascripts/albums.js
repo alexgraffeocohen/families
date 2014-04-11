@@ -15,14 +15,15 @@ $(document).ready(function() {
     $(".album_name").hide();
   })
   
-  $(".input_name").on("blur", function(){
+  $(".input_name").bind("blur keyup", function(e){
+    if (e.type == 'blur' || e.keyCode == '13')
     saveTask($(this).val());
   })
 
   function saveTask(val_arg){
     var newName = val_arg
     $(".input_name").addClass("hidden")
-    $(".album_name").val(newName).show();
+    $(".album_name").text(newName).show();
     var album_id = $(".album_name").data("id")
     var family_id = $(".album_name").data("family")
 

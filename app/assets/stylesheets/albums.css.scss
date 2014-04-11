@@ -33,3 +33,11 @@ body div.customize {
 .hidden {
   display: none;
 }
+
+.input_name {
+  border: 0px;
+}
+.input_name:focus {
+  outline: 0;
+  background-color: #ecf0f1;
+}

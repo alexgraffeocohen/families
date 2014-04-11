@@ -35,6 +35,7 @@ class AlbumsController < ApplicationController
   def update
     @album = Album.find(params[:album_id])
     @album.update(name: params[:album][:name])
+    @new_val = params[:album][:name]
   end
 
   def destroy

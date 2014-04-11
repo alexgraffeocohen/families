@@ -7,8 +7,8 @@
 
 
 <%= form_for [@family, @conversation, @message], remote: true do |f| %>
-<%= f.label :content, "Write a new message" %><br>
-<%= f.text_field :content %><br><br>
+  <%= f.label :content, "Write a new message" %><br>
+  <%= f.text_field :content %><br><br>
 
-<%= f.submit class: "btn btn-primary" %>
+  <%= f.submit class: "btn btn-primary" %>
 <% end %>
