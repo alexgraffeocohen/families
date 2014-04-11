@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def get_id_from_slug(slug)
-    Family.find_by(name_slug: slug).id
+  def find_family(slug)
+    Family.find_by(name_slug: slug)
   end
 end
