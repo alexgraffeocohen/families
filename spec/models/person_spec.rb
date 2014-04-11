@@ -62,6 +62,22 @@ describe Person do
     expect(@greg.uncles).to include(uncle)
   end
 
+  it "can have nephews" do
+    marcia_son = create(:person, gender: "M")
+    marcia_son.mother = @marcia
+    marcia_son.save
+
+    expect(@greg.nephews).to include(marcia_son)
+  end
+
+  it "can have nieces" do
+    greg_daughter = create(:person, gender: "F")
+    greg_daughter.father = @greg
+    greg_daughter.save
+
+    expect(@marcia.nieces).to include(greg_daughter)
+  end
+
   it "can have brothers_in_law" do
     marcia_husband = create(:person, gender: "M")
     @marcia.add_spouse(marcia_husband)

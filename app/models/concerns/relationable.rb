@@ -135,6 +135,18 @@ module Relationable
     [(mother.brothers unless mother.nil?), (father.brothers unless father.nil?)].flatten.compact
   end
 
+  def nephews
+    siblings.collect { |sibling| sibling.sons }.compact.flatten if siblings
+  end
+
+  def nieces
+    siblings.collect { |sibling| sibling.daughters }.compact.flatten if siblings
+  end
+
+  def siblings_in_law
+    [brothers_in_law, sisters_in_law].flatten
+  end
+
   def brothers_in_law
     [(wife.brothers unless wife.nil?), (husband.brothers unless husband.nil?)].flatten.compact
   end
