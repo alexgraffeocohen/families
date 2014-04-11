@@ -12,7 +12,7 @@
 
 .white_div {
   overflow: scroll;
-  width: 40%;
+  width: 45%;
   height: 20%;
   margin: 20px;
   background: white;
@@ -22,6 +22,14 @@
   float: left;
 }
 
+.center_div {
+  float: center;
+  width: 100%
+}
+
+.float_right {
+  float: right;
+}
 .clearfix:after {
      visibility: hidden;
      display: block;
