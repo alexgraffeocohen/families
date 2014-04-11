@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  
-  get 'welcome/index'
 
   as :person do
     get 'login' => 'devise/sessions#new', :as => :new_person_session
@@ -30,6 +28,25 @@ Rails.application.routes.draw do
   
   post 'families/:id/albums/:album_id/photos' => "photos#create", as: "create_photo"
   delete 'families/:id/albums/:album_id/photos/:photo_id' => "photos#destroy", as: "destroy_photo"
+
+  # conversation routes
+
+  get "/families/:id/conversations" => "conversations#index", as: "family_conversations"
+
+  post "/families/:id/conversations" => "converstions#create", as: "create_family_conversations"
+
+  delete "/families/:id/converastions" => "conversations#destroy", as: "delete_family_conversations"
+
+  # Message routes
+
+  get "/families/:id/conversations/:conversation_id/messages" => "messages#index", as: "family_messages"
+
+  post "/families/:id/conversations/:conversation_id/messages" => "messages#create", as: "create_family_messages"
+
+  delete "/families/:id/conversations/:conversation_id/messages" => "messages#destroy", as: "destroy_family_messages"
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
