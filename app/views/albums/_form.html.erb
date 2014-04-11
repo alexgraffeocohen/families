@@ -23,6 +23,9 @@
   <% unless current_person.children_in_laws.empty? %>
     <p><%= check_box_tag('album[parse_permission][]', value = "6", checked = false) %> Daughter and Son In-Laws</p>
   <% end %>
+  <% unless current_person.spouse.nil? %>
+    <p><%= check_box_tag('album[parse_permission][]', value = "7", checked = false) %> Spouse</p>
+  <% end %>
   <br><br>
   <%= submit_tag "Create Album" %>
 <% end %>
