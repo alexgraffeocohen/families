@@ -1,4 +1,8 @@
-<p><span class="large_font"><%= @album.name %></span> <%= @album.created_at.strftime("%b %Y") %></p>
+<%= link_to "Edit", "#" %>
+<input value="<%= @album.name %>" class="large_font hidden">
+<span class="large_font album_name"><%= @album.name %></span>
+<br>
+<%= @album.created_at.strftime("%b %Y") %>
 <div class="btn-group">
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
       Options

@@ -8,5 +8,10 @@ $(document).ready(function() {
     e.preventDefault();
     $('.customize').slideToggle();
   })
+  $("a:contains('Edit')").on("click", function(e){
+    e.preventDefault();
+    $(".album_name").hide();
+    $(".hidden").show();
+  })
 });
 
