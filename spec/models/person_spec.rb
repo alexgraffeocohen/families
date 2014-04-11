@@ -51,11 +51,11 @@ describe Person do
   end 
 
   it "has maternal grandmother" do 
-    expect(@greg.grandmothers[:maternal]).to eq(@connie)
+    expect(@greg.grandmothers).to include(@connie)
   end 
 
   it "has maternal grandfather" do 
-    expect(@greg.grandfathers[:maternal]).to eq(@harold)
+    expect(@greg.grandfathers).to include(@harold)
   end 
 
   it "gets a last name by default" do
@@ -84,12 +84,12 @@ describe Person do
       
     it "can assign a maternal grandmother" do
       grandaughter.maternal_grandmother = maternal_grandmother
-      expect(grandaughter.grandmothers[:maternal]).to eq(maternal_grandmother)
+      expect(grandaughter.grandmothers).to include(maternal_grandmother)
     end
 
     it "can assign a maternal grandfather" do
       grandaughter.maternal_grandfather = maternal_grandfather
-      expect(grandaughter.grandfathers[:maternal]).to eq(maternal_grandfather)
+      expect(grandaughter.grandfathers).to include(maternal_grandfather)
     end
   end
 
@@ -105,12 +105,12 @@ describe Person do
       
     it "can assign a paternal grandmother" do
       grandaughter.paternal_grandmother = paternal_grandmother
-      expect(grandaughter.grandmothers[:paternal]).to eq(paternal_grandmother)
+      expect(grandaughter.grandmothers).to include(paternal_grandmother)
     end
 
     it "can assign a paternal grandfather" do
       grandaughter.paternal_grandfather = paternal_grandfather
-      expect(grandaughter.grandfathers[:paternal]).to eq(paternal_grandfather)
+      expect(grandaughter.grandfathers).to include(paternal_grandfather)
     end
   end
 
