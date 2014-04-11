@@ -1,15 +1,5 @@
 require 'spec_helper'
 
-# Specs in this file have access to a helper object that includes
-# the PeopleHelper. For example:
-#
-# describe PeopleHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 describe PeopleHelper do
   describe "rearranging a new family array" do
     let(:mother)      {create(:person)}
@@ -101,7 +91,7 @@ describe PeopleHelper do
     end
 
     it 'assigns admin\'s wife as daughter-in-law' do
-      expect(admin.wife.relationship_to(admin.mother)).to eq("daughter-in-law")
+      expect(admin.wife.relationship_to(admin.mother)).to eq("daughter_in_law")
     end
   end
 end

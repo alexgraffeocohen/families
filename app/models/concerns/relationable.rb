@@ -3,13 +3,10 @@ module Relationable
   # relations []
 
   def relationship_to(person)
-    Person::RELATIONSHIPS.each { |relationship|
-      if self.send("#{relationship}_to", person)
-        return relationship
-      else
-        return "I don't know what.." 
-      end
-    }
+    Person::RELATIONSHIPS.each do |relationship|
+      return relationship if self.send("#{relationship}_to", person)
+    end
+    "I don't know what.." 
   end
 
   def daughter_to(person)
