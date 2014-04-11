@@ -47,7 +47,7 @@ class AlbumsController < ApplicationController
   end
 
   def index
-    @albums = current_person.permitted_albums
+    @albums = current_person.albums
   end
 
   private
