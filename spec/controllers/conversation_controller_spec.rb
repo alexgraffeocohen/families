@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ConversationController do
+describe ConversationsController do
 
   describe "GET 'index'" do
     it "returns http success" do
