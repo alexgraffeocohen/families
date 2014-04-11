@@ -143,6 +143,10 @@ module Relationable
     siblings.collect { |sibling| sibling.daughters }.compact.flatten if siblings
   end
 
+  def cousins
+    [(mother.nieces + mother.nephews unless mother.nil?), (father.nieces + father.nephews unless father.nil?)].flatten.compact
+  end
+
   def siblings_in_law
     [brothers_in_law, sisters_in_law].flatten
   end
