@@ -15,11 +15,19 @@ class AlbumsController < ApplicationController
 
   def create
     album = Album.new(album_params)
-    album.permissions = album.parse_permission(params[:album][:parse_permission])
     album.family_id = get_id_from_slug(params[:id])
-    album.save
-    current_person.albums << album
-    redirect_to album_path(Family.friendly.find(params[:id]), album)
+    unless params[:album][:parse_permission].nil?
+      album.permissions = album.parse_permission(params[:album][:parse_permission])
+    end
+   
+    
+    if album.save
+      current_person.albums << album
+      redirect_to album_path(Family.friendly.find(params[:id]), album)
+    else
+      flash[:alert] = "#{album.errors.full_messages}"
+      redirect_to :back
+    end
   end
 
   def update
