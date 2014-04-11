@@ -18,7 +18,7 @@
     <%= text_field_tag "photo[caption]", "", placeholder: "Add Caption", autofocus: true %><br><br>
     <%= submit_tag "Upload Photo" %>
   <% end %>
-  <li><%= link_to "Back to All Albums", albums_path %></li>
+  <%= link_to "Back to All Albums", albums_path %>
 </div>
 
   <div class="photos">
