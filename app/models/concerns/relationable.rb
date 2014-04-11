@@ -111,6 +111,10 @@ module Relationable
     children.collect { |child| child.spouse } if children  
   end
 
+  def parents_in_laws
+    spouse.parents if spouse
+  end
+
   def grandchildren
     children.collect { |child| child.children }.flatten if children 
   end
@@ -149,5 +153,13 @@ module Relationable
 
   def son_in_law_to(person)
     self.gender == "M" && person.children.include?(self.spouse)
+  end
+
+  def father_in_law_to(person)
+    self.gender == "M" && self.children.include?(self.spouse)
+  end
+
+  def mother_in_law_to(person)
+    self.gender == "F" && self.children.include?(person.spouse)
   end
 end
