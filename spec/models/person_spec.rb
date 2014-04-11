@@ -44,6 +44,22 @@ describe Person do
 
   it "has sisters" do 
     expect(@greg.sisters).to include(@marcia)
+  end
+
+  it "can have aunts" do
+    aunt = create(:person, gender: "F")
+    aunt.mother = @carol.mother
+    aunt.save
+
+    expect(@greg.aunts).to include(aunt)
+  end
+
+  it "can have uncles" do
+    uncle = create(:person, gender: "M")
+    uncle.father = @carol.father
+    uncle.save
+
+    expect(@greg.uncles).to include(uncle)
   end  
 
   it "can belong to a family" do 
