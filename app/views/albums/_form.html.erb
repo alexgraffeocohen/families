@@ -5,7 +5,8 @@
 
     <p>Who can view my album?</p>
 
-    <%= link_to "Entire Family", "#" %><br>
+     <label><%= check_box_tag :family %> Entire Family</label>
+     <br>
     <% @relationships.each_with_index do |relation, index| %>
       <% unless current_person.send("#{relation}").blank?  %>
         <%= f.check_box :parse_permission, {multiple: true}, (index+1), nil %> <%= relation.capitalize %><br>

@@ -1,8 +1,7 @@
 $(document).ready(function() {
   $('.image_link').magnificPopup({type: 'image' });
-  $("a:contains('Entire Family')").on("click", function(e){
-    e.preventDefault();
-    $('input[type=checkbox]').trigger('click');
+  $("#family").on("click", function(e){
+    $('input:checkbox').prop('checked', this.checked);
   })
   $("a:contains('Custom')").on("click", function(e){
     e.preventDefault();
