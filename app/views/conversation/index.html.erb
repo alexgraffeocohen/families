@@ -1,6 +1,8 @@
-<% @conversations.each do |convo| %>
-<div class="convo">
-<%= convo.title %>
-<%= convo.messages.last %>
+<div class="container">
+  <% @conversations.each do |convo| %>
+    <div class="convo" data-id= "<%= convo.id %>">
+      <%= convo.title %>
+      <%= convo.messages.last %>
+    </div>
+  <% end %>
 </div>
-<% end %>
