@@ -29,19 +29,19 @@ Rails.application.routes.draw do
   post 'families/:id/albums/:album_id/photos' => "photos#create", as: "create_photo"
   delete 'families/:id/albums/:album_id/photos/:photo_id' => "photos#destroy", as: "destroy_photo"
 
-  # conversation routes
+  # conversations routes
 
   get "/families/:id/conversations" => "conversations#index", as: "family_conversations"
 
-  post "/families/:id/conversations" => "converstions#create", as: "create_family_conversations"
+  post "/families/:id/conversations" => "conversations#create", as: "conversations"
 
-  delete "/families/:id/converastions" => "conversations#destroy", as: "delete_family_conversations"
+  delete "/families/:id/converastions" => "conversations#destroy", as: "delete_conversations"
 
   # Message routes
 
   get "/families/:id/conversations/:conversation_id/messages" => "messages#index", as: "family_messages"
 
-  post "/families/:id/conversations/:conversation_id/messages" => "messages#create", as: "create_family_messages"
+  post "/families/:id/conversations/:conversation_id/messages" => "messages#create", as: "family_conversation_messages"
 
   delete "/families/:id/conversations/:conversation_id/messages" => "messages#destroy", as: "destroy_family_messages"
 

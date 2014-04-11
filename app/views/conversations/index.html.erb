@@ -1,0 +1,11 @@
+<div class="convo_all">
+  <% @conversations.each do |convo| %>
+    <%= render "show_conversation", convo: convo %>
+  <% end %>
+</div>
+<%= form_for([@family, @conversation], remote: true) do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.submit %>
+<% end %>
+
