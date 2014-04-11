@@ -2,6 +2,8 @@ class Person < ActiveRecord::Base
   include Relationable
   include PeopleHelper
 
+  RELATIONSHIPS = ["grandmother", "son", "daughter", "father", "mother", "wife", "husband", "daughter_in_law", "son_in_law", "grandfather", "grandson", "granddaughter", "brother", "sister"]
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 

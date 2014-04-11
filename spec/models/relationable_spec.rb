@@ -88,14 +88,14 @@ describe Relationable do
       wifes_mother = create(:person)
       @wife.mother_id = wifes_mother.id
       @wife.save
-      expect(@husband.relationship_to(wifes_mother)).to eq('son-in-law')
+      expect(@husband.relationship_to(wifes_mother)).to eq('son_in_law')
     end
 
     it "can determine daughter-in-law" do
       husbands_mother = create(:person)
       @husband.mother_id = husbands_mother.id
       @husband.save
-      expect(@wife.relationship_to(husbands_mother)).to eq('daughter-in-law')
+      expect(@wife.relationship_to(husbands_mother)).to eq('daughter_in_law')
     end
   end
 end

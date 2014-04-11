@@ -1,28 +1,15 @@
 module Relationable
   extend ActiveSupport::Concern
   # relations []
+
   def relationship_to(person)
-    case 
-      # relations_array.each do |relation|
-      # when send("#{relation}_to", person) then relation
-      # end  
-      when wife_to(person)            then "wife"
-      when husband_to(person)         then "husband"
-      when mother_to(person)          then "mother"
-      when father_to(person)          then "father"
-      when sister_to(person)          then "sister"
-      when brother_to(person)         then "brother"
-      when son_to(person)             then "son"
-      when daughter_to(person)        then "daughter" 
-      when grandson_to(person)        then "grandson"      
-      when granddaughter_to(person)   then "granddaughter" 
-      when grandfather_to(person)     then "grandfather" 
-      when grandmother_to(person)     then "grandmother" 
-      when son_in_law_to(person)      then "son-in-law" 
-      when daughter_in_law_to(person) then "daughter-in-law" 
-    else 
-      "I don't know what..."
-    end
+    Person::RELATIONSHIPS.each { |relationship|
+      if self.send("#{relationship}_to", person)
+        return relationship
+      else
+        return "I don't know what.." 
+      end
+    }
   end
 
   def daughter_to(person)
@@ -141,5 +128,13 @@ module Relationable
 
   def paternal_grandfather=(person)
     self.father.father_id = person.id
+  end
+
+  def daughter_in_law_to(person)
+    self.gender == "F" && person.children.include?(self.spouse)
+  end
+
+  def son_in_law_to(person)
+    self.gender == "M" && person.children.include?(self.spouse)
   end
 end
