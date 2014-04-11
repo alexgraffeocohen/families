@@ -3,22 +3,22 @@ require 'spec_helper'
 describe Message do
   before do
     @message      = create(:message)
-    @message2     = create(:message)
     @conversation = create(:conversation)
-    
+    @person       = create(:person)
+
+    @message.person_id = @person.id
     @conversation.messages << @message
-    @conversation.messages << @message2
   end
 
-  it "has many messages" do
-    expect(@conversation.messages.length).to eq(2)
+  it "belongs to a conversation" do
+    expect(@message.conversation).to eq(@conversation)
   end
 
-  it "belongs to a family" do
-    expect(@family.conversations.length).to eq(1)
+  it "has content" do
+    expect(@message.content).to eq("MyText")
   end
 
-  it "has a title" do
-    expect(@conversation.title).to eq("Title")
+  it "belongs to a person" do
+    expect(@message.person).to eq(@person)
   end
 end

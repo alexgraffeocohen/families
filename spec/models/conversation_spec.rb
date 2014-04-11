@@ -5,7 +5,7 @@ describe Conversation do
     @family       = create(:family)
     @message      = create(:message)
     @message2     = create(:message)
-    @conversation = create(:conversation)
+    @conversation = create(:conversation, title: "Title")
     
     @family.conversations << @conversation
     @conversation.messages << @message
