@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :conversation do
-    title "MyString"
+    title "Title"
   end
 end
