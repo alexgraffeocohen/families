@@ -33,14 +33,8 @@ class AlbumsController < ApplicationController
   end
 
   def update
-    @album.update(album_params)
-
-    if @album.save
-      redirect_to albums_path(@family, @album), :notice => "User successfully edited"
-    else
-      render 'form' 
-      flash[:alert] = "Sorry, could not update."
-    end
+    @album = Album.find(params[:album_id])
+    @album.update(name: params[:album][:name])
   end
 
   def destroy

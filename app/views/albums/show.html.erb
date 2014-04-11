@@ -1,7 +1,6 @@
-<%= link_to "Edit", "#" %>
-<input value="<%= @album.name %>" class="large_font hidden">
-<span class="large_font album_name"><%= @album.name %></span>
-<br>
+<input type="text" value="<%= @album.name %>" class="large_font input_name hidden">
+<span data-id= "<%= @album.id %>" data-family= "<%= @family.id %>" class="large_font album_name"><%= @album.name %></span><br>
+
 <%= @album.created_at.strftime("%b %Y") %>
 <div class="btn-group">
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
