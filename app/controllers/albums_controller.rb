@@ -18,7 +18,7 @@ class AlbumsController < ApplicationController
     album = Album.new(album_params)
     album.family_id = get_id_from_slug(params[:id])
     unless params[:album][:parse_permission].nil?
-      album.permissions = album.parse_permission(params[:album][:parse_permission])
+      album.permissions = album.parse(params[:album][:parse_permission])
     end
    
     
