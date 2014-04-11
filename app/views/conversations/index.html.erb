@@ -6,19 +6,19 @@
 <% end %>
 
 <%= search_form_for @search, remote: true do |f| %>
-  <%= f.text_field :content_cont, placeholder: "Search conversations..." %>
+  <%= f.text_field :title_cont, placeholder: "Search conversations..." %>
   <%= f.submit 'Search' %>
   <%= f.submit 'Show All', name: 'show_all' %>
 <% end %>
 
 <div class="convo_all">
   <% if @all_found.length < 1 %>
-    <% @conversations.each do |convo| %>
-      <%= render "show_conversation", convo: convo %>
+    <% conversations.each do |convo|  %>
+      <%= render 'show_conversation', convo: convo %>
     <% end %>
   <% else %>
-    <% @all_found.each do |conversation| %>
-      <%= conversation.title %>
+    <% @all_found.each do |convo| %>
+      <%= render 'show_conversation', convo: convo %>
     <% end %>
   <% end %>
 </div>

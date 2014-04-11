@@ -28,7 +28,8 @@ gem 'remotipart'
 gem 'magnific-popup-rails'
 gem 'friendly_id'
 gem 'launchy'
-gem 'ransack'
+gem "ransack", github: "activerecord-hackery/ransack", branch: "rails-4.1"
+gem "polyamorous", github: "activerecord-hackery/polyamorous"
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 # gem 'spring',        group: :development
 
