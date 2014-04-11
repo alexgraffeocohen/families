@@ -26,4 +26,9 @@ class Album < ActiveRecord::Base
     
     permission_hash.map { |key, value| value if permissions.include?(key.to_s) }.compact.flatten
   end
+
+  def names_permitted
+    album_permission = permissions.split(" ")
+    album_permission.select {|permission| permission.match(/[A-Za-z]/)}
+  end
 end

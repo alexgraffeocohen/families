@@ -1,26 +1,29 @@
 <div class="white_div text-left">
-<%= form_for [@family, @album] do |f| %>
-  <%= f.label :name, "Name" %>
-  <%= f.text_field :name %>
-  <br>
-  <% ["siblings", "parents", "children", "grandparents", "grandchildren", "children_in_laws", "spouse"].each_with_index do |relation, index| %>
-    <% unless current_person.send("#{relation}").blank?  %>
-      <%= f.check_box :parse_permission, {multiple: true}, (index+1), nil %> <%= relation.capitalize %><br>
-    <% end %>
-  <% end %>
-  <div class="btn-group">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-      Custom
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-      <li><%= f.text_field :family_id %></li>
-    </ul>
-  </div>
-  <br><br>
-  <%= f.submit %>
-<% end %>
+  <%= form_for [@family, @album] do |f| %>
+    <%= f.label :name, "Name" %>
+    <%= f.text_field :name %><br>
 
-<br>
-<%= button_to "Back to All Albums", albums_path %>
+    <p>Who can view my album?</p>
+
+    <%= link_to "Entire Family", "#" %><br>
+    <% @relationships.each_with_index do |relation, index| %>
+      <% unless current_person.send("#{relation}").blank?  %>
+        <%= f.check_box :parse_permission, {multiple: true}, (index+1), nil %> <%= relation.capitalize %><br>
+      <% end %>
+    <% end %>
+
+    <%= link_to "Custom", "#" %><br>
+    <div class="customize">
+      <%= collection_check_boxes(:album, :parse_permission, 
+        @family.people.to_a.delete_if {|i| i == current_person}, 
+        :first_name, :first_name) do |b| %> 
+      <%= b.check_box %> <%= b.label(class: "check_box") %><br>
+      <% end %>
+    </div>
+    <br><br>
+    <%= f.submit %>
+  <% end %>
+
+  <br>
+  <%= button_to "Back to All Albums", albums_path %>
 </div>

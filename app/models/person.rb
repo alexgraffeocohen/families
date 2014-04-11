@@ -3,7 +3,7 @@ class Person < ActiveRecord::Base
   include PeopleHelper
 
   RELATIONSHIPS = ["grandmother", "son", "daughter", "father", "mother", "wife", "husband", "daughter_in_law", "son_in_law", "grandfather", "grandson", "granddaughter", "brother", "sister"]
-
+  GROUP_RELATIONSHIPS = ["siblings", "parents", "children", "grandparents", "grandchildren", "children_in_laws", "spouse"]
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
@@ -79,7 +79,9 @@ class Person < ActiveRecord::Base
   end
 
   def can_see_album?(album)
-    album.relationships_permitted.include?(self.relationship_to(album.owner)) || album.owner == self
+    album.relationships_permitted.include?(self.relationship_to(album.owner)) || 
+    album.owner == self ||
+    album.names_permitted.include?(self.first_name)
   end
 
   def cannot_see_any_albums?

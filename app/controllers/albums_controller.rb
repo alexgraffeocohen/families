@@ -11,10 +11,10 @@ class AlbumsController < ApplicationController
     @family = Family.friendly.find(params[:id])
     @album = Album.new
     @photo = Photo.new
+    @relationships = Person::GROUP_RELATIONSHIPS
   end
 
   def create
-    binding.pry
     album = Album.new(album_params)
     album.permissions = album.parse(params[:album][:parse_permission])
     album.family_id = get_id_from_slug(params[:id])
@@ -48,7 +48,7 @@ class AlbumsController < ApplicationController
   end
 
   def index
-    @albums = current_person.albums
+    @albums = current_person.permitted_albums
   end
 
   private

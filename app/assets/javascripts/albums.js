@@ -4,5 +4,9 @@ $(document).ready(function() {
     e.preventDefault();
     $('input[type=checkbox]').trigger('click');
   })
+  $("a:contains('Custom')").on("click", function(e){
+    e.preventDefault();
+    $('.customize').slideToggle();
+  })
 });
 
