@@ -70,8 +70,4 @@ class AlbumsController < ApplicationController
   def album_params
     params.require(:album).permit(:name, :family_id)
   end
-
-  def get_id_from_slug(slug)
-    Family.find_by(name_slug: slug).id
-  end
 end
