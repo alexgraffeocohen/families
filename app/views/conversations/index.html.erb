@@ -6,7 +6,7 @@
 <% end %>
 
 <%= search_form_for @search, remote: true do |f| %>
-  <%= f.text_field :title_cont, placeholder: "Search conversations..." %>
+  <%= f.text_field :messages_content_cont, placeholder: "Search conversations..." %>
   <%= f.submit 'Search' %>
   <%= f.submit 'Show All', name: 'show_all' %>
 <% end %>
