@@ -72,12 +72,12 @@ brady = Family.find_or_create_by(
   name: "Brady"
   )
 
-members = [marcia, greg, mike, carol, harold, connie]
+members = [connie, harold, carol, mike, greg, marcia]
+brady.add_members(members)
 
 members.each do |member|
   member.skip_confirmation!
   member.save
 end
 
-brady.add_members(members)
 carol.add_spouse(mike)
