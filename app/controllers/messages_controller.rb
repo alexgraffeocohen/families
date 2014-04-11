@@ -14,6 +14,17 @@ class MessagesController < ApplicationController
   end
 
   def destroy
+    @message = Message.find(params[:message_id])
+    respond_to do |f|
+      if current_person == @message.person
+        @message.destroy
+        f.html {redirect_to family_conversation_messages_index_path}
+        f.js {render 'destroy'}
+      else
+        @msg = "Sorry, you do not own this album."
+        f.js {render 'destroy_failure', locals: {msge: @msg}}
+      end
+    end
   end
 
   private

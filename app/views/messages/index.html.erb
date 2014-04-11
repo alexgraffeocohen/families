@@ -1,7 +1,7 @@
 <div class="message_all">
   <h2>Current Conversation: <%= @conversation.title %></h2>
   <% @conversation.messages.each do |message| %>
-    <%= render "show_message", {message: message} %>
+    <%= render "show_message", {family: @family, conversation: @conversation, message: message} %>
   <% end %>
 </div>
 

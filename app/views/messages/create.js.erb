@@ -1,2 +1,2 @@
-$("div.message_all").append("<%= j render 'show_message', {message: @message} %>")
+$("div.message_all").append("<%= j render 'show_message', {family: @family, conversation: @conversation, message: @message} %>")
 $("input#message_content").val("");
