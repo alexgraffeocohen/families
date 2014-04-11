@@ -1,9 +1,10 @@
 class ConversationController < ApplicationController
   def index
-    @conversations = Conversation.all
+    @conversations = all_conversations
   end
 
   def create
+
   end
 
   def destroy
