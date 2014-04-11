@@ -4,6 +4,24 @@ class ConversationsController < ApplicationController
   def index
     @conversations = Conversation.all_conversations
     @conversation = Conversation.new_conversation
+
+    @search = Conversation.search(params[:q])
+    @all_found = @search.result
+    @not_found = @conversations - @all_found
+    @not_found_ids =  @not_found.collect do |conversation|
+                    conversation.id
+                  end
+    if params[:show_all] != nil
+      respond_to do |f|
+        f.html {head :ok}
+        f.js {render 'show_all'}    
+      end
+    elsif params[:q] != nil
+      respond_to do |f|
+        f.html {head :ok}
+        f.js {render 'search_success', locals: {unfound: @not_found_ids}}
+      end
+    end
   end
 
   def create

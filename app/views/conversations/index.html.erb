@@ -1,11 +1,24 @@
-<div class="convo_all">
-  <% @conversations.each do |convo| %>
-    <%= render "show_conversation", convo: convo %>
-  <% end %>
-</div>
+
 <%= form_for([@family, @conversation], remote: true) do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title %>
   <%= f.submit %>
 <% end %>
 
+<%= search_form_for @search, remote: true do |f| %>
+  <%= f.text_field :content_cont, placeholder: "Search conversations..." %>
+  <%= f.submit 'Search' %>
+  <%= f.submit 'Show All', name: 'show_all' %>
+<% end %>
+
+<div class="convo_all">
+  <% if @all_found.length < 1 %>
+    <% @conversations.each do |convo| %>
+      <%= render "show_conversation", convo: convo %>
+    <% end %>
+  <% else %>
+    <% @all_found.each do |conversation| %>
+      <%= conversation.title %>
+    <% end %>
+  <% end %>
+</div>
