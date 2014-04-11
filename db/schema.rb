@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140410212651) do
+ActiveRecord::Schema.define(version: 20140411144908) do
 
   create_table "albums", force: true do |t|
     t.string   "name"
@@ -22,11 +22,25 @@ ActiveRecord::Schema.define(version: 20140410212651) do
     t.string   "permissions"
   end
 
+  create_table "conversations", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "families", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name_slug"
+  end
+
+  create_table "messages", force: true do |t|
+    t.text     "content"
+    t.integer  "conversation_id"
+    t.integer  "person_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "people", force: true do |t|

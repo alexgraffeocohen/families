@@ -15,7 +15,7 @@
     <%= link_to "Custom", "#" %><br>
     <div class="customize">
       <%= collection_check_boxes(:album, :parse_permission, 
-        @family.people.to_a.delete_if {|i| i == current_person}, 
+        @other_members, 
         :first_name, :first_name) do |b| %> 
       <%= b.check_box %> <%= b.label(class: "check_box") %><br>
       <% end %>

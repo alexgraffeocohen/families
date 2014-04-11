@@ -11,6 +11,7 @@ class AlbumsController < ApplicationController
     @family = Family.friendly.find(params[:id])
     @album = Album.new
     @photo = Photo.new
+    @other_members = @family.people.to_a.delete_if {|i| i == current_person}
     @relationships = Person::GROUP_RELATIONSHIPS
   end
 
