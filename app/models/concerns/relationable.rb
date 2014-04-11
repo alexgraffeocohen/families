@@ -10,11 +10,11 @@ module Relationable
   end
 
   def daughter_to(person)
-    self.parents.include?(person) && self.gender == "F"
+    person.daughters.include?(self)
   end
 
   def son_to(person)
-    self.parents.include?(person) && self.gender == "M"
+    person.sons.include?(self)
   end
 
   def brother_to(person)
