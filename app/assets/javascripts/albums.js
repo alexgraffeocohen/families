@@ -1,12 +1,13 @@
 $(document).ready(function() {
   $('.image_link').magnificPopup({type: 'image' });
   $("#family").on("click", function(e){
-    $('input:checkbox').prop('checked', this.checked);
+    $('input:checkbox.family').prop('checked', this.checked);
   })
   $("a:contains('Custom')").on("click", function(e){
     e.preventDefault();
     $('.customize').slideToggle();
   })
+
   $(".album_name").on("click", function(e){
     e.preventDefault();
     var oldVal = $(".hidden").val();
