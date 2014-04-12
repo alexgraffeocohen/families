@@ -1,5 +1,6 @@
 class AlbumsController < ApplicationController
   before_action :set_album, only: [:show, :edit, :update, :destroy]
+  before_action :set_family, only: [:create, :new, :index, :show, :edit, :update, :destroy]
   
   def show
   end
@@ -8,7 +9,6 @@ class AlbumsController < ApplicationController
   end
 
   def new
-    @family = Family.friendly.find(params[:id])
     @album = Album.new
     @photo = Photo.new
     @other_members = @family.people.to_a.delete_if {|i| i == current_person}
@@ -33,7 +33,6 @@ class AlbumsController < ApplicationController
   end
 
   def update
-    @album = Album.find(params[:album_id])
     @album.update(name: params[:album][:name])
     @new_val = params[:album][:name]
   end
@@ -58,8 +57,11 @@ class AlbumsController < ApplicationController
   private
 
   def set_album
-    @family = Family.friendly.find(params[:id])
     @album = Album.find(params[:album_id])
+  end
+
+  def set_family
+    @family = Family.friendly.find(params[:id])
   end
 
   def album_params

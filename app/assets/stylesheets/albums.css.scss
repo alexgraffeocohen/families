@@ -26,6 +26,11 @@ body div.customize {
 .input_name {
   border: 0px;
 }
+
+.display_block {
+  display: block;
+}
+
 .input_name:focus {
   outline: 0;
   background-color: #ecf0f1;
