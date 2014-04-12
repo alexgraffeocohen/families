@@ -1,34 +1,30 @@
 <div class="white_div text-left">
-<%= form_tag(create_album_path(@family)) do %>
-  <%= label_tag 'album[name]', "Album Name" %><br>
-  <%= text_field_tag 'album[name]'%><br><br>
+  <%= form_for [@family, @album] do |f| %>
+    <%= f.label :name, "Name" %>
+    <%= f.text_field :name %><br>
 
-  <%= label_tag 'album[parse_permission][]', 'Who can view my album?' %><br>
-  <p><%= link_to "Entire Family", "#" %></p>
-  <% unless current_person.siblings.empty? %>
-    <p><%= check_box_tag('album[parse_permission][]', value = "1", checked = false) %> Siblings</p>
+    <p>Who can view my album?</p>
+
+     <label><%= check_box_tag :family %> Entire Family</label>
+     <br>
+    <% @relationships.each_with_index do |relation, index| %>
+      <% unless current_person.send("#{relation}").blank?  %>
+        <%= f.check_box :parse_permission, {multiple: true, class: "family"}, (index+1), nil %> <%= relation.capitalize %><br>
+      <% end %>
+    <% end %>
+
+    <%= link_to "Custom", "#" %><br>
+    <div class="customize">
+      <%= collection_check_boxes(:album, :parse_permission, 
+        @other_members, 
+        :first_name, :first_name) do |b| %> 
+      <%= b.check_box %> <%= b.label(class: "check_box") %><br>
+      <% end %>
+    </div>
+    <br><br>
+    <%= f.submit %>
   <% end %>
-  <% unless current_person.parents.empty? %>
-    <p><%= check_box_tag('album[parse_permission][]', value = "2", checked = false) %> Parents</p>
-  <% end %>
-  <% unless current_person.children.empty? %>
-    <p><%= check_box_tag('album[parse_permission][]', value = "3", checked = false) %> Children</p>
-  <% end %>
-  <% unless current_person.grandparents.empty? %>
-    <p><%= check_box_tag('album[parse_permission][]', value = "4", checked = false) %> Grandparents</p>
-  <% end %>
-  <% unless current_person.grandchildren.empty? %>
-    <p><%= check_box_tag('album[parse_permission][]', value = "5", checked = false) %> Grandchildren</p>
-  <% end %>
-  <% unless current_person.children_in_laws.empty? %>
-    <p><%= check_box_tag('album[parse_permission][]', value = "6", checked = false) %> Daughter and Son In-Laws</p>
-  <% end %>
-  <% unless current_person.spouse.nil? %>
-    <p><%= check_box_tag('album[parse_permission][]', value = "7", checked = false) %> Spouse</p>
-  <% end %>
-  <br><br>
-  <%= submit_tag "Create Album" %>
-<% end %>
-<br>
-<%= button_to "Back to All Albums", albums_path %>
+
+  <br>
+  <%= button_to "Back to All Albums", albums_path %>
 </div>

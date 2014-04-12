@@ -10,14 +10,28 @@
   margin: 30px;
 }
 
-.photo_div {
-  display: inline-block;
-  padding: 20px;
-  position: relative;
+
+.check_box {
+  font-weight: normal;
 }
 
-.delete_pic {
-  position: absolute;
-  top: 5px;
-  right: 0px;
+body div.customize {
+  display: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.input_name {
+  border: 0px;
+}
+
+.display_block {
+  display: block;
+}
+
+.input_name:focus {
+  outline: 0;
+  background-color: #ecf0f1;
 }

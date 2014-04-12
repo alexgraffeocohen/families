@@ -1,0 +1,7 @@
+<% @conversations.each do |convo| %>
+  <% if unfound.include?(convo.id) %>
+    $("div[data-id='<%= convo.id %>']").hide();
+  <% else %>
+    $("div[data-id='<%= convo.id %>']").show();
+   <% end %>
+<% end %>

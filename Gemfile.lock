@@ -1,4 +1,22 @@
 GIT
+  remote: git://github.com/activerecord-hackery/polyamorous.git
+  revision: c1a6a04972709a10296cb0705de2433791b3dbf8
+  specs:
+    polyamorous (1.0.0)
+      activerecord (>= 3.0)
+
+GIT
+  remote: git://github.com/activerecord-hackery/ransack.git
+  revision: d51c78f9071f291b0707ed32093e191f4d8d3b26
+  branch: rails-4.1
+  specs:
+    ransack (1.1.0)
+      actionpack (>= 4.0)
+      activerecord (>= 4.0)
+      activesupport (>= 4.0)
+      i18n
+
+GIT
   remote: git://github.com/jnicklas/capybara.git
   revision: 59f751f1c4dcd570175cfc33d2a87da2f4ac7544
   specs:
@@ -265,9 +283,11 @@ DEPENDENCIES
   magnific-popup-rails
   mini_magick
   pg
+  polyamorous!
   pry
   rails (= 4.1.0.rc2)
   rails_12factor
+  ransack!
   remotipart
   rspec-rails
   sass-rails (~> 4.0.2)

@@ -1,5 +1,5 @@
 <%= link_to albums_path do %>
-  <div class="white_div">
+  <div class="white_div float_right">
     <% if current_person.cannot_see_any_albums? || family.albums.last.photos.empty? %>
       <%= image_tag('hip_read.jpg') %>
     <% else %>

@@ -1,4 +1,7 @@
-<p><span class="large_font"><%= @album.name %></span> <%= @album.created_at.strftime("%b %Y") %></p>
+<input type="text" value="<%= @album.name %>" class="large_font input_name hidden">
+<span data-id= "<%= @album.id %>" data-family= "<%= @family.id %>" class="large_font album_name"><%= @album.name %></span><br>
+
+<%= @album.created_at.strftime("%b %Y") %>
 <div class="btn-group">
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
       Options
@@ -18,13 +21,13 @@
     <%= text_field_tag "photo[caption]", "", placeholder: "Add Caption", autofocus: true %><br><br>
     <%= submit_tag "Upload Photo" %>
   <% end %>
-  <li><%= link_to "Back to All Albums", albums_path %></li>
+  <%= link_to "Back to All Albums", albums_path %>
 </div>
 
-  <div class="photos">
-    <% unless @album.photos.empty? %>
-      <% @album.photos.reverse.each do |photo| %>
-      <%= render "photos/show_photo", {family: @family, album: @album, photo: photo} %>
-      <% end %>
+<div class="photos">
+  <% unless @album.photos.empty? %>
+    <% @album.photos.reverse.each do |photo| %>
+    <%= render "photos/show_photo", {family: @family, album: @album, photo: photo} %>
     <% end %>
-  </div>
+  <% end %>
+</div>

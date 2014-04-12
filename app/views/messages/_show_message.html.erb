@@ -1,0 +1,5 @@
+<div class="message white_div center_div deletable_div float_left" data-id="<%= message.id %>">
+  <%= link_to "✖", destroy_family_conversation_message_path(family, conversation, message), remote: true, method: :delete, class: "delete_x" %>
+  <%= message.person.first_name %> said <%= message.content %>
+</div>
+<br>
