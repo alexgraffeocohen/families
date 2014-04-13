@@ -21,7 +21,7 @@ feature "Conversation" do
   scenario "index displays all" do
     save_and_open_page
     visit 'families/1/conversation'
-    expect(page).to have_content(@)
+    expect(page).to have_content(@album1.name)
     expect(page).to have_content(@album2.name)
   end
 end

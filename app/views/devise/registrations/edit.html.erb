@@ -20,7 +20,12 @@
   <%= f.date_select :birthday, :start_year => Date.today.year - 100 %></div>
 
   <div><%= f.label :phone %><br />
-  <%= f.text_field :phone %></div>  
+  <%= f.text_field :phone %></div>
+
+  <div><%= f.label :profile_photo, "Upload a Picture!" %><br />
+  <%= f.file_field :profile_photo %></div>
+
+
 
 
 
