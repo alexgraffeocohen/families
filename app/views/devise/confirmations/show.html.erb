@@ -5,20 +5,24 @@
   <fieldset>
     <legend>We just need a couple more pieces of information so you can activate your account.</legend>
 
-  <% if resource.first_name.nil? || resource.first_name.empty? %>
+  <% if resource.first_name.blank? %>
       <p><%= f.label :first_name,"What's your first name?" %> <%= f.text_field :first_name %></p>
   <% end %>
   
-  <% if resource.phone.nil? %>
+  <% if resource.phone.blank? %>
       <p><%= f.label :phone, "What's your phone number?" %> <%= f.text_field :phone %></p>
   <% end %>
   
-  <% if resource.birthday.nil? %>
+  <% if resource.birthday.blank? %>
       <p><%= f.label :birthday, "What's your birthday?" %> <%= f.date_field :birthday %></p>
   <% end %>
 
-  <% if resource.gender.nil? %>
+  <% if resource.gender.blank? %>
       <p><%= f.label :gender, "What's your gender?" %> <%= f.text_field :gender %></p>
+  <% end %>
+
+  <% if resource.profile_photo.blank? %>
+      <p><%= f.label :profile_photo, "Upload a Picture!" %> <%= f.file_field :profile_photo %></p>
   <% end %>
 
   <% if @requires_password %>

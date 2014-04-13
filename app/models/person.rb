@@ -2,6 +2,8 @@ class Person < ActiveRecord::Base
   include Relationable
   include PeopleHelper
 
+  mount_uploader :profile_photo, DataUploader
+
   RELATIONSHIPS = ["grandmother", "son", "daughter", "father", "mother", "wife", "husband", "daughter_in_law", "son_in_law", "grandfather", "grandson", "granddaughter", "brother", "sister"]
   GROUP_RELATIONSHIPS = ["siblings", "parents", "children", "grandparents", "grandchildren", "children_in_laws", "parents_in_laws", "spouse"]
   
@@ -31,14 +33,6 @@ class Person < ActiveRecord::Base
   def female?
     gender == "F"
   end
-
-  # def paternal_grandparents
-  #   [grandmothers[:paternal], grandfathers[:paternal]]
-  # end
-
-  # def maternal_grandparents
-  #   [grandmothers[:maternal], grandfathers[:maternal]]
-  # end
 
   def default_family
     self.families[0]

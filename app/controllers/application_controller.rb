@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   
   def configure_permitted_parameters
     #this is a total security risk. need to revisit.
-      [:first_name, :age, :birthday, :data, :admin, :gender].each do |param|
+      [:first_name, :age, :birthday, :data, :admin, :gender, :profile_photo].each do |param|
       devise_parameter_sanitizer.for(:sign_up) << param
       devise_parameter_sanitizer.for(:account_update) << param
     end

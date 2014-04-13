@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140411182801) do
+ActiveRecord::Schema.define(version: 20140413020836) do
 
   create_table "albums", force: true do |t|
     t.string   "name"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20140411182801) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.string   "profile_photo"
   end
 
   add_index "people", ["confirmation_token"], name: "index_people_on_confirmation_token", unique: true
