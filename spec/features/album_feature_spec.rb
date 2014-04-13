@@ -8,7 +8,7 @@ feature "Album" do
     @person = create(:person)
     @person.confirmed_at = Time.now
     @person.save
-    @family = create(:family)
+    @family = create(:family, name: "brady")
     @family.person_families.create(person: @person)
 
     @album = create(:album)
@@ -18,12 +18,6 @@ feature "Album" do
     @person.albums << @album
     @person.albums << @album2
     login_as(@person, :scope => :person)
-    # visit '/'
-    # click_link("Log in")
-
-    # fill_in "Email", with: @person.email
-    # fill_in "Password", with: @person.password
-    # click_button("Sign in")
   end
 
   after :each do
@@ -36,37 +30,28 @@ feature "Album" do
     expect(page).to have_content(@album2.name)
   end
 
-  scenario "album index displays when no albums exist" do
-    puts Album.all    
+  scenario "album index displays when no albums exist" do  
     Album.all.delete_all
-    visit 'families/1/albums'
+    visit 'families/brady/albums'
     expect(page).to have_content("You have 0 albums.")
   end
 
   scenario "shows 0 albums in index with ajax if all deleted" do
-    within ("div['data-id'='1']") do
-      click_link "Delete"
-    end
-    click_link "Delete"
+    visit 'families/brady/albums'
+    find("div[data-id='1']").find("a.delete_x").click
+    find("div[data-id='2']").find("a.delete_x").click
     expect(Album.all.length).to eq(0)
     expect(page).to have_content("You have 0 albums.")
   end
 
-  scenario "can view ablum from index" do
-    within ("div['data-id'='1']") do
-      click_link "View"
-    end
+  scenario "can view album from index" do
+    visit 'families/brady/albums'
+    find("div[data-id='1']").first(:xpath, "//a[@href='/families/brady/albums/1']").click
     expect(page).to have_content("Add a Photo")
   end
 
-  scenario "can edit album from index" do
-    within ("div['data-id'='1']") do
-      click_link "Edit"
-    end
-    expect(page).to have_button("Update Album")
-  end
-
   scenario "can create album from index" do
+    visit 'families/brady/albums'
     click_link "Create an album!"
     expect(page).to have_button("Create Album")
   end
