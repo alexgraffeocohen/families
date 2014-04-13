@@ -30,4 +30,12 @@ feature "Photo" do
    visit 'families/brady/about_us'
    expect(page).to have_content("#{@grandma.first_name}, your grandmother")
   end
+
+  scenario "it can create a new family" do
+    visit 'families/new'
+    fill_in "Name", with: "Cosby"
+    fill_in "people_emails_", with: "bill@cosby.com"
+    click_button "Create Family"
+    expect(page).to have_content("Cosby")
+  end
 end

@@ -16,6 +16,7 @@ feature "Album" do
     @family.albums << @album
     @family.albums << @album2
     @person.albums << @album2
+
     login_as(@person, :scope => :person)
   end
 
@@ -72,6 +73,16 @@ feature "Album" do
     fill_in "Name", with: "Crazy Awesome Album"
     click_button "Create Album"
     expect(page).to have_content("Permissions can't be blank")
+  end
+
+  scenario "can edit an album name" do
+    visit 'families/brady/albums/1'
+    find("span[data-family='1']").click
+    fill_in "album_title_field", with: "Even Better"
+    find("body").click
+    # keypress = "var e = $.Event('keydown', { keyCode: 13 }); $('body').trigger(e);"
+    # page.driver.execute_script(keypress)
+    expect(page).to have_content("Even Better")
   end
 
 end

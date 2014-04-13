@@ -20,4 +20,12 @@ feature "Conversation" do
     visit 'families/brady/conversations'
     expect(page).to have_content(@conversation.title)
   end
+
+  scenario "index displays all" do
+    visit 'families/brady/conversations'
+    fill_in "Title", with: "Vacation Talk"
+    click_button "Create Conversation"
+    expect(page).to have_content("Create Conversation")
+  end
+
 end

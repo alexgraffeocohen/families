@@ -1,4 +1,4 @@
-<input type="text" value="<%= @album.name %>" class="large_font input_name hidden">
+<input type="text" value="<%= @album.name %>" id="album_title_field" class="large_font input_name hidden">
 <span data-id= "<%= @album.id %>" data-family= "<%= @family.id %>" class="large_font album_name"><%= @album.name %></span><br>
 
 <%= @album.created_at.strftime("%b %Y") %>
