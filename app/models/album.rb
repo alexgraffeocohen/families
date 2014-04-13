@@ -15,13 +15,13 @@ class Album < ActiveRecord::Base
     album_permission = permissions.split(" ")
     
     permission_hash = {
-      "1" => "siblings",
-      "2" => "parents",
-      "3" => "children",
-      "4" => "grandparents",
-      "5" => "grandchildren",
-      "6" => "children_in_laws",
-      "7" => "spouse"
+      "1" => ["brother", "sister"],
+      "2" => ["mother", "father"],
+      "3" => ["son", "daughter"],
+      "4" => ["grandfather", "grandmother"],
+      "5" => ["grandson", "granddaughter"],
+      "6" => ["son_in_law", "daughter_in_law"],
+      "7" => ["husband", "wife"]
     }
     
     permission_hash.map { |key, value| value if permissions.include?(key.to_s) }.compact.flatten
