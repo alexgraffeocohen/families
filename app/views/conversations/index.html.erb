@@ -4,7 +4,7 @@
   <%= f.text_field :title %>
   <%= f.submit %>
 <% end %>
-
+<br>
 <%= search_form_for @search, remote: true do |f| %>
   <%= f.text_field :messages_content_cont, placeholder: "Search conversations..." %>
   <%= f.submit 'Search' %>
@@ -14,11 +14,11 @@
 <div class="convo_all">
   <% if @all_found.length < 1 %>
     <% @family.conversations.each do |convo|  %>
-      <%= render 'show_conversation', convo: convo %>
+      <%= render 'show_conversation', family: @family, convo: convo %>
     <% end %>
   <% else %>
     <% @all_found.each do |convo| %>
-      <%= render 'show_conversation', convo: convo %>
+      <%= render 'show_conversation', family: @family, convo: convo %>
     <% end %>
   <% end %>
 </div>

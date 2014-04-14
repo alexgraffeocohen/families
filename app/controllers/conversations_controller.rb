@@ -31,6 +31,17 @@ class ConversationsController < ApplicationController
   end
 
   def destroy
+    @conversation = Conversation.find(params[:conversation_id])
+    respond_to do |f|
+      if current_person.admin == 1
+        @conversation.destroy
+        f.html {redirect_to family_conversations_path}
+        f.js {render 'destroy'}
+      else
+        @msg = "Sorry, you are not a family admin."
+        f.js {render 'destroy_failure', locals: {msge: @msg}}
+      end
+    end
   end
 
   private

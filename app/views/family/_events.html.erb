@@ -1,0 +1,11 @@
+<%= link_to family_events_path do %>
+  <div class="white_div">
+    <div class="event_top">
+    <%= Time.now.strftime("%b").upcase %>
+      <div class="event_bottom">
+        <%= Time.now.strftime("%e") %>
+      </div>
+    </div>
+    <h1>EVENTS</h1>
+  </div>
+<% end %>
