@@ -17,16 +17,19 @@
         <li><%= link_to "Home", root_path %></li>
         <li><%= link_to "About", "#" %></li>
         <li>
-          <% if person_signed_in? %>
+          <% if person_signed_in? && current_person.first_name %>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <%= current_person.first_name.capitalize %><span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
               <li><%= link_to "Edit Profile", edit_person_registration_path %></li>
-              <li class="family" data-id="<%= current_person.default_family.id %>"><%= link_to "The #{current_person.default_family.name} Family", family_path(current_person.default_family) %></li>
+            <% if person_signed_in? && current_person.default_family %>
+                <li class="family" data-id="<%= current_person.default_family %>"><%= link_to "The #{current_person.default_family.name} Family", family_path(current_person.default_family) %></li>
+            
               <li><%= link_to "Albums", albums_path(current_person.default_family) %>
               <li><%= link_to "Conversations", family_conversations_path(current_person.default_family) %>
-              <li><%= link_to "Calendar", family_events_path %>
+              <li><%= link_to "Calendar", family_events_path(current_person.default_family) %>
+            <% end %>
             </ul>
           <% end %>
         <li>

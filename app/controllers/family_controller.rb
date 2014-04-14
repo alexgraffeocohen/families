@@ -9,7 +9,7 @@ class FamilyController < ApplicationController
     @family = Family.new
     respond_to do |f|
       f.html
-      f.js 
+      f.js
     end
   end
 
@@ -20,9 +20,7 @@ class FamilyController < ApplicationController
   end
 
   def permissions
-
     @names = get_names(params[:permissions])
-    @resource = request.referrer.split("/").last.chop
     respond_to do |f|
       f.js
     end
@@ -40,6 +38,12 @@ class FamilyController < ApplicationController
     nested_array = members_array(accounts, params[:people][:relations])
     set_relations(rearrange_members(nested_array), current_person)
     redirect_to family_path(@family)
+  end
+
+  def invite_members
+    @members.each do |member|
+      WelcomeMailer.invite(member.email).deliver
+    end
   end
 
   def about_us
