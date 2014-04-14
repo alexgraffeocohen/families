@@ -4,6 +4,10 @@ class ConversationsController < ApplicationController
   def index
     @conversations = Conversation.all_conversations
     @conversation = Conversation.new_conversation
+    @permitted_conversations = current_person.all_permitted("conversation")
+    
+    @other_members = @family.people.to_a.delete_if {|i| i == current_person}
+    @relationships = Person::GROUP_RELATIONSHIPS
 
     @search = Conversation.search(params[:q])
     @all_found = @search.result
@@ -26,11 +30,37 @@ class ConversationsController < ApplicationController
 
   def create
     @conversation = Conversation.create(conversation_params)
-    @conversation.family_id = @family.id
-    @conversation.save
+    unless params[:conversation][:parse_permission].blank?
+      @conversation.permissions = @conversation.parse(params[:conversation][:parse_permission])
+    end
+   
+    respond_to do |f|
+      if @conversation.save
+        @conversation.family_id = @family.id
+        @conversation.person_id = current_person.id
+        f.js {render 'create', locals: {conversation: @conversation}}
+        f.html redirect_to root_path
+      else
+        @msg = "Please enter title and permissions."
+        f.js {render 'create_failure', locals: {msge: @msg}}
+      end
+      
+    end
+
   end
 
   def destroy
+    @conversation = Conversation.find(params[:conversation_id])
+    respond_to do |f|
+      if current_person.admin == 1
+        @conversation.destroy
+        f.html {redirect_to family_conversations_path}
+        f.js {render 'destroy'}
+      else
+        @msg = "Sorry, you are not a family admin."
+        f.js {render 'destroy_failure', locals: {msge: @msg}}
+      end
+    end
   end
 
   private

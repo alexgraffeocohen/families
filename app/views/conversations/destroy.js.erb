@@ -1,7 +1,7 @@
-var div = $('div[data-id="<%= conversation.id %>"]');
-if($("div.container").children("div").size() == 1){
+var div = $('div[data-id="<%= @conversation.id %>"]');
+if($("div.convo_all").children("div").size() == 1){
   div.fadeOut(function(){
-    $("div.container").delay(3000).prepend("<div class='white_div'>You have 0 albums.</div>");
+    $("div.convo_all").delay(3000).prepend("<div class='white_div'>You have 0 albums.</div>");
   });
 }
 else{
