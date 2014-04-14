@@ -9,7 +9,7 @@ class FamilyController < ApplicationController
     @family = Family.new
     respond_to do |f|
       f.html
-      f.js
+      f.js 
     end
   end
 
@@ -20,7 +20,9 @@ class FamilyController < ApplicationController
   end
 
   def permissions
+
     @names = get_names(params[:permissions])
+    @resource = request.referrer.split("/").last.chop
     respond_to do |f|
       f.js
     end
