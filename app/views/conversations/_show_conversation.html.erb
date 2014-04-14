@@ -5,6 +5,6 @@
   <% if convo.messages.blank? %>
     <p>No Messages Yet :( </p>
   <% else %>
-    <p><%= convo.messages.last.content %></p>
+    <p><%= convo.last_contributor %>: <%= convo.last_message %></p>
   <% end %>
 </div>
