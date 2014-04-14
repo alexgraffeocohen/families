@@ -13,7 +13,7 @@
 
 <div class="convo_all">
   <% if @all_found.length < 1 %>
-    <% conversations.each do |convo|  %>
+    <% @family.conversations.each do |convo|  %>
       <%= render 'show_conversation', convo: convo %>
     <% end %>
   <% else %>
