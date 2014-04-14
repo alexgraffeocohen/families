@@ -34,7 +34,7 @@ Rails.application.routes.draw do
 
   get 'families/:id/albums/:album_id' => "albums#show", as: 'family_album'
 
-  post 'families/:id/albums' => "albums#create", as: "family_albums"
+  post 'families/:id/albums' => "albums#create"
 
   patch 'families/:id/albums/:album_id' => "albums#update", as: "update_family_albums"
   
@@ -42,7 +42,7 @@ Rails.application.routes.draw do
   
   # photo routes
 
-  post 'families/:id/albums/:album_id/photos' => "photos#create", as: "family_album_photo"
+  post 'families/:id/albums/:album_id/photos' => "photos#create"
   
   delete 'families/:id/albums/:album_id/photos/:photo_id' => "photos#destroy", as: "delete_family_album_photo"
 
@@ -50,7 +50,7 @@ Rails.application.routes.draw do
 
   get "/families/:id/conversations" => "conversations#index", as: "family_conversations"
 
-  post "/families/:id/conversations" => "conversations#create", as: "conversations"
+  post "/families/:id/conversations" => "conversations#create"
 
   delete "/families/:id/conversations/:conversation_id" => "conversations#destroy", as: "delete_family_conversations"
 
@@ -58,7 +58,7 @@ Rails.application.routes.draw do
 
   get "/families/:id/conversations/:conversation_id/messages" => "messages#index", as: "family_conversation_messages"
 
-  post "/families/:id/conversations/:conversation_id/messages" => "messages#create", as: "family_conversation_messages"
+  post "/families/:id/conversations/:conversation_id/messages" => "messages#create"
 
   delete "/families/:id/conversations/:conversation_id/messages/:message_id" => "messages#destroy", as: "delete_family_conversation_message"
 
@@ -68,7 +68,7 @@ Rails.application.routes.draw do
   
   get "/families/:id/events/:event_id" => "events#show", as: "family_event"  
   
-  post "/families/:id/events" => "events#create", as: "family_events"
+  post "/families/:id/events" => "events#create"
   
   delete "/families/:id/events" => "events#destroy", as: "delete_family_event"
 
