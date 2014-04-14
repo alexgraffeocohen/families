@@ -81,6 +81,22 @@ module Relationable
     [mother, father].compact
   end
 
+  def grandsons
+    grandchildren.select(&:male?)
+  end
+
+  def grandaughters
+    grandchildren.select(&:female?)
+  end
+
+  def son_in_laws
+    children_in_laws.select(&:male?)
+  end
+
+  def daughter_in_laws
+    children_in_laws.select(&:female?)
+  end
+
   def brothers
     siblings.select {|sibling| sibling.gender == "M"}
   end
@@ -111,7 +127,7 @@ module Relationable
     children.collect { |child| child.spouse } if children  
   end
 
-  def parents_in_laws
+  def parents_in_law
     spouse.parents if spouse
   end
 
@@ -157,6 +173,14 @@ module Relationable
 
   def cousins
     [(mother.nieces + mother.nephews unless mother.nil?), (father.nieces + father.nephews unless father.nil?)].flatten.compact
+  end
+
+  def father_in_laws
+    parents_in_law.select(&:male?) if parents_in_law
+  end
+ 
+  def mother_in_laws
+    parents_in_law.select(&:female?) if parents_in_law
   end
 
   def siblings_in_law
