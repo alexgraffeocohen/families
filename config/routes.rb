@@ -59,6 +59,11 @@ Rails.application.routes.draw do
 
   delete "/families/:id/conversations/:conversation_id/messages/:message_id" => "messages#destroy", as: "destroy_family_conversation_message"
 
+  # events routes
+
+  get "/families/:id/events" => "events#index", as: "family_events"  
+  post "/families/:id/events" => "events#create", as: "person_events"
+  delete "/families/:id/events" => "events#destroy", as: "destroy_event"
 
 
   # The priority is based upon order of creation: first created -> highest priority.
