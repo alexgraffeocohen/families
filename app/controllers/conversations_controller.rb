@@ -33,14 +33,20 @@ class ConversationsController < ApplicationController
     unless params[:conversation][:parse_permission].blank?
       @conversation.permissions = @conversation.parse(params[:conversation][:parse_permission])
     end
-    if @conversation.save
-      @conversation.family_id = @family.id
-      @conversation.person_id = current_person.id
-      redirect_to family_conversations_path(@family)
-    else
-      flash[:alert] = "Please enter title and permissions."
-      redirect_to :back
+   
+    respond_to do |f|
+      if @conversation.save
+        @conversation.family_id = @family.id
+        @conversation.person_id = current_person.id
+        f.js {render 'create', locals: {conversation: @conversation}}
+        f.html redirect_to root_path
+      else
+        @msg = "Please enter title and permissions."
+        f.js {render 'create_failure', locals: {msge: @msg}}
+      end
+      
     end
+
   end
 
   def destroy
