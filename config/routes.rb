@@ -71,9 +71,9 @@ Rails.application.routes.draw do
 
   get "/families/:id/events" => "events#index", as: "family_events"  
   
-  get "/families/:id/events/:event_id" => "events#show", as: "family_event"  
+  get "/families/:id/events/:event_id" => "events#show", as: "event"  
   
-  post "/families/:id/events" => "events#create"
+  post "/families/:id/events" => "events#create", as: "person_events"
   
   delete "/families/:id/events" => "events#destroy", as: "delete_family_event"
 
