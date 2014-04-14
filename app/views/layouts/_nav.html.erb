@@ -22,8 +22,11 @@
               <%= current_person.first_name.capitalize %><span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><%= link_to "The #{current_person.default_family.name} Family", family_path(current_person.default_family) %></li>
               <li><%= link_to "Edit Profile", edit_person_registration_path %></li>
+              <li><%= link_to "The #{current_person.default_family.name} Family", family_path(current_person.default_family) %></li>
+              <li><%= link_to "Albums", albums_path(current_person.default_family) %>
+              <li><%= link_to "Conversations", family_conversations_path(current_person.default_family) %>
+              <li><%= link_to "Calendar", "#" %>
             </ul>
           <% end %>
         <li>
