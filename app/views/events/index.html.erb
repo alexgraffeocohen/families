@@ -1,10 +1,12 @@
 <h1>Events</h1>
-<% @events.each do |event| %>
-  <h3><%= event.name %></h3>
-  <p><%= event.content %></p>
-  <p><%= event.start_date %></p>
-  <p><%= event.end_date %></p>
-<% end %>
+<div id="events">
+  <% @events.each do |event| %>
+    <div class="event_name"><h3><%= event.name %></h3></div>
+    <div class="event_content"><p><%= event.content %></p></div>
+    <div class="event_start"><p><%= event.start_date %></p></div>
+    <div class="event_end"><p><%= event.end_date %></p></div>
+  <% end %>
+</div>
 
 <h2>Create a New Event!</h2>
 <%= form_for([@person, @event]) do |f| %>

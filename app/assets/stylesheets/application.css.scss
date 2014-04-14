@@ -11,6 +11,7 @@
  * file per style scope.
  *
  *= require magnific-popup
+ *= require jquery.ui.all
  *= require_tree .
  *= require_self
  //= depend_on_asset "bootstrap/glyphicons-halflings-regular.eot"
