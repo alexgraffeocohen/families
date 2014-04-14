@@ -21,7 +21,6 @@ class AlbumsController < ApplicationController
     unless params[:album][:parse_permission].nil?
       album.permissions = album.parse(params[:album][:parse_permission])
     end
-   
     
     if album.save
       current_person.albums << album

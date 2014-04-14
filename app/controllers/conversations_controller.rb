@@ -30,11 +30,17 @@ class ConversationsController < ApplicationController
 
   def create
     @conversation = Conversation.create(conversation_params)
-    @conversation.family_id = @family.id
-    unless params[:album][:parse_permission].nil?
+    unless params[:conversation][:parse_permission].blank?
       @conversation.permissions = @conversation.parse(params[:conversation][:parse_permission])
     end
-    @conversation.save
+    if @conversation.save
+      @conversation.family_id = @family.id
+      @conversation.person_id = current_person.id
+      redirect_to family_conversations_path(@family)
+    else
+      flash[:alert] = "Please enter title and permissions."
+      redirect_to :back
+    end
   end
 
   def destroy

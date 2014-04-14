@@ -11,7 +11,7 @@
   <% end %>
   <%= link_to "Custom", "#" %><br>
   <div class="customize">
-    <%= collection_check_boxes(:album, :parse_permission, @other_members, :first_name, :first_name) do |b| %>
+    <%= collection_check_boxes(:conversation, :parse_permission, @other_members, :first_name, :first_name) do |b| %>
     <%= b.check_box %> <%= b.label(class: "check_box") %><br>
     <% end %>
   </div>

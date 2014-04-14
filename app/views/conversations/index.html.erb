@@ -7,7 +7,7 @@
 <% end %>
 
 <% if current_person.cannot_see_any?("conversation") || @conversations.empty? %>
-  <div class="white_div" >You have 0 albums.</div>
+  <div class="white_div" >You have 0 conversations.</div>
 <% else %>
   <div class="convo_all">
     <% if @all_found.length < 1 %>
