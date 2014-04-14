@@ -18,6 +18,8 @@ class Person < ActiveRecord::Base
   belongs_to :father, :class_name => Person, :foreign_key => :father_id
   belongs_to :spouse, :class_name => Person, :foreign_key => :spouse_id
 
+  before_save :set_age
+
   def add_spouse(spouse)
     self.spouse = spouse
     spouse.spouse = self
@@ -81,6 +83,12 @@ class Person < ActiveRecord::Base
 
   def cannot_see_any?(class_name)
     all_permitted(class_name).empty?
+  end
+
+  private 
+  
+  def set_age
+    self.age = DateTime.now.year - self.birthday.year if self.birthday
   end
 end
 
