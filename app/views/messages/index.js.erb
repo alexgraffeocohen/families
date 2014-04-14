@@ -1,5 +1,5 @@
 <% if @new_messages.length > 0 %>
   <% @new_messages.each do |new_message| %>
-    $(".message_all").append("<%= j render 'show_message', locals: {family: @family, conversation: @conversation} %>")
+   $(".message_all").prepend("<%= j render(:partial => 'show_message', locals: {family: @family, conversation: @conversation, message: new_message}) %>");
   <% end %>
 <% end %>

@@ -8,8 +8,12 @@
 <% end %>
 
 <div class="message_all">
-  <% @conversation.messages.reverse.each do |message| %>
-    <%= render "show_message", {family: @family, conversation: @conversation, message: message} %>
+  <% if @conversation.messages.length == 0 %>
+    <div class="white_div" >You have 0 messages.</div>
+  <% else %>
+      <% @conversation.messages.reverse.each do |message| %>
+        <%= render "show_message", {family: @family, conversation: @conversation, message: message} %>
+      <% end %>
   <% end %>
 </div>
 
