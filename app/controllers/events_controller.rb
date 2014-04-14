@@ -2,6 +2,7 @@ class EventsController < ApplicationController
   include CalendarHelper
 
   before_action :set_event, :only => [:destroy, :show]
+  before_action :set_owner, :only => [:destroy, :show]
 
   def index
     @person = current_person
@@ -18,10 +19,9 @@ class EventsController < ApplicationController
   end
 
   def show
-    @person = Person.find(params[:id])
   end
 
-  def destroy   
+  def destroy
     if current_person == @event.owner
       @event.destroy
       redirect_to family_events_path
@@ -35,6 +35,10 @@ class EventsController < ApplicationController
 
   def set_event
     @event = Event.find(params[:event_id])
+  end
+
+  def set_owner
+    @person = Person.find(params[:id])
   end
 
   def event_params
