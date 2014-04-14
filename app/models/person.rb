@@ -18,8 +18,6 @@ class Person < ActiveRecord::Base
   belongs_to :father, :class_name => Person, :foreign_key => :father_id
   belongs_to :spouse, :class_name => Person, :foreign_key => :spouse_id
 
-  validates :gender, presence: :true
-
   def add_spouse(spouse)
     self.spouse = spouse
     spouse.spouse = self

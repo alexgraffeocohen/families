@@ -52,11 +52,11 @@ module PeopleHelper
       admin.children.each do |child|
         if admin.wife
           child.mother_id = admin.wife.id
+          admin.wife.save
         elsif admin.husband
           child.father_id = admin.husband.id
         end
         child.save
-        admin.wife.save
         admin.save
       end
     end
