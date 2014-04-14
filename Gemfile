@@ -30,6 +30,7 @@ gem 'friendly_id'
 gem 'launchy'
 gem "ransack", github: "activerecord-hackery/ransack", branch: "rails-4.1"
 gem "polyamorous", github: "activerecord-hackery/polyamorous"
+gem 'jquery-ui-rails'
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 # gem 'spring',        group: :development
 

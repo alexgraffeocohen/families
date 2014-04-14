@@ -26,7 +26,7 @@
               <li><%= link_to "The #{current_person.default_family.name} Family", family_path(current_person.default_family) %></li>
               <li><%= link_to "Albums", albums_path(current_person.default_family) %>
               <li><%= link_to "Conversations", family_conversations_path(current_person.default_family) %>
-              <li><%= link_to "Calendar", "#" %>
+              <li><%= link_to "Calendar", family_events_path %>
             </ul>
           <% end %>
         <li>
