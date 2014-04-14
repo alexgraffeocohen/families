@@ -53,9 +53,9 @@ Rails.application.routes.draw do
 
   # conversations routes
 
-  get "/families/:id/conversations" => "conversations#index", as: "family_conversations"
+  get "/families/:id/conversations" => "conversations#index", as: "conversations"
 
-  post "/families/:id/conversations" => "conversations#create"
+  post "/families/:id/conversations" => "conversations#create", as: "family_conversations"
 
   delete "/families/:id/conversations/:conversation_id" => "conversations#destroy", as: "delete_family_conversations"
 
