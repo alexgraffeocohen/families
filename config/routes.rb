@@ -2,13 +2,18 @@ Rails.application.routes.draw do
 
   as :person do
     get 'login' => 'devise/sessions#new', :as => :new_person_session
+    
     post 'logout' => 'devise/sessions#create', :as => :person_session
+    
     delete 'logout' => 'devise/sessions#destroy', :as => :destroy_person_session
+    
     patch '/person/confirmation' => 'confirmations#update', :via => :patch, :as => :update_person_confirmation
   end
+  
   devise_for :people, :skip => [:sessions], :controllers => {:registrations => "registrations", :confirmations => "confirmations"}
 
   root "welcome#index"
+  
   # family routes
   
   get 'families/new' => "family#new", as: "new_family"
@@ -29,7 +34,7 @@ Rails.application.routes.draw do
 
   get 'families/:id/albums/:album_id/edit' => "albums#edit", as: 'edit_album'
   
-  get 'families/:id/albums/:album_id' => "albums#show", as: 'album'
+  get 'families/:id/albums/:album_id' => "albums#show", as: 'family_album'
 
   post 'families/:id/albums' => "albums#create", as: "family_albums"
 
@@ -62,8 +67,11 @@ Rails.application.routes.draw do
   # events routes
 
   get "/families/:id/events" => "events#index", as: "family_events"  
+  
   get "/families/:id/events/:event_id" => "events#show", as: "event"  
+  
   post "/families/:id/events" => "events#create", as: "person_events"
+  
   delete "/families/:id/events" => "events#destroy", as: "destroy_event"
 
 end

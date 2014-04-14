@@ -22,7 +22,7 @@ class AlbumsController < ApplicationController
     
     if album.save
       current_person.albums << album
-      redirect_to album_path(Family.friendly.find(params[:id]), album)
+      redirect_to family_album_path(@family, album)
     else
       flash[:alert] = "#{album.errors.full_messages}"
       redirect_to :back
