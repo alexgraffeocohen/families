@@ -1,3 +1,8 @@
 <% @names.map do |name| %>
-  $("#<%= @resource %>_parse_permission_<%= name.downcase %>").prop("checked", true);
+  var checkbox = $("#<%= @resource %>_parse_permission_<%= name.downcase %>")
+  if (checkbox.is(':checked')) {
+    checkbox.prop("checked", false)
+  } else{
+  checkbox.prop("checked", true)
+  }
 <% end %> 

@@ -39,7 +39,7 @@ Rails.application.routes.draw do
 
   get 'families/:id/albums/:album_id' => "albums#show", as: 'album'
 
-  post 'families/:id/albums' => "albums#create"
+  post 'families/:id/albums' => "albums#create", as: "family_albums"
 
   patch 'families/:id/albums/:album_id' => "albums#update", as: "update_family_albums"
   
