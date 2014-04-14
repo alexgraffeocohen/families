@@ -1,10 +1,10 @@
 <div class="row">
 
-<% if current_person.cannot_see_any_albums? || @albums.empty? %>
+<% if current_person.cannot_see_any?("album") || @albums.empty? %>
 <div class="white_div" >You have 0 albums.</div>
 <% else %>
   <% @albums.each do |album| %>
-    <% if current_person.can_see_album?(album) %>
+    <% if current_person.can_see?(album) %>
       <%= link_to album_path(@family, album) do %>
         <div class="white_div deletable_div" data-id= "<%= album.id %>">
           <h2><%= album.name %></h2>

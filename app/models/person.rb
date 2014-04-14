@@ -66,22 +66,23 @@ class Person < ActiveRecord::Base
     end
   end
 
-  def permitted_albums
+  def all_permitted(class_name)
+    total = class_name.downcase.pluralize
     self.families.collect { |family|
-      family.albums.select do |album|
-        self.can_see_album?(album)
+      family.send("#{total}").select do |object|
+        self.can_see?(object)
       end
     }.flatten
   end
 
-  def can_see_album?(album)
-    album.relationships_permitted.include?(self.relationship_to(album.owner)) || 
-    album.owner == self ||
-    album.names_permitted.include?(self.first_name)
+  def can_see?(object)
+    object.relationships_permitted.include?(self.relationship_to(object.owner)) || 
+    object.owner == self ||
+    object.names_permitted.include?(self.first_name)
   end
 
-  def cannot_see_any_albums?
-    permitted_albums.empty?
+  def cannot_see_any?(class_name)
+    all_permitted(class_name).empty?
   end
 end
 
