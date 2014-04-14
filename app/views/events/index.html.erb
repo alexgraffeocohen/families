@@ -1,26 +1,31 @@
 <h1>Events</h1>
 <div id="events">
-  <% @events.each do |event| %>
-    <div class="event_name"><h3><%= event.name %></h3></div>
-    <div class="event_content"><p><%= event.content %></p></div>
-    <div class="event_start"><p><%= event.start_date %></p></div>
-    <div class="event_end"><p><%= event.end_date %></p></div>
+  <%= calendar do |date| %>
+    <%= date.day %>
+    <% formatted_date = Time.zone.parse(date.to_s).utc %>
+    <% if @events_by_date[formatted_date] %>
+    <ul>
+      <% @events_by_date[formatted_date].each do |event| %>
+        <li><%= link_to event.name, event_path(current_person, event) %></li>
+      <% end %>
+    </ul>
+    <% end %>
   <% end %>
 </div>
 
 <h2>Create a New Event!</h2>
-<%= form_for([@person, @event]) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %><br>
+  <%= form_for([@person, @event]) do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %><br>
 
-  <%= f.label :content %>
-  <%= f.text_field :content %><br>
+    <%= f.label :content %>
+    <%= f.text_field :content %><br>
 
-  <%= f.label :start_date %>
-  <%= f.text_field :start_date %> <br> 
+    <%= f.label :start_date %>
+    <%= f.text_field :start_date %> <br> 
 
-  <%= f.label :end_date %>
-  <%= f.text_field :end_date %><br>
+    <%= f.label :end_date %>
+    <%= f.text_field :end_date %><br>
 
-  <%= f.submit %>
-<% end %>
+    <%= f.submit %>
+  <% end %>
