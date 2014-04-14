@@ -9,8 +9,13 @@ Rails.application.routes.draw do
   devise_for :people, :skip => [:sessions], :controllers => {:registrations => "registrations", :confirmations => "confirmations"}
 
   root "welcome#index"
-  # family routes
   
+  # for permissions
+
+  get "/families/:id/permissions" => "family#permissions", as: "permissions"
+
+  # family routes
+
   get 'families/new' => "family#new", as: "new_family"
 
   get 'families/add_member' => "family#add_member_input", as: "add_member"
