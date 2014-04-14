@@ -18,7 +18,7 @@ class MessagesController < ApplicationController
     respond_to do |f|
       if current_person == @message.sender
         @message.destroy
-        f.html {redirect_to family_conversation_messages_index_path}
+        f.html {redirect_to family_conversation_messages_path}
         f.js {render 'destroy'}
       else
         @msg = "Sorry, you did not send this message."
