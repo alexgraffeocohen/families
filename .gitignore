@@ -18,4 +18,6 @@
 # Ignore application configuration
 /config/application.yml
 /config/fog_credentials.yml
+
 coverage
+public/uploads
