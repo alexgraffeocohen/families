@@ -75,6 +75,6 @@ Rails.application.routes.draw do
   
   post "/families/:id/events" => "events#create", as: "person_events"
   
-  delete "/families/:id/events" => "events#destroy", as: "delete_family_event"
+  delete "/families/:id/events/:event_id" => "events#destroy", as: "delete_family_event"
 
 end
