@@ -12,7 +12,7 @@
           <p>Photos: <%=album.photos.count%></p>
           <%= album.created_at.strftime("%b %Y") %>
           <br><br>
-          <%= link_to "✖", destroy_album_path(album.family, album), remote: true, method: :delete, class: "delete_x" %>
+          <%= link_to "✖", delete_family_album_path(album.family, album), remote: true, method: :delete, class: "delete_x" %>
         </div>
       <% end %>
     <% end %>
@@ -20,7 +20,7 @@
 <% end %>
 </div>
 <div class="row text-center">
-<%= link_to "Create an album!", new_album_path %>
+<%= link_to "Create an album!", new_family_album_path %>
 </div>
 
 

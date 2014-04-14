@@ -30,21 +30,18 @@ class ConversationsController < ApplicationController
 
   def create
     @conversation = Conversation.create(conversation_params)
-    unless params[:conversation][:parse_permission].blank?
-      @conversation.permissions = @conversation.parse(params[:conversation][:parse_permission])
-    end
-   
+    @conversation.permissions = @conversation.parse(params[:conversation][:parse_permission])
+    @conversation.family_id = @family.id
+    @conversation.person_id = current_person.id
+    
     respond_to do |f|
       if @conversation.save
-        @conversation.family_id = @family.id
-        @conversation.person_id = current_person.id
         f.js {render 'create', locals: {conversation: @conversation}}
-        f.html redirect_to root_path
+        f.html {redirect_to :back}
       else
         @msg = "Please enter title and permissions."
         f.js {render 'create_failure', locals: {msge: @msg}}
-      end
-      
+      end 
     end
 
   end
@@ -52,7 +49,7 @@ class ConversationsController < ApplicationController
   def destroy
     @conversation = Conversation.find(params[:conversation_id])
     respond_to do |f|
-      if current_person.admin == 1
+      if current_person == @conversation.owner
         @conversation.destroy
         f.html {redirect_to family_conversations_path}
         f.js {render 'destroy'}

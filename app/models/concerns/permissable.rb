@@ -18,11 +18,17 @@ module Permissable
       "7" => ["husband", "wife"]
     }
     
-    permission_hash.map { |key, value| value if permissions.include?(key.to_s) }.compact.flatten
+    permission_hash.map { |key, value| value if permissions.include?(key) }.compact.flatten
   end
 
   def names_permitted
     permission_str = permissions.split(" ")
     permission_str.select {|permission| permission.match(/[A-Za-z]/)}
+  end
+
+  def all_permitted_members
+    self.family.people.collect do |member|
+      member.first_name if member.can_see?(self)
+    end.compact.join(", ")
   end
 end

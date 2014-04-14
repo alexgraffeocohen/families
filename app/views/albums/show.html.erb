@@ -8,13 +8,13 @@
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">
-      <li><%= link_to "Delete", destroy_album_path(@family, @album), method: :delete %></li>
+      <li><%= link_to "Delete", delete_family_album_path(@family, @album), method: :delete %></li>
     </ul>
   </div>
 </div>
 <br>
 <div class="add_photo">
-  <%= form_tag(create_photo_path(@family, @album), remote: true, multipart: true) do %>
+  <%= form_tag(family_album_photo_path(@family, @album), remote: true, multipart: true) do %>
     <%= label_tag "photo[data]", "Add a Photo" %>
     <%= file_field_tag "photo[data]" %><br>
     <%= text_field_tag "photo[caption]", "", placeholder: "Add Caption", autofocus: true %><br><br>

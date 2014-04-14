@@ -18,13 +18,11 @@ class AlbumsController < ApplicationController
   def create
     album = Album.new(album_params)
     album.family_id = find_family(params[:id]).id
-    unless params[:album][:parse_permission].nil?
-      album.permissions = album.parse(params[:album][:parse_permission])
-    end
+    album.permissions = album.parse(params[:album][:parse_permission])
     
     if album.save
       current_person.albums << album
-      redirect_to album_path(Family.friendly.find(params[:id]), album)
+      redirect_to family_album_path(@family, album)
     else
       flash[:alert] = "#{album.errors.full_messages}"
       redirect_to :back

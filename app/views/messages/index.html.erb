@@ -1,4 +1,5 @@
-  <h2>Current Conversation: <%= @conversation.title %></h2>
+<h4>Current Conversation:</h4>
+<h2 class="blue_font"><%= @conversation.title %> - (<%= @conversation.all_permitted_members %>)</h2>
 <%= form_for [@family, @conversation, @message], remote: true do |f| %>
   <%= f.label :content, "Write a new message" %><br>
   <%= f.text_area :content, required: true %><br><br>
