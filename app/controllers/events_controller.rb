@@ -1,7 +1,10 @@
 class EventsController < ApplicationController
+  include CalendarHelper
+
   def index
     @person = current_person
     @events = Event.all
+    @events_by_date = @events.group_by(&:start_date)
     @event = Event.new
   end
 
@@ -9,6 +12,10 @@ class EventsController < ApplicationController
     @event = Event.create(event_params)
     @event.owner = current_person
     redirect_to family_events_path
+  end
+
+  def show
+    @event = Event.find(params[:event_id])
   end
 
   def destroy
