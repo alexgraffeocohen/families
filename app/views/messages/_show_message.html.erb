@@ -1,4 +1,4 @@
-<div class="message white_div center_div deletable_div float_left" data-id="<%= message.id %>" data-time="<%= Time.now %>">
+<div class="message white_div center_div deletable_div float_left" data-id="<%= message.id %>" data-time="<%= message.created_at.to_i %>">
   <%= link_to "✖", delete_family_conversation_message_path(family, conversation, message), remote: true, method: :delete, class: "delete_x" %>
   <%= message.sender.first_name %>: <%= message.content %>
   <span class="message_time"><%= message.created_at.strftime("%_m/%e %l:%M%P") %></span>
