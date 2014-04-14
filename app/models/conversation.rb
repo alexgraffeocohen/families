@@ -1,4 +1,6 @@
 class Conversation < ActiveRecord::Base
+  include Permissable
+  
   belongs_to :family
   has_many :messages
 

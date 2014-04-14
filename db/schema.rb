@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140413020836) do
+ActiveRecord::Schema.define(version: 20140414144450) do
 
   create_table "albums", force: true do |t|
     t.string   "name"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20140413020836) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "family_id"
+    t.string   "permissions"
   end
 
   create_table "families", force: true do |t|

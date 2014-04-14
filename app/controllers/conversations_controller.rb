@@ -4,6 +4,9 @@ class ConversationsController < ApplicationController
   def index
     @conversations = Conversation.all_conversations
     @conversation = Conversation.new_conversation
+    
+    @other_members = @family.people.to_a.delete_if {|i| i == current_person}
+    @relationships = Person::GROUP_RELATIONSHIPS
 
     @search = Conversation.search(params[:q])
     @all_found = @search.result
@@ -27,6 +30,9 @@ class ConversationsController < ApplicationController
   def create
     @conversation = Conversation.create(conversation_params)
     @conversation.family_id = @family.id
+    unless params[:album][:parse_permission].nil?
+      @conversation.permissions = @conversation.parse(params[:conversation][:parse_permission])
+    end
     @conversation.save
   end
 
