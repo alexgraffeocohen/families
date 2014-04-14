@@ -124,15 +124,15 @@ module Relationable
   end
 
   def children_in_laws
-    children.collect { |child| child.spouse } if children  
+    children.collect { |child| child.spouse }.compact if children  
   end
 
   def parents_in_law
-    spouse.parents if spouse
+    spouse.parents.compact if spouse
   end
 
   def grandchildren
-    children.collect { |child| child.children }.flatten if children 
+    children.collect { |child| child.children }.compact.flatten if children 
   end
 
   def grandparents
@@ -140,11 +140,11 @@ module Relationable
   end
 
   def grandmothers
-    [(mother.mother unless mother.nil?), (father.mother unless father.nil?)]
+    [(mother.mother unless mother.nil?), (father.mother unless father.nil?)].compact
   end
 
   def grandfathers
-     [(mother.father unless mother.nil?), (father.father unless father.nil?)]
+     [(mother.father unless mother.nil?), (father.father unless father.nil?)].compact
   end
 
   def aunts

@@ -54,7 +54,7 @@ class ConversationsController < ApplicationController
         f.html {redirect_to family_conversations_path}
         f.js {render 'destroy'}
       else
-        @msg = "Sorry, you are not a family admin."
+        @msg = "Sorry, you do not own this conversation."
         f.js {render 'destroy_failure', locals: {msge: @msg}}
       end
     end

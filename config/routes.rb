@@ -14,12 +14,12 @@ Rails.application.routes.draw do
 
   root "welcome#index"
   
-  # for permissions
-
-  get "/families/:id/permissions" => "family#permissions", as: "permissions"
-
   # family routes
-
+   # for permissions
+ 
+  get "/families/:id/permissions" => "family#permissions", as: "permissions"
+ 
+  
   get 'families/new' => "family#new", as: "new_family"
 
   get 'families/add_member' => "family#add_member_input", as: "add_member"
@@ -34,46 +34,48 @@ Rails.application.routes.draw do
 
   get 'families/:id/albums' => "albums#index", as: 'albums'
   
-  get 'families/:id/albums/new' => "albums#new", as: 'new_family_album'
+  get 'families/:id/albums/new' => "albums#new", as: 'new_album'
 
+  get 'families/:id/albums/:album_id/edit' => "albums#edit", as: 'edit_album'
+  
   get 'families/:id/albums/:album_id' => "albums#show", as: 'family_album'
 
-  post 'families/:id/albums' => "albums#create"
+  post 'families/:id/albums' => "albums#create", as: "family_albums"
 
   patch 'families/:id/albums/:album_id' => "albums#update", as: "update_family_albums"
   
-  delete 'families/:id/albums/:album_id' => "albums#destroy", as: 'delete_family_album'
+  delete 'families/:id/albums/:album_id' => "albums#destroy", as: 'destroy_album'
   
   # photo routes
 
-  post 'families/:id/albums/:album_id/photos' => "photos#create"
+  post 'families/:id/albums/:album_id/photos' => "photos#create", as: "create_photo"
   
-  delete 'families/:id/albums/:album_id/photos/:photo_id' => "photos#destroy", as: "delete_family_album_photo"
+  delete 'families/:id/albums/:album_id/photos/:photo_id' => "photos#destroy", as: "destroy_photo"
 
   # conversations routes
 
   get "/families/:id/conversations" => "conversations#index", as: "family_conversations"
 
-  post "/families/:id/conversations" => "conversations#create"
+  post "/families/:id/conversations" => "conversations#create", as: "conversations"
 
-  delete "/families/:id/conversations/:conversation_id" => "conversations#destroy", as: "delete_family_conversations"
+  delete "/families/:id/conversations/:conversation_id" => "conversations#destroy", as: "delete_conversations"
 
   # message routes
 
-  get "/families/:id/conversations/:conversation_id/messages" => "messages#index", as: "family_conversation_messages"
+  get "/families/:id/conversations/:conversation_id/messages" => "messages#index", as: "family_conversation_messages_index"
 
-  post "/families/:id/conversations/:conversation_id/messages" => "messages#create"
+  post "/families/:id/conversations/:conversation_id/messages" => "messages#create", as: "family_conversation_messages"
 
-  delete "/families/:id/conversations/:conversation_id/messages/:message_id" => "messages#destroy", as: "delete_family_conversation_message"
+  delete "/families/:id/conversations/:conversation_id/messages/:message_id" => "messages#destroy", as: "destroy_family_conversation_message"
 
   # events routes
 
   get "/families/:id/events" => "events#index", as: "family_events"  
   
-  get "/families/:id/events/:event_id" => "events#show", as: "family_event"  
+  get "/families/:id/events/:event_id" => "events#show", as: "event"  
   
-  post "/families/:id/events" => "events#create"
+  post "/families/:id/events" => "events#create", as: "person_events"
   
-  delete "/families/:id/events" => "events#destroy", as: "delete_family_event"
+  delete "/families/:id/events" => "events#destroy", as: "destroy_event"
 
 end
