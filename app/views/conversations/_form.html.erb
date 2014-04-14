@@ -1,6 +1,6 @@
 <%= form_for([@family, @conversation], remote: true) do |f| %>
   <%= f.label :title %>
-  <%= f.text_field :title %>
+  <%= f.text_field :title %><br>
   <p>Who is in this conversation?</p>
   <label><%= check_box_tag :family %> Entire Family</label>
   <br>

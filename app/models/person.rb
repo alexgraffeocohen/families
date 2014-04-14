@@ -69,7 +69,7 @@ class Person < ActiveRecord::Base
   def all_permitted(class_name)
     total = class_name.downcase.pluralize
     self.families.collect { |family|
-      family.send("#{total}").select do |object|
+      family.send(total).select do |object|
         self.can_see?(object)
       end
     }.flatten
