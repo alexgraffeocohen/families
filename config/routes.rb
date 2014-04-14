@@ -13,11 +13,12 @@ Rails.application.routes.draw do
   devise_for :people, :skip => [:sessions], :controllers => {:registrations => "registrations", :confirmations => "confirmations"}
 
   root "welcome#index"
-  
+
   # for permissions
-
+ 
   get "/families/:id/permissions" => "family#permissions", as: "permissions"
-
+ 
+  
   # family routes
 
   get 'families/new' => "family#new", as: "new_family"
@@ -36,7 +37,7 @@ Rails.application.routes.draw do
   
   get 'families/:id/albums/new' => "albums#new", as: 'new_family_album'
 
-  get 'families/:id/albums/:album_id' => "albums#show", as: 'family_album'
+  get 'families/:id/albums/:album_id' => "albums#show", as: 'album'
 
   post 'families/:id/albums' => "albums#create"
 
@@ -52,9 +53,9 @@ Rails.application.routes.draw do
 
   # conversations routes
 
-  get "/families/:id/conversations" => "conversations#index", as: "family_conversations"
+  get "/families/:id/conversations" => "conversations#index", as: "conversations"
 
-  post "/families/:id/conversations" => "conversations#create"
+  post "/families/:id/conversations" => "conversations#create", as: "family_conversations"
 
   delete "/families/:id/conversations/:conversation_id" => "conversations#destroy", as: "delete_family_conversations"
 

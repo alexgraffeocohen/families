@@ -1,3 +1,3 @@
 <% @names.map do |name| %>
-  $("#album_parse_permission_<%= name.downcase %>").prop("checked", true);
+  $("#<%= @resource %>_parse_permission_<%= name.downcase %>").prop("checked", true);
 <% end %> 

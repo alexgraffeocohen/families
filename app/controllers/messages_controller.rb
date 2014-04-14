@@ -4,6 +4,7 @@ class MessagesController < ApplicationController
 
   def index
     @message = Message.new
+    @new_messages = Message.where("conversation_id = ? and created_at > ?", params[:conversation_id], Time.at(params[:after].to_i + 1))
   end
 
   def create
