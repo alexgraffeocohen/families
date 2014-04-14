@@ -5,12 +5,10 @@ Warden.test_mode!
 
 feature "Conversation" do
   before :each do
-    @family = create(:family)
-    @conversation = create(:conversation)
-    @family.albums << @album
-    @family.albums << @album2
-    @person.albums << @album
-    @person.albums << @album2
+    @family = create(:family, name: "brady")
+    @person = create(:person, confirmed_at: Time.now)
+    @family.person_families.create(person: @person)
+    @conversation = create(:conversation, family_id: @family.id)
     login_as(@person, :scope => :person)
   end
 
@@ -19,9 +17,15 @@ feature "Conversation" do
   end
 
   scenario "index displays all" do
-    save_and_open_page
-    visit 'families/1/conversation'
-    expect(page).to have_content(@album1.name)
-    expect(page).to have_content(@album2.name)
+    visit 'families/brady/conversations'
+    expect(page).to have_content(@conversation.title)
   end
+
+  scenario "index displays all" do
+    visit 'families/brady/conversations'
+    fill_in "Title", with: "Vacation Talk"
+    click_button "Create Conversation"
+    expect(page).to have_content("Create Conversation")
+  end
+
 end

@@ -50,7 +50,9 @@ gem 'figaro', git: 'https://github.com/laserlemon/figaro.git'
 group :test, :development do
   gem "rspec-rails"
   gem "capybara", github: 'jnicklas/capybara'
+  gem "poltergeist"
   gem "selenium-webdriver"
+  gem "capybara-webkit"
   gem "better_errors"
   gem "sprockets_better_errors"
   gem "binding_of_caller"
