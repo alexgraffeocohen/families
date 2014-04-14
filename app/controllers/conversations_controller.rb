@@ -4,6 +4,7 @@ class ConversationsController < ApplicationController
   def index
     @conversations = Conversation.all_conversations
     @conversation = Conversation.new_conversation
+    @permitted_conversations = current_person.all_permitted("conversation")
     
     @other_members = @family.people.to_a.delete_if {|i| i == current_person}
     @relationships = Person::GROUP_RELATIONSHIPS

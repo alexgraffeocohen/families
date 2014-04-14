@@ -6,14 +6,18 @@
   <%= f.submit 'Show All', name: 'show_all' %>
 <% end %>
 
-<div class="convo_all">
-  <% if @all_found.length < 1 %>
-    <% @family.conversations.each do |convo|  %>
-      <%= render 'show_conversation', family: @family, convo: convo %>
+<% if current_person.cannot_see_any?("conversation") || @conversations.empty? %>
+  <div class="white_div" >You have 0 albums.</div>
+<% else %>
+  <div class="convo_all">
+    <% if @all_found.length < 1 %>
+      <% @family.conversations.each do |convo|  %>
+        <%= render 'show_conversation', family: @family, convo: convo %>
+      <% end %>
+    <% else %>
+      <% @all_found.each do |convo| %>
+        <%= render 'show_conversation', family: @family, convo: convo %>
+      <% end %>
     <% end %>
-  <% else %>
-    <% @all_found.each do |convo| %>
-      <%= render 'show_conversation', family: @family, convo: convo %>
-    <% end %>
-  <% end %>
-</div>
+  </div>
+<% end %>
