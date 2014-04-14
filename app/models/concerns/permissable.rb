@@ -25,4 +25,10 @@ module Permissable
     permission_str = permissions.split(" ")
     permission_str.select {|permission| permission.match(/[A-Za-z]/)}
   end
+
+  def all_permitted_members
+    self.family.people.collect do |member|
+      member.first_name if member.can_see?(self)
+    end.compact.join(", ")
+  end
 end
