@@ -13,6 +13,7 @@ class Person < ActiveRecord::Base
   has_many   :person_families
   has_many   :families, through: :person_families
   has_many   :albums
+  has_many   :events
   belongs_to :mother, :class_name => Person, :foreign_key => :mother_id
   belongs_to :father, :class_name => Person, :foreign_key => :father_id
   belongs_to :spouse, :class_name => Person, :foreign_key => :spouse_id
