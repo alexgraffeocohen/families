@@ -8,7 +8,7 @@ class PermissionsController < ApplicationController
   end
 
   def individual
-    @ids = get_relations(params[:permissions])
+    @id = get_relation(params[:permissions])
     render 'individual.js'
   end
 
