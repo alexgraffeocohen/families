@@ -59,10 +59,6 @@ class AlbumsController < ApplicationController
     @album = Album.find(params[:album_id])
   end
 
-  def set_family
-    @family = Family.friendly.find(params[:id])
-  end
-
   def album_params
     params.require(:album).permit(:name, :family_id)
   end

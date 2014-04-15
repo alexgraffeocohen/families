@@ -23,6 +23,11 @@ class ApplicationController < ActionController::Base
     Family.find_by(name_slug: slug)
   end
 
+  def set_family
+    @family = find_family(params[:id])
+    binding.pry
+  end
+
   def set_resource
   end
 end

@@ -18,8 +18,8 @@ feature "Conversation" do
     Warden.test_reset!
   end
 
-  scenario "index displays all" do
-    visit 'families/brady/conversations'
+  scenario "index displays all", js: true do
+    visit "families/#{@brady.name_slug}/conversations"
     expect(page).to have_content(@conversation.title)
   end
 

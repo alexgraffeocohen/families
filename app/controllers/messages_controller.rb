@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
-
-  before_action :set_arrangements
+  before_action :set_family
+  before_action :set_conversation
 
   def index
     @message = Message.new
@@ -34,8 +34,7 @@ class MessagesController < ApplicationController
     params.require(:message).permit(:content)
   end
 
-  def set_arrangements
+  def set_conversation
     @conversation = Conversation.find(params[:conversation_id])
-    @family = find_family(params[:id])
   end
 end

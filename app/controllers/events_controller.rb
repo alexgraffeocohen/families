@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   include CalendarHelper
+  before_action :set_family
   before_action :set_event, :only => [:destroy, :show]
   before_action :set_owner, :only => [:destroy, :show]
   before_action :only => [:index] do

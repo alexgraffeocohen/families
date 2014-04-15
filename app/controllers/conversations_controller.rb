@@ -65,10 +65,6 @@ class ConversationsController < ApplicationController
     end
   end
 
-  def set_family
-    @family = find_family(params[:id])
-  end
-
   def conversation_params
     params.require(:conversation).permit(:title)
   end
