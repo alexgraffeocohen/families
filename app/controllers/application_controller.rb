@@ -4,6 +4,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :configure_permitted_parameters, if: :devise_controller?
   
+  def provide_relationships(family)
+    @other_members = family.people.to_a.delete_if {|i| i == current_person}
+    @relationships = Person::GROUP_RELATIONSHIPS
+  end
+  
   private
   
   def configure_permitted_parameters
@@ -16,12 +21,6 @@ class ApplicationController < ActionController::Base
 
   def find_family(slug)
     Family.find_by(name_slug: slug)
-  end
-
-  def provide_relationships
-    @family = find_family(params[:id])
-    @other_members = @family.people.to_a.delete_if {|i| i == current_person}
-    @relationships = Person::GROUP_RELATIONSHIPS
   end
 
   def set_resource

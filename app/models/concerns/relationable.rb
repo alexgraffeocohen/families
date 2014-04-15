@@ -85,7 +85,7 @@ module Relationable
     grandchildren.select(&:male?)
   end
 
-  def grandaughters
+  def granddaughters
     grandchildren.select(&:female?)
   end
 

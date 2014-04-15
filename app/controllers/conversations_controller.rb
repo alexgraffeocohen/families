@@ -1,7 +1,9 @@
 class ConversationsController < ApplicationController
   before_action :set_family
-  before_action :provide_relationships, :only => [:index]
   before_action :prepare_search_form, :only => [:index]
+  before_action :only => [:index] do
+    provide_relationships(@family)
+  end
 
   def index
     @conversation = Conversation.new_conversation

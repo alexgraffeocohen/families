@@ -47,7 +47,7 @@ Rails.application.routes.draw do
   
   # photo routes
 
-  post 'families/:id/albums/:album_id/photos' => "photos#create"
+  post 'families/:id/albums/:album_id/photos' => "photos#create", as: "family_album_photo"
   
   delete 'families/:id/albums/:album_id/photos/:photo_id' => "photos#destroy", as: "delete_family_album_photo"
 

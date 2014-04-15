@@ -1,7 +1,9 @@
 class AlbumsController < ApplicationController
-  before_action :set_album, only: [:show, :edit, :update, :destroy]
   before_action :set_family, only: [:create, :new, :index, :show, :edit, :update, :destroy]
-  before_action :provide_relationships, :only => [:new, :edit]
+  before_action :set_album, only: [:show, :edit, :update, :destroy]
+  before_action :only => [:new, :edit] do
+    provide_relationships(@family)
+  end
 
   def show
   end
@@ -21,7 +23,7 @@ class AlbumsController < ApplicationController
     
     if album.save
       current_person.albums << album
-      redirect_to family_album_path(@family, album)
+      redirect_to album_path(@family, album)
     else
       flash[:alert] = "#{album.errors.full_messages}"
       redirect_to :back

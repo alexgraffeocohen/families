@@ -24,6 +24,8 @@
             <ul class="dropdown-menu">
               <li><%= link_to "Edit Profile", edit_person_registration_path %></li>
             <% if person_signed_in? && current_person.default_family %>
+              <li><%= link_to "Sign Out", destroy_person_session_path, method: :delete %></li>
+              <li class="divider"></li>
                 <li class="family" data-id="<%= current_person.default_family.id %>"><%= link_to "The #{current_person.default_family.name} Family", family_path(current_person.default_family) %></li>
             
               <li><%= link_to "Albums", albums_path(current_person.default_family) %>
@@ -33,9 +35,7 @@
             </ul>
           <% end %>
         <li>
-          <% if person_signed_in? %>
-            <%= link_to "Sign Out", destroy_person_session_path, method: :delete %>
-          <% else %>
+          <% unless person_signed_in? %>
             <%= link_to "Sign In", new_person_session_path %>
           <% end %>
         </li>

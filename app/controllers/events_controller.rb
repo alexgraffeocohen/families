@@ -1,9 +1,10 @@
 class EventsController < ApplicationController
   include CalendarHelper
-
   before_action :set_event, :only => [:destroy, :show]
   before_action :set_owner, :only => [:destroy, :show]
-  before_action :provide_relationships, :only => [:index]
+  before_action :only => [:index] do
+    provide_relationships(@family)
+  end
 
   def index
     @person = current_person

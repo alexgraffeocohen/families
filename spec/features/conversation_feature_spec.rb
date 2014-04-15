@@ -6,13 +6,12 @@ Warden.test_mode!
 feature "Conversation" do
   before :each do
     brady_bunch
-    binding.pry
-    @family.person_families.create(person: @person)
-    @conversation = build(:conversation, family_id: @family.id)
+    @conversation = build(:conversation, family: @brady)
+    @conversation.owner = @greg
     @conversation.permissions = "1"
     @conversation.save(:validate => false)
     
-    login_as(@person, :scope => :person)
+    login_as(@greg, :scope => :person)
   end
 
   after :each do
