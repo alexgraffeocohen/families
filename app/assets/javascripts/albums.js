@@ -1,9 +1,5 @@
 $(document).ready(function() {
   $('.image_link').magnificPopup({type: 'image' });
-  $("a:contains('Custom')").on("click", function(e){
-    e.preventDefault();
-    $('.customize').slideToggle();
-  })
 
   $(".album_name").on("click", function(e){
     e.preventDefault();
@@ -14,10 +10,10 @@ $(document).ready(function() {
   
   $(".input_name").bind("blur keyup", function(e){
     if (e.type == 'blur' || e.keyCode == '13')
-    saveTask($(this).val());
+    saveName($(this).val());
   })
 
-  function saveTask(val_arg){
+  function saveName(val_arg){
     var newName = val_arg
     $(".input_name").addClass("hidden")
     $(".album_name").text(newName).show();
