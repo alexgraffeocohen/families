@@ -1,12 +1,12 @@
 $(document).ready(function(){
   $("a:contains('By Group')").on("click", function(e){
     e.preventDefault();
-    $('.group').slideToggle();
+    $('.group_section').slideToggle();
   });
 
   $("a:contains('By Person')").on("click", function(e){
     e.preventDefault();
-    $('.customize').slideToggle();
+    $('.individual_section').slideToggle();
   });
 
   $("#family").on("click", function(e){
@@ -23,7 +23,7 @@ $(document).ready(function(){
       });
   });
 
-  $("input.custom").on("click", function(){
+  $("input.individual").on("click", function(){
     var family_id = $("nav li.family").data("id")
     $.ajax({
       url: "/permissions/" + family_id + "/individual",

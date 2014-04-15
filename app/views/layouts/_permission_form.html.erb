@@ -1,6 +1,6 @@
 <%= link_to "By Group", "#" %>
 <br> 
-<div class="group">
+<div class="group_section">
 <label><%= check_box_tag :family %> Entire Family</label>
 <br> 
   <% @relationships.each_with_index do |relation, index| %>
@@ -13,9 +13,9 @@
 
 <%= link_to "By Person", "#" %>
 <br>
-<div class="customize">
+<div class="individual_section">
   <%= collection_check_boxes(:album, :parse_permission, @other_members, :id, :first_name) do |b| %> 
-    <%= b.check_box(class: "custom") %> <%= b.label(class: "check_box") %>
+    <%= b.check_box(class: "individual") %> <%= b.label(class: "check_box") %>
     <br>
   <% end %>
 </div>
