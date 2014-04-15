@@ -1,4 +1,8 @@
 $(document).ready(function(){
+  $("#family").on("click", function(e){
+    $('input:checkbox').prop('checked', this.checked);
+  });
+
   $("input.family").on("click", function(){
     var family_id = $("nav li.family").data("id")
     $.ajax({
