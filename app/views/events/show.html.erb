@@ -1,4 +1,6 @@
 <h1><%= @event.name %></h1>
 <p><%= @event.content %></p>
 
-<%= link_to "Delete Event", delete_family_event_path(@person, @event), method: :delete %>
+<% if @event.owner == current_person %>
+  <%= link_to "Delete Event", delete_family_event_path(@person, @event), method: :delete, data: { confirm: "Are you sure you want to delete this event?"} %>
+<% end %>

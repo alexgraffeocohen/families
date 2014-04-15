@@ -12,7 +12,9 @@
           <p>Photos: <%=album.photos.count%></p>
           <%= album.created_at.strftime("%b %Y") %>
           <br><br>
-          <%= link_to "✖", delete_family_album_path(album.family, album), remote: true, method: :delete, class: "delete_x" %>
+          <% if album.owner == current_person  %>
+            <%= link_to "✖", delete_family_album_path(album.family, album), remote: true, method: :delete, data: { confirm: "Are you sure you want to delete this album?"}, class: "delete_x" %>
+          <% end %>
         </div>
       <% end %>
     <% end %>
