@@ -22,9 +22,9 @@ module Permissable
     PERMISSION_HASH.map { |key, value| value if permissions.include?(key) }.compact.flatten
   end
 
-  def names_permitted
+  def people_permitted
     permission_str = permissions.split(" ")
-    permission_str.select {|permission| permission.match(/[A-Za-z]/)}
+    permission_str.select {|permission| permission.match(/[A-Za-z]\d+/)}
   end
 
   def all_permitted_members
@@ -38,15 +38,15 @@ module Permissable
     relations = PERMISSION_HASH[permission_key]
     relatives = relations.map do |relation|
       if singular.include?(relation)
-        current_person.send(relation).id if current_person.send(relation)
+        current_person.send(relation).permission_slug if current_person.send(relation)
       else
-        current_person.send(relation.pluralize).map {|rel| rel.id}
+        current_person.send(relation.pluralize).map {|rel| rel.permission_slug}
       end
     end.compact.flatten
   end
 
-  def get_relation(person_id)
-    relation = Person.find(person_id).relationship_to(current_person)
+  def get_relation(slug)
+    relation = Person.find_by(permission_slug: slug).relationship_to(current_person)
     PERMISSION_HASH.map do |key, value|
       key if value.include?(relation)
     end.compact.first

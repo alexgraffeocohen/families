@@ -20,6 +20,7 @@ class Person < ActiveRecord::Base
   belongs_to :spouse, :class_name => Person, :foreign_key => :spouse_id
 
   before_save :set_age
+  after_save  :set_permission_slug
 
   def add_spouse(spouse)
     self.spouse = spouse
@@ -79,7 +80,7 @@ class Person < ActiveRecord::Base
   def can_see?(object)
     object.relationships_permitted.include?(self.relationship_to(object.owner)) || 
     object.owner == self ||
-    object.names_permitted.include?(self.first_name)
+    object.people_permitted.include?(self.permission_slug)
   end
 
   def cannot_see_any?(class_name)
@@ -87,6 +88,13 @@ class Person < ActiveRecord::Base
   end
 
   private 
+
+  def set_permission_slug
+    if self.permission_slug.nil?
+      self.permission_slug = "#{first_name.downcase}#{id}" 
+      self.save
+    end
+  end
   
   def set_age
     self.age = DateTime.now.year - self.birthday.year if self.birthday

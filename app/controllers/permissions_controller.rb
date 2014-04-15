@@ -3,7 +3,7 @@ class PermissionsController < ApplicationController
   before_action :set_resource
 
   def group
-    @ids = get_people(params[:permissions])
+    @slugs = get_people(params[:permissions])
     render 'group.js'
   end
 

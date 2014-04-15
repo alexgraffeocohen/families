@@ -14,7 +14,7 @@
 <%= link_to "By Person", "#" %>
 <br>
 <div class="individual_section">
-  <%= collection_check_boxes(current_resource.to_sym, :parse_permission, @other_members, :id, :first_name) do |b| %> 
+  <%= collection_check_boxes(current_resource.to_sym, :parse_permission, @other_members, :permission_slug, :first_name) do |b| %> 
     <%= b.check_box(class: "individual") %> <%= b.label(class: "check_box") %>
     <br>
   <% end %>
