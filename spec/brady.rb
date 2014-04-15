@@ -1,6 +1,6 @@
 module Brady
   def make_brady_bunch
-    @brady = create(:family, name: "Brady")
+    @brady = create(:family, name: "Brady", name_slug: "brady")
     @connie = create(:person, first_name: "Connie", last_name: "Hutchins", gender: "F")
         @connie.confirmed_at = Time.now
     @harold = create(:person, first_name: "Harold", gender: "M")
