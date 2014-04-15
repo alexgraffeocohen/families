@@ -3,6 +3,7 @@ class Family < ActiveRecord::Base
   has_many :people, :through => :person_families, foreign_key: :person_id
   has_many :albums
   has_many :conversations
+  has_many :events
   
   extend FriendlyId 
   friendly_id :name_slug

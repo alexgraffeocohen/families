@@ -8,15 +8,15 @@ class EventsController < ApplicationController
   end
 
   def index
-    @person = current_person
-    @events = Event.all
-    @events_by_date = @events.group_by(&:start_date)
     @event = Event.new
+    @permitted_events_by_date = current_person.all_permitted("event").group_by(&:start_date)
   end
 
   def create
     @event = Event.new(event_params)
     @event.owner = current_person
+    @family.events << @event
+    @event.permissions = @event.parse(params[:event][:parse_permission])
     @event.save
     redirect_to family_events_path
   end

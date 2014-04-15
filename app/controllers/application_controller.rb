@@ -26,7 +26,4 @@ class ApplicationController < ActionController::Base
   def set_family
     @family = find_family(params[:id])
   end
-
-  def set_resource
-  end
 end
