@@ -1,31 +1,11 @@
 class ConversationsController < ApplicationController
   before_action :set_family
+  before_action :provide_relationships, :only => [:index]
+  before_action :prepare_search_form, :only => [:index]
 
   def index
-    @conversations = Conversation.all_conversations
     @conversation = Conversation.new_conversation
     @permitted_conversations = current_person.all_permitted("conversation")
-    
-    @other_members = @family.people.to_a.delete_if {|i| i == current_person}
-    @relationships = Person::GROUP_RELATIONSHIPS
-
-    @search = Conversation.search(params[:q])
-    @all_found = @search.result
-    @not_found = @conversations - @all_found
-    @not_found_ids =  @not_found.collect do |conversation|
-                    conversation.id
-                  end
-    if params[:show_all] != nil
-      respond_to do |f|
-        f.html {head :ok}
-        f.js {render 'show_all'}    
-      end
-    elsif params[:q] != nil
-      respond_to do |f|
-        f.html {head :ok}
-        f.js {render 'search_success', locals: {unfound: @not_found_ids}}
-      end
-    end
   end
 
   def create
@@ -61,6 +41,27 @@ class ConversationsController < ApplicationController
   end
 
   private
+
+  def prepare_search_form
+    @conversations = Conversation.all_conversations
+    @search = Conversation.search(params[:q])
+    @all_found = @search.result
+    @not_found = @conversations - @all_found
+    @not_found_ids =  @not_found.collect do |conversation|
+                        conversation.id
+                      end
+    if params[:show_all] != nil
+      respond_to do |f|
+        f.html {head :ok}
+        f.js {render 'show_all'}    
+      end
+    elsif params[:q] != nil
+      respond_to do |f|
+        f.html {head :ok}
+        f.js {render 'search_success', locals: {unfound: @not_found_ids}}
+      end
+    end
+  end
 
   def set_family
     @family = find_family(params[:id])

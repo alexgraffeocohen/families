@@ -4,8 +4,7 @@
     <%= f.text_field :name %><br>
 
     <p>Who can view my album?</p>
-
-    <%= render 'layouts/permission_form', f: f %>
+    <%= render 'layouts/permission_form', f: f, current_resource: "album" %>
     <%= f.submit %>
   <% end %>
 

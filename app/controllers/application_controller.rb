@@ -23,4 +23,7 @@ class ApplicationController < ActionController::Base
     @other_members = @family.people.to_a.delete_if {|i| i == current_person}
     @relationships = Person::GROUP_RELATIONSHIPS
   end
+
+  def set_resource
+  end
 end
