@@ -14,18 +14,32 @@
 </div>
 
 <h2>Create a New Event!</h2>
-  <%= form_for([@person, @event]) do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name %><br>
-
-    <%= f.label :content %>
-    <%= f.text_field :content %><br>
-
-    <%= f.label :start_date %>
-    <%= f.text_field :start_date %> <br> 
-
-    <%= f.label :end_date %>
-    <%= f.text_field :end_date %><br>
-
-    <%= f.submit %>
+  <%= form_for([@person, @event], class:"form-horizontal") do |f| %>
+  <div class="control-group">
+    <%= f.label :name, class:"control-label" %>
+    <div class="controls">
+      <%= f.text_field :name %><br>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :content, class:"control-label" %>
+    <div class="controls">
+      <%= f.text_field :content %><br>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :start_date, class:"control-label" %>
+    <div class="controls">
+      <%= f.text_field :start_date %> <br> 
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :end_date, class:"control-label" %>
+    <div class="controls">
+      <%= f.text_field :end_date %><br>
+    </div>
+  </div>
+    <br>
+    <%= f.submit class:"btn" %>
+    <br>
   <% end %>
