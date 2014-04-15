@@ -7,7 +7,7 @@
   <%= f.submit %>
 <% end %>
 <br>
-<%= button_to "Back to All Conversations", family_conversations_path %>
+<%= link_to "Back to All Conversations", family_conversations_path, class: "btn" %>
 <div class="message_all">
   <% if @conversation.messages.length == 0 %>
     <div class="white_div" >You have 0 messages.</div>

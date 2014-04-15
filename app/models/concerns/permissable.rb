@@ -20,6 +20,7 @@ module Permissable
 
   def relationships_permitted    
     PERMISSION_HASH.map { |key, value| value if permissions.include?(key) }.compact.flatten
+    
   end
 
   def people_permitted

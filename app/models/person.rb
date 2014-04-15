@@ -81,6 +81,7 @@ class Person < ActiveRecord::Base
     object.relationships_permitted.include?(self.relationship_to(object.owner)) || 
     object.owner == self ||
     object.people_permitted.include?(self.permission_slug)
+    binding.pry
   end
 
   def cannot_see_any?(class_name)
