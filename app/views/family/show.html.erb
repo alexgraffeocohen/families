@@ -1,6 +1,5 @@
 <h1 class="text-center"><%= @family.name %></h1>
 <div class="white_div">
-  <%= link_to image_tag(current_person.profile_photo_url(:thumb).to_s), current_person.profile_photo_url(:thumb).to_s, {class: "image_link"}  %><br>
   <h1><%= link_to "Our Family", about_us_path(@family) %><br></h1>
 </div>
 <div>

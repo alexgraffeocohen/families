@@ -1,0 +1,8 @@
+<% @ids.map do |id| %>
+  var checkbox = $("input.custom#<%= @resource %>_parse_permission_<%= id %>")
+  if (checkbox.is(':checked')) {
+    checkbox.prop("checked", false)
+  } else{
+  checkbox.prop("checked", true)
+  }
+<% end %> 

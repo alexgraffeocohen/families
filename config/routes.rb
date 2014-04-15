@@ -16,8 +16,8 @@ Rails.application.routes.draw do
 
   # for permissions
  
-  get "/families/:id/permissions" => "family#permissions", as: "permissions"
- 
+  get "/permissions/:id/group" => "permissions#group", as: "group_permissions"
+  get "/permissions/:id/individual" => "permissions#individual", as: "individual_permissions"
   
   # family routes
 
@@ -39,7 +39,7 @@ Rails.application.routes.draw do
 
   get 'families/:id/albums/:album_id' => "albums#show", as: 'album'
 
-  post 'families/:id/albums' => "albums#create"
+  post 'families/:id/albums' => "albums#create", as: "family_albums"
 
   patch 'families/:id/albums/:album_id' => "albums#update", as: "update_family_albums"
   
@@ -75,6 +75,6 @@ Rails.application.routes.draw do
   
   post "/families/:id/events" => "events#create", as: "person_events"
   
-  delete "/families/:id/events" => "events#destroy", as: "delete_family_event"
+  delete "/families/:id/events/:event_id" => "events#destroy", as: "delete_family_event"
 
 end

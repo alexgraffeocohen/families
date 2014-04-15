@@ -19,13 +19,6 @@ class FamilyController < ApplicationController
     end
   end
 
-  def permissions
-    @names = get_names(params[:permissions])
-    respond_to do |f|
-      f.js
-    end
-  end
-
   def show 
   end
 
