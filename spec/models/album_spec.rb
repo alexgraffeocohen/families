@@ -22,16 +22,16 @@ describe Album do
     let(:album2){create(:album, person_id: daughter.id, permissions: "1")}
     it "can block people" do
       expect(album2.relationships_permitted).to_not include("mother")
-      expect(mother.can_see_album?(album2)).to eq(false)
+      expect(mother.can_see?(album2)).to eq(false)
     end
 
     it "can allow people" do
       expect(album2.relationships_permitted).to include("brother")
-      expect(son.can_see_album?(album2)).to eq(true)
+      expect(son.can_see?(album2)).to eq(true)
     end
 
     it "including self" do
-      expect(daughter.can_see_album?(album2)).to eq(true)
+      expect(daughter.can_see?(album2)).to eq(true)
     end
   end
 
@@ -39,12 +39,12 @@ describe Album do
     let(:album3){create(:album, person_id: daughter.id, permissions: "1 2")}
     it "can block people" do
       expect(album.relationships_permitted).to include("mother")
-      expect(mother.can_see_album?(album3)).to eq(true)
+      expect(mother.can_see?(album3)).to eq(true)
     end
 
     it "can allow people" do
       expect(album.relationships_permitted).to include("brother")
-      expect(son.can_see_album?(album3)).to eq(true)
+      expect(son.can_see?(album3)).to eq(true)
     end
   end
 end

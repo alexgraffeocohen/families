@@ -57,16 +57,20 @@ module Relationable
     self.spouse == person && self.gender == "F"
   end
 
-  def son_in_law_to(person)
-    if self.spouse
-      self.spouse.parents.include?(person) && self.gender == "M"
-    end
+  def daughter_in_law_to(person)
+    self.gender == "F" && person.children.include?(self.spouse)
   end
 
-  def daughter_in_law_to(person)
-    if self.spouse
-      self.spouse.parents.include?(person) && self.gender == "F"
-    end
+  def son_in_law_to(person)
+    self.gender == "M" && person.children.include?(self.spouse)
+  end
+
+  def father_in_law_to(person)
+    self.gender == "M" && self.children.include?(person.spouse)
+  end
+
+  def mother_in_law_to(person)
+    self.gender == "F" && self.children.include?(person.spouse)
   end
 
   def husband
@@ -209,21 +213,5 @@ module Relationable
 
   def paternal_grandfather=(person)
     self.father.father_id = person.id
-  end
-
-  def daughter_in_law_to(person)
-    self.gender == "F" && person.children.include?(self.spouse)
-  end
-
-  def son_in_law_to(person)
-    self.gender == "M" && person.children.include?(self.spouse)
-  end
-
-  def father_in_law_to(person)
-    self.gender == "M" && self.children.include?(self.spouse)
-  end
-
-  def mother_in_law_to(person)
-    self.gender == "F" && self.children.include?(person.spouse)
   end
 end

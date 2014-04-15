@@ -6,7 +6,8 @@ describe Conversation do
     @message      = create(:message)
     @message2     = create(:message)
     @message2.sender = create(:person, first_name: "Alex")
-    @conversation = create(:conversation, title: "Title")
+    @conversation = build(:conversation, title: "Title")
+    @conversation.save(:validate => false)
     
     @family.conversations << @conversation
     @conversation.messages << @message

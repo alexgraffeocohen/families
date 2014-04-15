@@ -3,9 +3,10 @@ require 'spec_helper'
 describe Message do
   before do
     @message      = create(:message)
-    @conversation = create(:conversation)
+    @conversation = build(:conversation)
     @person       = create(:person)
 
+    @conversation.save(:validate => false)
     @message.sender = @person
     @conversation.messages << @message
   end
