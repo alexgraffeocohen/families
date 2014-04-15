@@ -33,15 +33,20 @@ module Permissable
     end.compact.join(", ")
   end
   
-  def get_names(num)
+  def get_people(num)
     singular = ["mother", "father", "husband", "wife"]
     relations = PERMISSION_HASH[num]
     relatives = relations.map do |relation|
       if singular.include?(relation)
-        current_person.send(relation).first_name if current_person.send(relation)
+        current_person.send(relation).id if current_person.send(relation)
       else
-        current_person.send(relation.pluralize).map {|rel| rel.first_name}
+        current_person.send(relation.pluralize).map {|rel| rel.id}
       end
     end.compact.flatten
+  end
+
+  def get_relations(name)
+    relatives = current_person.default_family.select { |p| p.first_name == "Greg" }
+
   end
 end

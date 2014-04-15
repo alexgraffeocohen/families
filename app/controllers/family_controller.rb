@@ -19,16 +19,6 @@ class FamilyController < ApplicationController
     end
   end
 
-  def permissions
-    @names = get_names(params[:permissions])
-    @resources = ["albums", "conversations", "events"]
-    @split_url = request.referrer.split("/")
-    @resource = (@split_url & @resources).first.chop
-    respond_to do |f|
-      f.js
-    end
-  end
-
   def show 
   end
 

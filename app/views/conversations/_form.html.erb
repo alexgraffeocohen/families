@@ -13,8 +13,8 @@
   
   <%= link_to "Custom", "#" %><br>
   <div class="customize">
-    <%= collection_check_boxes(:conversation, :parse_permission, @other_members, :first_name, :first_name) do |b| %>
-    <%= b.check_box %> <%= b.label(class: "check_box") %><br>
+    <%= collection_check_boxes(:conversation, :parse_permission, @other_members, :id, :first_name) do |b| %>
+    <%= b.check_box(class: "custom") %> <%= b.label(class: "check_box") %><br>
     <% end %>
   </div>
   <br><br>
