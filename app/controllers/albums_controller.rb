@@ -1,7 +1,8 @@
 class AlbumsController < ApplicationController
   before_action :set_album, only: [:show, :edit, :update, :destroy]
   before_action :set_family, only: [:create, :new, :index, :show, :edit, :update, :destroy]
-  
+  before_action :provide_relationships, :only => [:new, :edit]
+
   def show
   end
 
@@ -11,8 +12,6 @@ class AlbumsController < ApplicationController
   def new
     @album = Album.new
     @photo = Photo.new
-    @other_members = @family.people.to_a.delete_if {|i| i == current_person}
-    @relationships = Person::GROUP_RELATIONSHIPS
   end
 
   def create

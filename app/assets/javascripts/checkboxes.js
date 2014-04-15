@@ -13,7 +13,7 @@ $(document).ready(function(){
     $('input:checkbox').prop('checked', this.checked);
   });
 
-  $("input.family").on("click", function(){
+  $("input.group").on("click", function(){
     var family_id = $("nav li.family").data("id")
     $.ajax({
       url: "/permissions/" + family_id + "/group",

@@ -13,6 +13,7 @@ class PermissionsController < ApplicationController
   end
 
   private
+
   def set_resource
     @resources = ["albums", "conversations", "events"]
     @split_url = request.referrer.split("/")

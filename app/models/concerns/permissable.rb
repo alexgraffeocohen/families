@@ -4,13 +4,13 @@ module Permissable
 
   PERMISSION_HASH = {
       "1" => ["brother", "sister"],
-      "2" => ["mother", "father"], # this needs to be singular
+      "2" => ["mother", "father"],
       "3" => ["son", "daughter"],
       "4" => ["grandfather", "grandmother"],
       "5" => ["grandson", "granddaughter"],
       "6" => ["son_in_law", "daughter_in_law"],
       "7" => ["father_in_law", "mother_in_law"],
-      "8" => ["husband", "wife"] #this needs to be singular
+      "8" => ["husband", "wife"] 
     }
   attr_reader :parse_permission
 

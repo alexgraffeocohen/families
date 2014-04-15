@@ -3,6 +3,7 @@ class EventsController < ApplicationController
 
   before_action :set_event, :only => [:destroy, :show]
   before_action :set_owner, :only => [:destroy, :show]
+  before_action :provide_relationships, :only => [:index]
 
   def index
     @person = current_person

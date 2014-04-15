@@ -14,7 +14,7 @@
 </div>
 
 <h2>Create a New Event!</h2>
-  <%= form_for([@person, @event], class:"form-horizontal") do |f| %>
+<%= form_for([@person, @event], class:"form-horizontal") do |f| %>
   <div class="control-group">
     <%= f.label :name, class:"control-label" %>
     <div class="controls">
@@ -39,7 +39,7 @@
       <%= f.text_field :end_date %><br>
     </div>
   </div>
-    <br>
-    <%= f.submit class:"btn" %>
-    <br>
-  <% end %>
+  <%= render 'layouts/permission_form', f: f %>
+  <%= f.submit %>
+  <br>
+<% end %>
