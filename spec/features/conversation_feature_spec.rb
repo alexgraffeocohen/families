@@ -5,10 +5,13 @@ Warden.test_mode!
 
 feature "Conversation" do
   before :each do
-    @family = create(:family, name: "brady")
-    @person = create(:person, confirmed_at: Time.now)
+    brady_bunch
+    binding.pry
     @family.person_families.create(person: @person)
-    @conversation = create(:conversation, family_id: @family.id)
+    @conversation = build(:conversation, family_id: @family.id)
+    @conversation.permissions = "1"
+    @conversation.save(:validate => false)
+    
     login_as(@person, :scope => :person)
   end
 
@@ -21,7 +24,7 @@ feature "Conversation" do
     expect(page).to have_content(@conversation.title)
   end
 
-  scenario "index displays all" do
+  scenario "fill in title" do
     visit 'families/brady/conversations'
     fill_in "Title", with: "Vacation Talk"
     click_button "Create Conversation"
