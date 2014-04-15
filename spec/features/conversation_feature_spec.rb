@@ -5,7 +5,7 @@ Warden.test_mode!
 
 feature "Conversation" do
   before :each do
-    brady_bunch
+    make_brady_bunch
     @conversation = build(:conversation, family: @brady)
     @conversation.owner = @greg
     @conversation.permissions = "1"
@@ -23,8 +23,8 @@ feature "Conversation" do
     expect(page).to have_content(@conversation.title)
   end
 
-  scenario "fill in title" do
-    visit 'families/brady/conversations'
+  scenario "fill in title", js: true do
+    visit "families/#{@brady.name_slug}/conversations"
     fill_in "Title", with: "Vacation Talk"
     click_button "Create Conversation"
     expect(page).to have_content("Create Conversation")
