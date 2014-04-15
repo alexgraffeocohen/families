@@ -19,13 +19,15 @@ module Permissable
   end
 
   def relationships_permitted    
-    PERMISSION_HASH.map { |key, value| value if permissions.include?(key) }.compact.flatten
-    
+    PERMISSION_HASH.map { 
+      binding.pry
+      |key, value| value if permissions.match?(/(?<![a-z])\#{key}/) 
+      }.compact.flatten
   end
 
   def people_permitted
     permission_str = permissions.split(" ")
-    permission_str.select {|permission| permission.match(/[A-Za-z]\d+/)}
+    permission_str.select { |permission| permission == self.permission_slug }
   end
 
   def all_permitted_members
