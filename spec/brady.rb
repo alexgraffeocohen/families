@@ -15,6 +15,6 @@ module Brady
         @marcia.confirmed_at = Time.now
     @connie.add_spouse(@harold)
     @carol.add_spouse(@mike)
-    @brady.add_members([@harold, @carol, @mike, @greg, @marcia])
+    @brady.add_members([@connie, @harold, @carol, @mike, @greg, @marcia])
   end
 end
