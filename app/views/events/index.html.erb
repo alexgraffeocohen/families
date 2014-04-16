@@ -6,40 +6,10 @@
     <% if @permitted_events_by_date[formatted_date] %>
       <ul>
         <% @permitted_events_by_date[formatted_date].each do |event| %>
-          <li><%= link_to event.name, event_path(current_person, event) %></li>
+          <li><%= link_to event.name, event_path(@family, event) %></li>
         <% end %>
       </ul>
     <% end %>
   <% end %>
+<%= link_to "Create a New Event!", new_event_path %>
 </div>
-
-<h2>Create a New Event!</h2>
-<%= form_for([@family, @event], class:"form-horizontal") do |f| %>
-  <div class="control-group">
-    <%= f.label :name, class:"control-label" %>
-    <div class="controls">
-      <%= f.text_field :name %><br>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :content, "Description", class:"control-label" %>
-    <div class="controls">
-      <%= f.text_area :content %><br>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :start_date, class:"control-label" %>
-    <div class="controls">
-      <%= f.text_field :start_date %> <br> 
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :end_date, class:"control-label" %>
-    <div class="controls">
-      <%= f.text_field :end_date %><br>
-    </div>
-  </div>
-  <%= render 'layouts/permission_form', f: f, current_resource: "event" %>
-  <%= f.submit %>
-  <br>
-<% end %>

@@ -2,11 +2,6 @@ class MessagesController < ApplicationController
   before_action :set_family
   before_action :set_conversation
 
-  def index
-    @message = Message.new
-    @new_messages = Message.where("conversation_id = ? and created_at > ?", params[:conversation_id], Time.at(params[:after].to_i + 1))
-  end
-
   def create
     @message = Message.create(message_params)
     @message.conversation_id = params[:conversation_id]

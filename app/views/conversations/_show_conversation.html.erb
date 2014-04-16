@@ -1,6 +1,6 @@
 <div class="convo deletable_div white_div" data-id="<%= convo.id %>">
   <h3>
-    <%= link_to convo.title, family_conversation_messages_path(@family, convo) %>
+    <%= link_to convo.title, family_conversation_path(@family, convo) %>
     <% if convo.owner == current_person  %>
       <%= link_to "✖", delete_family_conversations_path(@family, convo), remote: true, method: :delete, data: { confirm: "Are you sure you want to delete this conversation?"}, class: "delete_x" %>
     <% end %>

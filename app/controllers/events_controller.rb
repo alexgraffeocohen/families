@@ -2,7 +2,6 @@ class EventsController < ApplicationController
   include CalendarHelper
   before_action :set_family
   before_action :set_event, :only => [:destroy, :show]
-  before_action :set_owner, :only => [:destroy, :show]
   before_action :only => [:index] do
     provide_relationships(@family)
   end
@@ -38,10 +37,6 @@ class EventsController < ApplicationController
 
   def set_event
     @event = Event.find(params[:event_id])
-  end
-
-  def set_owner
-    @person = Person.find(params[:id])
   end
 
   def event_params

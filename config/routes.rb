@@ -55,15 +55,15 @@ Rails.application.routes.draw do
 
   get "/families/:id/conversations" => "conversations#index", as: "conversations"
 
+  get "/families/:id/conversations/:conversation_id" => "conversations#show", as: "family_conversation"
+
   post "/families/:id/conversations" => "conversations#create", as: "family_conversations"
 
   delete "/families/:id/conversations/:conversation_id" => "conversations#destroy", as: "delete_family_conversations"
 
   # message routes
 
-  get "/families/:id/conversations/:conversation_id/messages" => "messages#index", as: "family_conversation_messages"
-
-  post "/families/:id/conversations/:conversation_id/messages" => "messages#create"
+  post "/families/:id/conversations/:conversation_id/messages" => "messages#create", as: "family_conversation_messages"
 
   delete "/families/:id/conversations/:conversation_id/messages/:message_id" => "messages#destroy", as: "delete_family_conversation_message"
 

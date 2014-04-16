@@ -1,5 +1,6 @@
 class ConversationsController < ApplicationController
   before_action :set_family
+  before_action :set_conversation, :only => [:show, :destroy]
   before_action :prepare_search_form, :only => [:index]
   before_action :only => [:index] do
     provide_relationships(@family)
@@ -25,11 +26,14 @@ class ConversationsController < ApplicationController
         f.js {render 'create_failure', locals: {msge: @msg}}
       end 
     end
+  end
 
+  def show
+    @message = Message.new
+    @new_messages = Message.where("conversation_id = ? and created_at > ?", params[:conversation_id], Time.at(params[:after].to_i + 1))
   end
 
   def destroy
-    @conversation = Conversation.find(params[:conversation_id])
     respond_to do |f|
       if current_person == @conversation.owner
         @conversation.destroy
@@ -68,5 +72,9 @@ class ConversationsController < ApplicationController
 
   def conversation_params
     params.require(:conversation).permit(:title)
+  end
+
+  def set_conversation
+    @conversation = Conversation.find(params[:conversation_id])
   end
 end
