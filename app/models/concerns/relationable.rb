@@ -99,6 +99,10 @@ module Relationable
     person.gender == "M" && self.parents.any? { |parent| person.siblings.include?(parent) }
   end
 
+  def cousin_to(person)
+    uncles.any? { |uncle| uncle.children.include?(person) } || aunts.any? { |aunt| aunt.children.include?(person) }
+  end
+
   def husband
     Person.find_by(spouse_id: self.id, gender: "M")
   end

@@ -11,6 +11,7 @@ module Brady
         @jenny.confirmed_at = Time.now
     @jon    = create(:person, first_name: "Jon", mother_id: @connie.id, father_id: @harold.id, gender: "M")
         @jon.confirmed_at = Time.now
+    @jon_jr = create(:person, first_name: "John Jr.", father_id: @jon.id)
     @mike   = create(:person, first_name: "Mike", gender: "M")
         @mike.confirmed_at = Time.now
     @greg   = create(:person, first_name: "Greg", mother_id: @carol.id, father_id: @mike.id, gender: "M", email: "greg@greg.com")
