@@ -4,7 +4,7 @@ $(document).ready(function(){
     var family_id = $("nav li.family").data("id")
     $.ajax({
       url: "/permissions/" + family_id + "/make_hash",
-      dataType: "json",
+      dataType: "script",
       method: "GET",
       });
   }
