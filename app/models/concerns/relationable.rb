@@ -73,6 +73,24 @@ module Relationable
     self.gender == "F" && self.children.include?(person.spouse)
   end
 
+  def aunt_to(person)
+    self.gender == "F" && person.parents.any? { |parent| self.siblings.include?(parent) }
+  end
+
+  def uncle_to(person)
+    self.gender == "M" && person.parents.any? { |parent| self.siblings.include?(parent) }
+  end
+
+  def brother_in_law_to(person)
+    self.gender == "M" && ((self.spouse.siblings.include?(person) if self.spouse) ||
+    (self.siblings.include?(person.spouse) if person.spouse))
+  end
+
+  def sister_in_law_to(person)
+    self.gender == "F" && ((self.spouse.siblings.include?(person) if self.spouse)||
+    (self.siblings.include?(person.spouse) if person.spouse))
+  end
+
   def husband
     Person.find_by(spouse_id: self.id, gender: "M")
   end
@@ -110,7 +128,11 @@ module Relationable
   end
   
   def siblings
-    Person.where("mother_id = ? OR father_id = ?", mother_id, father_id).where.not("id = ?", self.id)
+    if mother_id || father_id
+      Person.where("mother_id = ? OR father_id = ?", mother_id, father_id).where.not("id = ?", self.id)
+    else
+      []
+    end
   end
 
   def children
