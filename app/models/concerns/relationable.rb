@@ -91,6 +91,14 @@ module Relationable
     (self.siblings.include?(person.spouse) if person.spouse))
   end
 
+  def niece_to(person)
+    person.gender == "F" && self.parents.any? { |parent| person.siblings.include?(parent) }
+  end
+
+  def nephew_to(person)
+    person.gender == "M" && self.parents.any? { |parent| person.siblings.include?(parent) }
+  end
+
   def husband
     Person.find_by(spouse_id: self.id, gender: "M")
   end

@@ -78,6 +78,14 @@ describe Relationable do
     expect(@jenny.relationship_to(@mike)).to eq('sister_in_law')
   end
 
+  it "can determine niece" do
+    expect(@marcia.relationship_to(@jenny)).to eq('niece')
+  end
+
+  it "can determine nephew" do
+    expect(@greg.relationship_to(@jon)).to eq('nephew')
+  end
+
   it "can determine daughter-in-law and mother-in-law" do
     husband = create(:person)
     wife = create(:person, gender: "F")
