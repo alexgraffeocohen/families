@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   # for permissions
  
   get "/permissions/:id/group" => "permissions#group", as: "group_permissions"
+  
+  get "/permissions/:id/make_hash" => "permissions#make_hash"
+
   get "/permissions/:id/individual" => "permissions#individual", as: "individual_permissions"
   
   # family routes

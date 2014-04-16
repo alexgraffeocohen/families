@@ -2,6 +2,8 @@ class Person < ActiveRecord::Base
   include Relationable
   include PeopleHelper
 
+  attr_accessor :checkbox_hash
+
   mount_uploader :profile_photo, DataUploader
 
   RELATIONSHIPS = ["brother", "sister", "father", "mother", "son", "daughter", "grandmother", "grandfather", "grandson", "granddaughter", "wife", "husband", "daughter_in_law", "son_in_law", "father_in_law", "mother_in_law", "aunt", "uncle", "nephew", "niece", "cousin", "brother_in_law", "sister_in_law"]
@@ -22,6 +24,20 @@ class Person < ActiveRecord::Base
   before_save :set_age
   after_save  :set_permission_slug
 
+  PERMISSION_HASH2 = {
+      "1" => ["brother", "sister"],
+      "2" => ["mother", "father"],
+      "3" => ["son", "daughter"],
+      "4" => ["grandfather", "grandmother"],
+      "5" => ["grandson", "granddaughter"],
+      "6" => ["son_in_law", "daughter_in_law"],
+      "7" => ["father_in_law", "mother_in_law"],
+      "8" => ["husband", "wife"],
+      "9" => ["aunt", "uncle"],
+      "10" => ["niece", "nephew"],
+      "11" => ["cousin"],
+      "12" => ["brother_in_law", "sister_in_law"]
+    }
   def add_spouse(spouse)
     self.spouse = spouse
     spouse.spouse = self
@@ -85,6 +101,26 @@ class Person < ActiveRecord::Base
 
   def cannot_see_any?(class_name)
     all_permitted(class_name).empty?
+  end
+
+  def checkbox_hash
+    singular = [["mother", "father"], ["husband", "wife"]]
+    new_hash ||= {}.tap do |hash|
+      PERMISSION_HASH2.values.each_with_index do |relationships, index|
+        if singular.include?(relationships)
+          hash[index+1] = [self.send(relationships[0]).permission_slug] if self.send(relationships[0])
+          if relationships[1]
+            hash[index+1] << self.send(relationships[1]).permission_slug if self.send(relationships[1])
+          end
+        else
+          hash[index+1] = self.send(relationships[0].pluralize).map {|rel| rel.permission_slug}
+          if relationships[1]
+            hash[index+1] << self.send(relationships[1].pluralize).map {|rel| rel.permission_slug}
+          end
+        end
+        hash[index+1].flatten!
+      end
+    end
   end
 
   private 

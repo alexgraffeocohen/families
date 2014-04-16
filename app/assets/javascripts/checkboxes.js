@@ -1,4 +1,14 @@
 $(document).ready(function(){
+
+  if($("input.group").is(":visible")){
+    var family_id = $("nav li.family").data("id")
+    $.ajax({
+      url: "/permissions/" + family_id + "/make_hash",
+      dataType: "script",
+      method: "GET",
+      });
+  }
+
   $("a:contains('By Group')").on("click", function(e){
     e.preventDefault();
     $('.group_section').slideToggle();

@@ -210,14 +210,14 @@ describe Relationable do
       marcia_husband = create(:person, gender: "M")
       @marcia.add_spouse(marcia_husband)
 
-      expect(marcia_husband.brothers_in_law).to include(@greg)
+      expect(marcia_husband.brother_in_laws).to include(@greg)
     end
 
     it "can have sisters_in_law" do
       greg_wife = create(:person, gender: "F")
       @greg.add_spouse(greg_wife)
 
-      expect(greg_wife.sisters_in_law).to include(@marcia)
+      expect(greg_wife.sister_in_laws).to include(@marcia)
     end  
 
     it "has maternal grandmother" do 

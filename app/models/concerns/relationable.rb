@@ -230,14 +230,14 @@ module Relationable
   end
 
   def siblings_in_law
-    [brothers_in_law, sisters_in_law].flatten
+    [brother_in_laws, sister_in_laws].flatten
   end
 
-  def brothers_in_law
+  def brother_in_laws
     [(wife.brothers unless wife.nil?), (husband.brothers unless husband.nil?)].flatten.compact
   end
 
-  def sisters_in_law
+  def sister_in_laws
     [(wife.sisters unless wife.nil?), (husband.sisters unless husband.nil?)].flatten.compact
   end
   
