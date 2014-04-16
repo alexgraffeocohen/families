@@ -42,9 +42,6 @@ module Permissable
   end
 
   def get_relation(slug)
-    relation = Person.find_by(permission_slug: slug).relationship_to(current_person)
-    PERMISSION_HASH.map do |key, value|
-      key if value.include?(relation)
-    end.compact.first
+    current_person.checkbox_hash.detect {|k, v| v.include?(slug)}[0]
   end
 end
