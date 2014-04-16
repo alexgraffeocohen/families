@@ -115,6 +115,7 @@ describe Permissable do
 
     it "for siblings_in_law" do
       album4.permissions = "12"
+      expect(@jenny.can_see?(album)).to eq(true)
       expect(album4.relationships_permitted).to include("brother_in_law", "sister_in_law")
       expect(album4.all_permitted_members).to include("Jenny")
       expect(album4.all_permitted_members).to_not include("Carol")
@@ -123,8 +124,13 @@ describe Permissable do
   end
 
   describe "for individual checkboxes" do
-    xit "with one person excluded" do
+    it "with one person excluded" do
       album.permissions = "1 2 4 11 jon5"
+      expect(@jon.can_see?(album)).to eq(true)
+      expect(album4.relationships_permitted).to include("brother_in_law", "sister_in_law")
+      expect(album4.all_permitted_members).to include("Carol")
+      expect(album4.all_permitted_members).to_not include("Jenny")
+      expect(@jenny.can_see?(album4)).to eq(false)
     end
 
     xit "with one person included" do
