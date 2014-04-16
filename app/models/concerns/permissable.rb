@@ -22,8 +22,8 @@ module Permissable
     permissions_array.join(" ")
   end
 
-  def relationships_permitted    
-    PERMISSION_HASH.map { |key, value| value if permissions.match(/(?<![a-z])#{key}/) }.compact.flatten
+  def relationships_permitted 
+    PERMISSION_HASH.map { |key, value| value if permissions.match(/(?<![a-z]|\d)#{key}(?!\d)/) }.compact.flatten 
   end
 
   def people_permitted
