@@ -13,7 +13,7 @@ class PermissionsController < ApplicationController
   end
 
   def make_hash
-    @hash = current_person.checkbox_hash
+    current_person.checkbox_hash
   end
 
   private
