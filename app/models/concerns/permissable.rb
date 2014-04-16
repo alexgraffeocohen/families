@@ -10,7 +10,11 @@ module Permissable
       "5" => ["grandson", "granddaughter"],
       "6" => ["son_in_law", "daughter_in_law"],
       "7" => ["father_in_law", "mother_in_law"],
-      "8" => ["husband", "wife"] 
+      "8" => ["husband", "wife"],
+      "9" => ["aunt", "uncle"],
+      "10" => ["niece", "nephew"],
+      "11" => ["cousin"],
+      "12" => ["brother_in_law", "sister_in_law"]
     }
   attr_reader :parse_permission
 

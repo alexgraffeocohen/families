@@ -73,6 +73,36 @@ module Relationable
     self.gender == "F" && self.children.include?(person.spouse)
   end
 
+  def aunt_to(person)
+    self.gender == "F" && person.parents.any? { |parent| self.siblings.include?(parent) }
+  end
+
+  def uncle_to(person)
+    self.gender == "M" && person.parents.any? { |parent| self.siblings.include?(parent) }
+  end
+
+  def brother_in_law_to(person)
+    self.gender == "M" && ((self.spouse.siblings.include?(person) if self.spouse) ||
+    (self.siblings.include?(person.spouse) if person.spouse))
+  end
+
+  def sister_in_law_to(person)
+    self.gender == "F" && ((self.spouse.siblings.include?(person) if self.spouse)||
+    (self.siblings.include?(person.spouse) if person.spouse))
+  end
+
+  def niece_to(person)
+    person.gender == "F" && self.parents.any? { |parent| person.siblings.include?(parent) }
+  end
+
+  def nephew_to(person)
+    person.gender == "M" && self.parents.any? { |parent| person.siblings.include?(parent) }
+  end
+
+  def cousin_to(person)
+    uncles.any? { |uncle| uncle.children.include?(person) } || aunts.any? { |aunt| aunt.children.include?(person) }
+  end
+
   def husband
     Person.find_by(spouse_id: self.id, gender: "M")
   end
@@ -110,7 +140,11 @@ module Relationable
   end
   
   def siblings
-    Person.where("mother_id = ? OR father_id = ?", mother_id, father_id).where.not("id = ?", self.id)
+    if mother_id || father_id
+      Person.where("mother_id = ? OR father_id = ?", mother_id, father_id).where.not("id = ?", self.id)
+    else
+      []
+    end
   end
 
   def children
@@ -159,6 +193,10 @@ module Relationable
     [(mother.brothers unless mother.nil?), (father.brothers unless father.nil?)].flatten.compact
   end
 
+  def aunts_and_uncles
+    [aunts, uncles].flatten
+  end
+
   def great_uncles
     grandparents.collect { |grandparent| grandparent.brothers }.compact.flatten if grandparents
   end
@@ -173,6 +211,10 @@ module Relationable
 
   def nieces
     siblings.collect { |sibling| sibling.daughters }.compact.flatten if siblings
+  end
+
+  def nieces_and_nephews
+    [nieces, nephews].flatten
   end
 
   def cousins
