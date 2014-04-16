@@ -42,7 +42,7 @@ class AlbumsController < ApplicationController
         f.html {redirect_to albums_path}
         f.js {render 'destroy', locals: {album: @album, family: @family}}
       else
-        @msg = "Sorry, you do not own this album."
+        @msg = "Sorry, something went wrong."
         f.html {redirect_to albums_path, notice: @msg}
         f.js {render 'destroy_failure', locals: {msge: @msg}}
       end

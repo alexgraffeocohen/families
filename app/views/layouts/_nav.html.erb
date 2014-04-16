@@ -26,7 +26,7 @@
             <% if person_signed_in? && current_person.default_family %>
               <li><%= link_to "Sign Out", destroy_person_session_path, method: :delete %></li>
               <li class="divider"></li>
-                <li class="family" data-id="<%= current_person.default_family.id %>"><%= link_to "The #{current_person.default_family.name} Family", family_path(current_person.default_family) %></li>
+                <li class="family" data-id="<%= current_person.default_family.id %>"><%= link_to "About the #{current_person.default_family.name} Family", about_us_path(current_person.default_family) %></li>
             
               <li><%= link_to "Albums", albums_path(current_person.default_family) %>
               <li><%= link_to "Conversations", family_conversations_path(current_person.default_family) %>

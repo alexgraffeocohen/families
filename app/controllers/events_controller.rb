@@ -28,7 +28,7 @@ class EventsController < ApplicationController
       @event.destroy
       redirect_to family_events_path
     else
-      flash[:alert] = "Sorry, you did not create this event."
+      flash[:alert] = "Sorry, something went wrong."
       render 'show'
     end
   end

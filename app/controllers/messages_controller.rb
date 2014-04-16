@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
         f.html {redirect_to family_conversation_messages_path}
         f.js {render 'destroy'}
       else
-        @msg = "Sorry, you did not send this message."
+        @msg = "Sorry, something went wrong."
         f.js {render 'destroy_failure', locals: {msge: @msg}}
       end
     end
