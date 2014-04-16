@@ -1,2 +1,6 @@
+if($("div.none_showing").is(":visible")){
+  $("div.none_showing").hide();
+}
+
 $("div.message_all").prepend("<%= j render 'show_message', {family: @family, conversation: @conversation, message: @message} %>")
 $("textarea#message_content").val("");

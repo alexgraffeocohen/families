@@ -2,13 +2,16 @@ class EventsController < ApplicationController
   include CalendarHelper
   before_action :set_family
   before_action :set_event, :only => [:destroy, :show]
-  before_action :only => [:index] do
+  before_action :only => [:new] do
     provide_relationships(@family)
   end
 
   def index
-    @event = Event.new
     @permitted_events_by_date = current_person.all_permitted("event").group_by(&:start_date)
+  end
+
+  def new
+    @event = Event.new
   end
 
   def create

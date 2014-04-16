@@ -14,7 +14,7 @@
 
 <div class="message_all white_div center_div">
   <% if @conversation.messages.length == 0 %>
-    <div class="white_div" >You have 0 messages.</div>
+    <div class="white_div none_showing" >You have 0 messages.</div>
   <% else %>
       <% @conversation.messages.reverse.each do |message| %>
         <%= render "messages/show_message", {family: @family, conversation: @conversation, message: message} %>

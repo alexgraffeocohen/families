@@ -1,7 +1,7 @@
 var div = $('div[data-id="<%= @message.id %>"]');
 if($(".message_all").children("div.message").size() == 1){
   div.fadeOut(function(){
-    $("div.message_all").delay(3000).prepend("<div class='white_div'>You have 0 messages.</div>");
+    $("div.message_all").delay(3000).prepend("<div class='white_div none_showing'>You have 0 messages.</div>");
   });
 }
 else{
