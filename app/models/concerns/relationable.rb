@@ -193,6 +193,10 @@ module Relationable
     [(mother.brothers unless mother.nil?), (father.brothers unless father.nil?)].flatten.compact
   end
 
+  def aunts_and_uncles
+    [aunts, uncles].flatten
+  end
+
   def great_uncles
     grandparents.collect { |grandparent| grandparent.brothers }.compact.flatten if grandparents
   end
@@ -207,6 +211,10 @@ module Relationable
 
   def nieces
     siblings.collect { |sibling| sibling.daughters }.compact.flatten if siblings
+  end
+
+  def nieces_and_nephews
+    [nieces, nephews].flatten
   end
 
   def cousins

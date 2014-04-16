@@ -4,8 +4,8 @@ class Person < ActiveRecord::Base
 
   mount_uploader :profile_photo, DataUploader
 
-  RELATIONSHIPS = ["grandmother", "son", "daughter", "father", "mother", "wife", "husband", "daughter_in_law", "son_in_law", "father_in_law", "mother_in_law", "grandfather", "grandson", "granddaughter", "brother", "sister", "aunt", "uncle", "brother_in_law", "sister_in_law", "nephew", "niece", "cousin"]
-  GROUP_RELATIONSHIPS = ["siblings", "parents", "children", "grandparents", "grandchildren", "children_in_laws", "parents_in_law", "spouse"]
+  RELATIONSHIPS = ["brother", "sister", "father", "mother", "son", "daughter", "grandmother", "grandfather", "grandson", "granddaughter", "wife", "husband", "daughter_in_law", "son_in_law", "father_in_law", "mother_in_law", "aunt", "uncle", "nephew", "niece", "cousin", "brother_in_law", "sister_in_law"]
+  GROUP_RELATIONSHIPS = ["siblings", "parents", "children", "grandparents", "grandchildren", "children_in_laws", "parents_in_law", "spouse", "aunts_and_uncles", "nieces_and_nephews", "cousins", "siblings_in_law"]
   
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
@@ -91,7 +91,7 @@ class Person < ActiveRecord::Base
 
   def set_permission_slug
     if self.permission_slug.nil?
-      self.permission_slug = "#{first_name.downcase}#{id}" 
+      self.permission_slug = "#{first_name.downcase.gsub(' ', '_').gsub('.','')}#{id}" 
       self.save
     end
   end
