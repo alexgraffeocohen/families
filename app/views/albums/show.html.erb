@@ -10,7 +10,7 @@
 
 <br>
 <div class="add_photo">
-  <%= form_tag(family_album_photo_path(@family, @album), remote: true, multipart: true) do %>
+  <%= form_tag(family_album_photo_path(@family, @album), multipart: true) do %>
     <%= label_tag "photo[data]", "Add a Photo" %>
     <%= file_field_tag "photo[data]" %><br>
     <%= text_field_tag "photo[caption]", "", placeholder: "Add Caption", autofocus: true %><br><br>

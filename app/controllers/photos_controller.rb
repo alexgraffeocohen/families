@@ -5,6 +5,7 @@ class PhotosController < ActionController::Base
     @photo = Photo.new(photo_params)
     @photo.album_id = @album.id
     @photo.save
+    redirect_to album_path(@family, @album)
   end
 
   def destroy
