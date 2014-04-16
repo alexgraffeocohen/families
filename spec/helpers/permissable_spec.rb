@@ -133,7 +133,11 @@ describe Permissable do
       expect(@jenny.can_see?(album4)).to eq(false)
     end
 
-    xit "with one person included" do
+    it "with one person included" do
+      album.permissions = "connie1"
+      expect(@connie.can_see?(album)).to eq(true)
+      expect(album.relationships_permitted).to be_blank
+      expect(@jenny.can_see?(album)).to eq(false)
     end
   end
 end

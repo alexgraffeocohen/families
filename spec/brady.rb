@@ -1,7 +1,7 @@
 module Brady
   def make_brady_bunch
     @brady  = create(:family, name: "Brady")
-    @hutchins  = create(:family, name: "Hutchins")
+    @hutchins = create(:family, name: "Hutchins")
     @connie = create(:person, first_name: "Connie", last_name: "Hutchins", gender: "F")
         @connie.confirmed_at = Time.now
     @harold = create(:person, first_name: "Harold", last_name: "Hutchins", gender: "M")

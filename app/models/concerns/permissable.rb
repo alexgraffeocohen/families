@@ -36,17 +36,9 @@ module Permissable
       member.first_name if member.can_see?(self)
     end.compact.join(", ")
   end
-  
+
   def get_people(permission_key)
-    singular = ["mother", "father", "husband", "wife"]
-    relations = PERMISSION_HASH[permission_key]
-    relatives = relations.map do |relation|
-      if singular.include?(relation)
-        current_person.send(relation).permission_slug if current_person.send(relation)
-      else
-        current_person.send(relation.pluralize).map {|rel| rel.permission_slug}
-      end
-    end.compact.flatten
+    current_person.checkbox_hash[permission_key.to_i]
   end
 
   def get_relation(slug)

@@ -12,6 +12,10 @@ class PermissionsController < ApplicationController
     render 'individual.js'
   end
 
+  def make_hash
+    current_person.checkbox_hash
+  end
+
   private
 
   def set_resource
