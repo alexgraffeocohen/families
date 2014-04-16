@@ -1,6 +1,6 @@
 <h4>Current Conversation:</h4>
 <h2 data-id="<%= @conversation.id %>"><%= @conversation.title %></h2>
-<h5 id="conversation_members"><%= @conversation.all_permitted_members %></h5>
+<h5 id="permitted_members"><%= @conversation.all_permitted_members %></h5>
 <div class="white_div new_message">
   <%= form_for [@family, @conversation, @message], remote: true do |f| %>
     <%= f.label :content, "New Message" %><br>

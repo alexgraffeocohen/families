@@ -32,7 +32,7 @@ module Permissable
   end
 
   def all_permitted_members
-    self.family.people.collect do |member|
+    self.owner.my_family_members.collect do |member|
       member.first_name if member.can_see?(self)
     end.compact.join(", ")
   end

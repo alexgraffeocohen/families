@@ -1,17 +1,13 @@
 <input type="text" value="<%= @album.name %>" id="album_title_field" class="large_font input_name hidden">
 <span data-id= "<%= @album.id %>" data-family= "<%= @family.id %>" class="large_font album_name"><%= @album.name %></span><br>
+<%= link_to "Delete", delete_family_album_path(@family, @album), method: :delete %>
+<h5 id="permitted_members"><%= @album.all_permitted_members %></h5>
 
 <%= @album.created_at.strftime("%b %Y") %>
-<div class="btn-group">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-      Options
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-      <li><%= link_to "Delete", delete_family_album_path(@family, @album), method: :delete %></li>
-    </ul>
-  </div>
-</div>
+<% if @album.owner %>
+<% end %>   
+  
+
 <br>
 <div class="add_photo">
   <%= form_tag(family_album_photo_path(@family, @album), remote: true, multipart: true) do %>

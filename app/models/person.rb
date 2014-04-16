@@ -122,6 +122,12 @@ class Person < ActiveRecord::Base
       end
     end
   end
+  
+  def my_family_members
+    GROUP_RELATIONSHIPS.collect do |relationship|
+      self.send(relationship)
+    end.compact.flatten
+  end
 
   private 
 

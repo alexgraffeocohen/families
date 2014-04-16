@@ -58,6 +58,10 @@ $jumbotron-bg: white;
   right: 5px;
 }
 
+#permitted_members {
+  font-style: italic;
+}
+
 .form_attr {
   display: inline;
   float: left;
@@ -65,7 +69,5 @@ $jumbotron-bg: white;
 }
 
 .center {
-     text-align: center;
+  text-align: center;
 }
-
-
