@@ -12,7 +12,7 @@ module Brady
         @jenny.confirmed_at = Time.now
     @jon    = create(:person, first_name: "Jon", mother_id: @connie.id, father_id: @harold.id, gender: "M")
         @jon.confirmed_at = Time.now
-    @jon_jr = create(:person, first_name: "John Jr.", father_id: @jon.id)
+    @jon_jr = create(:person, first_name: "Jon Jr.", father_id: @jon.id)
         @jon_jr.confirmed_at = Time.now
     @mike   = create(:person, first_name: "Mike", gender: "M")
         @mike.confirmed_at = Time.now
