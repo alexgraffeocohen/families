@@ -87,6 +87,12 @@ class Person < ActiveRecord::Base
     all_permitted(class_name).empty?
   end
 
+  def my_family_members
+    GROUP_RELATIONSHIPS.collect do |relationship|
+      self.send(relationship)
+    end.compact.flatten
+  end
+
   private 
 
   def set_permission_slug

@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   
   def provide_relationships(family)
-    @other_members = family.people.to_a.delete_if {|i| i == current_person}
+    @other_members = current_person.my_family_members
     @relationships = Person::GROUP_RELATIONSHIPS
   end
   
