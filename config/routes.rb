@@ -69,7 +69,9 @@ Rails.application.routes.draw do
 
   # events routes
 
-  get "/families/:id/events" => "events#index", as: "family_events"  
+  get "/families/:id/events" => "events#index", as: "family_events" 
+
+  get "/families/:id/events/new" => "events#new", as: "new_event"  
   
   get "/families/:id/events/:event_id" => "events#show", as: "event"  
   
