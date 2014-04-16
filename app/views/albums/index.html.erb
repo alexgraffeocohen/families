@@ -1,5 +1,5 @@
 <div class="row">
-
+<h2 class="center"><%= link_to "Create an album!", new_family_album_path %></h2>
 <% if current_person.cannot_see_any?("album") || @albums.empty? %>
 <div class="white_div" >You have 0 albums.</div>
 <% else %>
@@ -22,7 +22,6 @@
 <% end %>
 </div>
 <div class="row text-center">
-<%= link_to "Create an album!", new_family_album_path %>
 </div>
 
 

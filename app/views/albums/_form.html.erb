@@ -1,13 +1,11 @@
-<div class="white_div text-left">
   <%= form_for [@family, @album] do |f| %>
     <%= f.label :name, "Name" %>
     <%= f.text_field :name %><br>
-
+    <br>
     <p>Who can view my album?</p>
     <%= render 'layouts/permission_form', f: f, current_resource: "album" %>
+    <br>
     <%= f.submit %>
   <% end %>
-
   <br>
-  <%= button_to "Back to All Albums", albums_path %>
-</div>
+  <%= link_to "Back to All Albums", albums_path %>
