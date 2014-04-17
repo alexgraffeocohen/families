@@ -12,12 +12,12 @@
   <% if current_person.cannot_see_any?("conversation") || @conversations.empty? %>
     <div class="white_div none_showing" >You have 0 conversations.</div>
   <% else %>
-    <% if @last_search.nil? %>
+    <% if @search_params.nil? %>
       <% current_person.all_permitted("conversation").each do |convo|  %>
         <%= render 'show_conversation', family: @family, convo: convo %>
       <% end %>
     <% else %>
-      <% @all_found.each do |convo| %>
+      <% @search.result.each do |convo| %>
         <% if current_person.all_permitted("conversation").include?(convo)  %>
           <%= render 'show_conversation', family: @family, convo: convo %>
         <% end %>

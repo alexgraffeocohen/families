@@ -54,10 +54,8 @@ class ConversationsController < ApplicationController
   def prepare_search_form
     @conversations = Conversation.all_conversations
     @search = Conversation.search(params[:q])
-    @all_found = @search.result
-    @last_search = params[:q]
-    @not_found = @conversations - @all_found
-    @not_found_ids =  @not_found.collect do |conversation|
+    @search_params = params[:q]
+    @not_found_ids =  (@conversations - @search.result).collect do |conversation|
                         conversation.id
                       end
     if params[:show_all] != nil
