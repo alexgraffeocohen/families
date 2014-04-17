@@ -1,89 +1,143 @@
 module Assignable
 
   def son=(member)
-    member.father = admin
+    member.father = self
+    member.gender = "M"
   end
 
   def daughter=(member)
-    member.mother_id = admin.id
+    member.mother_id = self.id
+    member.gender = "F"
   end
 
   def husband=(member)
-    admin.add_spouse(member)
+    self.add_spouse(member)
+    member.gender = "M"
   end
 
   def wife=(member)
-    admin.add_spouse(member)
+    self.add_spouse(member)
+    member.gender = "F"
   end
 
   def mother=(member)
-    admin.mother = member
+    self.mother = member
+    member.gender = "F"
   end
 
   def father=(member)
-    admin.father = member
-  end
-
-  def father_missing
-    !admin.father
-  end
-
-  def mother_missing
-    !admin.mother
+    self.father = member
+    member.gender = "M"
   end
 
   def sibling=(member)
-    member.mother = admin.mother
-    member.father = admin.father
+    member.mother = self.mother if self.mother
+    member.father = self.father if self.father
   end
 
   def brother=(member)
-    unless father_missing && mother_missing
-      admin.sibling = member
-    else
-      admin.non_rel_brothers << member
-    end
+    self.sibling = member
+    member.gender = "M"
   end
 
   def sister=(member)
-    unless father_missing && mother_missing
-      admin.sibling = member
-    else
-      admin.non_rel_sister << member
-    end
+    self.sibling = member
+    member.gender = "F"
   end
 
-  def grandmother=(member)
+  def maternal_grandmother=(member) 
+    self.mother.mother = member if self.mother
+    member.gender = "F"
   end
 
-  def grandfather=(member)
+  def maternal_grandfather=(member)
+    self.mother.father = member if self.mother
+    member.gender = "M"
   end
 
-  def grandson=(member)
+  def paternal_grandmother=(member)
+    self.father.mother = member if self.father
+    member.gender = "F"
   end
 
-  def graddaughter=(member)
+  def paternal_grandfather=(member)
+    self.father.father = member if self.father
+    member.gender = "M"
+  end
+
+  def maternal_grandson=(member) 
+    member.mother = self.daughter # doesn't work
+  end
+
+  def paternal_grandson=(member)
+    member.father = self.son # doesn't work
+  end
+
+  def maternal_granddaughter=(member)
+    member.mother = self.daughter # doesn't work
+  end
+
+  def paternal_granddaughter=(member)
+    member.father = self.son # doesn't work
   end
 
   def father_in_law=(member)
+    self.spouse.father = member if self.spouse.father
+    member.gender = "M"
   end
 
   def mother_in_law=(member)
+    self.spouse.mother = member if self.spouse.mother
+    member.gender = "F"
+  end
+
+  def sibling_in_law=(member)
+    member.mother = self.spouse.mother if self.spouse.mother
+    member.father = self.spouse.father if self.spouse.father
   end
 
   def brother_in_law=(member)
+    sibling_in_law = member
+    member.gender = "M"
   end
 
   def sister_in_law=(member)
+    sibling_in_law = member
+    member.gender = "F"
   end
 
-  def aunt=(member)
+  def maternal_aunt_or_uncle=(member)
+    member.mother = self.mother.mother if self.mother.mother
+    member.father = self.mother.father if self.mother.father
   end
 
-  def uncle=(member)
+  def paternal_aunt_or_uncle=(member)
+    member.mother = self.father.mother if self.father.mother
+    member.father = self.father.father if self.father.father
+  end
+
+  def maternal_aunt=(member)
+    maternal_aunt_or_uncle = member
+    member.gender = "F"
+  end
+
+  def paternal_aunt=(member)
+    paternal_aunt_or_uncle = member
+    member.gender = "F"
+  end
+
+  def maternal_uncle=(member)
+    maternal_aunt_or_uncle = member
+    member.gender = "M"
+  end
+
+  def paternal_uncle=(member)
+    paternal_aunt_or_uncle = member
+    member.gender = "M"
   end
 
   def cousin=(member)
+    # I DON'T WANT TO WRITE THIS
   end
 
 end

@@ -283,20 +283,4 @@ module Relationable
   def sister_in_laws
     [(wife.sisters unless wife.nil?), (husband.sisters unless husband.nil?)].flatten.compact
   end
-  
-  def maternal_grandmother=(person) 
-    self.mother.mother = person
-  end
-
-  def maternal_grandfather=(person)
-    self.mother.father = person
-  end
-
-  def paternal_grandmother=(person)
-    self.father.mother_id = person.id
-  end
-
-  def paternal_grandfather=(person)
-    self.father.father_id = person.id
-  end
 end

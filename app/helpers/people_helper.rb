@@ -21,6 +21,8 @@ module PeopleHelper
       member = pair[0]
       relation = pair[1]
 
+     # PERSON::RELATIONSHIPS + my extra relations
+
       PERSON::RELATIONSHIPS.each do |possible_relation|
         if relation == possible_relation
           admin.relation = member
