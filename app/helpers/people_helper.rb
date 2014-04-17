@@ -21,26 +21,15 @@ module PeopleHelper
       member = pair[0]
       relation = pair[1]
 
-     # PERSON::RELATIONSHIPS + my extra relations
+      extra_relations = ["maternal_grandmother", "maternal_grandfather", "paternal_grandmother", "paternal_grandfather", "maternal_aunt", "paternal_aunt", "maternal_uncle", "paternal_uncle"]
+      possible_relations = [PERSON::RELATIONSHIPS, extra_relations].flatten
 
-      PERSON::RELATIONSHIPS.each do |possible_relation|
+      possible_relations.each do |possible_relation|
         if relation == possible_relation
           admin.relation = member
+          member.save
         end
       end
-      
-      
-      
-      # elsif relation == "grandmother (maternal)"
-      #   admin.maternal_grandmother = member
-      # elsif relation == "grandfather (maternal)"
-      #   admin.maternal_grandfather = member
-      # elsif relation == "grandmother (paternal)"
-      #   admin.paternal_grandmother = member
-      # elsif relation == "grandfather (paternal)"
-      #   admin.paternal_grandfather = member
-      
-    member.save
     end
 
     if !admin.children.empty?

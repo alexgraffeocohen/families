@@ -65,44 +65,13 @@ module Assignable
     member.gender = "M"
   end
 
-  def maternal_grandson=(member) 
-    member.mother = self.daughter # doesn't work
-  end
-
-  def paternal_grandson=(member)
-    member.father = self.son # doesn't work
-  end
-
-  def maternal_granddaughter=(member)
-    member.mother = self.daughter # doesn't work
-  end
-
-  def paternal_granddaughter=(member)
-    member.father = self.son # doesn't work
-  end
-
   def father_in_law=(member)
-    self.spouse.father = member if self.spouse.father
+    self.spouse.father = member if self.spouse
     member.gender = "M"
   end
 
   def mother_in_law=(member)
-    self.spouse.mother = member if self.spouse.mother
-    member.gender = "F"
-  end
-
-  def sibling_in_law=(member)
-    member.mother = self.spouse.mother if self.spouse.mother
-    member.father = self.spouse.father if self.spouse.father
-  end
-
-  def brother_in_law=(member)
-    sibling_in_law = member
-    member.gender = "M"
-  end
-
-  def sister_in_law=(member)
-    sibling_in_law = member
+    self.spouse.mother = member if self.spouse
     member.gender = "F"
   end
 
@@ -135,9 +104,5 @@ module Assignable
     paternal_aunt_or_uncle = member
     member.gender = "M"
   end
-
-  def cousin=(member)
-    # I DON'T WANT TO WRITE THIS
-  end
-
+  
 end
