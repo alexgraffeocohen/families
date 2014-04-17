@@ -1,5 +1,5 @@
 <h2 class="center"><%= link_to "About Us", new_family_album_path %></h2>
-<% @family.people.each do |person| %>
+<% current_person.my_family_members.each do |person| %>
   <% if person != current_person %>
     <div class="white_div">
       <h4><%= person.first_name %>, your <%= person.relationship_to(current_person)%></h4>

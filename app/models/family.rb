@@ -1,10 +1,12 @@
 class Family < ActiveRecord::Base
   has_many :person_families
   has_many :people, :through => :person_families, foreign_key: :person_id
-  has_many :albums
-  has_many :conversations
-  has_many :events
-  
+  has_many :albums, dependent: :destroy
+  has_many :conversations, dependent: :destroy
+  has_many :events, dependent: :destroy
+
+  before_destroy :destroy_members
+
   extend FriendlyId 
   friendly_id :name_slug
 
@@ -21,4 +23,13 @@ class Family < ActiveRecord::Base
     end
   end
 
+  private
+
+  def destroy_members
+    people.each do |member|
+      unless member.families.length > 1
+        member.destroy
+      end
+    end
+  end
 end

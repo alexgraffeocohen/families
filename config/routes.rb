@@ -30,6 +30,8 @@ Rails.application.routes.draw do
   
   get 'families/:id/add_admin' => "family#add_admin", as: "add_admin"
   
+  get 'families/:id/confirm_destroy' => "family#confirm_destroy", as: "confirm_destroy_family"
+
   get 'families/:id/about_us' => "family#about_us", as: "about_us"
 
   get "families/:id" => "family#show", as: "family"
@@ -38,7 +40,7 @@ Rails.application.routes.draw do
 
   post 'families/:id/create_admin' => "family#create_admin", as: "create_admin"
 
-  delete 'families' => "family#destroy"
+  delete 'families/:id' => "family#destroy", as: "destroy_family"
 
   # album routes
 

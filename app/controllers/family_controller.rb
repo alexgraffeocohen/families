@@ -3,7 +3,7 @@ class FamilyController < ApplicationController
   include PeopleHelper
   include Permissable
   before_filter :authenticate_person!
-  before_action :set_family, only: [:show, :about_us, :add_admin, :destroy]
+  before_action :set_family, only: [:show, :about_us, :add_admin, :destroy, :confirm_destroy]
 
   def new
     @family = Family.new
@@ -47,8 +47,8 @@ class FamilyController < ApplicationController
   end
 
   def destroy
-    @family.people.destroy_all
-    redirect_to new_person_session_path
+    @family.destroy
+    redirect_to root_path
   end
 
   def invite_members

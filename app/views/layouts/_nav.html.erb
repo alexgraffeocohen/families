@@ -26,7 +26,7 @@
               <% if current_person.admin? %>
                 <li><%= link_to "Add Admins", add_admin_path(current_person.default_family) %></li>
                 <li><%= link_to "Invite Members", add_member_path(current_person.default_family) %></li>
-                <li><%= link_to "Delete Family", data: { confirm: "Are you sure you want to delete this album?" } %></li>
+                <li><%= link_to "Delete Family", confirm_destroy_family_path(current_person.default_family) %></li>
               <% end %>
               <% if person_signed_in? && current_person.default_family %>
                 <li><%= link_to "Sign Out", destroy_person_session_path, method: :delete %></li>
