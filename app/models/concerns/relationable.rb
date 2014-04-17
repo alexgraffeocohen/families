@@ -9,98 +9,141 @@ module Relationable
     "I don't know what.." 
   end
 
-  def daughter_to(person)
-    person.daughters.include?(self)
+  def child_to(person)
+    person.children.include?(self)
   end
 
-  def son_to(person)
-    person.sons.include?(self)
+    def daughter_to(person)
+      self.gender == "F" && child_to(person)
+    end
+
+    def son_to(person)
+      self.gender == "M" && child_to(person)
+    end
+
+  def sibling_to(person)
+    person.siblings.include?(self)
   end
 
-  def brother_to(person)
-    person.siblings.include?(self) && self.gender == "M"
+    def brother_to(person)
+      self.gender == "M" && sibling_to(person)
+    end
+
+    def sister_to(person)
+      self.gender == "F" && sibling_to(person)
+    end
+
+  def parent_to(person)
+    person.parents.include?(self)
   end
 
-  def sister_to(person)
-    person.siblings.include?(self) && self.gender == "F"
+    def father_to(person)
+      self.gender == "M" && parent_to(person)
+    end
+
+    def mother_to(person)
+      self.gender == "F" && parent_to(person)
+    end
+
+  def grandparent_to(person)
+    person.grandparents.include?(self)
   end
 
-  def father_to(person)
-    person.parents.include?(self) && self.gender == "M"
+    def grandfather_to(person)
+       self.gender == "M" && person.grandparents.include?(self)
+    end
+
+    def grandmother_to(person)
+      self.gender == "F" && person.grandparents.include?(self)
+    end
+
+  def grandchild_to(person)
+    self.grandparents.include?(person)
   end
 
-  def mother_to(person)
-    person.parents.include?(self) && self.gender == "F"
+    def grandson_to(person)
+       self.gender == "M" && grandchild_to(person)
+    end
+
+    def granddaughter_to(person)
+      self.gender == "F" && grandchild_to(person)
+    end
+
+  def spouse_to(person)
+    self.spouse == person
   end
 
-  def grandfather_to(person)
-    person.grandparents.include?(self) && self.gender == "M"
+    def husband_to(person)
+      self.gender == "M" && spouse_to(person)
+    end
+
+    def wife_to(person)
+      self.gender == "F" && spouse_to(person)
+    end
+
+  def child_in_law_to(person)
+    person.children.include?(self.spouse)
   end
 
-  def grandmother_to(person)
-    person.grandparents.include?(self) && self.gender == "F"
+    def daughter_in_law_to(person)
+      self.gender == "F" && child_in_law_to(person)
+    end
+
+    def son_in_law_to(person)
+      self.gender == "M" && child_in_law_to(person)
+    end
+
+  def parent_in_law_to(person)
+    self.children.include?(person.spouse)
   end
 
-  def grandson_to(person)
-    self.grandparents.include?(person) && self.gender == "M"
+    def father_in_law_to(person)
+      self.gender == "M" && parent_in_law_to(person)
+    end
+
+    def mother_in_law_to(person)
+      self.gender == "F" && parent_in_law_to(person)
+    end
+
+  def aunt_or_uncle_to(person)
+    person.parents.any? { |parent| self.siblings.include?(parent) }
   end
 
-  def granddaughter_to(person)
-    self.grandparents.include?(person) && self.gender == "F"
-  end
+    def aunt_to(person)
+      self.gender == "F" && aunt_or_uncle_to(person)
+    end
 
-  def husband_to(person)
-    self.spouse == person && self.gender == "M"
-  end
+    def uncle_to(person)
+      self.gender == "M" && aunt_or_uncle_to(person)
+    end
 
-  def wife_to(person)
-    self.spouse == person && self.gender == "F"
-  end
-
-  def daughter_in_law_to(person)
-    self.gender == "F" && person.children.include?(self.spouse)
-  end
-
-  def son_in_law_to(person)
-    self.gender == "M" && person.children.include?(self.spouse)
-  end
-
-  def father_in_law_to(person)
-    self.gender == "M" && self.children.include?(person.spouse)
-  end
-
-  def mother_in_law_to(person)
-    self.gender == "F" && self.children.include?(person.spouse)
-  end
-
-  def aunt_to(person)
-    self.gender == "F" && person.parents.any? { |parent| self.siblings.include?(parent) }
-  end
-
-  def uncle_to(person)
-    self.gender == "M" && person.parents.any? { |parent| self.siblings.include?(parent) }
-  end
-
-  def brother_in_law_to(person)
-    self.gender == "M" && ((self.spouse.siblings.include?(person) if self.spouse) ||
+  def sibling_in_law_to(person)
+    ((self.spouse.siblings.include?(person) if self.spouse) ||
     (self.siblings.include?(person.spouse) if person.spouse))
   end
 
-  def sister_in_law_to(person)
-    self.gender == "F" && ((self.spouse.siblings.include?(person) if self.spouse)||
-    (self.siblings.include?(person.spouse) if person.spouse))
+    def brother_in_law_to(person)
+      self.gender == "M" && sibling_in_law_to(person)
+    end
+
+    def sister_in_law_to(person)
+      self.gender == "F" && sibling_in_law_to(person)
+    end
+
+  def niece_or_nephew_to(person)
+    self.parents.any? { |parent| person.siblings.include?(parent) }
   end
 
   def niece_to(person)
-    person.gender == "F" && self.parents.any? { |parent| person.siblings.include?(parent) }
+    person.gender == "F" && niece_or_nephew_to(person)
   end
 
   def nephew_to(person)
-    person.gender == "M" && self.parents.any? { |parent| person.siblings.include?(parent) }
+    person.gender == "M" && niece_or_nephew_to(person)
   end
 
   def cousin_to(person)
-    uncles.any? { |uncle| uncle.children.include?(person) } || aunts.any? { |aunt| aunt.children.include?(person) }
+    self.parents.any? { |parent| parent.aunt_or_uncle_to(person) }
   end
 
   def husband
@@ -113,6 +156,10 @@ module Relationable
 
   def parents
     [mother, father].compact
+  end
+
+  def grandchildren
+    children.collect { |child| child.children }.compact.flatten if children 
   end
 
   def grandsons
@@ -167,10 +214,6 @@ module Relationable
 
   def parents_in_law
     spouse.parents.compact if spouse
-  end
-
-  def grandchildren
-    children.collect { |child| child.children }.compact.flatten if children 
   end
 
   def grandparents
