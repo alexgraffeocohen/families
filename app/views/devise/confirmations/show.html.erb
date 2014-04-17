@@ -1,42 +1,71 @@
-<h2>Account Activation</h2>
+<div class="panel panel-default form_attr add_photo">
+  <div class="panel-heading center">
+    <h4>Account Activation</h4>
+    <h5>We just need a couple more pieces of<br>
+      information so you can activate your account.</h5>
+  </div>
+  <div class="panel-body">
+    <%= form_for resource, :as => resource_name, :url => update_person_confirmation_path, :html => {:method => 'patch'}, :id => 'activation-form' do |f| %>
+      <%= devise_error_messages! %>
+      <fieldset>
+      <% if resource.first_name.blank? %>
+        <div class="control-group">
+          <%= f.label :first_name,"What's your first name?" %>
+          <div class="controls">
+            <%= f.text_field :first_name %>
+          </div>
+        </div>
+      <% end %>
+      <br>
+      <% if resource.phone.blank? %>
+        <div class="control-group">
+          <%= f.label :phone, "What's your phone number?" %> 
+            <div class="controls">
+              <%= f.text_field :phone %>
+            </div>
+        </div>
+      <% end %>
+      <br>
+      <% if resource.birthday.blank? %>
+        <div class="control-group">
+          <%= f.label :birthday, "What's your birthday?" %> 
+          <div class="controls">
+            <%= f.date_field :birthday %>
+          </div>
+        </div>
+      <% end %>
+      <br>
+      <% if resource.gender.blank? %>
+            <%= f.label :gender, "What's your gender?" %><br />
+            <%= f.radio_button :gender, "F" %>
+            <%= f.label :gender_f, "F" %><br />
+            <%= f.radio_button :gender, "M" %>
+            <%= f.label :gender_m, "M" %>
+      <% end %>
+      <br><br>
+      <% if resource.profile_photo.blank? %>
+          <%= f.label :profile_photo, "Upload a Picture!" %> <%= f.file_field :profile_photo %>
+      <% end %>
+      <hr>
+      <% if @requires_password %>
+        <div class="control-group">
+          <%= f.label :password,'Choose a Password:' %>
+          <div class="controls">
+            <%= f.password_field :password %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :password_confirmation,'Password Confirmation:' %> 
+          <div class="controls">
+            <%= f.password_field :password_confirmation %>
+          </div>
+        </div>
+      <% end %>
 
-<%= form_for resource, :as => resource_name, :url => update_person_confirmation_path, :html => {:method => 'patch'}, :id => 'activation-form' do |f| %>
-  <%= devise_error_messages! %>
-  <fieldset>
-    <legend>We just need a couple more pieces of information so you can activate your account.</legend>
-
-  <% if resource.first_name.blank? %>
-      <p><%= f.label :first_name,"What's your first name?" %> <%= f.text_field :first_name %></p>
-  <% end %>
-  
-  <% if resource.phone.blank? %>
-      <p><%= f.label :phone, "What's your phone number?" %> <%= f.text_field :phone %></p>
-  <% end %>
-  
-  <% if resource.birthday.blank? %>
-      <p><%= f.label :birthday, "What's your birthday?" %> <%= f.date_field :birthday %></p>
-  <% end %>
-
-  <% if resource.gender.blank? %>
-      <p>
-        <%= f.label :gender, "What's your gender?" %><br />
-        <%= f.radio_button :gender, "F" %>
-        <%= f.label :gender_f, "F" %><br />
-        <%= f.radio_button :gender, "M" %>
-        <%= f.label :gender_m, "M" %>
-      </p>
-  <% end %>
-
-  <% if resource.profile_photo.blank? %>
-      <p><%= f.label :profile_photo, "Upload a Picture!" %> <%= f.file_field :profile_photo %></p>
-  <% end %>
-
-  <% if @requires_password %>
-      <p><%= f.label :password,'Choose a Password:' %> <%= f.password_field :password %></p>
-      <p><%= f.label :password_confirmation,'Password Confirmation:' %> <%= f.password_field :password_confirmation %></p>
-  <% end %>
-
-  <%= hidden_field_tag :confirmation_token, @confirmation_token %>
-  <p><%= f.submit "Activate" %></p>
-  </fieldset>
-<% end %>
+      <%= hidden_field_tag :confirmation_token, @confirmation_token %>
+      <br>
+      <%= f.submit "Activate" %>
+      </fieldset>
+    <% end %>
+  </div>
+</div>

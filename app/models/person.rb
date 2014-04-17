@@ -24,20 +24,6 @@ class Person < ActiveRecord::Base
   before_save :set_age
   after_save  :set_permission_slug
 
-  PERMISSION_HASH2 = {
-      "1" => ["brother", "sister"],
-      "2" => ["mother", "father"],
-      "3" => ["son", "daughter"],
-      "4" => ["grandfather", "grandmother"],
-      "5" => ["grandson", "granddaughter"],
-      "6" => ["son_in_law", "daughter_in_law"],
-      "7" => ["father_in_law", "mother_in_law"],
-      "8" => ["husband", "wife"],
-      "9" => ["aunt", "uncle"],
-      "10" => ["niece", "nephew"],
-      "11" => ["cousin"],
-      "12" => ["brother_in_law", "sister_in_law"]
-    }
   def add_spouse(spouse)
     self.spouse = spouse
     spouse.spouse = self
@@ -110,7 +96,7 @@ class Person < ActiveRecord::Base
   def checkbox_hash
     singular = [["mother", "father"], ["husband", "wife"]]
     new_hash ||= {}.tap do |hash|
-      PERMISSION_HASH2.values.each_with_index do |relationships, index|
+      Permissable::PERMISSION_HASH.values.each_with_index do |relationships, index|
         if singular.include?(relationships)
           if self.send(relationships[0])
             hash[index+1] = [self.send(relationships[0]).permission_slug]
@@ -133,9 +119,12 @@ class Person < ActiveRecord::Base
   end
   
   def my_family_members
-    GROUP_RELATIONSHIPS.collect do |relationship|
-      self.send(relationship)
-    end.compact.flatten
+    GROUP_RELATIONSHIPS.collect { |relationship| self.send(relationship) }.compact.flatten.
+    select { |member| member.confirmed? }
+  end
+
+  def confirmed?
+    !self.confirmed_at.nil?
   end
 
   private 
