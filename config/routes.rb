@@ -26,13 +26,19 @@ Rails.application.routes.draw do
 
   get 'families/new' => "family#new", as: "new_family"
 
-  get 'families/add_member' => "family#add_member_input", as: "add_member"
+  get 'families/:id/add_member' => "family#add_member_input", as: "add_member"
+  
+  get 'families/:id/add_admin' => "family#add_admin", as: "add_admin"
   
   get 'families/:id/about_us' => "family#about_us", as: "about_us"
 
   get "families/:id" => "family#show", as: "family"
   
   post 'families' => "family#create"
+
+  post 'families/:id/create_admin' => "family#create_admin", as: "create_admin"
+
+  delete 'families' => "family#destroy"
 
   # album routes
 
@@ -59,6 +65,8 @@ Rails.application.routes.draw do
   get "/families/:id/conversations" => "conversations#index", as: "conversations"
 
   get "/families/:id/conversations/:conversation_id" => "conversations#show", as: "family_conversation"
+  
+  get "/families/:id/conversations/:conversation_id/check_messages" => "conversations#check_messages"
 
   post "/families/:id/conversations" => "conversations#create", as: "family_conversations"
 

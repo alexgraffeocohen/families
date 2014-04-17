@@ -3,7 +3,7 @@ class FamilyController < ApplicationController
   include PeopleHelper
   include Permissable
   before_filter :authenticate_person!
-  before_action :set_family, only: [:show, :about_us]
+  before_action :set_family, only: [:show, :about_us, :add_admin, :destroy]
 
   def new
     @family = Family.new
@@ -19,6 +19,19 @@ class FamilyController < ApplicationController
     end
   end
 
+  def add_admin
+  end
+
+  def create_admin
+    ids = params[:add_admin].split(" ")
+    ids.each do |id|
+      person = Person.where("id = ?", id.to_i)[0]
+      person.admin = 1
+      person.save
+    end
+    redirect_to root_path
+  end
+
   def show 
   end
 
@@ -31,6 +44,11 @@ class FamilyController < ApplicationController
     nested_array = members_array(accounts, params[:people][:relations])
     set_relations(rearrange_members(nested_array), current_person)
     redirect_to family_path(@family)
+  end
+
+  def destroy
+    @family.people.destroy_all
+    redirect_to new_person_session_path
   end
 
   def invite_members

@@ -45,6 +45,10 @@ class Person < ActiveRecord::Base
     spouse.save
   end
 
+  def admin?
+    admin == 1
+  end
+
   def male?
     gender == "M"
   end

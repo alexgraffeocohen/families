@@ -30,7 +30,6 @@ class ConversationsController < ApplicationController
 
   def show
     @message = Message.new
-    @new_messages = Message.where("conversation_id = ? and created_at > ?", params[:conversation_id], Time.at(params[:after].to_i + 1))
   end
 
   def destroy
@@ -44,6 +43,10 @@ class ConversationsController < ApplicationController
         f.js {render 'destroy_failure', locals: {msge: @msg}}
       end
     end
+  end
+
+  def check_messages
+    @new_messages = Message.where("conversation_id = ? and created_at > ?", params[:conversation_id], Time.at(params[:after].to_i + 1))
   end
 
   private
