@@ -14,6 +14,7 @@ class PermissionsController < ApplicationController
 
   def make_hash
     current_person.checkbox_hash
+    render nothing: true
   end
 
   private
