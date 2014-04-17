@@ -19,7 +19,7 @@
 
   <% if resource.gender.blank? %>
       <p>
-        <%= f.label :gender, "What's your gender?" %>
+        <%= f.label :gender, "What's your gender?" %><br />
         <%= f.radio_button :gender, "F" %>
         <%= f.label :gender_f, "F" %><br />
         <%= f.radio_button :gender, "M" %>
