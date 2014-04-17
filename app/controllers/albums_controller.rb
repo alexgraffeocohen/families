@@ -33,6 +33,7 @@ class AlbumsController < ApplicationController
   def update
     @album.update(name: params[:album][:name])
     @new_val = params[:album][:name]
+    render nothing: true
   end
 
   def destroy
