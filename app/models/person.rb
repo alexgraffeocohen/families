@@ -2,6 +2,7 @@ class Person < ActiveRecord::Base
   include Relationable
   include NonRelationable
   include PeopleHelper
+  include Assignable
 
   attr_accessor :checkbox_hash
 
@@ -77,8 +78,8 @@ class Person < ActiveRecord::Base
 
   def all_permitted(class_name)
     total = class_name.downcase.pluralize
-    self.families.collect { |family|
-      family.send(total).select do |object|
+    self.my_family_members.collect { |member|
+      member.send(total).select do |object|
         self.can_see?(object)
       end
     }.flatten
@@ -104,6 +105,7 @@ class Person < ActiveRecord::Base
           end
           if relationships[1]
             if self.send(relationships[1])
+              hash[index+1] = [] if hash[index+1].nil?
               (hash[index+1] << self.send(relationships[1]).permission_slug)
             end
           end

@@ -22,11 +22,11 @@ module PeopleHelper
       relation = pair[1]
 
       extra_relations = ["maternal_grandmother", "maternal_grandfather", "paternal_grandmother", "paternal_grandfather", "maternal_aunt", "paternal_aunt", "maternal_uncle", "paternal_uncle"]
-      possible_relations = [PERSON::RELATIONSHIPS, extra_relations].flatten
+      possible_relations = [Person::RELATIONSHIPS, extra_relations].flatten
 
       possible_relations.each do |possible_relation|
         if relation == possible_relation
-          admin.relation = member
+          admin.send("#{relation}=", member)
           member.save
         end
       end

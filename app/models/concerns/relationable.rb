@@ -179,11 +179,11 @@ module Relationable
   end
 
   def brothers
-    siblings.select {|sibling| sibling.gender == "M"} + non_rel_brothers
+    siblings.select {|sibling| sibling.gender == "M"}
   end
 
   def sisters
-    siblings.select {|sibling| sibling.gender == "F"} + non_rel_sisters
+    siblings.select {|sibling| sibling.gender == "F"} 
   end
   
   def siblings

@@ -7,7 +7,6 @@ class ConversationsController < ApplicationController
   end
 
   def index
-    @conversations = Conversation.all_conversations
     @conversation = Conversation.new_conversation
     @permitted_conversations = current_person.all_permitted("conversation")
   end
@@ -53,6 +52,7 @@ class ConversationsController < ApplicationController
   private
 
   def prepare_search_form
+    @conversations = Conversation.all_conversations
     @search = Conversation.search(params[:q])
     @search_params = params[:q]
     @not_found_ids =  (@conversations - @search.result).collect do |conversation|
