@@ -134,13 +134,13 @@ module Relationable
     self.parents.any? { |parent| person.siblings.include?(parent) }
   end
 
-  def niece_to(person)
-    person.gender == "F" && niece_or_nephew_to(person)
-  end
+    def niece_to(person)
+      person.gender == "F" && niece_or_nephew_to(person)
+    end
 
-  def nephew_to(person)
-    person.gender == "M" && niece_or_nephew_to(person)
-  end
+    def nephew_to(person)
+      person.gender == "M" && niece_or_nephew_to(person)
+    end
 
   def cousin_to(person)
     self.parents.any? { |parent| parent.aunt_or_uncle_to(person) }
@@ -179,11 +179,11 @@ module Relationable
   end
 
   def brothers
-    siblings.select {|sibling| sibling.gender == "M"}
+    siblings.select {|sibling| sibling.gender == "M"} + non_rel_brothers
   end
 
   def sisters
-    siblings.select {|sibling| sibling.gender == "F"}
+    siblings.select {|sibling| sibling.gender == "F"} + non_rel_sisters
   end
   
   def siblings
@@ -282,21 +282,5 @@ module Relationable
 
   def sister_in_laws
     [(wife.sisters unless wife.nil?), (husband.sisters unless husband.nil?)].flatten.compact
-  end
-  
-  def maternal_grandmother=(person) 
-    self.mother.mother = person
-  end
-
-  def maternal_grandfather=(person)
-    self.mother.father = person
-  end
-
-  def paternal_grandmother=(person)
-    self.father.mother_id = person.id
-  end
-
-  def paternal_grandfather=(person)
-    self.father.father_id = person.id
   end
 end

@@ -1,5 +1,6 @@
 class Person < ActiveRecord::Base
   include Relationable
+  include NonRelationable
   include PeopleHelper
 
   attr_accessor :checkbox_hash

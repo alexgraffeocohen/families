@@ -20,32 +20,16 @@ module PeopleHelper
     ordered_nested_array.each do |pair|
       member = pair[0]
       relation = pair[1]
-      
-      if ["son", "daughter"].include?(relation)
-        if admin.male?
-          member.father_id = admin.id
-        elsif admin.female?
-          member.mother_id = admin.id
+
+      extra_relations = ["maternal_grandmother", "maternal_grandfather", "paternal_grandmother", "paternal_grandfather", "maternal_aunt", "paternal_aunt", "maternal_uncle", "paternal_uncle"]
+      possible_relations = [PERSON::RELATIONSHIPS, extra_relations].flatten
+
+      possible_relations.each do |possible_relation|
+        if relation == possible_relation
+          admin.relation = member
+          member.save
         end
-      elsif relation == "mother"
-        admin.mother_id = member.id
-      elsif relation == "father"
-        admin.father_id = member.id
-      elsif ["husband", "wife"].include?(relation)
-        admin.add_spouse(member)
-      elsif relation == "grandmother (maternal)"
-        admin.maternal_grandmother = member
-      elsif relation == "grandfather (maternal)"
-        admin.maternal_grandfather = member
-      elsif relation == "grandmother (paternal)"
-        admin.paternal_grandmother = member
-      elsif relation == "grandfather (paternal)"
-        admin.paternal_grandfather = member
-      elsif ["brother", "sister"].include?(relation)
-        member.mother_id = admin.mother_id if admin.mother
-        member.father_id = admin.father_id if admin.father
       end
-    member.save
     end
 
     if !admin.children.empty?
