@@ -1,10 +1,10 @@
 <%= link_to albums_path do %>
   <div class="white_div float_right">
-    <% if current_person.cannot_see_any?("album") || family.albums.last.photos.empty? %>
-      <%= image_tag('hip_read.jpg') %>
-    <% else %>
-      <%= image_tag(family.albums.last.photos.last.data_url(:thumb).to_s) %>
-    <% end %>
+    <%# if current_person.cannot_see_any?("album") || family.albums.last.photos.empty? %>
+      <%#= image_tag('hip_read.jpg') %>
+    <%# else %>
+      <%#= image_tag(family.albums.last.photos.last.data_url(:thumb).to_s) %>
+    <%# end %>
     <h1>Our Albums</h1>
   </div>
 <% end %>
