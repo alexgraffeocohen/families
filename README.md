@@ -1,5 +1,7 @@
 # Families
 
+[![Code Climate](https://codeclimate.com/github/alexwilkinson/families.png)](https://codeclimate.com/github/alexwilkinson/families)
+
 ## Description
 
 Add a short description of your app.
