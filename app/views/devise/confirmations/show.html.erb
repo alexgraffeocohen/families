@@ -18,7 +18,13 @@
   <% end %>
 
   <% if resource.gender.blank? %>
-      <p><%= f.label :gender, "What's your gender?" %> <%= f.text_field :gender %></p>
+      <p>
+        <%= f.label :gender, "What's your gender?" %>
+        <%= f.radio_button :gender, "F" %>
+        <%= f.label :gender_f, "F" %><br />
+        <%= f.radio_button :gender, "M" %>
+        <%= f.label :gender_m, "M" %>
+      </p>
   <% end %>
 
   <% if resource.profile_photo.blank? %>
