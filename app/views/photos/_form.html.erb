@@ -1,6 +1,13 @@
-<%= form_for [@family, @conversation, @message], remote: true do |f| %>
-  <%= f.label :content, "New Message" %><br>
-  <%= f.text_area :content, required: true %><br><br>
-
-  <%= f.submit %>
-<% end %>
+<div class="panel panel-default inline form_attr add_photo">
+  <div class="panel-heading">
+    <h4 class="center">Add a Photo</h4>
+    </div>
+    <div class="panel-body center">
+    <%= form_tag(family_album_photo_path(@family, @album), multipart: true) do %>
+      <%= file_field_tag "photo[data]" %><br>
+      <%= text_field_tag "photo[caption]", "", placeholder: "Add Caption", autofocus: true %>
+      <hr>
+      <%= submit_tag "Upload Photo" %>
+    <% end %>
+  </div>
+</div>

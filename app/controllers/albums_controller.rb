@@ -1,7 +1,7 @@
 class AlbumsController < ApplicationController
   before_action :set_family, only: [:create, :new, :index, :show, :edit, :update, :destroy]
   before_action :set_album, only: [:show, :edit, :update, :destroy]
-  before_action :only => [:new, :edit] do
+  before_action :only => [:index, :edit] do
     provide_relationships(@family)
   end
 
@@ -9,11 +9,6 @@ class AlbumsController < ApplicationController
   end
 
   def edit
-  end
-
-  def new
-    @album = Album.new
-    @photo = Photo.new
   end
 
   def create
@@ -51,6 +46,8 @@ class AlbumsController < ApplicationController
   end
 
   def index
+    @album = Album.new
+    @photo = Photo.new
     @albums = current_person.all_permitted("album")
   end
 

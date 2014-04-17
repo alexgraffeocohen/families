@@ -14,8 +14,9 @@
         <p>Who can view my album?</p>
         <%= render 'layouts/permission_form', f: f, current_resource: "album" %>
         <hr>
-        <%= f.submit %>
+        <div class="center">
+          <%= f.submit %>
+        </div>
     <% end %>
-    <%= link_to "Back to All Albums", albums_path %>  
   </div>
 </div>
