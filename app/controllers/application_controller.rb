@@ -13,6 +13,11 @@ class ApplicationController < ActionController::Base
     @family = find_family(params[:id])
   end
 
+  def capitalize_string(arg)
+    arg.gsub('_', ' ').split(' ').collect(&:capitalize).join(' ')
+  end
+  helper_method :capitalize_string
+
   private
   
   def configure_permitted_parameters

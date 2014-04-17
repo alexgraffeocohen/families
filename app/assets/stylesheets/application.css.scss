@@ -71,3 +71,27 @@ $jumbotron-bg: white;
 .center {
   text-align: center;
 }
+
+.panel.inline {
+  display: inline-block;
+}
+
+.white_div {
+  overflow: scroll;
+  width: 45%;
+  height: 20%;
+  margin: 20px;
+  background: white;
+  border-radius: 10px;
+  text-align: center;
+  padding: 20px;
+  float: left;
+}
+.conversation_white_div {
+  @extend .white_div;
+  width: 35%;
+}
+.center_div {
+  float: right;
+  width: 75%;
+}

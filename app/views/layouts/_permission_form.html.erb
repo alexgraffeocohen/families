@@ -5,7 +5,7 @@
 <br> 
   <% @relationships.each_with_index do |relation, index| %>
     <% unless current_person.send("#{relation}").blank?  %>
-      <%= f.check_box :parse_permission, {multiple: true, class: "group"}, (index+1), nil %> <%= relation.gsub('_', ' ').split(' ').collect(&:capitalize).join(' ') %>
+      <%= f.check_box :parse_permission, {multiple: true, class: "group"}, (index+1), nil %> <%= capitalize_string(relation) %>
       <br>
     <% end %>
   <% end %>

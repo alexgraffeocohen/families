@@ -14,8 +14,11 @@
       <%= f.email_field :email %></div>
 
       <div class="form-group"><%= f.label :gender, "Gender" %><br />
-        <p><%= f.radio_button :gender, "F", class:"radio" %></p>
-        <p><%= f.radio_button :gender, "M" %></p>
+        <%= f.radio_button :gender, "F" %>
+        <%= f.label :gender_f, "F" %><br />
+        <%= f.radio_button :gender, "M" %>
+        <%= f.label :gender_m, "M" %>
+
       </div>
 
       <div class="form-group"><%= f.label :birthday %><br />

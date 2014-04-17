@@ -1,9 +1,20 @@
-<%= form_for([@family, @conversation], remote: true) do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %><br>
-  
-  <p>Who is in this conversation?</p>
-  <%= render 'layouts/permission_form', f: f, current_resource: "conversation" %>
-  <br>
-  <%= f.submit %>
-<% end %>
+<div class="panel panel-default inline form_attr">
+  <div class="panel-heading">
+    <h4>Create a Conversation</h4>
+  </div>
+  <div class="panel-body">
+    <%= form_for([@family, @conversation], remote: true) do |f| %>
+      <div class="control-group">
+        <%= f.label :title %>
+        <div class="controls">
+          <%= f.text_field :title %>
+        </div>
+      </div>
+      <hr>
+      <p>Who is in this conversation?</p>
+      <%= render 'layouts/permission_form', f: f, current_resource: "conversation" %>
+      <hr>
+      <%= f.submit %>
+    <% end %>
+  </div>
+</div>
