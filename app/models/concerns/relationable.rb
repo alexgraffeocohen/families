@@ -134,13 +134,13 @@ module Relationable
     self.parents.any? { |parent| person.siblings.include?(parent) }
   end
 
-  def niece_to(person)
-    person.gender == "F" && niece_or_nephew_to(person)
-  end
+    def niece_to(person)
+      person.gender == "F" && niece_or_nephew_to(person)
+    end
 
-  def nephew_to(person)
-    person.gender == "M" && niece_or_nephew_to(person)
-  end
+    def nephew_to(person)
+      person.gender == "M" && niece_or_nephew_to(person)
+    end
 
   def cousin_to(person)
     self.parents.any? { |parent| parent.aunt_or_uncle_to(person) }
@@ -179,11 +179,11 @@ module Relationable
   end
 
   def brothers
-    siblings.select {|sibling| sibling.gender == "M"}
+    siblings.select {|sibling| sibling.gender == "M"} + non_rel_brothers
   end
 
   def sisters
-    siblings.select {|sibling| sibling.gender == "F"}
+    siblings.select {|sibling| sibling.gender == "F"} + non_rel_sisters
   end
   
   def siblings
