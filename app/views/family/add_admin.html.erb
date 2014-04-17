@@ -1,0 +1,12 @@
+<%= form_tag(create_admin_path(@family)) do %>
+<p>Select admins<p>
+  <% current_person.my_family_members.each do |member| %>
+    <% unless member.admin? %>
+      <%= check_box_tag 'add_admin', member.id %>
+      <%= label_tag member.first_name %>
+      <br>
+    <% end %>
+  <% end %>
+  <br>
+  <%= submit_tag %>
+<% end %>

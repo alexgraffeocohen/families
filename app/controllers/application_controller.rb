@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
     @relationships = Person::GROUP_RELATIONSHIPS
   end
   
+  def set_family
+    @family = find_family(params[:id])
+  end
+
   private
   
   def configure_permitted_parameters
@@ -21,9 +25,5 @@ class ApplicationController < ActionController::Base
 
   def find_family(slug)
     Family.find_by(name_slug: slug)
-  end
-
-  def set_family
-    @family = find_family(params[:id])
   end
 end
