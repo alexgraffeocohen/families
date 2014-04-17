@@ -2,12 +2,14 @@
 <% current_person.my_family_members.each do |person| %>
   <% if person != current_person %>
     <div class="white_div">
+      <%= image_tag(person.profile_photo_url(:tiny)) %>
       <h4><%= person.first_name %>, your <%= person.relationship_to(current_person)%></h4>
-      <%= image_tag(person.profile_photo_url(:thumb)) %>
-      <p><%= "Age: #{person.age}" if person.age %></p>
-      <p><%= "Birthday: #{person.birthday.strftime("%B %d, %Y")}" if person.birthday %></p>
-      <p><%= "Phone: #{person.phone}" if person.phone %></p>
-      <p><%= "Location: #{person.location}" if person.location %></p>
+      <div>
+        <p><%= "Age: #{person.age}" if person.age %></p>
+        <p><%= "Birthday: #{person.birthday.strftime("%B %d, %Y")}" if person.birthday %></p>
+        <p><%= "Phone: #{person.phone}" if person.phone %></p>
+        <p><%= "Location: #{person.location}" if person.location %></p>
+      </div>
     </div>
   <% end %>
 <% end %>

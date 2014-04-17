@@ -9,6 +9,16 @@
 .float_right {
   float: right;
 }
+.float_left {
+  float: left;
+  padding-left: 50px;
+}
+
+.float_left_text_too {
+  @extend .float_left;
+  padding-left: 5px;
+  text-align: left;
+}
 .clearfix:after {
      visibility: hidden;
      display: block;
