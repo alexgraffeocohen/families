@@ -1,11 +1,21 @@
-  <%= form_for [@family, @album] do |f| %>
-    <%= f.label :name, "Name" %>
-    <%= f.text_field :name %><br>
-    <br>
-    <p>Who can view my album?</p>
-    <%= render 'layouts/permission_form', f: f, current_resource: "album" %>
-    <br>
-    <%= f.submit %>
-  <% end %>
-  <br>
-  <%= link_to "Back to All Albums", albums_path %>
+<div class="panel panel-default inline form_attr">
+  <div class="panel-heading">
+    <h4 class="center">Create an Album</h4>
+  </div>
+  <div class="panel-body">
+    <%= form_for [@family, @album] do |f| %>
+      <div class="control-group">
+        <%= f.label :name %>
+        <div class="controls">
+          <%= f.text_field :name %><br>
+        </div>
+      </div>
+        <hr>
+        <p>Who can view my album?</p>
+        <%= render 'layouts/permission_form', f: f, current_resource: "album" %>
+        <hr>
+        <%= f.submit %>
+    <% end %>
+    <%= link_to "Back to All Albums", albums_path %>  
+  </div>
+</div>
