@@ -1,9 +1,12 @@
-var div = $('div[data-id="<%= @conversation.id %>"]');
-if($("div.convo_all").children("div").size() == 2){
-  div.fadeOut(function(){
-    $("div.convo_all").delay(3000).prepend("<div class='white_div none_showing'>You have 0 conversations.</div>");
-  });
-}
-else{
-  div.fadeOut();
-}
+$(document).ready(function(){
+  var div = $('div[data-id="<%= @conversation.id %>"]');
+  if($("div.convo").size() == 1){
+    div.fadeOut(function(){
+      $(this).remove();
+      $("div.convo_all").delay(3000).prepend("<div class='white_div none_showing'>You have 0 conversations.</div>");
+    });
+  }
+  else{
+    div.remove();
+  }
+});
