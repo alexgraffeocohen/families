@@ -112,9 +112,13 @@ class Person < ActiveRecord::Base
     new_hash ||= {}.tap do |hash|
       PERMISSION_HASH2.values.each_with_index do |relationships, index|
         if singular.include?(relationships)
-          hash[index+1] = [self.send(relationships[0]).permission_slug] if self.send(relationships[0])
+          if self.send(relationships[0])
+            hash[index+1] = [self.send(relationships[0]).permission_slug]
+          end
           if relationships[1]
-            hash[index+1] << self.send(relationships[1]).permission_slug if self.send(relationships[1])
+            if self.send(relationships[1])
+              (hash[index+1] << self.send(relationships[1]).permission_slug)
+            end
           end
         else
           hash[index+1] = self.send(relationships[0].pluralize).map {|rel| rel.permission_slug}
@@ -122,6 +126,7 @@ class Person < ActiveRecord::Base
             hash[index+1] << self.send(relationships[1].pluralize).map {|rel| rel.permission_slug}
           end
         end
+        hash[index+1] = [] if hash[index+1].nil?
         hash[index+1].flatten!
       end
     end
@@ -137,7 +142,7 @@ class Person < ActiveRecord::Base
 
   def set_permission_slug
     if self.permission_slug.nil?
-      self.permission_slug = "#{first_name.downcase.gsub(' ', '_').gsub('.','')}#{id}" 
+      self.permission_slug = "#{email.split("@").first.downcase.gsub(' ', '_').gsub('.','')}#{id}" 
       self.save
     end
   end

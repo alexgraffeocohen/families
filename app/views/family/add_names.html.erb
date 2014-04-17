@@ -1,0 +1,6 @@
+<h2>Add members to the <%= @family.name %> family</h2>
+<%= form_for([@family, @person], url: modify_families_path) do |f| %>
+    <%= render "member_input" %>
+     <%= link_to("Add Member", add_member_path, remote: true) %><br><br>
+     <%= f.submit %>
+<% end %>

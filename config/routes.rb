@@ -26,7 +26,11 @@ Rails.application.routes.draw do
 
   get 'families/new' => "family#new", as: "new_family"
 
-  get 'families/:id/add_member' => "family#add_member_input", as: "add_member"
+  get 'families/add_member' => "family#add_member_input", as: "add_member"
+
+  get "families/:id/add_names" => "family#add_names", as: "add_names"
+  
+  post 'families/:id/modify_families' => "family#modify_families", as: "modify_families"
   
   get 'families/:id/add_admin' => "family#add_admin", as: "add_admin"
   
