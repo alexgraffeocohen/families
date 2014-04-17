@@ -10,6 +10,9 @@ connie = Person.create!(
   first_name: "Connie",
   last_name: "Hutchins",
   email: "connie@hutchins.com",
+  age: 68,
+  # birthday: 
+  # location: ""
   password: "foobar12",
   password_confirmation: "foobar12",
   gender: "F",
@@ -21,6 +24,9 @@ harold = Person.create!(
   first_name: "Harold",
   last_name: "Hutchins",
   email: "harold@hutchins.com",
+  age: 71,
+  # birthday:
+  location: "Malibu, California",
   password: "foobar12",
   password_confirmation: "foobar12",
   gender: "M",
@@ -31,6 +37,9 @@ harold = Person.create!(
 carol = Person.create!(
   first_name: "Carol",
   email: "carol@brady.com",
+  age: 41,
+  # birthday:
+  location: "Los Angeles, California",
   password: "foobar12",
   password_confirmation: "foobar12",
   gender: "F",
@@ -43,6 +52,9 @@ carol = Person.create!(
 mike = Person.create!(
   first_name: "Mike",
   email: "mike@brady.com",
+  age: 43,
+  # birthday:
+  location: "Los Angeles, California",
   password: "foobar12",
   password_confirmation: "foobar12",
   gender: "M",
@@ -53,6 +65,9 @@ mike = Person.create!(
 greg = Person.create!(
   first_name: "Greg",
   email: "greg@brady.com",
+  age: 16,
+  # birthday:
+  location: "Los Angeles, California",
   password: "foobar12",
   password_confirmation: "foobar12",
   gender: "M",
@@ -65,6 +80,9 @@ greg = Person.create!(
 marcia = Person.create!(
   first_name: "Marcia",
   email: "marcia@brady.com",
+  age: 16,
+  # birthday:
+  location: "Los Angeles, California",
   password: "foobar12",
   password_confirmation: "foobar12",
   gender: "F",
@@ -77,6 +95,9 @@ marcia = Person.create!(
  jenny = Person.create!(
   first_name: "Jenny",
   email: "jenny@hutchins.com",
+  age: 33,
+  # birthday:
+  location: "Los Angeles, California",
   password: "foobar12",
   password_confirmation: "foobar12", 
   gender: "F",
@@ -89,6 +110,10 @@ marcia = Person.create!(
   jon = Person.create!(
     first_name: "Jon",
     email: "jon@hutchins.com",
+    age: 35,
+    profile_photo: open("images/hip_read.jpg"),
+    # birthday:
+    location: "Los Angeles, California",
     password: "foobar12",
     password_confirmation: "foobar12", 
     gender: "M",
@@ -101,6 +126,9 @@ marcia = Person.create!(
   jon_jr = Person.create!(
     first_name: "Jon Jr.",
     email: "jon_jr@hutchins.com",
+    age: 9,
+    # birthday:
+    location: "Los Angeles, California",
     password: "foobar12",
     password_confirmation: "foobar12", 
     gender: "M",
