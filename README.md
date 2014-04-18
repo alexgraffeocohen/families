@@ -4,14 +4,14 @@
 
 ## Description
 
-All in the Family is a closed social network to use with your family. We made it as easy as possible to share photos, plan events and have conversations with family members. The application also includes custom permissions so you don't have to share your bar-hopping photos with your grandparents. Interested? Give it a try (here)[www.all-in-the-family.herokuapp.com] and let us know what you think!
+All in the Family is a closed social network to use with your family. We made it as easy as possible to share photos, plan events and have conversations with family members. The application also includes custom permissions so you don't have to share your bar-hopping photos with your grandparents. Interested? Give it a try [here](www.all-in-the-family.herokuapp.com) and let us know what you think!
 
 ## Screenshots
 
-![Home Screen](http://i.imgur.com/l2SK2aX)
-![Resource Panel](http://i.imgur.com/PwVtj21)
-![Conversations](http://i.imgur.com/FNV00fR)
-![Vacations](http://i.imgur.com/sXj61Fd)
+![Home Screen](http://i.imgur.com/l2SK2aX.png)
+![Resource Panel](http://i.imgur.com/PwVtj21.png)
+![Conversations](http://i.imgur.com/FNV00fR.png)
+![Vacations](http://i.imgur.com/sXj61Fd.png)
 
 ## Background
 
