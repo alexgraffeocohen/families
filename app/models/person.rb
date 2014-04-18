@@ -32,7 +32,7 @@ class Person < ActiveRecord::Base
     self.save
     spouse.save
   end
-
+  
   def admin?
     admin == 1
   end

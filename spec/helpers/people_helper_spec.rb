@@ -6,11 +6,11 @@ describe PeopleHelper do
   let(:son)                  {create(:person, first_name: "son")}
   let(:daughter)             {create(:person, first_name: "daughter")}
   let(:maternal_grandmother) {create(:person, first_name: "maternal_grandmother")}
-  let(:brother) {create(:person, first_name: "brother")}
-  let(:mother) {create(:person, first_name: "mother")}
-  let(:father) {create(:person, first_name: "father")}
-  let(:maternal_aunt) {create(:person, first_name: "maternal_aunt" )}
-  let(:paternal_uncle) {create(:person, first_name: "paternal_uncle" )}
+  let(:brother)              {create(:person, first_name: "brother")}
+  let(:mother)               {create(:person, first_name: "mother")}
+  let(:father)               {create(:person, first_name: "father")}
+  let(:maternal_aunt)        {create(:person, first_name: "maternal_aunt" )}
+  let(:paternal_uncle)       {create(:person, first_name: "paternal_uncle" )}
   let(:members) {[[maternal_grandmother, "maternal grandmother"], [son, "son"], [daughter, "daughter"], [maternal_aunt, "maternal aunt"], [paternal_uncle, "paternal uncle"], [wife, "wife"], [brother, "brother"], [father, "father"], [mother, "mother"]]}
   
   describe "rearranging a new family array" do
@@ -53,7 +53,6 @@ describe PeopleHelper do
     end
 
     it 'assigns the admin as the son' do
-      binding.pry
       expect(mother.sons).to include(admin)
     end
 
