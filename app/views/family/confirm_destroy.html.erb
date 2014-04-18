@@ -1,9 +1,17 @@
-<h1>Are you sure?</h1>
-<p>The following accounts will be deleted</p>
-<ul>
-  <% @family.people.each do |member| %>
-    <li><%= member.first_name %></li>
-  <% end %>
-</ul>
-
-<%= link_to "I'm Sure", destroy_family_path(@family), method: :delete, data: { confirm: "Are you sure you want to delete this family?" } %>
+<div class="panel panel-default inline form_attr">
+  <div class="panel-heading">
+    <h4 class="center">Are you sure?</h4>
+    <p>The following accounts will be deleted</p>
+  </div>
+  <div class="panel-body">
+    <ul>
+      <% @family.people.each do |member| %>
+        <li><%= member.first_name %></li>
+      <% end %>
+    </ul>
+    <hr>
+    <div class="center">
+      <%= link_to "I'm Sure", destroy_family_path(@family), method: :delete, data: { confirm: "Are you sure you want to delete this family?" } %>
+    </div>  
+  </div>
+</div>
