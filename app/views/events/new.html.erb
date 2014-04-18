@@ -1,37 +1,51 @@
-<h2>Create a New Event!</h2>
-<div class="form_attr">
-  <%= form_for([@family, @event], class:"form-horizontal") do |f| %>
-    <div class="control-group">
-      <%= f.label :name, class:"control-label" %>
-      <div class="controls">
-        <%= f.text_field :name %><br>
-      </div>
-    </div>
-    <div class="control-group">
-      <%= f.label :content, "Description", class:"control-label" %>
-      <div class="controls">
-        <%= f.text_area :content %><br>
-      </div>
-    </div>
-    <div class="control-group">
-      <%= f.label :start_date, class:"control-label" %>
-      <div class="controls">
-        <%= f.text_field :start_date %> <br> 
-      </div>
-    </div>
-    <div class="control-group">
-      <%= f.label :end_date, class:"control-label" %>
-      <div class="controls">
-        <%= f.text_field :end_date %><br>
-      </div>
-    </div>
-    <br>
-    <%= f.submit %>
-    <br><br>
-    <%= link_to "Back to All Events", family_events_path %>
+<div class="panel panel-default inline form_attr">
+  <div class="panel-heading">
+    <h4 class="center">Create a New Event!</h4>
   </div>
-  <div class="form_attr">
-    <p>Who can see this event?</p>
-    <%= render 'layouts/permission_form', f: f, current_resource: "event" %>
-  </div> 
-  <% end %>
+  <div class="panel-body form_attr">
+    <%= form_for([@family, @event], class:"form-horizontal") do |f| %>
+      <div class="control-group">
+        <%= f.label :name, class:"control-label" %>
+        <div class="controls">
+          <%= f.text_field :name %><br>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :content, "Description", class:"control-label" %>
+        <div class="controls">
+          <%= f.text_area :content %><br>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :start_date, class:"control-label" %>
+        <div class="controls">
+          <%= f.text_field :start_date %> <br> 
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :end_date, class:"control-label" %>
+        <div class="controls">
+          <%= f.text_field :end_date %><br>
+        </div>
+        <br><br><br><br>
+      </div>
+      <hr>
+      <div class="center">
+        <%= f.submit %>
+        <br><br>
+        <%= link_to "Back to All Events", family_events_path %>
+      </div>
+    </div>
+    <div class="form_attr">
+      <hr>
+      <p>Who can see this event?</p>
+      <%= render 'layouts/permission_form', f: f, current_resource: "event" %>
+    </div> 
+    <% end %>
+  </div>
+</div>
+
+
+
+
+

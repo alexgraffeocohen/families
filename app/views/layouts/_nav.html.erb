@@ -15,7 +15,7 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "About", "#" %></li>
+        <li><%= link_to "About", about_path %></li>
         <li>
           <% if person_signed_in? && current_person.first_name && current_person.default_family %>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">

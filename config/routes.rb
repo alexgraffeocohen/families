@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   root "welcome#index"
 
+  get "/about" => "welcome#about", as: "about"
+
   # for permissions
  
   get "/permissions/:id/group" => "permissions#group", as: "group_permissions"
