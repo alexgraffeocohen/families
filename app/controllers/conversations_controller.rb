@@ -17,6 +17,7 @@ class ConversationsController < ApplicationController
     @conversation.family_id = @family.id
     @conversation.person_id = current_person.id
     @conversation.save
+
     
     respond_to do |f|
       if @conversation.save

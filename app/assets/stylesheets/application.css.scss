@@ -90,6 +90,7 @@ $jumbotron-bg: white;
 .conversation_white_div {
   @extend .white_div;
   width: 35%;
+  float: right;
 }
 .center_div {
   float: right;
