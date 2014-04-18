@@ -41,6 +41,7 @@ class FamilyController < ApplicationController
       person.admin = 1
       person.save
     end
+    flash[:notice] = "Admins have been assigned."
     redirect_to root_path
   end
 

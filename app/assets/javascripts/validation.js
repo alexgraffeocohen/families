@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $("form.new_person").on("submit", function(e){
+  $("div.new_sign_up form.new_person").on("submit", function(e){
     if ($("div.new_sign_up input[type=radio]:checked").length > 0){
 
     } else {
