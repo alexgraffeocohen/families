@@ -28,6 +28,7 @@ class FamilyController < ApplicationController
     nested_array = members_array(accounts, params[:people][:relations])
     set_relations(rearrange_members(nested_array), current_person)
     redirect_to family_path(@family)
+    flash[:notice] = "Invitations have been sent."
   end
 
   def add_admin
@@ -55,12 +56,6 @@ class FamilyController < ApplicationController
   def destroy
     @family.destroy
     redirect_to root_path
-  end
-
-  def invite_members
-    @members.each do |member|
-      WelcomeMailer.invite(member.email).deliver
-    end
   end
 
   def about_us
