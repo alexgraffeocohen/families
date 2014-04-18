@@ -39,9 +39,12 @@ module PeopleHelper
         relation_param = relation.gsub(/[ |-]/, '_')
         if relation_param == possible_relation
           admin.send("#{relation_param}=", member)
-          member.save
         end
+        member.save!
+        admin.save!
       end
+        # puts "This is the member we're on: #{member.first_name}"
+        # puts "Relationship to admin: #{member.relationship_to(admin)}"
     end
 
     # if !admin.children.empty?

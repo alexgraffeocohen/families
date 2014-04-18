@@ -6,14 +6,9 @@ class Conversation < ActiveRecord::Base
   has_many :messages, dependent: :destroy
 
   validates_presence_of :title, :permissions
-  before_save :capitalize_title
 
   scope :all_conversations, -> {all}
   scope :new_conversation, -> {new}
-
-  def capitalize_title
-    self.title = self.title.gsub('_', ' ').split(' ').collect(&:capitalize).join(' ')
-  end
 
   def last_contributor
     messages.last.sender.first_name

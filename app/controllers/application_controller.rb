@@ -16,6 +16,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :capitalize_string
 
+  def permitted_except_viewer(object)
+    object.all_permitted_members.gsub(current_person.first_name, "You")
+  end
+  helper_method :permitted_except_viewer
+
   private
   
   def configure_permitted_parameters

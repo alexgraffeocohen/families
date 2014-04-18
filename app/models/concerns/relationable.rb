@@ -229,6 +229,7 @@ module Relationable
   end
 
   def aunts
+    # binding.pry
     [(mother.sisters unless mother.nil?), (father.sisters unless father.nil?)].flatten.compact
   end
 

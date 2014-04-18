@@ -48,8 +48,13 @@ $jumbotron-bg: white;
 
 .deletable_div {
   display: inline-block;
-  padding: 20px;
+  padding: 10px 20px;
   position: relative;
+}
+
+.deletable_div_photo {
+  @extend .deletable_div;
+  float: left;
 }
 
 .delete_x {

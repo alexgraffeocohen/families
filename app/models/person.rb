@@ -37,6 +37,16 @@ class Person < ActiveRecord::Base
     admin == 1
   end
 
+  def mother=(member)
+    write_attribute(:mother_id, member.id)
+    member.gender = "F"
+  end
+
+  def father=(member)
+    write_attribute(:father_id, member.id)
+    member.gender = "M"
+  end
+
   def male?
     gender == "M"
   end

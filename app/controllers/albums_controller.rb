@@ -6,6 +6,7 @@ class AlbumsController < ApplicationController
   end
 
   def show
+    @permitted_except_viewer = @album.all_permitted_members.gsub(current_person.first_name, "You")
   end
 
   def edit
