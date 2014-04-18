@@ -6,7 +6,9 @@
   <div class="panel-body">
     <ul>
       <% @family.people.each do |member| %>
-        <li><%= member.first_name if member.confirmed? %></li>
+        <% if member.confirmed? %>
+          <li><%= member.first_name %></li>
+        <% end %>
       <% end %>
     </ul>
     <hr>
