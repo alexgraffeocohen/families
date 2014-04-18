@@ -4,7 +4,9 @@
 
   <h3>Add Family Members</h3>
 
-  <%= render "member_input" %><br>
+  <div id="member_inputs">
+    <%= render "member_input" %><br>
+  </div>
 
   <%= link_to("Add Member", add_member_path, remote: true) %><br><br>
 
