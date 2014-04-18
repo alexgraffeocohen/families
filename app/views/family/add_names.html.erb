@@ -1,6 +1,14 @@
-<h2>Add members to the <%= @family.name %> family</h2>
-<%= form_for([@family, @person], url: modify_families_path) do |f| %>
-    <%= render "member_input" %>
-     <%= link_to("Add Member", add_member_path, remote: true) %><br><br>
-     <%= f.submit %>
-<% end %>
+<div class="panel panel-default inline form_attr">
+  <div class="panel-heading">
+    <h4 class="center">Add members to the <%= @family.name %> family</h4>
+  </div>
+  <div class="panel-body">
+    <%= form_for([@family, @person], url: modify_families_path) do |f| %>
+      <%= render "member_input" %>
+       <%= link_to("Add Member", add_member_path, remote: true) %><br><br>
+       <hr>
+       <%= f.submit %>
+    <% end %>
+  </div>
+</div>
+
