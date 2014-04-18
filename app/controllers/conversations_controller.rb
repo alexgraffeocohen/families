@@ -16,6 +16,7 @@ class ConversationsController < ApplicationController
     @conversation.permissions = @conversation.parse(params[:conversation][:parse_permission])
     @conversation.family_id = @family.id
     @conversation.person_id = current_person.id
+    binding.pry
     
     respond_to do |f|
       if @conversation.save
