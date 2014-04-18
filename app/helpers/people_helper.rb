@@ -43,8 +43,6 @@ module PeopleHelper
         member.save!
         admin.save!
       end
-        # puts "This is the member we're on: #{member.first_name}"
-        # puts "Relationship to admin: #{member.relationship_to(admin)}"
     end
 
     # if !admin.children.empty?

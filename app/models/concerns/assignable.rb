@@ -95,22 +95,22 @@ module Assignable
   end
 
   def maternal_aunt=(member)
-    maternal_aunt_or_uncle = member
+    self.maternal_aunt_or_uncle = member
     member.gender = "F"
   end
 
   def paternal_aunt=(member)
-    paternal_aunt_or_uncle = member
+    self.paternal_aunt_or_uncle = member
     member.gender = "F"
   end
 
   def maternal_uncle=(member)
-    maternal_aunt_or_uncle = member
+    self.maternal_aunt_or_uncle = member
     member.gender = "M"
   end
 
   def paternal_uncle=(member)
-    paternal_aunt_or_uncle = member
+    self.paternal_aunt_or_uncle = member
     member.gender = "M"
   end
 
