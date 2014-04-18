@@ -8,10 +8,10 @@ All in the Family is a closed social network to use with your family. We made it
 
 ## Screenshots
 
-[Home Screen](http://i.imgur.com/l2SK2aX)
-[Resource Panel](http://i.imgur.com/PwVtj21)
-[Conversations](http://i.imgur.com/FNV00fR)
-[Vacations](http://i.imgur.com/sXj61Fd)
+![Home Screen](http://i.imgur.com/l2SK2aX)
+![Resource Panel](http://i.imgur.com/PwVtj21)
+![Conversations](http://i.imgur.com/FNV00fR)
+![Vacations](http://i.imgur.com/sXj61Fd)
 
 ## Background
 
@@ -39,12 +39,12 @@ We're currently implementing several features to enhance user experience like in
 
 ## Author
 
-All in the Family was created with love in the Ruby-004 semester at the (Flatiron School)[www.flatironschool.com] by:
+All in the Family was created with love in the Ruby-004 semester at the [Flatiron School](www.flatironschool.com) by:
 
-(Arielle Sullivan)[https://github.com/asullivan210], (Alex Wilkinson)[https://github.com/alexwilkinson] and (Daniel Spector)[https://github.com/danielspector].
+[Arielle Sullivan](https://github.com/asullivan210), [Alex Wilkinson](https://github.com/alexwilkinson) and [Daniel Spector](https://github.com/danielspector).
 
 If you have any questions, please feel free to reach out!
 
 ## License
 
-All in the Family is licensed under MIT. That means that you are generally free to use the app as you choose but we assume no liability relating to the application. Please see the LICESNSE.txt file for complete details.
+All in the Family is licensed under MIT. That means that you are generally free to use the app as you choose but we assume no liability relating to the application. Please see the LICENSE file for complete details.
