@@ -49,9 +49,16 @@ class FamilyController < ApplicationController
   end
 
   def create
-    @family = Family.find_or_create_by(family_params)
-    @family.person_families.build(person: current_person)
-    modify_families
+    result = any_invalid?
+    if result == false   
+      family = Family.find_or_create_by(family_params)
+      family.person_families.build(person: current_person)
+      modify_families
+    else
+      flash[:alert] = generate_invalid_alert(result)
+      @family = Family.new
+      render 'new'
+    end
   end
 
   def destroy
@@ -63,6 +70,66 @@ class FamilyController < ApplicationController
   end
 
   private
+
+  def validation_hash
+    {
+      :full_match_needed => {
+        "maternal grandmother" => ["mother"],
+        "maternal grandfather" => ["mother"],
+        "paternal grandmother" => ["father"],
+        "paternal grandfather" => ["father"],
+      },
+      :partial_match_needed => {
+        "sister" => ["father", "mother"],
+        "brother" => ["father", "mother"],
+        "maternal aunt" => ["maternal grandmother", "maternal grandfather", "mother"],
+        "paternal aunt" => ["paternal grandmother", "paternal grandfather", "father"],
+        "maternal uncle" => ["maternal grandmother", "maternal grandfather", "mother"],
+        "paternal uncle" => ["paternal grandmother", "paternal grandfather", "father"],
+      } 
+    }
+  end
+
+  def any_invalid?
+    relations = params["people"]["relations"]
+    switch = false
+
+    validation_hash[:full_match_needed].each do |key, value|
+      if relations.include?(key) && (relations & value).length != value.length
+        switch = key
+      end
+    end
+
+    validation_hash[:partial_match_needed].each do |key, value|
+      if relations.include?(key) && (relations & value).length < 1
+        switch = key
+      end
+    end
+
+    switch
+  end
+
+  def generate_invalid_alert(result)
+    message = ""
+    validation_hash[:full_match_needed].each do |key, value|
+      if result == key
+        message = "To add a #{key}, please also add #{value[0]}"
+      end
+    end
+
+    validation_hash[:partial_match_needed].each do |key, value|
+      if result == key
+        message = "To add a #{key}, please also add 
+        #{if value[2]
+          value[0]+' or '+value[1]+' and '+value[2]
+        elsif value[1]
+          value[0]+' or '+value[1]
+        end }"
+      end
+    end
+
+    message
+  end
 
   def set_family
     @family = Family.friendly.find(params[:id])
