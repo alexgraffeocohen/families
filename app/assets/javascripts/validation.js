@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  $("input#date-pick").datepicker({dateFormat: "yy-mm-dd" });
   $("div.new_sign_up form.new_person").on("submit", function(e){
     if ($("div.new_sign_up input[type=radio]:checked").length > 0){
 
