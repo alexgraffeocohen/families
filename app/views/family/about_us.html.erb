@@ -6,7 +6,7 @@
       <h4><%= person.first_name %>, your <%= person.relationship_to(current_person)%></h4>
       <div>
         <p><%= "Age: #{person.age}" unless person.age.blank? %></p>
-        <p><%= "Birthday: #{person.birthday.strftime("%B %d, %Y")}" unless person.birthday.blank? %></p>
+        <p><%= "Birthday: #{person.birthday.strftime("%B %e, %Y")}" unless person.birthday.blank? %></p>
         <p><%= "Phone: #{person.phone}" unless person.phone.blank? %></p>
         <p><%= "Location: #{person.location}" unless person.location.blank? %></p>
       </div>
