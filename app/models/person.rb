@@ -78,11 +78,13 @@ class Person < ActiveRecord::Base
 
   def all_permitted(class_name)
     total = class_name.downcase.pluralize
-    self.my_family_members.collect { |member|
-      member.send(total).select do |object|
-        self.can_see?(object)
-      end
-    }.flatten
+    owned_by_others = self.my_family_members.collect { |member|
+                        member.send(total).select do |object|
+                          self.can_see?(object)
+                        end
+                      }
+    owned_by_others << self.send(total)
+    owned_by_others.flatten
   end
 
   def can_see?(object)

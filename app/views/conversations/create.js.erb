@@ -1,6 +1,6 @@
 if($("div.none_showing").is(":visible")){
   $("div.none_showing").remove();
 }
-
 $("div.convo_all").append("<%= j render 'show_conversation', {convo: conversation} %>")
 $("input#conversation_title").val("");
+$("input[type='checkbox']").prop("checked", false);
