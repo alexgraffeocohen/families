@@ -6,8 +6,7 @@ describe Conversation do
     @message      = create(:message)
     @message2     = create(:message)
     @message2.sender = create(:person, first_name: "Alex")
-    @conversation = build(:conversation, title: "title")
-    @conversation.save(:validate => false)
+    @conversation = create(:conversation, title: "title", permissions: "1 2")
     
     @family.conversations << @conversation
     @conversation.messages << @message
@@ -35,8 +34,8 @@ describe Conversation do
   end
 
   it "can capitalize title" do
-    @conversation = build(:conversation, title: "lowercase title")
-    @conversation.save(:validate => false)
+    @conversation = build(:conversation, title: "lowercase title", permissions: "1 2")
+    @conversation.save
 
     expect(@conversation.title).to eq("Lowercase Title")
   end

@@ -4,7 +4,6 @@ module Assignable
     member.father = self if self.gender == "M"
     member.mother = self if self.gender == "F"
     if self.spouse
-      binding.pry
       member.father = self.spouse if self.spouse.gender == "M"
       member.mother = self.spouse if self.spouse.gender == "F"
     end
@@ -96,6 +95,7 @@ module Assignable
   end
 
   def maternal_aunt=(member)
+    binding.pry
     maternal_aunt_or_uncle = member
     member.gender = "F"
   end
