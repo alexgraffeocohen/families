@@ -12,10 +12,11 @@ class ConversationsController < ApplicationController
   end
 
   def create
-    @conversation = Conversation.create(conversation_params)
+    @conversation = Conversation.new(conversation_params)
     @conversation.permissions = @conversation.parse(params[:conversation][:parse_permission])
     @conversation.family_id = @family.id
     @conversation.person_id = current_person.id
+    @conversation.save
     
     respond_to do |f|
       if @conversation.save

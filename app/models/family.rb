@@ -5,6 +5,8 @@ class Family < ActiveRecord::Base
   has_many :conversations, dependent: :destroy
   has_many :events, dependent: :destroy
 
+  validates_presence_of :name
+
   before_destroy :destroy_members
 
   extend FriendlyId 

@@ -9,6 +9,9 @@ module PeopleHelper
       if pair[1] == "father" || pair[1] == "mother"
         nested_array.delete(pair)
         nested_array.unshift(pair)
+      elsif pair[1] == "wife" || pair[1] == "husband"
+        nested_array.delete(pair)
+        nested_array.unshift(pair)
       elsif pair[1][0] == "g"
         nested_array.delete(pair)
         nested_array.push(pair)
@@ -32,17 +35,17 @@ module PeopleHelper
       end
     end
 
-    if !admin.children.empty?
-      admin.children.each do |child|
-        if admin.wife
-          child.mother_id = admin.wife.id
-          admin.wife.save
-        elsif admin.husband
-          child.father_id = admin.husband.id
-        end
-        child.save
-        admin.save
-      end
-    end
+    # if !admin.children.empty?
+    #   admin.children.each do |child|
+    #     if admin.wife
+    #       child.mother_id = admin.wife.id
+    #       admin.wife.save
+    #     elsif admin.husband
+    #       child.father_id = admin.husband.id
+    #     end
+    #     child.save
+    #     admin.save
+    #   end
+    # end
   end
 end

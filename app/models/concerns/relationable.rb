@@ -135,11 +135,11 @@ module Relationable
   end
 
     def niece_to(person)
-      person.gender == "F" && niece_or_nephew_to(person)
+      self.gender == "F" && niece_or_nephew_to(person)
     end
 
     def nephew_to(person)
-      person.gender == "M" && niece_or_nephew_to(person)
+      self.gender == "M" && niece_or_nephew_to(person)
     end
 
   def cousin_to(person)

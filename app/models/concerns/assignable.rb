@@ -1,12 +1,22 @@
 module Assignable
 
+  def child=(member)
+    member.father = self if self.gender == "M"
+    member.mother = self if self.gender == "F"
+    if self.spouse
+      binding.pry
+      member.father = self.spouse if self.spouse.gender == "M"
+      member.mother = self.spouse if self.spouse.gender == "F"
+    end
+  end
+
   def son=(member)
-    member.father = self
+    self.child = member
     member.gender = "M"
   end
 
   def daughter=(member)
-    member.mother_id = self.id
+    self.child = member
     member.gender = "F"
   end
 
@@ -104,5 +114,5 @@ module Assignable
     paternal_aunt_or_uncle = member
     member.gender = "M"
   end
-  
+
 end

@@ -7,7 +7,12 @@ describe PeopleHelper do
     let(:son)         {create(:person)}
     let(:daughter)    {create(:person)}
     let(:grandmother) {create(:person)}
-    let(:members) {[[grandmother, "grandmother"], [son, "son"], [daughter, "daughter"], [father, "father"], [mother, "mother"]]}
+    let(:wife)        {create(:person)}
+    let(:uncle)       {create(:person)}
+    let(:aunt)        {create(:person)}
+    let(:cousin)      {create(:person)}
+
+    let(:members) {[[grandmother, "grandmother"], [son, "son"], [daughter, "daughter"], [cousin, "cousin"], [aunt, "aunt"], [uncle, "uncle"], [wife, "wife"], [father, "father"], [mother, "mother"]]}
 
   before(:each) do
     @rearranged_array = helper.rearrange_members(members)
@@ -19,12 +24,17 @@ describe PeopleHelper do
 
     it "puts mother toward the front" do
       mother_index = @rearranged_array.index([mother, "mother"])
-      expect(0..1).to cover(mother_index)
+      expect(0..2).to cover(mother_index)
     end
 
     it "puts father toward the front" do
       father_index = @rearranged_array.index([father, "father"])
-      expect(0..1).to cover(father_index)
+      expect(0..2).to cover(father_index)
+    end
+
+    it "puts spouse toward the front" do
+      spouse_index = @rearranged_array.index([wife, "wife"])
+      expect(0..2).to cover(spouse_index)
     end
   end
 
@@ -91,7 +101,7 @@ describe PeopleHelper do
     end
 
     it 'assigns admin\'s wife as daughter-in-law' do
-      expect(admin.wife.relationship_to(admin.mother)).to eq("daughter_in_law")
+      expect(admin.wife.relationship_to(admin.mother)).to eq("daughter-in-law")
     end
   end
 end
