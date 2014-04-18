@@ -112,20 +112,22 @@ class Person < ActiveRecord::Base
     new_hash ||= {}.tap do |hash|
       Permissable::PERMISSION_HASH.values.each_with_index do |relationships, index|
         if singular.include?(relationships)
-          if self.send(relationships[0])
-            hash[index+1] = [self.send(relationships[0]).permission_slug]
-          end
-          if relationships[1] && self.send(relationships[1])
-            hash[index+1] = [] if hash[index+1].nil?
-            (hash[index+1] << self.send(relationships[1]).permission_slug)
-          end
+          singular_checkbox_hash(relationships, index, hash)
+          # if self.send(relationships[0])
+          #   hash[index+1] = [self.send(relationships[0]).permission_slug]
+          # end
+          # if relationships[1] && self.send(relationships[1])
+          #   hash[index+1] = [] if hash[index+1].nil?
+          #   (hash[index+1] << self.send(relationships[1]).permission_slug)
+          # end
         else
-          if self.send(relationships[0].pluralize)
-            hash[index+1] = self.send(relationships[0].pluralize).map {|rel| rel.permission_slug}
-          end
-          if relationships[1] && self.send(relationships[1].pluralize)
-            hash[index+1] << self.send(relationships[1].pluralize).map {|rel| rel.permission_slug}
-          end
+          group_checkbox_hash(relationships, index, hash)
+          # if self.send(relationships[0].pluralize)
+          #   hash[index+1] = self.send(relationships[0].pluralize).map {|rel| rel.permission_slug}
+          # end
+          # if relationships[1] && self.send(relationships[1].pluralize)
+          #   hash[index+1] << self.send(relationships[1].pluralize).map {|rel| rel.permission_slug}
+          # end
         end
         hash[index+1] = [] if hash[index+1].nil?
         hash[index+1].flatten!
@@ -155,6 +157,25 @@ class Person < ActiveRecord::Base
   
   def set_age
     self.age = DateTime.now.year - self.birthday.year if self.birthday
+  end
+
+  def singular_checkbox_hash(relationships, index, hash)
+    if self.send(relationships[0])
+      hash[index+1] = [self.send(relationships[0]).permission_slug]
+    end
+    if relationships[1] && self.send(relationships[1])
+      hash[index+1] = [] if hash[index+1].nil?
+      (hash[index+1] << self.send(relationships[1]).permission_slug)
+    end
+  end
+
+  def group_checkbox_hash(relationships, index, hash)
+    if self.send(relationships[0].pluralize)
+      hash[index+1] = self.send(relationships[0].pluralize).map {|rel| rel.permission_slug}
+    end
+    if relationships[1] && self.send(relationships[1].pluralize)
+      hash[index+1] << self.send(relationships[1].pluralize).map {|rel| rel.permission_slug}
+    end
   end
 end
 
