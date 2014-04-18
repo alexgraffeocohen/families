@@ -113,21 +113,8 @@ class Person < ActiveRecord::Base
       Permissable::PERMISSION_HASH.values.each_with_index do |relationships, index|
         if singular.include?(relationships)
           singular_checkbox_hash(relationships, index, hash)
-          # if self.send(relationships[0])
-          #   hash[index+1] = [self.send(relationships[0]).permission_slug]
-          # end
-          # if relationships[1] && self.send(relationships[1])
-          #   hash[index+1] = [] if hash[index+1].nil?
-          #   (hash[index+1] << self.send(relationships[1]).permission_slug)
-          # end
         else
           group_checkbox_hash(relationships, index, hash)
-          # if self.send(relationships[0].pluralize)
-          #   hash[index+1] = self.send(relationships[0].pluralize).map {|rel| rel.permission_slug}
-          # end
-          # if relationships[1] && self.send(relationships[1].pluralize)
-          #   hash[index+1] << self.send(relationships[1].pluralize).map {|rel| rel.permission_slug}
-          # end
         end
         hash[index+1] = [] if hash[index+1].nil?
         hash[index+1].flatten!

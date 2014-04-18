@@ -1,15 +1,22 @@
-<%= form_for(@family) do |f| %>
-  <div><%= f.label :name %><br>
-  <%= f.text_field :name %><br>
+<div class="panel panel-default inline form_attr">
+  <div class="panel-heading">
+    <h4 class="center">Add Family Members</h4>
+  <div class="panel-body">
+    <%= form_for(@family) do |f| %>
+    <div class="control-group">
+      <%= f.label :name %>
+      <div class="controls">
+        <%= f.text_field :name %>
+      </div>
+    </div>
 
-  <h3>Add Family Members</h3>
+      <div id="member_inputs">
+        <%= render "member_input" %><br>
+      </div>
 
-  <div id="member_inputs">
-    <%= render "member_input" %><br>
+      <%= link_to("Add Member", add_member_path, remote: true) %><br><br>
+      <hr>
+      <%= f.submit %>
+    <% end %>
   </div>
-
-  <%= link_to("Add Member", add_member_path, remote: true) %><br><br>
-
-  <%= f.submit %>
-<% end %>
-
+</div>
