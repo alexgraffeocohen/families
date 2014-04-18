@@ -5,11 +5,14 @@ describe Album do
   let(:daughter) {create :person, mother_id: mother.id, gender: "F"}
   let(:son) {create :person, mother_id: mother.id, gender: "M"}
   let(:album) {create(:album, person_id: daughter.id)}
-
+  let(:photo) {create(:photo, album_id: album.id)}
   it "has photos" do
-    photo = create(:photo)
-    album.photos << photo
     expect(album.photos).to include photo
+  end
+
+  it "has photos dependent on destruction" do
+    album.destroy
+    expect(Photo.all.length).to eq(0)
   end
 
   it "belongs to a family" do

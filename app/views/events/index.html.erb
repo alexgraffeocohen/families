@@ -7,7 +7,7 @@
     <% if @permitted_events_by_date[formatted_date] %>
       <ul>
         <% @permitted_events_by_date[formatted_date].each do |event| %>
-          <li><%= link_to event.name, event_path(@family, event) %></li>
+          <li><%= link_to capitalize_string(event.name), event_path(@family, event) %></li>
         <% end %>
       </ul>
     <% end %>
