@@ -6,7 +6,7 @@ describe Conversation do
     @message      = create(:message)
     @message2     = create(:message)
     @message2.sender = create(:person, first_name: "Alex")
-    @conversation = build(:conversation, title: "Title")
+    @conversation = build(:conversation, title: "title")
     @conversation.save(:validate => false)
     
     @family.conversations << @conversation
@@ -32,5 +32,12 @@ describe Conversation do
 
   it "can show last message sent" do
     expect(@conversation.last_message).to eq(@message2.content)
+  end
+
+  it "can capitalize title" do
+    @conversation = build(:conversation, title: "lowercase title")
+    @conversation.save(:validate => false)
+
+    expect(@conversation.title).to eq("Lowercase Title")
   end
 end

@@ -124,7 +124,9 @@ class Person < ActiveRecord::Base
   end
   
   def my_family_members
-    GROUP_RELATIONSHIPS.collect { |relationship| self.send(relationship) }.compact.flatten.
+    GROUP_RELATIONSHIPS.collect { |relationship| 
+      self.send(relationship) 
+    }.compact.flatten.
     select { |member| member.confirmed? }
   end
 
