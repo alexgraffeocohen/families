@@ -6,12 +6,14 @@ describe PeopleHelper do
   let(:son)                  {create(:person, first_name: "son")}
   let(:daughter)             {create(:person, first_name: "daughter")}
   let(:maternal_grandmother) {create(:person, first_name: "maternal_grandmother")}
+  let(:paternal_grandmother) {create(:person, first_name: "paternal_grandmother")}
   let(:brother) {create(:person, first_name: "brother")}
   let(:mother) {create(:person, first_name: "mother")}
   let(:father) {create(:person, first_name: "father")}
   let(:maternal_aunt) {create(:person, first_name: "maternal_aunt" )}
+  let(:paternal_aunt) {create(:person, first_name: "paternal_aunt" )}
   let(:paternal_uncle) {create(:person, first_name: "paternal_uncle" )}
-  let(:members) {[[maternal_grandmother, "maternal grandmother"], [son, "son"], [daughter, "daughter"], [maternal_aunt, "maternal aunt"], [paternal_uncle, "paternal uncle"], [wife, "wife"], [brother, "brother"], [father, "father"], [mother, "mother"]]}
+  let(:members) {[[maternal_grandmother, "maternal grandmother"], [paternal_grandmother, "paternal grandmother"],  [son, "son"], [daughter, "daughter"], [paternal_aunt, "paternal aunt"], [maternal_aunt, "maternal aunt"], [paternal_uncle, "paternal uncle"], [wife, "wife"], [brother, "brother"], [father, "father"], [mother, "mother"]]}
   
   describe "rearranging a new family array" do
     before(:each) do
@@ -19,7 +21,7 @@ describe PeopleHelper do
     end
 
     it "puts grandparents toward the end of the inputted array" do
-      expect(@rearranged_array.last(3)[0]).to eq([maternal_grandmother, "maternal grandmother"])
+      expect(@rearranged_array.last(6).first(2)).to include([maternal_grandmother, "maternal grandmother"])
     end
 
     it "puts mother toward the front" do
@@ -44,7 +46,7 @@ describe PeopleHelper do
   end
 
   describe "setting relations" do
-    before(:each) do
+    before do
       helper.set_relations(helper.rearrange_members(members), admin)
     end
 
@@ -53,7 +55,6 @@ describe PeopleHelper do
     end
 
     it 'assigns the admin as the son' do
-      # binding.pry
       expect(mother.sons).to include(admin)
     end
 
