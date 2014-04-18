@@ -17,6 +17,15 @@
         </div>
       <% end %>
       <br>
+      <% if resource.last_name.blank? %>
+        <div class="control-group">
+          <%= f.label :last_name,"What's your last name?" %>
+          <div class="controls">
+            <%= f.text_field :last_name %>
+          </div>
+        </div>
+      <% end %>
+      <br>
       <% if resource.phone.blank? %>
         <div class="control-group">
           <%= f.label :phone, "What's your phone number?" %> 
@@ -31,6 +40,15 @@
           <%= f.label :birthday, "What's your birthday?" %> 
           <div class="controls">
             <%= f.date_field :birthday %>
+          </div>
+        </div>
+      <% end %>
+      <br>
+      <% if resource.location.blank? %>
+        <div class="control-group">
+          <%= f.label :location, "What's your location?" %> 
+          <div class="controls">
+            <%= f.text_field :location %>
           </div>
         </div>
       <% end %>

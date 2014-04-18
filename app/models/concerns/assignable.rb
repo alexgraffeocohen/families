@@ -56,21 +56,25 @@ module Assignable
 
   def maternal_grandmother=(member) 
     self.mother.mother = member if self.mother
+    self.mother.save
     member.gender = "F"
   end
 
   def maternal_grandfather=(member)
     self.mother.father = member if self.mother
+    self.mother.save
     member.gender = "M"
   end
 
   def paternal_grandmother=(member)
     self.father.mother = member if self.father
+    self.father.save
     member.gender = "F"
   end
 
   def paternal_grandfather=(member)
     self.father.father = member if self.father
+    self.father.save
     member.gender = "M"
   end
 
