@@ -55,11 +55,11 @@ describe Relationable do
   end
 
   it "can determine son-in-law" do
-    expect(@mike.relationship_to(@harold)).to eq('son_in_law')
+    expect(@mike.relationship_to(@harold)).to eq('son-in-law')
   end
 
   it "can determine father-in-law" do
-    expect(@harold.relationship_to(@mike)).to eq('father_in_law')
+    expect(@harold.relationship_to(@mike)).to eq('father-in-law')
   end
 
   it "can determine aunt" do
@@ -71,11 +71,13 @@ describe Relationable do
   end
 
   it "can determine brother-in-law" do
-    expect(@mike.relationship_to(@jon)).to eq('brother_in_law')
+    expect(@mike.relationship_to(@jon)).to eq('brother-in-law')
   end
 
   it "can determine sister-in-law" do
-    expect(@jenny.relationship_to(@mike)).to eq('sister_in_law')
+    expect(@jenny.relationship_to(@mike)).to eq('sister-in-law')
+    expect(@carol.relationship_to(@rebekah)).to eq('sister-in-law')
+    expect(@rebekah.relationship_to(@carol)).to eq('sister-in-law')
   end
 
   it "can determine niece" do
@@ -90,15 +92,18 @@ describe Relationable do
     expect(@greg.relationship_to(@jon_jr)).to eq('cousin')
   end
 
-  it "can determine daughter-in-law and mother-in-law" do
+  it "can determine mother-in-law" do
+    expect(@connie.relationship_to(@mike)).to eq('mother-in-law')
+  end
+
+  it "can determine daughter-in-law" do
     husband = create(:person)
     wife = create(:person, gender: "F")
     husbands_mother = create(:person, gender: "F")
     husband.mother_id = husbands_mother.id
     husband.add_spouse(wife)
 
-    expect(wife.relationship_to(husbands_mother)).to eq('daughter_in_law')
-    expect(husbands_mother.relationship_to(wife)).to eq('mother_in_law')
+    expect(wife.relationship_to(husbands_mother)).to eq('daughter-in-law')
   end
 
   describe "relationable can tell if a person" do
@@ -135,19 +140,11 @@ describe Relationable do
     end
 
     it "can have aunts" do
-      aunt = create(:person, gender: "F")
-      aunt.mother = @carol.mother
-      aunt.save
-
-      expect(@greg.aunts).to include(aunt)
+      expect(@greg.aunts).to include(@jenny)
     end
 
     it "can have uncles" do
-      uncle = create(:person, gender: "M")
-      uncle.father = @carol.father
-      uncle.save
-
-      expect(@greg.uncles).to include(uncle)
+      expect(@greg.uncles).to include(@jon)
     end
 
     it "can have great uncles" do
@@ -179,45 +176,30 @@ describe Relationable do
     end
 
     it "can have nephews" do
-      marcia_son = create(:person, gender: "M")
-      marcia_son.mother = @marcia
-      marcia_son.save
-
-      expect(@greg.nephews).to include(marcia_son)
+      expect(@jon.nephews).to include(@greg)
     end
 
     it "can have nieces" do
-      greg_daughter = create(:person, gender: "F")
-      greg_daughter.father = @greg
-      greg_daughter.save
-
-      expect(@marcia.nieces).to include(greg_daughter)
+      expect(@jenny.nieces).to include(@marcia)
     end
 
     it "can have cousins" do
-      marcia_son = create(:person, gender: "M")
-      marcia_son.mother = @marcia
-      marcia_son.save
-
-      greg_daughter = create(:person, gender: "F")
-      greg_daughter.father = @greg
-      greg_daughter.save
-
-      expect(greg_daughter.cousins).to include(marcia_son)
+      expect(@marcia.cousins).to include(@jon_jr)
     end
 
     it "can have brothers_in_law" do
-      marcia_husband = create(:person, gender: "M")
-      @marcia.add_spouse(marcia_husband)
-
-      expect(marcia_husband.brother_in_laws).to include(@greg)
+      expect(@jenny.brother_in_laws).to include(@mike)
     end
 
     it "can have sisters_in_law" do
-      greg_wife = create(:person, gender: "F")
-      @greg.add_spouse(greg_wife)
+      expect(@mike.sister_in_laws).to include(@jenny)
+    end
 
-      expect(greg_wife.sister_in_laws).to include(@marcia)
+    it "properly detects siblings_in_law" do
+      expect(@rebekah.siblings_in_law).to include(@carol)
+      expect(@carol.siblings_in_law).to include(@rebekah)
+      expect(@mike.siblings_in_law).to include(@jenny)
+      expect(@jenny.siblings_in_law).to include(@mike)
     end  
 
     it "has maternal grandmother" do 

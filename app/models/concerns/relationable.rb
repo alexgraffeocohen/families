@@ -277,10 +277,14 @@ module Relationable
   end
 
   def brother_in_laws
-    [(wife.brothers unless wife.nil?), (husband.brothers unless husband.nil?)].flatten.compact
+    from_brothers = brothers.map { |brother| brother.husband }
+    from_sisters  = sisters.map { |sister| sister.husband }
+    [(wife.brothers unless wife.nil?), from_brothers, from_sisters, (husband.brothers unless husband.nil?)].flatten.compact
   end
 
   def sister_in_laws
-    [(wife.sisters unless wife.nil?), (husband.sisters unless husband.nil?)].flatten.compact
+    from_brothers = brothers.map { |brother| brother.wife }
+    from_sisters  = sisters.map { |sister| sister.wife }
+    [(wife.sisters unless wife.nil?), from_sisters, from_brothers, (husband.sisters unless husband.nil?)].flatten.compact
   end
 end
