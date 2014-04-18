@@ -22,7 +22,7 @@
       </div>
 
       <div class="form-group"><%= f.label :birthday %><br />
-      <%= f.date_select :birthday, :start_year => Date.today.year - 100 %></div>
+      <%= f.text_field :birthday, id: "date-pick" %></div>
 
       <div class="form-group"><%= f.label :phone %><br />
       <%= f.text_field :phone %></div>  
