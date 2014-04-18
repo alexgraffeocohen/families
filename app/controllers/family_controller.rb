@@ -27,6 +27,7 @@ class FamilyController < ApplicationController
     accounts = create_accounts(params, @family)
     nested_array = members_array(accounts, params[:people][:relations])
     set_relations(rearrange_members(nested_array), current_person)
+    
     redirect_to family_path(@family)
     flash[:notice] = "Invitations have been sent."
   end
@@ -41,6 +42,7 @@ class FamilyController < ApplicationController
       person.admin = 1
       person.save
     end
+    
     flash[:notice] = "Admins have been assigned."
     redirect_to root_path
   end
@@ -55,9 +57,11 @@ class FamilyController < ApplicationController
       @family.person_families.build(person: current_person)
       modify_families
     else
-      flash[:alert] = generate_invalid_alert(result)
       @family = Family.new
-      render 'new'
+      respond_to do |f|
+        f.js   {render 'members_invalid', locals: {msge: generate_invalid_alert(result)} }
+        f.html { render 'new', :alert => generate_invalid_alert(result) }
+      end
     end
   end
 
