@@ -95,7 +95,6 @@ module Assignable
   end
 
   def maternal_aunt=(member)
-    binding.pry
     maternal_aunt_or_uncle = member
     member.gender = "F"
   end

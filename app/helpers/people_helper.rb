@@ -6,21 +6,25 @@ module PeopleHelper
 
   def rearrange_members(nested_array)
     aunts_and_uncles = []
-    nested_array.each_with_index do |pair, i|
+    first = []
+    grandparents = []
+    remainder = []
+    nested_array.each do |pair|
       if pair[1] == "father" || pair[1] == "mother"
-        nested_array.delete(pair)
-        nested_array.unshift(pair)
+        first.push(pair)
       elsif pair[1] == "wife" || pair[1] == "husband"
-        nested_array.delete(pair)
-        nested_array.unshift(pair)
-      elsif pair[1][0] == "g"
-        nested_array.delete(pair)
-        nested_array.push(pair)
-      elsif pair[1].include?("aunt") || pair[1].include?("uncle")
-        aunts_and_uncles << nested_array.slice!(i)
+        first.push(pair)
+      elsif pair[1].include?("grand")
+       grandparents.push(pair)
+      elsif pair[1].include?("aunt")
+        aunts_and_uncles.push(pair)
+      elsif pair[1].include?("uncle")
+        aunts_and_uncles.push(pair)
+      else
+        remainder.push(pair)
       end
     end
-    array = [nested_array, aunts_and_uncles].flatten
+    array = [first, remainder, grandparents, aunts_and_uncles].flatten(1)
   end
 
   def set_relations(ordered_nested_array, admin)
