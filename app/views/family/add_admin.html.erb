@@ -1,12 +1,20 @@
-<%= form_tag(create_admin_path(@family)) do %>
-<p>Select admins<p>
-  <% current_person.my_family_members.each do |member| %>
-    <% unless member.admin? %>
-      <%= check_box_tag 'add_admin', member.id %>
-      <%= label_tag member.first_name %>
-      <br>
+<div class="panel panel-default inline form_attr">
+  <div class="panel-heading">
+    <h4 class="center">Select Admins</h4>
+  </div>
+  <div class="panel-body">
+    <%= form_tag(create_admin_path(@family)) do %>
+
+      <% current_person.my_family_members.each do |member| %>
+        <% unless member.admin? %>
+          <%= check_box_tag 'add_admin', member.id %>
+          <%= label_tag member.first_name %>
+          <br>
+        <% end %>
+      <% end %>
+      <hr>
+      <%= submit_tag %>
     <% end %>
-  <% end %>
-  <br>
-  <%= submit_tag %>
-<% end %>
+  </div>
+</div>
+

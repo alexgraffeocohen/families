@@ -1,18 +1,9 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create!([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-
 connie = Person.create!(
   first_name: "Connie",
   last_name: "Hutchins",
   email: "connie@hutchins.com",
   phone: "310-561-9314",
-  age: 68,
-  # birthday: 
+  birthday: Time.gm(1914,"jul",17,20,15,1), 
   # location: ""
   password: "foobar12",
   password_confirmation: "foobar12",
@@ -26,8 +17,7 @@ harold = Person.create!(
   last_name: "Hutchins",
   email: "harold@hutchins.com",
   phone: "310-559-9244",
-  age: 71,
-  # birthday:
+  birthday: Time.gm(1914,"jun",12,20,15,1),
   location: "Malibu, California",
   password: "foobar12",
   password_confirmation: "foobar12",
@@ -40,8 +30,8 @@ carol = Person.create!(
   first_name: "Carol",
   email: "carol@brady.com",
   phone: "310-452-9364",
-  age: 41,
-  # birthday:
+    age: 9,
+  birthday: Time.gm(1939,"feb",4,20,15,1),
   location: "Los Angeles, California",
   password: "foobar12",
   password_confirmation: "foobar12",
@@ -56,8 +46,7 @@ mike = Person.create!(
   first_name: "Mike",
   email: "mike@brady.com",
   phone: "310-805-9238",
-  age: 43,
-  # birthday:
+  birthday: Time.gm(1937,"feb",4,20,15,1),
   location: "Los Angeles, California",
   password: "foobar12",
   password_confirmation: "foobar12",
@@ -70,8 +59,7 @@ greg = Person.create!(
   first_name: "Greg",
   email: "greg@brady.com",
   phone: "310-775-7614",
-  age: 16,
-  # birthday:
+  birthday: Time.gm(1964,"aug",23,20,15,1),
   location: "Los Angeles, California",
   password: "foobar12",
   password_confirmation: "foobar12",
@@ -86,8 +74,7 @@ marcia = Person.create!(
   first_name: "Marcia",
   email: "marcia@brady.com",
   phone: "310-135-8294",
-  age: 16,
-  # birthday:
+  birthday: Time.gm(1964,"nov",10,20,15,1),
   location: "Los Angeles, California",
   password: "foobar12",
   password_confirmation: "foobar12",
@@ -102,8 +89,7 @@ marcia = Person.create!(
   first_name: "Jenny",
   email: "jenny@hutchins.com",
   phone: "310-905-9276",
-  age: 33,
-  # birthday:
+  birthday: Time.gm(1947,"mar",2,20,15,1),
   location: "Los Angeles, California",
   password: "foobar12",
   password_confirmation: "foobar12", 
@@ -118,7 +104,6 @@ marcia = Person.create!(
     first_name: "Jon",
     email: "jon@hutchins.com",
     phone: "310-817-3014",
-    age: 35,
     # profile_photo: open("assets/hip_read.jpg"),
     birthday: Time.gm(1945,"jan",1,20,15,1), 
     location: "Los Angeles, California",
@@ -135,8 +120,7 @@ marcia = Person.create!(
     first_name: "Jon Jr.",
     email: "jon_jr@hutchins.com",
     phone: "310-213-8654",
-    age: 9,
-    # birthday:
+    birthday: Time.gm(1971,"dec",30,20,15,1),
     location: "Los Angeles, California",
     password: "foobar12",
     password_confirmation: "foobar12", 
