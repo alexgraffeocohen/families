@@ -51,8 +51,8 @@ class FamilyController < ApplicationController
   def create
     result = any_invalid?
     if result == false   
-      family = Family.find_or_create_by(family_params)
-      family.person_families.build(person: current_person)
+      @family = Family.find_or_create_by(family_params)
+      @family.person_families.build(person: current_person)
       modify_families
     else
       flash[:alert] = generate_invalid_alert(result)
@@ -82,10 +82,12 @@ class FamilyController < ApplicationController
       :partial_match_needed => {
         "sister" => ["father", "mother"],
         "brother" => ["father", "mother"],
-        "maternal aunt" => ["maternal grandmother", "maternal grandfather", "mother"],
-        "paternal aunt" => ["paternal grandmother", "paternal grandfather", "father"],
+        "maternal aunt"  => ["maternal grandmother", "maternal grandfather", "mother"],
+        "paternal aunt"  => ["paternal grandmother", "paternal grandfather", "father"],
         "maternal uncle" => ["maternal grandmother", "maternal grandfather", "mother"],
         "paternal uncle" => ["paternal grandmother", "paternal grandfather", "father"],
+        "father-in-law"  => ["husband", "wife"],
+        "mother-in-law"  => ["husband", "wife"]
       } 
     }
   end
