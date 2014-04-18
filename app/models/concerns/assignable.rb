@@ -4,7 +4,6 @@ module Assignable
     member.father = self if self.gender == "M"
     member.mother = self if self.gender == "F"
     if self.spouse
-      binding.pry
       member.father = self.spouse if self.spouse.gender == "M"
       member.mother = self.spouse if self.spouse.gender == "F"
     end
