@@ -5,7 +5,8 @@ module PeopleHelper
   end
 
   def rearrange_members(nested_array)
-    nested_array.each do |pair|
+    aunts_and_uncles = []
+    nested_array.each_with_index do |pair, i|
       if pair[1] == "father" || pair[1] == "mother"
         nested_array.delete(pair)
         nested_array.unshift(pair)
@@ -15,8 +16,11 @@ module PeopleHelper
       elsif pair[1][0] == "g"
         nested_array.delete(pair)
         nested_array.push(pair)
+      elsif pair[1].include?("aunt") || pair[1].include?("uncle")
+        aunts_and_uncles << nested_array.slice!(i)
       end
     end
+    array = [nested_array, aunts_and_uncles].flatten
   end
 
   def set_relations(ordered_nested_array, admin)
@@ -28,8 +32,9 @@ module PeopleHelper
       possible_relations = [Person::RELATIONSHIPS, extra_relations].flatten
 
       possible_relations.each do |possible_relation|
-        if relation == possible_relation
-          admin.send("#{relation}=", member)
+        relation_param = relation.gsub(/[ |-]/, '_')
+        if relation_param == possible_relation
+          admin.send("#{relation_param}=", member)
           member.save
         end
       end
