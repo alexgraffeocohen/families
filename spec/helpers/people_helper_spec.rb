@@ -53,7 +53,7 @@ describe PeopleHelper do
     end
 
     it 'assigns the admin as the son' do
-      binding.pry
+      # binding.pry
       expect(mother.sons).to include(admin)
     end
 

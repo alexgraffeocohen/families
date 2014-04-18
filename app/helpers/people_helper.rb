@@ -40,6 +40,7 @@ module PeopleHelper
         if relation_param == possible_relation
           admin.send("#{relation_param}=", member)
           member.save
+          admin.save
         end
       end
     end
