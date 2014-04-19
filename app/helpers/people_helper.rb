@@ -44,18 +44,5 @@ module PeopleHelper
         admin.save!
       end
     end
-
-    # if !admin.children.empty?
-    #   admin.children.each do |child|
-    #     if admin.wife
-    #       child.mother_id = admin.wife.id
-    #       admin.wife.save
-    #     elsif admin.husband
-    #       child.father_id = admin.husband.id
-    #     end
-    #     child.save
-    #     admin.save
-    #   end
-    # end
   end
 end

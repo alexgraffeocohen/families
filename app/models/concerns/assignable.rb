@@ -29,16 +29,6 @@ module Assignable
     member.gender = "F"
   end
 
-  # def mother=(member)
-  #   self.mother = member
-  #   member.gender = "F"
-  # end
-
-  # def father=(member)
-  #   self.father = member
-  #   member.gender = "M"
-  # end
-
   def sibling=(member)
     member.mother = self.mother if self.mother
     member.father = self.father if self.father
