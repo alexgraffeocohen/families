@@ -28,7 +28,7 @@ class Family < ActiveRecord::Base
       self.name_slug = name.downcase
     else
       count = Family.where("name_slug = ?",name.downcase).length
-      self.name_slug = "#{name.downcase}#{count-1}"
+      self.name_slug = "#{name.downcase}#{count-1}" if self.name_slug.nil?
     end
   end
 
