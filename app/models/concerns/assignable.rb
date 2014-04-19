@@ -70,11 +70,13 @@ module Assignable
 
   def father_in_law=(member)
     self.spouse.father = member if self.spouse
+    self.spouse.save
     member.gender = "M"
   end
 
   def mother_in_law=(member)
     self.spouse.mother = member if self.spouse
+    self.spouse.save
     member.gender = "F"
   end
 

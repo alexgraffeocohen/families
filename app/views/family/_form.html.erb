@@ -3,7 +3,7 @@
     <h4 class="center">Create Your Family</h4>
   </div>
   <div class="panel-body">
-    <%= form_for(@family) do |f| %>
+    <%= form_for(@family, remote: true) do |f| %>
       <div class="control-group">
         <%= f.label :name %>
         <div class="controls">
