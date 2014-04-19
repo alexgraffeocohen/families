@@ -51,8 +51,8 @@ class FamilyController < ApplicationController
   def create
     result = any_invalid?
     if result == false   
-      family = Family.find_or_create_by(family_params)
-      family.person_families.build(person: current_person)
+      @family = Family.find_or_create_by(family_params)
+      @family.person_families.build(person: current_person)
       modify_families
     else
       flash[:alert] = generate_invalid_alert(result)
