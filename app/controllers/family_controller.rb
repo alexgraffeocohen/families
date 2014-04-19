@@ -27,12 +27,8 @@ class FamilyController < ApplicationController
     accounts = create_accounts(params, @family)
     nested_array = members_array(accounts, params[:people][:relations])
     set_relations(rearrange_members(nested_array), current_person)
-    if params[:action] == "create"
-      render nothing: true
-    else
-      redirect_to family_path(@family)
-      flash[:notice] = "Invitations have been sent."
-    end
+    render :js => "window.location='#{family_path(@family)}'"
+    flash[:notice] = "Invitations have been sent."
   end
 
   def add_admin
@@ -45,7 +41,6 @@ class FamilyController < ApplicationController
       person.admin = 1
       person.save
     end
-    
     flash[:notice] = "Admins have been assigned."
     redirect_to root_path
   end
