@@ -27,9 +27,12 @@ class FamilyController < ApplicationController
     accounts = create_accounts(params, @family)
     nested_array = members_array(accounts, params[:people][:relations])
     set_relations(rearrange_members(nested_array), current_person)
-    
-    redirect_to family_path(@family)
-    flash[:notice] = "Invitations have been sent."
+    if params[:action] == "create"
+      render nothing: true
+    else
+      redirect_to family_path(@family)
+      flash[:notice] = "Invitations have been sent."
+    end
   end
 
   def add_admin
@@ -52,10 +55,10 @@ class FamilyController < ApplicationController
 
   def create
     result = any_invalid?
-    if result == false   
-      @family = Family.find_or_create_by(family_params)
-      @family.person_families.build(person: current_person)
-      modify_families
+    if result == false 
+        @family = Family.find_or_create_by(family_params)
+        @family.person_families.build(person: current_person)
+        modify_families
     else
       @family = Family.new
       respond_to do |f|
