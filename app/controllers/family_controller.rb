@@ -34,7 +34,9 @@ class FamilyController < ApplicationController
         render :js => "window.location='#{family_path(@family)}'"
         flash[:notice] = "Invitations have been sent."
       else
-        f.js   {render 'members_invalid', locals: {msge: generate_invalid_alert(result)} }
+        respond_to do |f|
+          f.js   {render 'members_invalid', locals: {msge: generate_invalid_alert(result)} }
+        end
       end
     else
       accounts = create_accounts(params, @family)

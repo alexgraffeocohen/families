@@ -40,26 +40,25 @@ class Person < ActiveRecord::Base
   def current_relationships
     relationships = my_family_members.collect do |member|
       [member, member.relationship_to(self)]
-    end
+    end.uniq
     new_rels =  relationships.collect do |rel|
       case rel[1]
       when "grandmother", "grandfather"
-        if self.father.parents.include?(rel[0])
-          "paternal" + rel[1]
-        else
-          "maternal" + rel[1]
+        if self.father && self.father.parents.include?(rel[0])
+          "paternal " + rel[1]
+        elsif self.mother && self.mother.parents.include?(rel[0])
+          "maternal " + rel[1]
         end
       when "aunt", "uncle"
-        if self.father.siblings.include?(rel[0])
-          "paternal" + rel[1]
-        else
-          "maternal" + rel[1]
+        if self.father && self.father.siblings.include?(rel[0])
+          "paternal " + rel[1]
+        elsif self.mother && self.mother.siblings.include?(rel[0])
+          "maternal " + rel[1]
         end
       else
         rel[1]
       end
     end
-    binding.pry
   end
 
   def mother=(member)
