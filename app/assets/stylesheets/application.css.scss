@@ -111,14 +111,26 @@ $jumbotron-bg: white;
 
 .white_div {
   overflow: scroll;
-  width: 45%;
+  // width: 45%;
   height: 20%;
-  margin: 20px;
+  margin: 2.5%;
   background: white;
   border-radius: 10px;
   text-align: center;
-  padding: 20px;
+  padding: 2.5%;
   float: left;
+}
+
+@media screen and (max-width: 599px){
+  .white_div {
+    width: 90%;
+  }
+}
+
+@media screen and (min-width: 600px){
+  .white_div {
+    width: 45%;
+  }
 }
 .conversation_white_div {
   @extend .white_div;
