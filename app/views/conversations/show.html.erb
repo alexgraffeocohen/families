@@ -1,5 +1,5 @@
 <div class="center">
-  <h2 data-id="<%= @conversation.id %>">Current Conversation: <%= capitalize_string(@conversation.title) %></h2>
+  <h2 data-id="<%= @conversation.id %>"><%= capitalize_string(@conversation.title) %></h2>
   <h5>Who can view this conversation?<span id="permitted_members"><%= permitted_except_viewer(@conversation) %></span></h5>
 </div>
 <div class="white_div new_message">
