@@ -62,6 +62,7 @@ describe Permissable do
 
     it "for parents-in-laws" do
       @album_mike.permissions = "7"
+      # binding.pry
       expect(@connie.can_see?(@album_mike)).to eq(true)
       expect(@album_mike.relationships_permitted).to include("father_in_law", "mother_in_law")
       expect(@album_mike.all_permitted_members).to include()
