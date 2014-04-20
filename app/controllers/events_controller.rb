@@ -8,6 +8,7 @@ class EventsController < ApplicationController
 
   def index
     @permitted_events_by_date = current_person.all_permitted("event").group_by(&:start_date)
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
   end
 
   def new
