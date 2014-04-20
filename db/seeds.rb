@@ -147,6 +147,8 @@ carol.add_spouse(mike)
 
 greg_marcia_convo = Conversation.create!(
   title: "Family Vacation to Hawaii"
+  person_id: marcia.id,
+  permissions: "greg#{greg.id}"
 )
 
 Message.create!(
