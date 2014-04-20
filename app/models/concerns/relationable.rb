@@ -277,11 +277,11 @@ module Relationable
   end
 
   def brother_in_laws
-    set_sib_in_laws("brother", "husband")
+    set_sib_in_laws("brothers", "husband")
   end
 
   def sister_in_laws
-    set_sib_in_laws("sister", "wife")
+    set_sib_in_laws("sisters", "wife")
   end
 
   def set_sib_in_laws(gender_sib, gender_spouse)
