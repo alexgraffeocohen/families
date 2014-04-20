@@ -225,6 +225,30 @@ Photo.create!(
   album_id: album.id
 )
 
+Photo.create!(
+  data: File.open(File.join(Rails.root, 'app/assets/images/album2.jpg')),
+  caption: "The girls found some birds",
+  album_id: album.id
+)
+
+Photo.create!(
+  data: File.open(File.join(Rails.root, 'app/assets/images/album3.jpg')),
+  caption: "Family meeting",
+  album_id: album.id
+)
+
+Photo.create!(
+  data: File.open(File.join(Rails.root, 'app/assets/images/album4.jpg')),
+  caption: "Kodak moment!",
+  album_id: album.id
+)
+
+Photo.create!(
+  data: File.open(File.join(Rails.root, 'app/assets/images/album5.jpg')),
+  caption: "Top phone user of the fam",
+  album_id: album.id
+)
+
 
 
 
