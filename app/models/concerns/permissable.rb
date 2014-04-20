@@ -35,7 +35,6 @@ module Permissable
     without_owner =  self.owner.my_family_members.collect do |member|
                 member.first_name if member.can_see?(self)
               end.compact
-              binding.pry
     (without_owner + [self.owner.first_name]).join(", ")
   end
 
