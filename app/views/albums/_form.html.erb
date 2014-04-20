@@ -3,20 +3,24 @@
     <h4 class="center">Create an Album</h4>
   </div>
   <div class="panel-body">
-    <%= form_for [@family, @album] do |f| %>
-      <div class="control-group">
-        <%= f.label :name %>
-        <div class="controls">
-          <%= f.text_field :name %><br>
+    <% if current_person.my_family_members.none? {|member| member.confirmed?} %>
+      <p>You cannot create a new album until<br> someone from your family confirms their account</p>
+    <% else  %>
+      <%= form_for [@family, @album] do |f| %>
+        <div class="control-group">
+          <%= f.label :name %>
+          <div class="controls">
+            <%= f.text_field :name %><br>
+          </div>
         </div>
-      </div>
-        <hr>
-        <p>Who can view my album?</p>
-        <%= render 'layouts/permission_form', f: f, current_resource: "album" %>
-        <hr>
-        <div class="center">
-          <%= f.submit %>
-        </div>
+          <hr>
+          <p>Who can view my album?</p>
+          <%= render 'layouts/permission_form', f: f, current_resource: "album" %>
+          <hr>
+          <div class="center">
+            <%= f.submit %>
+          </div>
+      <% end %>
     <% end %>
   </div>
 </div>
