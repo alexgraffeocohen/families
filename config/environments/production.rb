@@ -27,7 +27,7 @@ Rails.application.configure do
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
-  config.action_mailer.default_url_options = { :host => 'smtp.sendgrid.net'}
+  config.action_mailer.default_url_options = { :host => 'all-in-the-family.herokuapp.com'}
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
