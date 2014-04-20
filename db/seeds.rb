@@ -104,7 +104,7 @@ marcia = Person.create!(
     first_name: "Jon",
     email: "jon@hutchins.com",
     phone: "310-817-3014",
-    # profile_photo: open("assets/hip_read.jpg"),
+    profile_photo: File.open(File.join(Rails.root, 'app/assets/images/hip_read.jpg')),
     birthday: Time.gm(1945,"jan",1,20,15,1), 
     location: "Los Angeles, California",
     password: "foobar12",
