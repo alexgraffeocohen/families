@@ -52,6 +52,13 @@ $jumbotron-bg: white;
   position: relative;
 }
 
+.deletable_div_member {
+  @extend .deletable_div;
+  padding: 0;
+  padding-bottom: 5px;
+  display: block;
+}
+
 .deletable_div_photo {
   @extend .deletable_div;
   float: left;
@@ -61,6 +68,14 @@ $jumbotron-bg: white;
   position: absolute;
   top: 5px;
   right: 5px;
+}
+
+.delete_x_member_input:hover {
+ 
+}
+
+#people_relations_ {
+  margin-right: 5px;
 }
 
 #permitted_members {
