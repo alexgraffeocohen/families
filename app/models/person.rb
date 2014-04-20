@@ -122,7 +122,7 @@ class Person < ActiveRecord::Base
   end
 
   def can_see?(object)
-    object.relationships_permitted.include?(self.relationship_to(object.owner)) || 
+    object.relationships_permitted.include?(self.relationship_to(object.owner).gsub("-","_")) || 
     object.owner == self ||
     object.people_permitted.include?(self.permission_slug)
   end

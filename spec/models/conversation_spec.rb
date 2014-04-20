@@ -22,7 +22,7 @@ describe Conversation do
   end
 
   it "has a title" do
-    expect(@conversation.title).to eq("Title")
+    expect(@conversation.title).to eq("title")
   end
 
   it "can show last contributor" do
@@ -31,12 +31,5 @@ describe Conversation do
 
   it "can show last message sent" do
     expect(@conversation.last_message).to eq(@message2.content)
-  end
-
-  it "can capitalize title" do
-    @conversation = build(:conversation, title: "lowercase title", permissions: "1 2")
-    @conversation.save
-
-    expect(@conversation.title).to eq("Lowercase Title")
   end
 end
