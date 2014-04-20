@@ -3,6 +3,7 @@ connie = Person.create!(
   last_name: "Hutchins",
   email: "connie@hutchins.com",
   phone: "310-561-9314",
+  profile_photo: File.open(File.join(Rails.root, 'app/assets/images/connie.jpg')),
   birthday: Time.gm(1914,"jul",17,20,15,1), 
   # location: ""
   password: "foobar12",
@@ -30,7 +31,7 @@ carol = Person.create!(
   first_name: "Carol",
   email: "carol@brady.com",
   phone: "310-452-9364",
-    age: 9,
+  profile_photo: File.open(File.join(Rails.root, 'app/assets/images/carol.jpg')),
   birthday: Time.gm(1939,"feb",4,20,15,1),
   location: "Los Angeles, California",
   password: "foobar12",
@@ -46,6 +47,7 @@ mike = Person.create!(
   first_name: "Mike",
   email: "mike@brady.com",
   phone: "310-805-9238",
+  profile_photo: File.open(File.join(Rails.root, 'app/assets/images/mike.jpg')),
   birthday: Time.gm(1937,"feb",4,20,15,1),
   location: "Los Angeles, California",
   password: "foobar12",
@@ -59,6 +61,7 @@ greg = Person.create!(
   first_name: "Greg",
   email: "greg@brady.com",
   phone: "310-775-7614",
+  profile_photo: File.open(File.join(Rails.root, 'app/assets/images/greg.jpg')),
   birthday: Time.gm(1964,"aug",23,20,15,1),
   location: "Los Angeles, California",
   password: "foobar12",
@@ -74,6 +77,7 @@ marcia = Person.create!(
   first_name: "Marcia",
   email: "marcia@brady.com",
   phone: "310-135-8294",
+  profile_photo: File.open(File.join(Rails.root, 'app/assets/images/marcia.jpg')),
   birthday: Time.gm(1964,"nov",10,20,15,1),
   location: "Los Angeles, California",
   password: "foobar12",
@@ -146,7 +150,7 @@ carol.add_spouse(mike)
 
 
 greg_marcia_convo = Conversation.create!(
-  title: "Family Vacation to Hawaii"
+  title: "Family Vacation to Hawaii",
   person_id: marcia.id,
   permissions: "greg#{greg.id}"
 )
@@ -203,6 +207,14 @@ Message.create!(
   conversation_id: greg_marcia_convo.id,
   person_id: marcia.id,
   content: "Great!"
+)
+
+Event.create!(
+  name: "Surprise Luau for Mom and Dad!",
+  person_id: greg.id,
+  permissions: "1, 4, 9, 11",
+  start_date: Time.now,
+  end_date: Time.now
 )
 
 
