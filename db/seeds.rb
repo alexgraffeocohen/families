@@ -4,8 +4,8 @@ connie = Person.create!(
   email: "connie@hutchins.com",
   phone: "310-561-9314",
   profile_photo: File.open(File.join(Rails.root, 'app/assets/images/connie.jpg')),
-  birthday: Time.gm(1914,"jul",17,20,15,1), 
-  # location: ""
+  birthday: Time.gm(1914+34,"jul",17,20,15,1), 
+  location: "Malibu, California",
   password: "foobar12",
   password_confirmation: "foobar12",
   gender: "F",
@@ -18,7 +18,8 @@ harold = Person.create!(
   last_name: "Hutchins",
   email: "harold@hutchins.com",
   phone: "310-559-9244",
-  birthday: Time.gm(1914,"jun",12,20,15,1),
+  profile_photo: File.open(File.join(Rails.root, 'app/assets/images/harold.jpg')),
+  birthday: Time.gm(1914+34,"jun",12,20,15,1),
   location: "Malibu, California",
   password: "foobar12",
   password_confirmation: "foobar12",
@@ -32,7 +33,7 @@ carol = Person.create!(
   email: "carol@brady.com",
   phone: "310-452-9364",
   profile_photo: File.open(File.join(Rails.root, 'app/assets/images/carol.jpg')),
-  birthday: Time.gm(1939,"feb",4,20,15,1),
+  birthday: Time.gm(1939+34,"feb",4,20,15,1),
   location: "Los Angeles, California",
   password: "foobar12",
   password_confirmation: "foobar12",
@@ -48,7 +49,7 @@ mike = Person.create!(
   email: "mike@brady.com",
   phone: "310-805-9238",
   profile_photo: File.open(File.join(Rails.root, 'app/assets/images/mike.jpg')),
-  birthday: Time.gm(1937,"feb",4,20,15,1),
+  birthday: Time.gm(1937+34,"feb",4,20,15,1),
   location: "Los Angeles, California",
   password: "foobar12",
   password_confirmation: "foobar12",
@@ -62,7 +63,7 @@ greg = Person.create!(
   email: "greg@brady.com",
   phone: "310-775-7614",
   profile_photo: File.open(File.join(Rails.root, 'app/assets/images/greg.jpg')),
-  birthday: Time.gm(1964,"aug",23,20,15,1),
+  birthday: Time.gm(1964+34,"aug",23,20,15,1),
   location: "Los Angeles, California",
   password: "foobar12",
   password_confirmation: "foobar12",
@@ -78,7 +79,71 @@ marcia = Person.create!(
   email: "marcia@brady.com",
   phone: "310-135-8294",
   profile_photo: File.open(File.join(Rails.root, 'app/assets/images/marcia.jpg')),
-  birthday: Time.gm(1964,"nov",10,20,15,1),
+  birthday: Time.gm(1964+34,"nov",10,20,15,1),
+  location: "Los Angeles, California",
+  password: "foobar12",
+  password_confirmation: "foobar12",
+  gender: "F",
+  mother_id: carol.id,
+  father_id: mike.id,
+  admin: 0,
+  confirmed_at: Time.now
+  )
+
+cindy = Person.create!(
+  first_name: "Cindy",
+  email: "cindy@brady.com",
+  phone: "310-243-8234",
+  profile_photo: File.open(File.join(Rails.root, 'app/assets/images/cindy.jpg')),
+  birthday: Time.gm(1966+34,"nov",7,23,15,1),
+  location: "Los Angeles, California",
+  password: "foobar12",
+  password_confirmation: "foobar12",
+  gender: "F",
+  mother_id: carol.id,
+  father_id: mike.id,
+  admin: 0,
+  confirmed_at: Time.now
+  )
+
+peter = Person.create!(
+  first_name: "Peter",
+  email: "peter@brady.com",
+  phone: "310-321-6735",
+  profile_photo: File.open(File.join(Rails.root, 'app/assets/images/peter.jpg')),
+  birthday: Time.gm(1965+34,"oct",8,23,15,1),
+  location: "Los Angeles, California",
+  password: "foobar12",
+  password_confirmation: "foobar12",
+  gender: "M",
+  mother_id: carol.id,
+  father_id: mike.id,
+  admin: 0,
+  confirmed_at: Time.now
+  )
+
+bobby = Person.create!(
+  first_name: "Bobby",
+  email: "bobby@brady.com",
+  phone: "310-765-4926",
+  profile_photo: File.open(File.join(Rails.root, 'app/assets/images/bobby.jpg')),
+  birthday: Time.gm(1966+34,"nov",4,16,15,1),
+  location: "Los Angeles, California",
+  password: "foobar12",
+  password_confirmation: "foobar12",
+  gender: "M",
+  mother_id: carol.id,
+  father_id: mike.id,
+  admin: 0,
+  confirmed_at: Time.now
+  )
+
+jan = Person.create!(
+  first_name: "Jan",
+  email: "jan@brady.com",
+  phone: "310-344-8362",
+  profile_photo: File.open(File.join(Rails.root, 'app/assets/images/jan.jpg')),
+  birthday: Time.gm(1962+34,"feb",8,7,15,1),
   location: "Los Angeles, California",
   password: "foobar12",
   password_confirmation: "foobar12",
@@ -93,7 +158,8 @@ marcia = Person.create!(
   first_name: "Jenny",
   email: "jenny@hutchins.com",
   phone: "310-905-9276",
-  birthday: Time.gm(1947,"mar",2,20,15,1),
+  birthday: Time.gm(1947+34,"mar",2,20,15,1),
+  profile_photo: File.open(File.join(Rails.root, 'app/assets/images/jenny.jpg')),
   location: "Los Angeles, California",
   password: "foobar12",
   password_confirmation: "foobar12", 
@@ -108,8 +174,8 @@ marcia = Person.create!(
     first_name: "Jon",
     email: "jon@hutchins.com",
     phone: "310-817-3014",
-    profile_photo: File.open(File.join(Rails.root, 'app/assets/images/hip_read.jpg')),
-    birthday: Time.gm(1945,"jan",1,20,15,1), 
+    profile_photo: File.open(File.join(Rails.root, 'app/assets/images/jon.jpg')),
+    birthday: Time.gm(1945+34,"jan",1,20,15,1), 
     location: "Los Angeles, California",
     password: "foobar12",
     password_confirmation: "foobar12", 
@@ -124,7 +190,8 @@ marcia = Person.create!(
     first_name: "Jon Jr.",
     email: "jon_jr@hutchins.com",
     phone: "310-213-8654",
-    birthday: Time.gm(1971,"dec",30,20,15,1),
+    birthday: Time.gm(1971+34,"dec",30,20,15,1),
+    profile_photo: File.open(File.join(Rails.root, 'app/assets/images/jon_jr.jpg')),
     location: "Los Angeles, California",
     password: "foobar12",
     password_confirmation: "foobar12", 
@@ -142,7 +209,7 @@ hutchins = Family.find_or_create_by(
   name: "Hutchins"
   )
 
-brady.add_members([carol, connie, harold, mike, greg, marcia])
+brady.add_members([carol, connie, harold, mike, greg, marcia, cindy, peter, bobby, jan])
 hutchins.add_members([jon, jenny, jon_jr, carol, connie, harold])
 
 connie.add_spouse(harold)
