@@ -143,3 +143,68 @@ hutchins.add_members([jon, jenny, jon_jr, carol, connie, harold])
 
 connie.add_spouse(harold)
 carol.add_spouse(mike)
+
+
+greg_marcia_convo = Conversation.create!(
+  title: "Family Vacation to Hawaii"
+  person_id: marcia.id,
+  permissions: "greg#{greg.id}"
+)
+
+Message.create!(
+  conversation_id: greg_marcia_convo.id,
+  person_id: marcia.id,
+  content: "Hey greg, what are you bringing to Hawaii?"
+)
+
+Message.create!(
+  conversation_id: greg_marcia_convo.id,
+  person_id: greg.id,
+  content: "My surfboard and some swimmies."
+)
+
+Message.create!(
+  conversation_id: greg_marcia_convo.id,
+  person_id: marcia.id,
+  content: "Cool, I was thinking we could surprise Mom and Dad by organizing a luau."
+)
+
+Message.create!(
+  conversation_id: greg_marcia_convo.id,
+  person_id: greg.id,
+  content: "Yea! We can all wear matching outfits."
+)
+
+Message.create!(
+  conversation_id: greg_marcia_convo.id,
+  person_id: marcia.id,
+  content: "I don't know if grandma and grandpa will be into it."
+)
+
+Message.create!(
+  conversation_id: greg_marcia_convo.id,
+  person_id: greg.id,
+  content: "We should start an event and a conversation without mom and dad invited."
+)
+
+Message.create!(
+  conversation_id: greg_marcia_convo.id,
+  person_id: marcia.id,
+  content: "Perfect, then we can brainstorm ideas with everyone."
+)
+
+Message.create!(
+  conversation_id: greg_marcia_convo.id,
+  person_id: greg.id,
+  content: "Exactly."
+)
+
+Message.create!(
+  conversation_id: greg_marcia_convo.id,
+  person_id: marcia.id,
+  content: "Great!"
+)
+
+
+
+
