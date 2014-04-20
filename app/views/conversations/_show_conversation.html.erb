@@ -1,4 +1,4 @@
-<div class="convo deletable_div conversation_white_div" data-id="<%= convo.id %>">
+<div class="convo deletable_div message_convo_div" data-id="<%= convo.id %>">
   <h3>
     <%= link_to capitalize_string(convo.title), family_conversation_path(@family, convo) %>
     <h5 id="permitted_members"><%= convo.all_permitted_members %></h5>
