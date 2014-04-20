@@ -28,24 +28,15 @@ class FamilyController < ApplicationController
     if request.referrer.include?("add_names")
       result = any_invalid?(rels, current_person.current_relationships)
       if result == false
-        accounts = create_accounts(params, @family)
-        nested_array = members_array(accounts, rels)
-        set_relations(rearrange_members(nested_array), current_person)
-        render :js => "window.location='#{family_path(@family)}'"
-        flash[:notice] = "Invitations have been sent."
+        send_invites(rels)
       else
         respond_to do |f|
           f.js   {render 'members_invalid', locals: {msge: generate_invalid_alert(result)} }
         end
       end
     else
-      accounts = create_accounts(params, @family)
-      nested_array = members_array(accounts, rels)
-      set_relations(rearrange_members(nested_array), current_person)
-      render :js => "window.location='#{family_path(@family)}'"
-      flash[:notice] = "Invitations have been sent."
+      send_invites(rels)
     end
-
   end
 
   def add_admin
@@ -89,6 +80,14 @@ class FamilyController < ApplicationController
   end
 
   private
+
+  def send_invites(rels)
+    accounts = create_accounts(params, @family)
+    nested_array = members_array(accounts, rels)
+    set_relations(rearrange_members(nested_array), current_person)
+    render :js => "window.location='#{family_path(@family)}'"
+    flash[:notice] = "Invitations have been sent."
+  end
 
   def validation_hash
     {
