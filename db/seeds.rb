@@ -217,6 +217,15 @@ Event.create!(
   end_date: Time.now
 )
 
+album = Album.create!(name: "Family fun!", person_id: carol.id, family_id: brady.id, permissions: "1, 2, 3, 8, 12")
+
+Photo.create!(
+  data: File.open(File.join(Rails.root, 'app/assets/images/album1.jpg')),
+  caption: "At the beach in Hawaii",
+  album_id: album.id
+)
+
+
 
 
 
