@@ -277,14 +277,16 @@ module Relationable
   end
 
   def brother_in_laws
-    from_brothers = brothers.map { |brother| brother.husband }
-    from_sisters  = sisters.map { |sister| sister.husband }
-    [(wife.brothers unless wife.nil?), from_brothers, from_sisters, (husband.brothers unless husband.nil?)].flatten.compact
+    set_sib_in_laws("brother", "husband")
   end
 
   def sister_in_laws
-    from_brothers = brothers.map { |brother| brother.wife }
-    from_sisters  = sisters.map { |sister| sister.wife }
-    [(wife.sisters unless wife.nil?), from_sisters, from_brothers, (husband.sisters unless husband.nil?)].flatten.compact
+    set_sib_in_laws("sister", "wife")
+  end
+
+  def set_sib_in_laws(gender_sib, gender_spouse)
+    from_brothers = brothers.map { |brother| brother.send(gender_spouse) }
+    from_sisters  = sisters.map { |sister| sister.send(gender_spouse) }
+    [(wife.send(gender_sib) unless wife.nil?), from_sisters, from_brothers, (husband.send(gender_sib) unless husband.nil?)].flatten.compact
   end
 end
