@@ -24,11 +24,26 @@ class FamilyController < ApplicationController
   end
 
   def modify_families
-    accounts = create_accounts(params, @family)
-    nested_array = members_array(accounts, params[:people][:relations])
-    set_relations(rearrange_members(nested_array), current_person)
-    render :js => "window.location='#{family_path(@family)}'"
-    flash[:notice] = "Invitations have been sent."
+    rels = params[:people][:relations]
+    if request.referrer.include?("add_names")
+      result = any_invalid?(rels, current_person.current_relationships)
+      if result == false
+        accounts = create_accounts(params, @family)
+        nested_array = members_array(accounts, rels)
+        set_relations(rearrange_members(nested_array), current_person)
+        render :js => "window.location='#{family_path(@family)}'"
+        flash[:notice] = "Invitations have been sent."
+      else
+        f.js   {render 'members_invalid', locals: {msge: generate_invalid_alert(result)} }
+      end
+    else
+      accounts = create_accounts(params, @family)
+      nested_array = members_array(accounts, rels)
+      set_relations(rearrange_members(nested_array), current_person)
+      render :js => "window.location='#{family_path(@family)}'"
+      flash[:notice] = "Invitations have been sent."
+    end
+
   end
 
   def add_admin
@@ -49,7 +64,7 @@ class FamilyController < ApplicationController
   end
 
   def create
-    result = any_invalid?
+    result = any_invalid?(params["people"]["relations"])
     if result == false 
         @family = Family.find_or_create_by(family_params)
         @family.person_families.build(person: current_person)
@@ -94,18 +109,18 @@ class FamilyController < ApplicationController
     }
   end
 
-  def any_invalid?
-    relations = params["people"]["relations"]
+  def any_invalid?(requested_relations, current_relations = nil)
+    current_relations ||= requested_relations
     switch = false
 
     validation_hash[:full_match_needed].each do |key, value|
-      if relations.include?(key) && (relations & value).length != value.length
+      if requested_relations.include?(key) && (current_relations & value).length != value.length
         switch = key
       end
     end
 
     validation_hash[:partial_match_needed].each do |key, value|
-      if relations.include?(key) && (relations & value).length < 1
+      if requested_relations.include?(key) && (current_relations & value).length < 1
         switch = key
       end
     end
