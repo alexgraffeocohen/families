@@ -85,8 +85,8 @@ class FamilyController < ApplicationController
     accounts = create_accounts(params, @family)
     nested_array = members_array(accounts, rels)
     set_relations(rearrange_members(nested_array), current_person)
-    render :js => "window.location='#{family_path(@family)}'"
     flash[:notice] = "Invitations have been sent."
+    render js: "window.location='#{family_path(@family)}'"
   end
 
   def validation_hash

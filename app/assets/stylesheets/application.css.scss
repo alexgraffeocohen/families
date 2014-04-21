@@ -138,7 +138,13 @@ $jumbotron-bg: white;
   margin: 0;
   margin-top: 2.5%;
   float: right;
+  text-align: center;
 }
+
+.message_time {
+  padding-left: 10px;
+}
+
 .center_div {
   float: right;
   width: 75%;
@@ -147,9 +153,12 @@ $jumbotron-bg: white;
 .message_convo_div {
   @extend .conversation_white_div;
   margin: 2%;
+  // text-align: left;
 }
 
-#message_photo {
-  float: left;
+#message_content {
+  // float: left;
   display: inline;
+  vertical-align: middle;
+  height: auto;
 }

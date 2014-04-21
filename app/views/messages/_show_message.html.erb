@@ -1,8 +1,10 @@
-<div class="message center_div deletable_div" data-id="<%= message.id %>" data-time="<%= message.created_at.to_i %>">
+<div class="message deletable_div" data-id="<%= message.id %>" data-time="<%= message.created_at.to_i %>">
   <% if current_person == message.sender %>
     <%= link_to "✖", delete_family_conversation_message_path(family, conversation, message), remote: true, method: :delete, class: "delete_x" %>
   <% end %>
-  <div id="message_photo"><%= image_tag(message.sender.profile_photo_url(:tiny)) %></div>
-  <%= message.sender.first_name %>: <%= message.content %>
-  <span class="message_time"><%= message.created_at.strftime("%_m/%e %l:%M%P") %></span>
+  <div id="message_content">
+    <%= image_tag(message.sender.profile_photo_url(:tiny)) %>
+    <%= message.sender.first_name %>: <%= message.content %><br>
+    <span class="message_time"><%= message.created_at.strftime("%_m/%e %l:%M%P") %></span>
+  </div>
 </div>
