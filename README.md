@@ -8,7 +8,7 @@ All in the Family is a closed social network to use with your family. We made it
 
 ## Screenshots
 
-![Home Screen](http://i.imgur.com/l2SK2aX.png)
+![Home Screen](http://i.imgur.com/WbRWpBI.png)
 ![Vacations](http://i.imgur.com/EGI2ImG.png)
 
 ## Background

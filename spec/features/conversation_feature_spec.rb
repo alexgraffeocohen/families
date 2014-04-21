@@ -23,9 +23,8 @@ feature "Conversation" do
     expect(page).to have_content(@conversation.title)
   end
 
-  xscenario "fill in title", js: true do
+  scenario "fill in title", js: true do
     visit conversations_path(@brady)
-    save_and_open_page
     fill_in "Title", with: "Vacation Talk"
     click_button "Create Conversation"
     page.should have_content("Create a Conversation")
