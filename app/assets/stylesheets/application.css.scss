@@ -141,9 +141,6 @@ $jumbotron-bg: white;
   text-align: center;
 }
 
-.message_time {
-  padding-left: 10px;
-}
 
 .center_div {
   float: right;
@@ -156,13 +153,22 @@ $jumbotron-bg: white;
   // text-align: left;
 }
 
-#message_content {
+.message_content {
   // float: left;
   display: inline;
-  vertical-align: middle;
   height: auto;
 }
 
+
 .white_div.fixed_height {
   height: 300px;
+}
+
+.message_pic {
+  float: left;
+}
+.name_and_message {
+  overflow: hidden;
+  padding: 5px;
+  margin-right: 5px;
 }

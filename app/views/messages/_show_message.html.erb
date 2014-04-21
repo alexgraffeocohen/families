@@ -2,9 +2,9 @@
   <% if current_person == message.sender %>
     <%= link_to "✖", delete_family_conversation_message_path(family, conversation, message), remote: true, method: :delete, class: "delete_x" %>
   <% end %>
-  <div id="message_content">
-    <%= image_tag(message.sender.profile_photo_url(:tiny)) %>
-    <span class="padding_left"><%= message.sender.first_name %>: <%= message.content %></span><br>
-    <span class="message_time"><%= message.created_at.strftime("%_m/%e %l:%M%P") %></span>
+  <div class="message_content">
+    <div class="message_pic"><%= image_tag(message.sender.profile_photo_url(:tiny)) %></div>
+    <div class="name_and_message"><%= message.sender.first_name %>:<%= message.content %><br><br>
+    <%= message.created_at.strftime("%_m/%e %l:%M%P") %></div>
   </div>
 </div>
