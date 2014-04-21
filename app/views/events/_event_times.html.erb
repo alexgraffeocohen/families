@@ -1,0 +1,6 @@
+<% unless @event.formatted_time("start_date") == "" %>
+  <p>Start Time: <%= @event.formatted_time("start_date") %></p>
+<% end %>
+<% unless @event.formatted_time("end_date") == "" %>
+  <p>End Time: <%= @event.formatted_time("end_date") %></p>
+<% end %>

@@ -3,43 +3,42 @@
     <h4 class="center">Create a New Event!</h4>
   </div>
   <div class="panel-body form_attr">
-    <%= form_for([@family, @event], class:"form-horizontal") do |f| %>
+    <%= form_for([@family, @event], class:"form-horizontal", remote: true) do |f| %>
       <div class="control-group">
         <%= f.label :name, class:"control-label" %>
         <div class="controls">
-          <%= f.text_field :name %><br>
+          <%= f.text_field :name %><br><br>
         </div>
       </div>
       <div class="control-group">
-        <%= f.label :content, "Description", class:"control-label" %>
+        <%= f.label :description, "Description", class:"control-label" %>
         <div class="controls">
-          <%= f.text_area :content %><br>
+          <%= f.text_area :description %><br><br>
         </div>
       </div>
       <div class="control-group">
         <%= f.label :start_date, class:"control-label" %>
         <div class="controls">
-          <%= f.text_field :start_date %> <br> 
+          <%= f.text_field :start_date %><br><br>
         </div>
       </div>
       <div class="control-group">
         <%= f.label :end_date, class:"control-label" %>
         <div class="controls">
-          <%= f.text_field :end_date %><br>
+          <%= f.text_field :end_date %><br><br>
         </div>
       </div>
       <div class="control-group">
         <%= label_tag "start_time", "Start Time", class:"control-label" %>
         <div class="controls">
-          <%= time_field_tag "start_time", "Start Time" %> <br> 
+          <%= time_field_tag "start_time", "Start Time" %><br><br> 
         </div>
       </div>
       <div class="control-group">
         <%= label_tag "end_time", "End Time", class:"control-label" %>
         <div class="controls">
-          <%= time_field_tag "end_time", "End Time" %> <br> 
+          <%= time_field_tag "end_time", "End Time" %>
         </div>
-        <br><br><br><br>
       </div>
       <hr>
       <div class="center">

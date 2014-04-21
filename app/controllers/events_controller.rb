@@ -17,14 +17,22 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    
-    save_time
-    @event.owner = current_person
-    @family.events << @event
     @event.permissions = @event.parse(params[:event][:parse_permission])
-    @event.save
-
-    redirect_to family_events_path
+    respond_to do |f|
+      if @event.valid?
+        save_start_time unless params[:start_time].nil?
+        save_end_time unless params[:end_time].nil?
+  
+        @event.owner = current_person
+        @family.events << @event
+        
+        @event.save
+        f.js { render js: "window.location='#{family_events_path}'" }
+      else
+        @msg = print_errors_for(@event)
+        f.js {render 'create_failure', locals: {msge: @msg}}
+      end
+    end
   end
 
   def show
@@ -46,13 +54,17 @@ class EventsController < ApplicationController
     @event = Event.find(params[:event_id])
   end
 
-  def save_time
+  def save_start_time
     start_hours = params[:start_time].split(":").first.to_i
     start_minutes = params[:start_time].split(":").last.to_i
+    
+    @event.start_date = (DateTime.parse(params["event"]["start_date"]) + start_hours.hours + start_minutes.minutes).to_s
+  end
+
+  def save_end_time
     end_hours = params[:end_time].split(":").first.to_i
     end_minutes = params[:end_time].split(":").last.to_i
 
-    @event.start_date = (DateTime.parse(params["event"]["start_date"]) + start_hours.hours + start_minutes.minutes).to_s
     @event.end_date = (DateTime.parse(params["event"]["end_date"]) + end_hours.hours + end_minutes.minutes).to_s
   end
 

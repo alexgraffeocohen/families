@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
 
   def print_errors_for(resource)
     messages = resource.errors.full_messages
-    error_string = "This #{resource.class.to_s.downcase} could not be created. "
+    error_string = "This #{resource.class.to_s.downcase} could not be created: "
     messages.each do |message|
       error_string << "#{message}. "
     end

@@ -3,13 +3,17 @@ class Event < ActiveRecord::Base
   belongs_to :family
   include Permissable
 
-  validates_presence_of :start_date, :end_date, :permissions
+  validates_presence_of :start_date, :end_date, :permissions, :name
 
   def formatted_date
     [start_date.day, start_date.month]
   end
 
   def formatted_time(date)
-    self.send(date).strftime("%-l:%M %p")
+    unless self.send(date).hour == 0
+      self.send(date).strftime("%-l:%M %p")
+    else
+      ""
+    end
   end
 end

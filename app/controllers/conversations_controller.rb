@@ -24,7 +24,7 @@ class ConversationsController < ApplicationController
         f.js {render 'create', locals: {conversation: @conversation}}
         f.html {redirect_to :back}
       else
-        @msg = "Please enter title and permissions."
+        @msg = print_errors_for(@conversation)
         f.js {render 'create_failure', locals: {msge: @msg}}
       end 
     end

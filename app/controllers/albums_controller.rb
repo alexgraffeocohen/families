@@ -13,15 +13,15 @@ class AlbumsController < ApplicationController
   end
 
   def create
-    album = Album.new(album_params)
-    album.family_id = find_family(params[:id]).id
-    album.permissions = album.parse(params[:album][:parse_permission])
+    @album = Album.new(album_params)
+    @album.family_id = find_family(params[:id]).id
+    @album.permissions = @album.parse(params[:album][:parse_permission])
     respond_to do |f|
-      if album.save
-        current_person.albums << album
-        render js: "window.location='#{album_path(@family, album)}'"
+      if @album.save
+        current_person.albums << @album
+        f.js { render js: "window.location='#{album_path(@family, @album)}'" }
       else
-        @msg = print_errors_for(album)
+        @msg = print_errors_for(@album)
         f.js {render 'create_failure', locals: {msge: @msg}}
       end
     end
