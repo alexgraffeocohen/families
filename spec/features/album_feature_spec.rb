@@ -26,8 +26,9 @@ feature "Album" do
   end
 
   scenario "album index displays when no albums exist" do  
-    Album.all.delete_all
+    Album.destroy_all
     visit "families/#{@brady.name_slug}/albums"
+    visit current_path
     expect(page).to have_content("You have 0 albums.")
   end
 
