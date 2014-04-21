@@ -1,8 +1,6 @@
 <div class="center">
-  <h4>Current Conversation:</h4>
   <h2 data-id="<%= @conversation.id %>"><%= capitalize_string(@conversation.title) %></h2>
-  <h5>Who can view this conversation?</h5>
-  <h5 id="permitted_members"><%= permitted_except_viewer(@conversation) %></h5>
+  <h5>Who can view this conversation? <span id="permitted_members"><%= permitted_except_viewer(@conversation) %></span></h5>
 </div>
 <div class="white_div new_message">
   <%= form_for [@family, @conversation, @message], remote: true do |f| %>
@@ -15,7 +13,7 @@
   <%= link_to "Back to All Conversations", family_conversations_path %>
 </div>
 
-<div class="message_all white_div center_div">
+<div class="message_all conversation_white_div center_div">
   <% if @conversation.messages.length == 0 %>
     <div class="white_div none_showing" >You have 0 messages.</div>
   <% else %>

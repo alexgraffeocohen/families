@@ -3,18 +3,22 @@
     <h4 class="center">Create a Conversation</h4>
   </div>
   <div class="panel-body">
-    <%= form_for([@family, @conversation], remote: true) do |f| %>
-      <div class="control-group">
-        <%= f.label :title %>
-        <div class="controls">
-          <%= f.text_field :title %>
+    <% if current_person.my_family_members.none? {|member| member.confirmed?} %>
+      <p>You cannot create a new conversation until<br> someone from your family confirms their account</p>
+    <% else %>
+      <%= form_for([@family, @conversation], remote: true) do |f| %>
+        <div class="control-group">
+          <%= f.label :title %>
+          <div class="controls">
+            <%= f.text_field :title %>
+          </div>
         </div>
-      </div>
-      <hr>
-      <p>Who is in this conversation?</p>
-      <%= render 'layouts/permission_form', f: f, current_resource: "conversation" %>
-      <hr>
-      <%= f.submit %>
+        <hr>
+        <p>Who is in this conversation?</p>
+        <%= render 'layouts/permission_form', f: f, current_resource: "conversation" %>
+        <hr>
+        <%= f.submit %>
+      <% end %>
     <% end %>
   </div>
 </div>

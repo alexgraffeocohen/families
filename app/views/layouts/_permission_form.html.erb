@@ -1,10 +1,10 @@
 <%= link_to "By Group", "#" %>
-<br> 
+<br>
 <div class="group_section">
 <label><%= check_box_tag :family %> Entire Family</label>
 <br> 
   <% @relationships.each_with_index do |relation, index| %>
-    <% unless current_person.send("#{relation}").blank?  %>
+    <% unless current_person.send(relation).blank? || [current_person.send(relation)].flatten.none? {|member| member.confirmed?} %>
       <%= f.check_box :parse_permission, {multiple: true, class: "group"}, (index+1), nil %> <%= capitalize_string(relation) %>
       <br>
     <% end %>

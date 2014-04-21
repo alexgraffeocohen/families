@@ -48,7 +48,6 @@ feature "Album" do
 
   scenario "can create album from index" do
     visit "families/#{@brady.name_slug}/albums"
-    click_link "Create an album!"
     fill_in "Name", with: "Crazy Awesome Album"
     check('Greg')
     click_button "Create Album"
@@ -57,7 +56,6 @@ feature "Album" do
 
   scenario "cannot save album without permissions" do
     visit "families/#{@brady.name_slug}/albums"
-    click_link "Create an album!"
     fill_in "Name", with: "Crazy Awesome Album"
     click_button "Create Album"
     expect(page).to have_content("Permissions can't be blank")

@@ -37,6 +37,30 @@ class Person < ActiveRecord::Base
     admin == 1
   end
 
+  def current_relationships
+    relationships = my_family_members.collect do |member|
+      [member, member.relationship_to(self)]
+    end.uniq
+    new_rels =  relationships.collect do |rel|
+      case rel[1]
+      when "grandmother", "grandfather"
+        if self.father && self.father.parents.include?(rel[0])
+          "paternal " + rel[1]
+        elsif self.mother && self.mother.parents.include?(rel[0])
+          "maternal " + rel[1]
+        end
+      when "aunt", "uncle"
+        if self.father && self.father.siblings.include?(rel[0])
+          "paternal " + rel[1]
+        elsif self.mother && self.mother.siblings.include?(rel[0])
+          "maternal " + rel[1]
+        end
+      else
+        rel[1]
+      end
+    end
+  end
+
   def mother=(member)
     write_attribute(:mother_id, member.id)
     member.gender = "F"
@@ -98,7 +122,7 @@ class Person < ActiveRecord::Base
   end
 
   def can_see?(object)
-    object.relationships_permitted.include?(self.relationship_to(object.owner)) || 
+    object.relationships_permitted.include?(self.relationship_to(object.owner).gsub("-","_")) || 
     object.owner == self ||
     object.people_permitted.include?(self.permission_slug)
   end

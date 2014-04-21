@@ -20,6 +20,14 @@
  //= depend_on_asset "bootstrap/glyphicons-halflings-regular.svg"
  */
 
+
+// .open {
+//   a:focus {
+//     background-color: white;
+//   }
+// }
+
+
 @import url(http://fonts.googleapis.com/css?family=Lato:400,700);
 
 $body-bg: #ecf0f1;
@@ -42,6 +50,11 @@ $jumbotron-bg: white;
   margin-bottom: 20px;
 }
 
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  background-color: white;
+  color: #555555;
+}
+
 .theme-showcase > p > .btn {
   margin: 5px 0;
 }
@@ -50,6 +63,13 @@ $jumbotron-bg: white;
   display: inline-block;
   padding: 10px 20px;
   position: relative;
+}
+
+.deletable_div_member {
+  @extend .deletable_div;
+  padding: 0;
+  padding-bottom: 5px;
+  display: block;
 }
 
 .deletable_div_photo {
@@ -61,6 +81,14 @@ $jumbotron-bg: white;
   position: absolute;
   top: 5px;
   right: 5px;
+}
+
+.delete_x_member_input:hover {
+ 
+}
+
+#people_relations_ {
+  margin-right: 5px;
 }
 
 #permitted_members {
@@ -85,19 +113,43 @@ $jumbotron-bg: white;
   overflow: scroll;
   width: 45%;
   height: 20%;
-  margin: 20px;
+  margin: 2.5%;
   background: white;
   border-radius: 10px;
   text-align: center;
-  padding: 20px;
+  padding: 2.5%;
   float: left;
+}
+
+@media screen and (max-width: 599px){
+  .white_div {
+    width: 90%;
+  }
+}
+
+@media screen and (min-width: 600px){
+  .white_div {
+    width: 45%;
+  }
 }
 .conversation_white_div {
   @extend .white_div;
   width: 35%;
+  margin: 0;
+  margin-top: 2.5%;
   float: right;
 }
 .center_div {
   float: right;
   width: 75%;
+}
+
+.message_convo_div {
+  @extend .conversation_white_div;
+  margin: 2%;
+}
+
+#message_photo {
+  float: left;
+  display: inline;
 }

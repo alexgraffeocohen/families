@@ -14,8 +14,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "About", about_path %></li>
+        <li><%= link_to "About This App", about_path %></li>
         <li>
           <% if person_signed_in? && current_person.first_name && current_person.default_family %>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -34,7 +33,7 @@
               
                 <li><%= link_to "Albums", albums_path(current_person.default_family) %>
                 <li><%= link_to "Conversations", family_conversations_path(current_person.default_family) %>
-                <li><%= link_to "Calendar", family_events_path(current_person.default_family) %>
+                <li><%= link_to "Events", family_events_path(current_person.default_family) %>
             </ul>
           <% end %>
         <li>
