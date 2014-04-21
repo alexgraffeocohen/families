@@ -8,7 +8,7 @@
 </h2>
   <%= calendar @date do |date| %>
     <%= date.day %>
-    <% formatted_date = Time.zone.parse(date.to_s).utc %>
+    <% formatted_date = [Time.zone.parse(date.to_s).utc.day, Time.zone.parse(date.to_s).utc.month]  %>
     <% if @permitted_events_by_date[formatted_date] %>
       <ul>
         <% @permitted_events_by_date[formatted_date].each do |event| %>

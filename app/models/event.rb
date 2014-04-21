@@ -4,4 +4,8 @@ class Event < ActiveRecord::Base
   include Permissable
 
   validates_presence_of :start_date, :end_date, :permissions
+
+  def formatted_date
+    [start_date.day, start_date.month]
+  end
 end
