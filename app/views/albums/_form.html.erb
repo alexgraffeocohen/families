@@ -6,7 +6,7 @@
     <% if current_person.my_family_members.none? {|member| member.confirmed?} %>
       <p>You cannot create a new album until<br> someone from your family confirms their account</p>
     <% else  %>
-      <%= form_for [@family, @album] do |f| %>
+      <%= form_for [@family, @album], remote: true do |f| %>
         <div class="control-group">
           <%= f.label :name %>
           <div class="controls">

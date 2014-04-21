@@ -25,7 +25,8 @@ class Family < ActiveRecord::Base
 
   def save_name_slug
     unless Family.find_by(name_slug: name.downcase)
-      self.name_slug = name.downcase
+      binding.pry
+      self.name_slug = name.gsub(/\s|\/|&/, '-').downcase
     else
       count = Family.where("name_slug = ?",name.downcase).length
       self.name_slug = "#{name.downcase}#{count-1}" if self.name_slug.nil?

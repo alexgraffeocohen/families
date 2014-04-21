@@ -22,6 +22,15 @@ class ApplicationController < ActionController::Base
   helper_method :permitted_except_viewer
 
   private
+
+  def print_errors_for(resource)
+    messages = resource.errors.full_messages
+    error_string = "This #{resource.class.to_s.downcase} could not be created. "
+    messages.each do |message|
+      error_string << "#{message}. "
+    end
+    error_string
+  end
   
   def configure_permitted_parameters
     #this is a total security risk. need to revisit.
