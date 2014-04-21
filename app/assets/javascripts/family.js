@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  $(".delete_x_member_input").hide();
   $(document).on("click", "a.delete_x_member_input", function(e){
     e.preventDefault();
     if($("a.delete_x_member_input").size() > 1){
