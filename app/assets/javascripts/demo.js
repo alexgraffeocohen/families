@@ -1,7 +1,8 @@
 $(document).ready(function(){
   $("#demo-user-btn").on("click", function(e){
-    $(".hidden-email-field").val("demo-user@heatseeknyc.com");
-    $(".hidden-password-field").val("33west26");
+    e.preventDefault();
+    $(".hidden-email-field").val("marcia@brady.com");
+    $(".hidden-password-field").val("foobar12");
     $("form").submit();
   });
 });
