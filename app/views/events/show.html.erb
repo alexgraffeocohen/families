@@ -5,7 +5,9 @@
   <% if @event.owner == current_person %>
     <%= link_to "Delete", delete_family_event_path(@family, @event), method: :delete, data: { confirm: "Are you sure you want to delete this event?"} %>
   <% end %>
+  <hr>
   <p>Start Time: <%= @event.formatted_time("start_date") %></p>
   <p>End Time: <%= @event.formatted_time("end_date") %></p>
-  <p><%= @event.content %></p>
+  <hr>
+  <p><%= @event.description %></p>
 </div>
