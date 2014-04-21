@@ -1,7 +1,7 @@
 <h2 class="center">About Us</h2>
 <% current_person.my_family_members.each do |person| %>
   <% if person != current_person %>
-    <div class="white_div">
+    <div class="white_div fixed_height">
       <%= image_tag(person.profile_photo_url(:tiny)) %>
       <h4><%= person.first_name %>, your <%= person.relationship_to(current_person)%></h4>
       <div>
