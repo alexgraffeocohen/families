@@ -13,7 +13,7 @@
       <ul>
         <% @permitted_events_by_date[formatted_date].each do |event| %>
           <p>
-            <%= event.start_date.strftime("%H: %M") %>: <%= link_to capitalize_string(event.name), event_path(@family, event) %>
+            <%= event.formatted_time("start_date") %>: <%= link_to capitalize_string(event.name), event_path(@family, event) %>
           </p>
         <% end %>
       </ul>

@@ -8,4 +8,8 @@ class Event < ActiveRecord::Base
   def formatted_date
     [start_date.day, start_date.month]
   end
+
+  def formatted_time(date)
+    self.send(date).strftime("%-l:%M %p")
+  end
 end
