@@ -39,7 +39,7 @@
         <div class="control-group">
           <%= f.label :birthday, "What's your birthday?" %> 
           <div class="controls">
-            <%= f.date_field :birthday %>
+            <%= f.date_select :birthday, :start_year => Date.today.year - 100 %>
           </div>
         </div>
       <% end %>
