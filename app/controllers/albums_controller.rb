@@ -21,7 +21,7 @@ class AlbumsController < ApplicationController
       current_person.albums << album
       redirect_to album_path(@family, album)
     else
-      flash[:alert] = "#{album.errors.full_messages}"
+      flash[:alert] = "#{print_errors_for(album)}"
       redirect_to :back
     end
   end

@@ -7,14 +7,14 @@ en:
       send_instructions: "You will receive an email with instructions about how to confirm your account in a few minutes."
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions about how to confirm your account in a few minutes."
     failure:
-      already_authenticated: "You are already signed in."
+      already_authenticated: "You are already logged in."
       inactive: "Your account is not activated yet."
       invalid: "Invalid email or password."
       locked: "Your account is locked."
       last_attempt: "You have one more attempt before your account will be locked."
       not_found_in_database: "Invalid email or password."
-      timeout: "Your session expired. Please sign in again to continue."
-      unauthenticated: "You need to sign in or sign up before continuing."
+      timeout: "Your session expired. Please log in again to continue."
+      unauthenticated: "You need to log in or sign up before continuing."
       unconfirmed: "You have to confirm your account before continuing."
     mailer:
       confirmation_instructions:
@@ -41,7 +41,7 @@ en:
       update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and click on the confirm link to finalize confirming your new email address."
       updated: "You updated your account successfully."
     sessions:
-      signed_in: "Signed in successfully."
+      signed_in: "Logged in successfully."
       signed_out: "Signed out successfully."
     unlocks:
       send_instructions: "You will receive an email with instructions about how to unlock your account in a few minutes."
@@ -49,7 +49,7 @@ en:
       unlocked: "Your account has been unlocked successfully. Please sign in to continue."
   errors:
     messages:
-      already_confirmed: "was already confirmed, please try signing in"
+      already_confirmed: "was already confirmed, please try logging in"
       confirmation_period_expired: "needs to be confirmed within %{period}, please request a new one"
       expired: "has expired, please request a new one"
       not_found: "not found"
