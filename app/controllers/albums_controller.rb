@@ -19,10 +19,10 @@ class AlbumsController < ApplicationController
     
     if album.save
       current_person.albums << album
-      redirect_to album_path(@family, album)
+      render js: "window.location='#{album_path(@family, album)}'"
     else
-      flash[:alert] = "#{album.errors.full_messages}"
-      redirect_to :back
+      @msg = "#{album.errors.full_messages}"
+      f.js {render 'create_failure', locals: {msge: @msg}}
     end
   end
 
