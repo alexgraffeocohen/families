@@ -63,7 +63,7 @@ greg = Person.create!(
   email: "greg@brady.com",
   phone: "310-775-7614",
   profile_photo: File.open(File.join(Rails.root, 'app/assets/images/greg.jpg')),
-  birthday: Time.gm(1964+34,"aug",23,20,15,1),
+  birthday: Time.gm(1964+33,"aug",23,20,15,1),
   location: "Los Angeles, California",
   password: "foobar12",
   password_confirmation: "foobar12",
@@ -95,7 +95,7 @@ cindy = Person.create!(
   email: "cindy@brady.com",
   phone: "310-243-8234",
   profile_photo: File.open(File.join(Rails.root, 'app/assets/images/cindy.jpg')),
-  birthday: Time.gm(1966+34,"nov",7,23,15,1),
+  birthday: Time.gm(1966+38,"nov",7,23,15,1),
   location: "Los Angeles, California",
   password: "foobar12",
   password_confirmation: "foobar12",
@@ -127,7 +127,7 @@ bobby = Person.create!(
   email: "bobby@brady.com",
   phone: "310-765-4926",
   profile_photo: File.open(File.join(Rails.root, 'app/assets/images/bobby.jpg')),
-  birthday: Time.gm(1966+34,"nov",4,16,15,1),
+  birthday: Time.gm(1966+38,"nov",4,16,15,1),
   location: "Los Angeles, California",
   password: "foobar12",
   password_confirmation: "foobar12",
@@ -143,7 +143,7 @@ jan = Person.create!(
   email: "jan@brady.com",
   phone: "310-344-8362",
   profile_photo: File.open(File.join(Rails.root, 'app/assets/images/jan.jpg')),
-  birthday: Time.gm(1962+34,"feb",8,7,15,1),
+  birthday: Time.gm(1962+35,"feb",8,7,15,1),
   location: "Los Angeles, California",
   password: "foobar12",
   password_confirmation: "foobar12",
@@ -190,7 +190,7 @@ jan = Person.create!(
     first_name: "Jon Jr.",
     email: "jon_jr@hutchins.com",
     phone: "310-213-8654",
-    birthday: Time.gm(1971+34,"dec",30,20,15,1),
+    birthday: Time.gm(1971+38,"dec",30,20,15,1),
     profile_photo: File.open(File.join(Rails.root, 'app/assets/images/jon_jr.jpg')),
     location: "Los Angeles, California",
     password: "foobar12",
@@ -280,8 +280,27 @@ Event.create!(
   name: "Surprise Luau for Mom and Dad!",
   person_id: greg.id,
   permissions: "1, 4, 9, 11",
-  start_date: Time.now,
-  end_date: Time.now
+  start_date: Time.now + 1.day + 4.hours,
+  end_date: Time.now + 1.day + 10.hours,
+  description: "Everyone meet at the beach at sundown!"
+)
+
+Event.create!(
+  name: "Family Dinner",
+  person_id: greg.id,
+  permissions: "1, 2, 4, 9, 11",
+  start_date: Time.now + 2.hours,
+  end_date: Time.now + 4.hours,
+  description: "Meatloaf"
+)
+
+Event.create!(
+  name: "Shopping with Jan and Cindy",
+  person_id: marcia.id,
+  permissions: "jan#{jan.id} cindy#{cindy.id}",
+  start_date: Time.now + 3.days,
+  end_date: Time.now + 3.days + 3.hours,
+  description: "Let's get new dresses for the summer."
 )
 
 album = Album.create!(name: "Family fun!", person_id: carol.id, family_id: brady.id, permissions: "1, 2, 3, 8, 12")
