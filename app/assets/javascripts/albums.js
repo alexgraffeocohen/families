@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $('.image_link').magnificPopup({type: 'image' });
+  $('.image_link').magnificPopup({type: 'image'});
 
   $(".album_name").on("click", function(e){
     e.preventDefault();

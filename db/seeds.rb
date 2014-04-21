@@ -86,7 +86,7 @@ marcia = Person.create!(
   gender: "F",
   mother_id: carol.id,
   father_id: mike.id,
-  admin: 0,
+  admin: 1,
   confirmed_at: Time.now
   )
 
