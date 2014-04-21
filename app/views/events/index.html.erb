@@ -9,10 +9,13 @@
   <%= calendar @date do |date| %>
     <%= date.day %>
     <% formatted_date = Time.zone.parse(date.to_s).utc %>
+    <% binding.pry %>
     <% if @permitted_events_by_date[formatted_date] %>
       <ul>
         <% @permitted_events_by_date[formatted_date].each do |event| %>
-          <li><%= link_to capitalize_string(event.name), event_path(@family, event) %></li>
+          <p>
+            <%= event.start_date.strftime("%H: %M") %>: <%= link_to capitalize_string(event.name), event_path(@family, event) %>
+          </p>
         <% end %>
       </ul>
     <% end %>

@@ -27,6 +27,18 @@
         <div class="controls">
           <%= f.text_field :end_date %><br>
         </div>
+      </div>
+      <div class="control-group">
+        <%= label_tag "start_time", "Start Time", class:"control-label" %>
+        <div class="controls">
+          <%= time_field_tag "start_time", "Start Time" %> <br> 
+        </div>
+      </div>
+      <div class="control-group">
+        <%= label_tag "end_time", "End Time", class:"control-label" %>
+        <div class="controls">
+          <%= time_field_tag "end_time", "End Time" %> <br> 
+        </div>
         <br><br><br><br>
       </div>
       <hr>
