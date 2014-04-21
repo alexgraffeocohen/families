@@ -287,7 +287,7 @@ module Relationable
   def set_sib_in_laws(gender_sib, gender_spouse)
     array = []
     array << sib_spouses(gender_spouse) << (wife.send(gender_sib) unless wife.nil?) << (husband.send(gender_sib) unless husband.nil?)
-    array.compact.reject!(&:empty?).flatten
+    array.flatten.compact
   end
 
   def sib_spouses(gender_spouse)
