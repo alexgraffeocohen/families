@@ -38,7 +38,7 @@ class ConversationsController < ApplicationController
     respond_to do |f|
       if current_person == @conversation.owner
         @conversation.destroy
-        f.html {redirect_to family_conversations_path}
+        f.html {redirect_to family_conversations_path(@family)}
         f.js {render 'destroy'}
       else
         @msg = "Sorry, something went wrong."
