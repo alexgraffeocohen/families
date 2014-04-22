@@ -5,22 +5,13 @@ class MessagesController < ApplicationController
   def create
     @message = Message.create(message_params)
     @message.conversation_id = params[:conversation_id]
-    @message.sender = current_person
+    @message.owner = current_person
     @message.save
   end
 
   def destroy
     @message = Message.find(params[:message_id])
-    respond_to do |f|
-      if current_person == @message.sender
-        @message.destroy
-        f.html {redirect_to family_conversation_messages_path}
-        f.js {render 'destroy'}
-      else
-        @msg = "Sorry, something went wrong."
-        f.js {render 'layouts/destroy_failure', locals: {msge: @msg}}
-      end
-    end
+    destroy_response(@message)
   end
 
   private

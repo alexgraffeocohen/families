@@ -35,7 +35,7 @@ class ConversationsController < ApplicationController
   end
 
   def destroy
-    destroy_response
+    destroy_response(@conversation)
   end
 
   def check_messages

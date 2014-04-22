@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
     respond_to do |f|
       if current_person == object.owner
         object.destroy
-        f.html {redirect_to "family_#{object.class.pluralize}_path"}
+        f.html { redirect_to "/families/#{params[:id]}/#{object.class.to_s.downcase.pluralize}" }
         f.js {render 'destroy'}
       else
         @msg = "Sorry, something went wrong."
