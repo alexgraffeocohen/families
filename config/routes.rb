@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   as :person do
     get 'login' => 'devise/sessions#new', :as => :new_person_session
+
+    get 'sign_up' => 'devise/registrations#new', :as => :new_person_registration
     
     post 'logout' => 'devise/sessions#create', :as => :person_session
     
