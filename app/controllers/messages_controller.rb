@@ -18,7 +18,7 @@ class MessagesController < ApplicationController
         f.js {render 'destroy'}
       else
         @msg = "Sorry, something went wrong."
-        f.js {render 'destroy_failure', locals: {msge: @msg}}
+        f.js {render 'layouts/destroy_failure', locals: {msge: @msg}}
       end
     end
   end

@@ -30,7 +30,7 @@ class EventsController < ApplicationController
         f.js { render js: "window.location='#{family_events_path}'" }
       else
         @msg = print_errors_for(@event)
-        f.js {render 'create_failure', locals: {msge: @msg}}
+        f.js {render 'layouts/create_failure', locals: {msge: @msg}}
       end
     end
   end

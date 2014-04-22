@@ -21,6 +21,19 @@ class ApplicationController < ActionController::Base
   end
   helper_method :permitted_except_viewer
 
+  def destroy_response
+    respond_to do |f|
+      if current_person == @conversation.owner
+        @conversation.destroy
+        f.html {redirect_to family_conversations_path}
+        f.js {render 'destroy'}
+      else
+        @msg = "Sorry, something went wrong."
+        f.js {render 'layouts/destroy_failure', locals: {msge: @msg}}
+      end
+    end
+  end
+
   private
 
   def print_errors_for(resource)
