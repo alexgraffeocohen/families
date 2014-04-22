@@ -181,11 +181,11 @@ class Person < ActiveRecord::Base
   end
 
   def group_checkbox_hash(relationships, index, hash)
-    if self.send(relationships[0].pluralize)
-      hash[index+1] = self.send(relationships[0].pluralize).map {|rel| rel.permission_slug}
+    if self.send(relationships[0].gsub("-", "_").pluralize)
+      hash[index+1] = self.send(relationships[0].gsub("-", "_").pluralize).map {|rel| rel.permission_slug}
     end
-    if relationships[1] && self.send(relationships[1].pluralize)
-      hash[index+1] << self.send(relationships[1].pluralize).map {|rel| rel.permission_slug}
+    if relationships[1] && self.send(relationships[1].gsub("-", "_").pluralize)
+      hash[index+1] << self.send(relationships[1].gsub("-", "_").pluralize).map {|rel| rel.permission_slug}
     end
   end
 end
