@@ -6,7 +6,7 @@
   <% @albums.each do |album| %>
     <% if current_person.can_see?(album) %>
       <%= link_to album_path(@family, album) do %>
-        <div class="white_div deletable_div" data-id= "<%= album.id %>">
+        <div class="white_div deletable_div album_div" data-id= "<%= album.id %>">
           <h2><%= capitalize_string(album.name) %></h2>
           <%= image_tag(album.photos.last.data_url(:thumb).to_s) unless album.photos.empty? %>
           <p>Photos: <%=album.photos.count%></p>
