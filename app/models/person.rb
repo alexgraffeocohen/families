@@ -136,12 +136,10 @@ class Person < ActiveRecord::Base
     new_hash ||= {}.tap do |hash|
       Permissable::PERMISSION_HASH.values.each_with_index do |relationships, index|
         if singular.include?(relationships)
-          singular_checkbox_hash(relationships, index, hash)
+          check_relationships(relationships, index, hash)
         else
-          group_checkbox_hash(relationships, index, hash)
+          check_relationships(relationships, index, hash, 'group')
         end
-        hash[index+1] = [] if hash[index+1].nil?
-        hash[index+1].flatten!
       end
     end
   end
@@ -178,10 +176,6 @@ class Person < ActiveRecord::Base
     self.age = DateTime.now.year - self.birthday.year if self.birthday
   end
 
-  def singular_checkbox_hash(relationships, index, hash)
-    check_relationships(relationships, index, hash)
-  end
-
   def check_relationships(relationships, index, hash, group = nil)
     for length in 0..1
       r = relationships[length]
@@ -200,11 +194,7 @@ class Person < ActiveRecord::Base
 
   def set_hash(hash, index, value)
     hash[index+1] = [] if hash[index+1].nil?
-    hash[index+1] << value
-  end
-
-  def group_checkbox_hash(relationships, index, hash)
-    check_relationships(relationships, index, hash, 'group')
+    (hash[index+1] << value).flatten!
   end
 end
 
