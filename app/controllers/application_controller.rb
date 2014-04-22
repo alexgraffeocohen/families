@@ -21,11 +21,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :permitted_except_viewer
 
-  def destroy_response
+  def destroy_response(object)
     respond_to do |f|
-      if current_person == @conversation.owner
-        @conversation.destroy
-        f.html {redirect_to family_conversations_path}
+      if current_person == object.owner
+        object.destroy
+        f.html {redirect_to "family_#{object.class.pluralize}_path"}
         f.js {render 'destroy'}
       else
         @msg = "Sorry, something went wrong."
