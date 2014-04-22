@@ -7,7 +7,7 @@ describe Message do
     @person       = create(:person)
 
     @conversation.save(:validate => false)
-    @message.sender = @person
+    @message.owner = @person
     @conversation.messages << @message
   end
 
@@ -20,6 +20,6 @@ describe Message do
   end
 
   it "belongs to a person" do
-    expect(@message.sender).to eq(@person)
+    expect(@message.owner).to eq(@person)
   end
 end

@@ -22,7 +22,7 @@ class AlbumsController < ApplicationController
         f.js { render js: "window.location='#{album_path(@family, @album)}'" }
       else
         @msg = print_errors_for(@album)
-        f.js {render 'create_failure', locals: {msge: @msg}}
+        f.js {render 'layouts/create_failure', locals: {msge: @msg}}
       end
     end
   end
@@ -34,17 +34,7 @@ class AlbumsController < ApplicationController
   end
 
   def destroy
-    respond_to do |f|
-      if current_person == @album.owner
-        @album.destroy
-        f.html {redirect_to albums_path}
-        f.js {render 'destroy', locals: {album: @album, family: @family}}
-      else
-        @msg = "Sorry, something went wrong."
-        f.html {redirect_to albums_path, notice: @msg}
-        f.js {render 'destroy_failure', locals: {msge: @msg}}
-      end
-    end
+    destroy_response(@album)
   end
 
   def index

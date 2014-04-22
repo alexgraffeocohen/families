@@ -2,7 +2,6 @@ $(document).ready(function() {
   $('.image_link').magnificPopup({type: 'image'});
 
   $(".album_name").on("click", function(e){
-    e.preventDefault();
     var oldVal = $(".hidden").val();
     $(".hidden").removeClass("hidden").css("display", "inline").focus().val(oldVal);
     $(".album_name").hide();

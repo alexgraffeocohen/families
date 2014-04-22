@@ -150,11 +150,10 @@ $jumbotron-bg: white;
 .message_convo_div {
   @extend .conversation_white_div;
   margin: 2%;
-  // text-align: left;
+  height: 200px;
 }
 
 .message_content {
-  // float: left;
   display: inline;
   height: auto;
 }
@@ -176,7 +175,7 @@ $jumbotron-bg: white;
 }
 
 .white_div.fixed_height {
-  height: 300px;
+  height: 320px;
 }
 
 .message_pic {
