@@ -77,13 +77,13 @@ module Relationable
       self.gender == "F" && paternal_grandparent_to(person)
     end
 
-    def grandfather_to(person)
-       self.gender == "M" && person.grandparents.include?(self)
-    end
+    # def grandfather_to(person)
+    #    self.gender == "M" && person.grandparents.include?(self)
+    # end
 
-    def grandmother_to(person)
-      self.gender == "F" && person.grandparents.include?(self)
-    end
+    # def grandmother_to(person)
+    #   self.gender == "F" && person.grandparents.include?(self)
+    # end
 
   def grandchild_to(person)
     self.grandparents.include?(person)
@@ -145,10 +145,6 @@ module Relationable
       self.gender == "F" && person.maternal_aunts.include?(self)
     end
 
-    def aunt_to(person)
-      self.gender == "F" && aunt_or_uncle_to(person)
-    end
-
     def paternal_uncle_to(person)
       self.gender == "M" && person.paternal_uncles.include?(self)
     end
@@ -157,9 +153,13 @@ module Relationable
       self.gender == "M" && person.maternal_uncles.include?(self)
     end
 
-    def uncle_to(person)
-      self.gender == "M" && aunt_or_uncle_to(person)
-    end
+    # def uncle_to(person)
+    #   self.gender == "M" && aunt_or_uncle_to(person)
+    # end
+
+    # def aunt_to(person)
+    #   self.gender == "F" && aunt_or_uncle_to(person)
+    # end
 
   def sibling_in_law_to(person)
     ((self.spouse.siblings.include?(person) if self.spouse) ||

@@ -8,7 +8,7 @@ class Person < ActiveRecord::Base
 
   mount_uploader :profile_photo, DataUploader
 
-  RELATIONSHIPS = ["brother", "sister", "father", "mother", "son", "daughter", "maternal_grandfather", "paternal_grandfather", "maternal_grandmother", "paternal_grandmother", "grandmother", "grandfather", "grandson", "granddaughter", "wife", "husband", "daughter_in_law", "son_in_law", "father_in_law", "mother_in_law", "maternal_aunt", "paternal_aunt", "maternal_uncle", "paternal_uncle", "aunt", "uncle", "nephew", "niece", "cousin", "brother_in_law", "sister_in_law"]
+  RELATIONSHIPS = ["brother", "sister", "father", "mother", "son", "daughter", "maternal_grandfather", "paternal_grandfather", "maternal_grandmother", "paternal_grandmother", "grandson", "granddaughter", "wife", "husband", "daughter_in_law", "son_in_law", "father_in_law", "mother_in_law", "maternal_aunt", "paternal_aunt", "maternal_uncle", "paternal_uncle", "nephew", "niece", "cousin", "brother_in_law", "sister_in_law"]
   GROUP_RELATIONSHIPS = ["siblings", "parents", "children", "grandparents", "grandchildren", "children_in_laws", "parents_in_law", "spouse", "aunts_and_uncles", "nieces_and_nephews", "cousins", "siblings_in_law"]
   
   devise :database_authenticatable, :registerable,
