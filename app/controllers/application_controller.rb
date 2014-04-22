@@ -21,6 +21,21 @@ class ApplicationController < ActionController::Base
   end
   helper_method :permitted_except_viewer
 
+  def destroy_response(object)
+    respond_to do |f|
+      if current_person == object.owner
+        object.destroy
+        f.html { redirect_to "/families/#{params[:id]}/#{object.class.to_s.downcase.pluralize}" }
+        f.js {render 'destroy'}
+      else
+        @msg = "Sorry, something went wrong."
+        f.js {render 'layouts/destroy_failure', locals: {msge: @msg}}
+        f.html {render 'show'}
+        # flash[:alert] = "Sorry, something went wrong."
+      end
+    end
+  end
+
   private
 
   def print_errors_for(resource)

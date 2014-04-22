@@ -11,7 +11,7 @@ class Conversation < ActiveRecord::Base
   scope :new_conversation, -> {new}
 
   def last_contributor
-    messages.last.sender.first_name
+    messages.last.owner.first_name
   end
 
   def last_message

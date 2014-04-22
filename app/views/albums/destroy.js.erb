@@ -1,4 +1,4 @@
-var div = $('div[data-id="<%= album.id %>"]');
+var div = $('div[data-id="<%= @album.id %>"]');
 if($("div.deletable_div").size() == 1){
   div.remove()
   $("div.row:first").delay(3000).prepend("<div class='white_div'>You have 0 albums.</div>");

@@ -1,6 +1,10 @@
 <div class="center">
   <h2 data-id="<%= @conversation.id %>"><%= capitalize_string(@conversation.title) %></h2>
   <h5>Who can view this conversation? <span id="permitted_members"><%= permitted_except_viewer(@conversation) %></span></h5>
+  <%= link_to "All Conversations", family_conversations_path(@family) %>
+  <% if current_person == @conversation.owner %>
+    | <%= link_to "Delete", delete_family_conversations_path(@family, @conversation), method: :delete %>
+  <% end %>
 </div>
 <div class="white_div new_message">
   <%= form_for [@family, @conversation, @message], remote: true do |f| %>
@@ -10,7 +14,6 @@
     <%= f.submit %>
   <% end %>
   <br>
-  <%= link_to "Back to All Conversations", family_conversations_path(@family) %>
 </div>
 
 <div class="message_all center_div">

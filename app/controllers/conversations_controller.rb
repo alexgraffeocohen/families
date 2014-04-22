@@ -25,7 +25,7 @@ class ConversationsController < ApplicationController
         f.html {redirect_to :back}
       else
         @msg = print_errors_for(@conversation)
-        f.js {render 'create_failure', locals: {msge: @msg}}
+        f.js {render 'layouts/create_failure', locals: {msge: @msg}}
       end 
     end
   end
@@ -35,16 +35,7 @@ class ConversationsController < ApplicationController
   end
 
   def destroy
-    respond_to do |f|
-      if current_person == @conversation.owner
-        @conversation.destroy
-        f.html {redirect_to family_conversations_path(@family)}
-        f.js {render 'destroy'}
-      else
-        @msg = "Sorry, something went wrong."
-        f.js {render 'destroy_failure', locals: {msge: @msg}}
-      end
-    end
+    destroy_response(@conversation)
   end
 
   def check_messages

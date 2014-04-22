@@ -5,7 +5,7 @@ describe Conversation do
     @family       = create(:family)
     @message      = create(:message)
     @message2     = create(:message)
-    @message2.sender = create(:person, first_name: "Alex")
+    @message2.owner = create(:person, first_name: "Alex")
     @conversation = create(:conversation, title: "title", permissions: "1 2")
     
     @family.conversations << @conversation
