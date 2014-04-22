@@ -1,7 +1,7 @@
 <%= render 'form' %>
 <br>
-<div class="form_centered">
-<%= search_form_for @search, remote: true, class:"form_centered" do |f| %>
+<div class="search_form_div">
+<%= search_form_for @search, remote: true, class:"search_form" do |f| %>
   <%= f.text_field :messages_content_cont, placeholder: "Search conversations..." %>
   <%= f.submit 'Search' %>
   <button type="button" id="show_all">Show All</button> 
