@@ -178,9 +178,9 @@ class Person < ActiveRecord::Base
 
   def check_relationships(relationships, index, hash, group = nil)
     for length in 0..1
-      r = relationships[length]
+      r = relationships[length].gsub("-", "_")
       
-      if r
+      unless r.nil?
         if group
           value = self.send(r.pluralize).map {|rel| rel.permission_slug}.compact 
         elsif self.send(r)
