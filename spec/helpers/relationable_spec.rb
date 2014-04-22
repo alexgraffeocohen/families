@@ -38,20 +38,12 @@ describe Relationable do
     expect(@mike.relationship_to(@marcia)).to eq('father')
   end
 
-  it "can determine grandfather" do
-    expect(@harold.relationship_to(@greg)).to eq('grandfather')
-  end
-
   it "can determine paternal grandfather" do
     expect(@robert.relationship_to(@greg)).to eq('paternal-grandfather')
   end
 
   it "can determine maternal grandfather" do
     expect(@harold.relationship_to(@greg)).to eq('maternal-grandfather')
-  end
-
-  it "can determine grandmother" do
-    expect(@connie.relationship_to(@marcia)).to eq('grandmother')
   end
 
   it "can determine maternal grandmother" do
@@ -78,20 +70,12 @@ describe Relationable do
     expect(@harold.relationship_to(@mike)).to eq('father-in-law')
   end
 
-  it "can determine aunt" do
-    expect(@jenny.relationship_to(@greg)).to eq('aunt')
-  end
-
   it "can determine maternal aunt" do
     expect(@jenny.relationship_to(@greg)).to eq('maternal-aunt')
   end
 
   it "can determine paternal aunt" do
     expect(@rebekah.relationship_to(@marcia)).to eq('paternal-aunt')
-  end
-
-  it "can determine uncle" do
-    expect(@jon.relationship_to(@greg)).to eq('uncle')
   end
 
   it "can determine maternal uncle" do

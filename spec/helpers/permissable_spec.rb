@@ -64,7 +64,7 @@ describe Permissable do
       @album_mike.permissions = "7"
       # binding.pry
       expect(@connie.can_see?(@album_mike)).to eq(true)
-      expect(@album_mike.relationships_permitted).to include("father_in_law", "mother_in_law")
+      expect(@album_mike.relationships_permitted).to include("father-in-law", "mother-in-law")
       expect(@album_mike.all_permitted_members).to include()
       expect(@album_mike.all_permitted_members).to_not include("Marcia")
       expect(@carol.can_see?(@album_mike)).to eq(false)
@@ -73,7 +73,7 @@ describe Permissable do
     it "for children-in-laws" do
       @album_harold.permissions = "6"
       expect(@mike.can_see?(@album_harold)).to eq(true)
-      expect(@album_harold.relationships_permitted).to include("son_in_law", "daughter_in_law")
+      expect(@album_harold.relationships_permitted).to include("son-in-law", "daughter-in-law")
       expect(@album_harold.all_permitted_members).to_not include("Greg")
       expect(@carol.can_see?(@album_harold)).to eq(false)
     end
@@ -117,7 +117,7 @@ describe Permissable do
     it "for siblings_in_law" do
       @album_mike.permissions = "12"
       expect(@jenny.can_see?(@album_mike)).to eq(true)
-      expect(@album_mike.relationships_permitted).to include("brother_in_law", "sister_in_law")
+      expect(@album_mike.relationships_permitted).to include("brother-in-law", "sister-in-law")
       expect(@album_mike.all_permitted_members).to include("Jenny")
       expect(@album_mike.all_permitted_members).to_not include("Carol")
       expect(@greg.can_see?(@album_mike)).to eq(false)

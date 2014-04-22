@@ -4,7 +4,11 @@ module Relationable
 
   def relationship_to(person)
     Person::RELATIONSHIPS.each do |relationship|
-      return relationship.gsub("_", "-") if self.send("#{relationship}_to", person)
+      begin
+        return relationship.gsub("_", "-") if self.send("#{relationship}_to", person)
+      rescue
+        next
+      end
     end
     "I don't know what.." 
   end
