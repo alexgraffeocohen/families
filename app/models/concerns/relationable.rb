@@ -5,12 +5,27 @@ module Relationable
   def relationship_to(person)
     Person::RELATIONSHIPS.each do |relationship|
       begin
-        return relationship.gsub("_", "-") if self.send("#{relationship}_to", person)
+        if self.send("#{relationship}_to", person)
+          return relationship.gsub("_", "-")
+        end 
       rescue
         next
       end
     end
     "I don't know what.." 
+  end
+
+  def sanitized_relationship_to(person)
+    relationship = self.relationship_to(person)
+    if relationship.include?("maternal") || relationship.include?("paternal")
+      stripped_relation(relationship)
+    else
+      relationship
+    end
+  end
+
+  def stripped_relation(relationship)
+    relationship.split("-")[1]
   end
 
   def child_to(person)
