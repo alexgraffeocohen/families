@@ -4,7 +4,7 @@
   <% end %>
   <div class="message_content">
     <div class="message_pic"><%= image_tag(message.sender.profile_photo_url(:tiny)) %></div>
-    <div class="name_and_message"><%= message.sender.first_name %>:<%= message.content %><br><br>
+    <div class="name_and_message"><%= message.sender.first_name %>: <%= message.content %><br><br>
     <%= message.created_at.strftime("%_m/%e %l:%M%P") %></div>
   </div>
 </div>

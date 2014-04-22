@@ -216,6 +216,55 @@ connie.add_spouse(harold)
 carol.add_spouse(mike)
 
 
+siblings_convo = Conversation.create!(
+  title: "Phone Privileges",
+  person_id: marcia.id,
+  permissions: "1"
+)
+
+Message.create!(
+  conversation_id: siblings_convo.id,
+  person_id: marcia.id,
+  content: "Jan, I know tomorrow is your night with the phone but I need it. I am expecting a call."
+)
+
+Message.create!(
+  conversation_id: siblings_convo.id,
+  person_id: jan.id,
+  content: "That isn't fair. I don't want to trade."
+)
+
+Message.create!(
+  conversation_id: siblings_convo.id,
+  person_id: peter.id,
+  content: "Marcia you can't have the phone whenever you feel like it."
+)
+
+Message.create!(
+  conversation_id: siblings_convo.id,
+  person_id: greg.id,
+  content: "Yea, Jan should be able to keep her schedule if she wants to."
+)
+
+Message.create!(
+  conversation_id: siblings_convo.id,
+  person_id: marcia.id,
+  content: "Fine!"
+)
+
+Message.create!(
+  conversation_id: siblings_convo.id,
+  person_id: cindy.id,
+  content: "You can have my night, Marcia."
+)
+
+Message.create!(
+  conversation_id: siblings_convo.id,
+  person_id: bobby.id,
+  content: "Cindy you don't have phone privileges..."
+)
+
+
 greg_marcia_convo = Conversation.create!(
   title: "Family Vacation to Hawaii",
   person_id: marcia.id,
@@ -276,6 +325,10 @@ Message.create!(
   content: "Great!"
 )
 
+
+
+# EVENTS ----
+
 Event.create!(
   name: "Surprise Luau for Mom and Dad!",
   person_id: greg.id,
@@ -302,6 +355,9 @@ Event.create!(
   end_date: Time.now + 3.days + 3.hours,
   description: "Let's get new dresses for the summer."
 )
+
+
+# PHOTOS ---- 
 
 album = Album.create!(name: "Family fun!", person_id: carol.id, family_id: brady.id, permissions: "1, 2, 3, 8, 12")
 

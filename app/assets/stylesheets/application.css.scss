@@ -159,6 +159,21 @@ $jumbotron-bg: white;
   height: auto;
 }
 
+.search_form{
+  position: relative;
+  display: inline-block;
+  margin: 10px;
+  background: whitesmoke;
+  border-radius: 10px;
+  padding: 10px;
+  border: 2px solid #dddddd;
+
+}
+.search_form_div {
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
 
 .white_div.fixed_height {
   height: 300px;

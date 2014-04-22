@@ -2,6 +2,11 @@ $(function(){
   if($(".message_all").length > 0){
     setTimeout(checkNewMessages, 5000);
   }
+
+  $("#show_all").on("click", function(){
+    $("div.convo").show();
+    $("input#q_messages_content_cont").val("");
+  });
 });
 
 function checkNewMessages () {
