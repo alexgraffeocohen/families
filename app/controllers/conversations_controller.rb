@@ -56,16 +56,16 @@ class ConversationsController < ApplicationController
   def prepare_search_form
     @conversations = Conversation.all_conversations
     @search = Conversation.search(params[:q])
-    @search_params = params[:q]
+
+    render_search_results
+  end
+
+  def render_search_results
     @not_found_ids =  (@conversations - @search.result).collect do |conversation|
                         conversation.id
                       end
-    if params[:show_all] != nil
-      respond_to do |f|
-        f.html {head :ok}
-        f.js {render 'show_all'}    
-      end
-    elsif params[:q] != nil
+                      
+    if params[:q] != nil
       respond_to do |f|
         f.html {head :ok}
         f.js {render 'search_success', locals: {unfound: @not_found_ids}}

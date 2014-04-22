@@ -4,15 +4,17 @@
 <%= search_form_for @search, remote: true, class:"form_centered" do |f| %>
   <%= f.text_field :messages_content_cont, placeholder: "Search conversations..." %>
   <%= f.submit 'Search' %>
-  <%= f.submit 'Show All', name: 'show_all' %>
+  <button type="button" id="show_all">Show All</button> 
 <% end %>
+
 </div>
+
 
 <div class="convo_all">
   <% if current_person.cannot_see_any?("conversation") || @conversations.empty? %>
     <div class="white_div none_showing" >You have 0 conversations.</div>
   <% else %>
-    <% if @search_params.nil? %>
+    <% if @search.conditions.length > 0 %>
       <% current_person.all_permitted("conversation").each do |convo|  %>
         <%= render 'show_conversation', family: @family, convo: convo %>
       <% end %>
