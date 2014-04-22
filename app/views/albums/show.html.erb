@@ -4,7 +4,7 @@
   <%= @album.created_at.strftime("%b %Y") %>
   <h5>Who can view this album? <span id="permitted_members"><%= permitted_except_viewer(@album) %></span></h5>
   
-  <%= link_to "All Albums", albums_path(@family, @album) %>
+  <%= link_to "All Albums", albums_path(@family) %>
   <% if current_person == @album.owner %>
     | <%= link_to "Delete", delete_family_album_path(@family, @album), method: :delete %>
   <% end %>

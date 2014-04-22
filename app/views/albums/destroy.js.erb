@@ -1,9 +1,8 @@
 var div = $('div[data-id="<%= album.id %>"]');
-if($("div.row:first").children("div").size() == 1){
-  div.fadeOut(function(){
-    $("div.row:first").delay(3000).prepend("<div class='white_div'>You have 0 albums.</div>");
-  });
+if($("div.deletable_div").size() == 1){
+  div.remove()
+  $("div.row:first").delay(3000).prepend("<div class='white_div'>You have 0 albums.</div>");
 }
 else{
-  div.fadeOut();
+  div.remove();
 }

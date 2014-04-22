@@ -13,7 +13,7 @@ class PhotosController < ActionController::Base
     respond_to do |f|
       if current_person == @album.owner
         @photo.destroy
-        f.html {redirect_to albums_path}
+        f.html {redirect_to albums_path(@family)}
         f.js {render 'destroy', locals: {family: @family, album: @album, photo: @photo}}
       else
         @msg = "Sorry, you do not own this album."

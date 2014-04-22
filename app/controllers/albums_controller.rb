@@ -37,11 +37,11 @@ class AlbumsController < ApplicationController
     respond_to do |f|
       if current_person == @album.owner
         @album.destroy
-        f.html {redirect_to albums_path}
+        f.html {redirect_to albums_path(@family)}
         f.js {render 'destroy', locals: {album: @album, family: @family}}
       else
         @msg = "Sorry, something went wrong."
-        f.html {redirect_to albums_path, notice: @msg}
+        f.html {redirect_to albums_path(@family), notice: @msg}
         f.js {render 'destroy_failure', locals: {msge: @msg}}
       end
     end

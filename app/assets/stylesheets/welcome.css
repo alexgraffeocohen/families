@@ -2,3 +2,18 @@
   text-align: justify;
   text-indent: 20px;
 }
+
+
+.bio_div {
+  width: 100%;
+  position: relative;
+}
+
+.bio {
+  position: relative;
+  margin: 5px;
+  border: #ccc 3px solid;
+  border-radius: 5px;
+  padding: 5px;
+  display: inline-block;
+}
