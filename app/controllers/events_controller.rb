@@ -20,8 +20,8 @@ class EventsController < ApplicationController
     @event.permissions = @event.parse(params[:event][:parse_permission])
     respond_to do |f|
       if @event.valid?
-        save_start_time unless params[:start_time].nil?
-        save_end_time unless params[:end_time].nil?
+        save_time("start") unless params[:start_time].nil?
+        save_time("end") unless params[:end_time].nil?
   
         @event.owner = current_person
         @family.events << @event
@@ -54,18 +54,13 @@ class EventsController < ApplicationController
     @event = Event.find(params[:event_id])
   end
 
-  def save_start_time
-    start_hours = params[:start_time].split(":").first.to_i
-    start_minutes = params[:start_time].split(":").last.to_i
-    
-    @event.start_date = (DateTime.parse(params["event"]["start_date"]) + start_hours.hours + start_minutes.minutes).to_s
-  end
+  def save_time(period)
+    period_hours = params["#{period}_time".to_sym].split(":").first.to_i
+    period_minutes = params["#{period}_time".to_sym].split(":").second.to_i
+    parsed_date = DateTime.parse(params["event"]["#{period}_date"])
+    date_with_time = (parsed_date + period_hours.hours + period_minutes.minutes).to_s
 
-  def save_end_time
-    end_hours = params[:end_time].split(":").first.to_i
-    end_minutes = params[:end_time].split(":").last.to_i
-
-    @event.end_date = (DateTime.parse(params["event"]["end_date"]) + end_hours.hours + end_minutes.minutes).to_s
+    @event.send("#{period}_date=".to_sym, date_with_time)
   end
 
   def event_params
