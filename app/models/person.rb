@@ -157,6 +157,14 @@ class Person < ActiveRecord::Base
     !self.confirmed_at.nil?
   end
 
+  # def method_missing
+  #   puts "hit"
+  #   # if method_sym
+  #   #   .map {|rel| rel.permission_slug}
+  #   # else
+  #   #   .permission_slug
+  # end
+
   private 
 
   def set_permission_slug
@@ -171,22 +179,32 @@ class Person < ActiveRecord::Base
   end
 
   def singular_checkbox_hash(relationships, index, hash)
-    if self.send(relationships[0])
-      hash[index+1] = [self.send(relationships[0]).permission_slug]
-    end
-    if relationships[1] && self.send(relationships[1])
-      hash[index+1] = [] if hash[index+1].nil?
-      (hash[index+1] << self.send(relationships[1]).permission_slug)
+    check_relationships(relationships, index, hash)
+  end
+
+  def check_relationships(relationships, index, hash, group = nil)
+    for length in 0..1
+      r = relationships[length]
+      
+      if r
+        if group
+          value = self.send(r.pluralize).map {|rel| rel.permission_slug}.compact 
+        elsif self.send(r)
+          value = self.send(r).permission_slug
+        end
+      end
+
+      set_hash(hash, index, value)
     end
   end
 
+  def set_hash(hash, index, value)
+    hash[index+1] = [] if hash[index+1].nil?
+    hash[index+1] << value
+  end
+
   def group_checkbox_hash(relationships, index, hash)
-    if self.send(relationships[0].pluralize)
-      hash[index+1] = self.send(relationships[0].pluralize).map {|rel| rel.permission_slug}
-    end
-    if relationships[1] && self.send(relationships[1].pluralize)
-      hash[index+1] << self.send(relationships[1].pluralize).map {|rel| rel.permission_slug}
-    end
+    check_relationships(relationships, index, hash, 'group')
   end
 end
 
