@@ -41,7 +41,7 @@ class EventsController < ApplicationController
   def destroy
     if current_person == @event.owner
       @event.destroy
-      redirect_to family_events_path
+      redirect_to family_events_path(@family)
     else
       flash[:alert] = "Sorry, something went wrong."
       render 'show'
