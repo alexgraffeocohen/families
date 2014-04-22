@@ -12,10 +12,14 @@ module Brady
     @mike    = create(:person, first_name: "Mike", father_id: @robert.id, gender: "M", confirmed_at: Time.now)
     @rebekah = create(:person, first_name: "Rebekah", father_id: @robert.id, gender: "F", confirmed_at: Time.now)
     @greg    = create(:person, first_name: "Greg", mother_id: @carol.id, father_id: @mike.id, gender: "M", confirmed_at: Time.now)
+    @peter    = create(:person, first_name: "Peter", mother_id: @carol.id, father_id: @mike.id, gender: "M", confirmed_at: Time.now)
+    @bobby    = create(:person, first_name: "Bobby", mother_id: @carol.id, father_id: @mike.id, gender: "M", confirmed_at: Time.now)
     @marcia  = create(:person, first_name: "Marcia", mother_id: @carol.id, father_id: @mike.id, gender: "F", confirmed_at: Time.now)
+    @cindy  = create(:person, first_name: "Cindy", mother_id: @carol.id, father_id: @mike.id, gender: "F", confirmed_at: Time.now)
+    @jan  = create(:person, first_name: "Jan", mother_id: @carol.id, father_id: @mike.id, gender: "F", confirmed_at: Time.now)
     @connie.add_spouse(@harold)
     @carol.add_spouse(@mike)
-    @brady.add_members([@connie, @harold, @carol, @mike, @greg, @marcia])
+    @brady.add_members([@connie, @harold, @carol, @mike, @greg, @marcia, @cindy, @peter, @bobby, @jan])
     @hutchins.add_members([@connie, @harold, @carol, @jon, @jenny, @jon_jr])
   end
 end

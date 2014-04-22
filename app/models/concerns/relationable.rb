@@ -221,19 +221,51 @@ module Relationable
   end
 
   def grandmothers
-    [(mother.mother unless mother.nil?), (father.mother unless father.nil?)].compact
+    [maternal_grandmother, paternal_grandmother].flatten.compact
+  end
+
+  def maternal_grandmother
+    mother.mother unless mother.nil?
+  end
+
+  def paternal_grandmother
+    father.mother unless father.nil?
   end
 
   def grandfathers
-     [(mother.father unless mother.nil?), (father.father unless father.nil?)].compact
+    [maternal_grandfather, paternal_grandfather].flatten.compact
+  end
+
+  def maternal_grandfather
+    mother.father unless mother.nil?
+  end
+
+  def paternal_grandfather
+    father.father unless father.nil?
   end
 
   def aunts
-    [(mother.sisters unless mother.nil?), (father.sisters unless father.nil?)].flatten.compact
+    [maternal_aunts, paternal_aunts].flatten.compact
+  end
+
+  def maternal_aunts
+    mother.sisters unless mother.nil?
+  end
+
+  def paternal_aunts
+    father.sisters unless father.nil?
   end
 
   def uncles
-    [(mother.brothers unless mother.nil?), (father.brothers unless father.nil?)].flatten.compact
+    [maternal_uncles, paternal_uncles].flatten.compact
+  end
+
+  def maternal_uncles
+    mother.brothers unless mother.nil?
+  end
+
+  def paternal_uncles
+    father.brothers unless father.nil?
   end
 
   def aunts_and_uncles
