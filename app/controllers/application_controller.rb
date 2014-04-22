@@ -30,6 +30,8 @@ class ApplicationController < ActionController::Base
       else
         @msg = "Sorry, something went wrong."
         f.js {render 'layouts/destroy_failure', locals: {msge: @msg}}
+        f.html {render 'show'}
+        # flash[:alert] = "Sorry, something went wrong."
       end
     end
   end
