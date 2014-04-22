@@ -49,6 +49,30 @@ module Relationable
     person.grandparents.include?(self)
   end
 
+  def maternal_grandparent_to(person)
+    person.maternal_grandparents.include?(self)
+  end
+
+  def paternal_grandparent_to(person)
+    person.paternal_grandparents.include?(self)
+  end
+
+    def maternal_grandfather_to(person)
+      self.gender == "M" && maternal_grandparent_to(person)
+    end
+
+    def paternal_grandfather_to(person)
+      self.gender == "M" && paternal_grandparent_to(person)
+    end
+
+    def maternal_grandmother_to(person)
+      self.gender == "F" && maternal_grandparent_to(person)
+    end
+
+    def paternal_grandmother_to(person)
+      self.gender == "F" && paternal_grandparent_to(person)
+    end
+
     def grandfather_to(person)
        self.gender == "M" && person.grandparents.include?(self)
     end
@@ -109,8 +133,24 @@ module Relationable
     person.parents.any? { |parent| self.siblings.include?(parent) }
   end
 
+    def paternal_aunt_to(person)
+      self.gender == "F" && person.paternal_aunts.include?(self)
+    end
+
+    def maternal_aunt_to(person)
+      self.gender == "F" && person.maternal_aunts.include?(self)
+    end
+
     def aunt_to(person)
       self.gender == "F" && aunt_or_uncle_to(person)
+    end
+
+    def paternal_uncle_to(person)
+      self.gender == "M" && person.paternal_uncles.include?(self)
+    end
+
+    def maternal_uncle_to(person)
+      self.gender == "M" && person.maternal_uncles.include?(self)
     end
 
     def uncle_to(person)
@@ -218,6 +258,14 @@ module Relationable
 
   def grandparents
     (grandmothers + grandfathers).compact
+  end
+
+  def maternal_grandparents
+    [maternal_grandmother, maternal_grandfather].flatten.compact
+  end
+
+  def paternal_grandparents
+    [paternal_grandmother, paternal_grandfather].flatten.compact
   end
 
   def grandmothers
