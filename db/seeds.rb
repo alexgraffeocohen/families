@@ -3,7 +3,7 @@ connie = Person.create!(
   last_name: "Hutchins",
   email: "connie@hutchins.com",
   phone: "310-561-9314",
-  # profile_photo: File.open(File.join(Rails.root, 'app/assets/images/connie.jpg')),
+  profile_photo: File.open(File.join(Rails.root, 'app/assets/images/connie.jpg')),
   birthday: Time.gm(1914+34,"jul",17,20,15,1), 
   location: "Malibu, California",
   password: "foobar12",
@@ -18,7 +18,7 @@ harold = Person.create!(
   last_name: "Hutchins",
   email: "harold@hutchins.com",
   phone: "310-559-9244",
-  # profile_photo: File.open(File.join(Rails.root, 'app/assets/images/harold.jpg')),
+  profile_photo: File.open(File.join(Rails.root, 'app/assets/images/harold.jpg')),
   birthday: Time.gm(1914+34,"jun",12,20,15,1),
   location: "Malibu, California",
   password: "foobar12",
@@ -32,7 +32,7 @@ carol = Person.create!(
   first_name: "Carol",
   email: "carol@brady.com",
   phone: "310-452-9364",
-  # profile_photo: File.open(File.join(Rails.root, 'app/assets/images/carol.jpg')),
+  profile_photo: File.open(File.join(Rails.root, 'app/assets/images/carol.jpg')),
   birthday: Time.gm(1939+34,"feb",4,20,15,1),
   location: "Los Angeles, California",
   password: "foobar12",
@@ -48,7 +48,7 @@ mike = Person.create!(
   first_name: "Mike",
   email: "mike@brady.com",
   phone: "310-805-9238",
-  # profile_photo: File.open(File.join(Rails.root, 'app/assets/images/mike.jpg')),
+  profile_photo: File.open(File.join(Rails.root, 'app/assets/images/mike.jpg')),
   birthday: Time.gm(1937+34,"feb",4,20,15,1),
   location: "Los Angeles, California",
   password: "foobar12",
@@ -62,7 +62,7 @@ greg = Person.create!(
   first_name: "Greg",
   email: "greg@brady.com",
   phone: "310-775-7614",
-  # profile_photo: File.open(File.join(Rails.root, 'app/assets/images/greg.jpg')),
+  profile_photo: File.open(File.join(Rails.root, 'app/assets/images/greg.jpg')),
   birthday: Time.gm(1964+33,"aug",23,20,15,1),
   location: "Los Angeles, California",
   password: "foobar12",
@@ -78,7 +78,7 @@ marcia = Person.create!(
   first_name: "Marcia",
   email: "marcia@brady.com",
   phone: "310-135-8294",
-  # profile_photo: File.open(File.join(Rails.root, 'app/assets/images/marcia.jpg')),
+  profile_photo: File.open(File.join(Rails.root, 'app/assets/images/marcia.jpg')),
   birthday: Time.gm(1964+34,"nov",10,20,15,1),
   location: "Los Angeles, California",
   password: "foobar12",
@@ -94,7 +94,7 @@ cindy = Person.create!(
   first_name: "Cindy",
   email: "cindy@brady.com",
   phone: "310-243-8234",
-  # profile_photo: File.open(File.join(Rails.root, 'app/assets/images/cindy.jpg')),
+  profile_photo: File.open(File.join(Rails.root, 'app/assets/images/cindy.jpg')),
   birthday: Time.gm(1966+38,"nov",7,23,15,1),
   location: "Los Angeles, California",
   password: "foobar12",
@@ -110,7 +110,7 @@ peter = Person.create!(
   first_name: "Peter",
   email: "peter@brady.com",
   phone: "310-321-6735",
-  # profile_photo: File.open(File.join(Rails.root, 'app/assets/images/peter.jpg')),
+  profile_photo: File.open(File.join(Rails.root, 'app/assets/images/peter.jpg')),
   birthday: Time.gm(1965+34,"oct",8,23,15,1),
   location: "Los Angeles, California",
   password: "foobar12",
@@ -126,7 +126,7 @@ bobby = Person.create!(
   first_name: "Bobby",
   email: "bobby@brady.com",
   phone: "310-765-4926",
-  # profile_photo: File.open(File.join(Rails.root, 'app/assets/images/bobby.jpg')),
+  profile_photo: File.open(File.join(Rails.root, 'app/assets/images/bobby.jpg')),
   birthday: Time.gm(1966+38,"nov",4,16,15,1),
   location: "Los Angeles, California",
   password: "foobar12",
@@ -142,7 +142,7 @@ jan = Person.create!(
   first_name: "Jan",
   email: "jan@brady.com",
   phone: "310-344-8362",
-  # profile_photo: File.open(File.join(Rails.root, 'app/assets/images/jan.jpg')),
+  profile_photo: File.open(File.join(Rails.root, 'app/assets/images/jan.jpg')),
   birthday: Time.gm(1962+35,"feb",8,7,15,1),
   location: "Los Angeles, California",
   password: "foobar12",
@@ -159,7 +159,7 @@ jan = Person.create!(
   email: "jenny@hutchins.com",
   phone: "310-905-9276",
   birthday: Time.gm(1947+34,"mar",2,20,15,1),
-  # profile_photo: File.open(File.join(Rails.root, 'app/assets/images/jenny.jpg')),
+  profile_photo: File.open(File.join(Rails.root, 'app/assets/images/jenny.jpg')),
   location: "Los Angeles, California",
   password: "foobar12",
   password_confirmation: "foobar12", 
@@ -174,7 +174,7 @@ jan = Person.create!(
     first_name: "Jon",
     email: "jon@hutchins.com",
     phone: "310-817-3014",
-    # profile_photo: File.open(File.join(Rails.root, 'app/assets/images/jon.jpg')),
+    profile_photo: File.open(File.join(Rails.root, 'app/assets/images/jon.jpg')),
     birthday: Time.gm(1945+34,"jan",1,20,15,1), 
     location: "Los Angeles, California",
     password: "foobar12",
@@ -191,7 +191,7 @@ jan = Person.create!(
     email: "jon_jr@hutchins.com",
     phone: "310-213-8654",
     birthday: Time.gm(1971+38,"dec",30,20,15,1),
-    # profile_photo: File.open(File.join(Rails.root, 'app/assets/images/jon_jr.jpg')),
+    profile_photo: File.open(File.join(Rails.root, 'app/assets/images/jon_jr.jpg')),
     location: "Los Angeles, California",
     password: "foobar12",
     password_confirmation: "foobar12", 
@@ -362,31 +362,31 @@ Event.create!(
 album = Album.create!(name: "Family fun!", person_id: carol.id, family_id: brady.id, permissions: "1, 2, 3, 8, 12")
 
 Photo.create!(
-  # data: File.open(File.join(Rails.root, 'app/assets/images/album1.jpg')),
+  data: File.open(File.join(Rails.root, 'app/assets/images/album1.jpg')),
   caption: "At the beach in Hawaii",
   album_id: album.id
 )
 
 Photo.create!(
-  # data: File.open(File.join(Rails.root, 'app/assets/images/album2.jpg')),
+  data: File.open(File.join(Rails.root, 'app/assets/images/album2.jpg')),
   caption: "The girls found some birds",
   album_id: album.id
 )
 
 Photo.create!(
-  # data: File.open(File.join(Rails.root, 'app/assets/images/album3.jpg')),
+  data: File.open(File.join(Rails.root, 'app/assets/images/album3.jpg')),
   caption: "Family meeting",
   album_id: album.id
 )
 
 Photo.create!(
-  # data: File.open(File.join(Rails.root, 'app/assets/images/album4.jpg')),
+  data: File.open(File.join(Rails.root, 'app/assets/images/album4.jpg')),
   caption: "Kodak moment!",
   album_id: album.id
 )
 
 Photo.create!(
-  # data: File.open(File.join(Rails.root, 'app/assets/images/album5.jpg')),
+  data: File.open(File.join(Rails.root, 'app/assets/images/album5.jpg')),
   caption: "Top phone user of the fam",
   album_id: album.id
 )
