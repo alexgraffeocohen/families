@@ -22,4 +22,9 @@ describe Person do
   it "can belong to a family" do 
     expect(@mike.default_family).to eq(@brady)
   end
+
+  it "can return current relationships" do
+    relations = ["brother", "sister", "brother", "brother", "sister", "mother", "father", "maternal-grandmother", "maternal-grandfather", "maternal-aunt", "maternal-uncle", "cousin", "paternal-grandfather", "paternal-aunt", "paternal-grandmother", "paternal-uncle"]
+    expect(@marcia.current_relationships - relations).to be_empty
+  end
 end

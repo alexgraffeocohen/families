@@ -8,7 +8,7 @@ class Person < ActiveRecord::Base
 
   mount_uploader :profile_photo, DataUploader
 
-  RELATIONSHIPS = ["brother", "sister", "father", "mother", "son", "daughter", "grandmother", "grandfather", "grandson", "granddaughter", "wife", "husband", "daughter_in_law", "son_in_law", "father_in_law", "mother_in_law", "aunt", "uncle", "nephew", "niece", "cousin", "brother_in_law", "sister_in_law"]
+  RELATIONSHIPS = ["brother", "sister", "father", "mother", "son", "daughter", "maternal_grandfather", "paternal_grandfather", "maternal_grandmother", "paternal_grandmother", "grandson", "granddaughter", "wife", "husband", "daughter_in_law", "son_in_law", "father_in_law", "mother_in_law", "maternal_aunt", "paternal_aunt", "maternal_uncle", "paternal_uncle", "nephew", "niece", "cousin", "brother_in_law", "sister_in_law"]
   GROUP_RELATIONSHIPS = ["siblings", "parents", "children", "grandparents", "grandchildren", "children_in_laws", "parents_in_law", "spouse", "aunts_and_uncles", "nieces_and_nephews", "cousins", "siblings_in_law"]
   
   devise :database_authenticatable, :registerable,
@@ -39,26 +39,8 @@ class Person < ActiveRecord::Base
 
   def current_relationships
     relationships = my_family_members.collect do |member|
-      [member, member.relationship_to(self)]
-    end.uniq
-    new_rels =  relationships.collect do |rel|
-      case rel[1]
-      when "grandmother", "grandfather"
-        if self.father && self.father.parents.include?(rel[0])
-          "paternal " + rel[1]
-        elsif self.mother && self.mother.parents.include?(rel[0])
-          "maternal " + rel[1]
-        end
-      when "aunt", "uncle"
-        if self.father && self.father.siblings.include?(rel[0])
-          "paternal " + rel[1]
-        elsif self.mother && self.mother.siblings.include?(rel[0])
-          "maternal " + rel[1]
-        end
-      else
-        rel[1]
-      end
-    end
+      [member.relationship_to(self)]
+    end.flatten
   end
 
   def mother=(member)
@@ -122,7 +104,7 @@ class Person < ActiveRecord::Base
   end
 
   def can_see?(object)
-    object.relationships_permitted.include?(self.relationship_to(object.owner).gsub("-","_")) || 
+    object.relationships_permitted.include?(self.relationship_to(object.owner)) || 
     object.owner == self ||
     object.people_permitted.include?(self.permission_slug)
   end
@@ -181,11 +163,11 @@ class Person < ActiveRecord::Base
   end
 
   def group_checkbox_hash(relationships, index, hash)
-    if self.send(relationships[0].pluralize)
-      hash[index+1] = self.send(relationships[0].pluralize).map {|rel| rel.permission_slug}
+    if self.send(relationships[0].gsub("-", "_").pluralize)
+      hash[index+1] = self.send(relationships[0].gsub("-", "_").pluralize).map {|rel| rel.permission_slug}
     end
-    if relationships[1] && self.send(relationships[1].pluralize)
-      hash[index+1] << self.send(relationships[1].pluralize).map {|rel| rel.permission_slug}
+    if relationships[1] && self.send(relationships[1].gsub("-", "_").pluralize)
+      hash[index+1] << self.send(relationships[1].gsub("-", "_").pluralize).map {|rel| rel.permission_slug}
     end
   end
 end

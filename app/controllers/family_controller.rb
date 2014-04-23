@@ -59,9 +59,9 @@ class FamilyController < ApplicationController
   def create
     result = any_invalid?(params["people"]["relations"])
     if result == false 
-        @family = Family.find_or_create_by(family_params)
-        @family.person_families.build(person: current_person)
-        modify_families
+      @family = Family.find_or_create_by(family_params)
+      @family.person_families.build(person: current_person)
+      modify_families
     else
       @family = Family.new
       respond_to do |f|
@@ -92,18 +92,18 @@ class FamilyController < ApplicationController
   def validation_hash
     {
       :full_match_needed => {
-        "maternal grandmother" => ["mother"],
-        "maternal grandfather" => ["mother"],
-        "paternal grandmother" => ["father"],
-        "paternal grandfather" => ["father"],
+        "maternal-grandmother" => ["mother"],
+        "maternal-grandfather" => ["mother"],
+        "paternal-grandmother" => ["father"],
+        "paternal-grandfather" => ["father"],
       },
       :partial_match_needed => {
         "sister" => ["father", "mother"],
         "brother" => ["father", "mother"],
-        "maternal aunt"  => ["maternal grandmother", "maternal grandfather", "mother"],
-        "paternal aunt"  => ["paternal grandmother", "paternal grandfather", "father"],
-        "maternal uncle" => ["maternal grandmother", "maternal grandfather", "mother"],
-        "paternal uncle" => ["paternal grandmother", "paternal grandfather", "father"],
+        "maternal-aunt"  => ["maternal-grandmother", "maternal-grandfather", "mother"],
+        "paternal-aunt"  => ["paternal-grandmother", "paternal-grandfather", "father"],
+        "maternal-uncle" => ["maternal-grandmother", "maternal-grandfather", "mother"],
+        "paternal-uncle" => ["paternal-grandmother", "paternal-grandfather", "father"],
         "father-in-law"  => ["husband", "wife"],
         "mother-in-law"  => ["husband", "wife"]
       } 

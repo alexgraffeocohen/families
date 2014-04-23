@@ -6,15 +6,15 @@ module Permissable
       "1" => ["brother", "sister"],
       "2" => ["mother", "father"],
       "3" => ["son", "daughter"],
-      "4" => ["grandfather", "grandmother"],
+      "4" => ["grandfather", "grandmother", "maternal-grandfather", "paternal-grandfather", "maternal-grandmother", "paternal-grandmother"],
       "5" => ["grandson", "granddaughter"],
-      "6" => ["son_in_law", "daughter_in_law"],
-      "7" => ["father_in_law", "mother_in_law"],
+      "6" => ["son-in-law", "daughter-in-law"],
+      "7" => ["father-in-law", "mother-in-law"],
       "8" => ["husband", "wife"],
-      "9" => ["aunt", "uncle"],
+      "9" => ["aunt", "uncle", "maternal-aunt", "paternal-aunt", "maternal-uncle", "paternal-uncle"],
       "10" => ["niece", "nephew"],
       "11" => ["cousin"],
-      "12" => ["brother_in_law", "sister_in_law"]
+      "12" => ["brother-in-law", "sister-in-law"]
     }
   attr_reader :parse_permission
 

@@ -20,9 +20,7 @@ class EventsController < ApplicationController
     @event.permissions = @event.parse(params[:event][:parse_permission])
     respond_to do |f|
       if @event.valid?
-        save_time("start") unless params[:start_time].nil?
-        save_time("end") unless params[:end_time].nil?
-  
+        save_times
         @event.owner = current_person
         @family.events << @event
         
@@ -43,6 +41,11 @@ class EventsController < ApplicationController
   end
 
   private
+
+  def save_times
+    save_time("start") unless params[:start_time].nil?
+    save_time("end") unless params[:end_time].nil?
+  end
 
   def set_event
     @event = Event.find(params[:event_id])

@@ -4,9 +4,28 @@ module Relationable
 
   def relationship_to(person)
     Person::RELATIONSHIPS.each do |relationship|
-      return relationship.gsub("_", "-") if self.send("#{relationship}_to", person)
+      begin
+        if self.send("#{relationship}_to", person)
+          return relationship.gsub("_", "-")
+        end 
+      rescue
+        next
+      end
     end
     "I don't know what.." 
+  end
+
+  def sanitized_relationship_to(person)
+    relationship = self.relationship_to(person)
+    if relationship.include?("maternal") || relationship.include?("paternal")
+      stripped_relation(relationship)
+    else
+      relationship
+    end
+  end
+
+  def stripped_relation(relationship)
+    relationship.split("-")[1]
   end
 
   def child_to(person)
@@ -49,13 +68,37 @@ module Relationable
     person.grandparents.include?(self)
   end
 
-    def grandfather_to(person)
-       self.gender == "M" && person.grandparents.include?(self)
+  def maternal_grandparent_to(person)
+    person.maternal_grandparents.include?(self)
+  end
+
+  def paternal_grandparent_to(person)
+    person.paternal_grandparents.include?(self)
+  end
+
+    def maternal_grandfather_to(person)
+      self.gender == "M" && maternal_grandparent_to(person)
     end
 
-    def grandmother_to(person)
-      self.gender == "F" && person.grandparents.include?(self)
+    def paternal_grandfather_to(person)
+      self.gender == "M" && paternal_grandparent_to(person)
     end
+
+    def maternal_grandmother_to(person)
+      self.gender == "F" && maternal_grandparent_to(person)
+    end
+
+    def paternal_grandmother_to(person)
+      self.gender == "F" && paternal_grandparent_to(person)
+    end
+
+    # def grandfather_to(person)
+    #    self.gender == "M" && person.grandparents.include?(self)
+    # end
+
+    # def grandmother_to(person)
+    #   self.gender == "F" && person.grandparents.include?(self)
+    # end
 
   def grandchild_to(person)
     self.grandparents.include?(person)
@@ -109,13 +152,29 @@ module Relationable
     person.parents.any? { |parent| self.siblings.include?(parent) }
   end
 
-    def aunt_to(person)
-      self.gender == "F" && aunt_or_uncle_to(person)
+    def paternal_aunt_to(person)
+      self.gender == "F" && person.paternal_aunts.include?(self)
     end
 
-    def uncle_to(person)
-      self.gender == "M" && aunt_or_uncle_to(person)
+    def maternal_aunt_to(person)
+      self.gender == "F" && person.maternal_aunts.include?(self)
     end
+
+    def paternal_uncle_to(person)
+      self.gender == "M" && person.paternal_uncles.include?(self)
+    end
+
+    def maternal_uncle_to(person)
+      self.gender == "M" && person.maternal_uncles.include?(self)
+    end
+
+    # def uncle_to(person)
+    #   self.gender == "M" && aunt_or_uncle_to(person)
+    # end
+
+    # def aunt_to(person)
+    #   self.gender == "F" && aunt_or_uncle_to(person)
+    # end
 
   def sibling_in_law_to(person)
     ((self.spouse.siblings.include?(person) if self.spouse) ||
@@ -220,20 +279,60 @@ module Relationable
     (grandmothers + grandfathers).compact
   end
 
+  def maternal_grandparents
+    [maternal_grandmother, maternal_grandfather].flatten.compact
+  end
+
+  def paternal_grandparents
+    [paternal_grandmother, paternal_grandfather].flatten.compact
+  end
+
   def grandmothers
-    [(mother.mother unless mother.nil?), (father.mother unless father.nil?)].compact
+    [maternal_grandmother, paternal_grandmother].flatten.compact
+  end
+
+  def maternal_grandmother
+    mother.mother unless mother.nil?
+  end
+
+  def paternal_grandmother
+    father.mother unless father.nil?
   end
 
   def grandfathers
-     [(mother.father unless mother.nil?), (father.father unless father.nil?)].compact
+    [maternal_grandfather, paternal_grandfather].flatten.compact
+  end
+
+  def maternal_grandfather
+    mother.father unless mother.nil?
+  end
+
+  def paternal_grandfather
+    father.father unless father.nil?
   end
 
   def aunts
-    [(mother.sisters unless mother.nil?), (father.sisters unless father.nil?)].flatten.compact
+    [maternal_aunts, paternal_aunts].flatten.compact
+  end
+
+  def maternal_aunts
+    mother.sisters unless mother.nil?
+  end
+
+  def paternal_aunts
+    father.sisters unless father.nil?
   end
 
   def uncles
-    [(mother.brothers unless mother.nil?), (father.brothers unless father.nil?)].flatten.compact
+    [maternal_uncles, paternal_uncles].flatten.compact
+  end
+
+  def maternal_uncles
+    mother.brothers unless mother.nil?
+  end
+
+  def paternal_uncles
+    father.brothers unless father.nil?
   end
 
   def aunts_and_uncles

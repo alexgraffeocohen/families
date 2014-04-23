@@ -1,5 +1,5 @@
 <div class="member_input deletable_div_member">
   <%= text_field_tag('people[emails][]', "", placeholder: 'email') %>
-      <%= select_tag 'people[relations][]', options_for_select(["husband", "wife", "brother", "sister", "daughter", "son", "mother", "father", "maternal grandmother", "paternal grandmother", "maternal grandfather", "paternal grandfather", "maternal aunt", "paternal aunt", "maternal uncle", "paternal uncle", "father-in-law", "mother-in-law"]) %><%= link_to "✖", "#", class: "delete_x_member_input" %>
+      <%= select_tag 'people[relations][]', options_for_select(["husband", "wife", "brother", "sister", "daughter", "son", "mother", "father", "maternal-grandmother", "paternal-grandmother", "maternal-grandfather", "paternal-grandfather", "maternal-aunt", "paternal-aunt", "maternal-uncle", "paternal-uncle", "father-in-law", "mother-in-law"]) %><%= link_to "✖", "#", class: "delete_x_member_input" %>
   <br>
 </div>
