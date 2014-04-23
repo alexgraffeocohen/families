@@ -360,7 +360,7 @@ module Relationable
   end
 
   def cousins
-    [(maternal_nieces + maternal_nieces unless mother.nil?), (paternal_nieces + paternal_nephews unless father.nil?)].flatten.compact
+    [(maternal_nieces + maternal_nephews unless mother.nil?), (paternal_nieces + paternal_nephews unless father.nil?)].flatten.compact
   end
 
   def maternal_nieces
@@ -368,7 +368,7 @@ module Relationable
   end
 
   def maternal_nephews
-    mother.nieces
+    mother.nephews
   end
 
   def paternal_nieces
