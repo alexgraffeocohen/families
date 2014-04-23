@@ -1,7 +1,6 @@
 module Permissable
   extend ActiveSupport::Concern
 
-
   PERMISSION_HASH = {
       "1" => ["brother", "sister"],
       "2" => ["mother", "father"],
