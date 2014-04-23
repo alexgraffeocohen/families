@@ -63,11 +63,15 @@ class FamilyController < ApplicationController
       @family.person_families.build(person: current_person)
       modify_families
     else
-      @family = Family.new
-      respond_to do |f|
-        f.js   {render 'members_invalid', locals: {msge: generate_invalid_alert(result)} }
-        f.html { render 'new', :alert => generate_invalid_alert(result) }
-      end
+      render_error(result)
+    end
+  end
+
+  def render_error(result)
+    @family = Family.new
+    respond_to do |f|
+      f.js   {render 'members_invalid', locals: {msge: generate_invalid_alert(result)} }
+      f.html { render 'new', :alert => generate_invalid_alert(result) }
     end
   end
 
