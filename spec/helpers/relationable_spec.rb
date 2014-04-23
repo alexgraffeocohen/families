@@ -1,6 +1,7 @@
 require 'spec_helper'
 include Relationable
 include Findable
+include Extendable
 
 describe Relationable do
   before(:each) do
