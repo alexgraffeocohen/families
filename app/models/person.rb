@@ -1,6 +1,7 @@
 class Person < ActiveRecord::Base
   include Relationable
   include Findable
+  include Extendable
   include PeopleHelper
   include Assignable
 
