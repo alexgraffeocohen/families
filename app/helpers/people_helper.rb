@@ -10,15 +10,11 @@ module PeopleHelper
     grandparents = []
     remainder = []
     nested_array.each do |pair|
-      if pair[1] == "father" || pair[1] == "mother"
-        first.push(pair)
-      elsif pair[1] == "wife" || pair[1] == "husband"
+      if ["father", "mother", "wife", "husband"].include?(pair[1])
         first.push(pair)
       elsif pair[1].include?("grand")
        grandparents.push(pair)
-      elsif pair[1].include?("aunt")
-        aunts_and_uncles.push(pair)
-      elsif pair[1].include?("uncle")
+      elsif pair[1].include?("aunt") || pair[1].include?("uncle")
         aunts_and_uncles.push(pair)
       else
         remainder.push(pair)
