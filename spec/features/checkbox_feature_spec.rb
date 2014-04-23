@@ -14,13 +14,13 @@ feature "Checkboxes" do
   end
 
   scenario "about us page displays correctly" do
-   visit "families/#{@brady.name_slug}/conversations"
-   save_and_open_page
-   page.check('1')
-   click_link('By Person')
-   cindy_checkbox = find('#conversation_parse_permission_cindy7')
-   carol_checkbox = find('#conversation_parse_permission_carol3')
-   expect(cindy_checkbox.checked?).to eq(true)
-   expect(carol_checkbox.checked?).to eq(false)
+     visit "families/#{@brady.name_slug}/conversations"
+     page.check('conversation_parse_permission_1')
+     click_link('By Person')
+     page.has_checked_field?('conversation_parse_permission_cindy#{@cindy.id}')
+     page.has_unchecked_field?('conversation_parse_permission_carol#{@carol.id}')
+  end
+
+  scenario "about us page displays correctly" do
   end
 end
