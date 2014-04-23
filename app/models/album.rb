@@ -9,7 +9,4 @@ class Album < ActiveRecord::Base
 
   attr_reader :parse_permission
 
-  def set_family(params)
-    find_family(params[:id]).id
-  end
 end

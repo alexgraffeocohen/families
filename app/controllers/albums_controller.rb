@@ -14,8 +14,12 @@ class AlbumsController < ApplicationController
 
   def create
     @album = Album.new(album_params)
-    @album.family_id = set_family(params)
+    @album.family_id = find_family(params[:id]).id
     @album.permissions = @album.parse(params[:album][:parse_permission])
+    create_block(@family, @album)
+  end
+
+  def create_block(family, album)
     respond_to do |f|
       if @album.save
         current_person.albums << @album
