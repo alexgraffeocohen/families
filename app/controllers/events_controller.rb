@@ -41,7 +41,7 @@ class EventsController < ApplicationController
   end
 
   private
-
+  
   def save_times
     save_time("start") unless params[:start_time].nil?
     save_time("end") unless params[:end_time].nil?
@@ -52,12 +52,20 @@ class EventsController < ApplicationController
   end
 
   def save_time(period)
-    period_hours = params["#{period}_time".to_sym].split(":").first.to_i
-    period_minutes = params["#{period}_time".to_sym].split(":").second.to_i
-    parsed_date = DateTime.parse(params["event"]["#{period}_date"])
-    date_with_time = (parsed_date + period_hours.hours + period_minutes.minutes).to_s
-
+    date_with_time = (parsed_date(period) + period_hours(period).hours + period_minutes(period).minutes).to_s
     @event.send("#{period}_date=".to_sym, date_with_time)
+  end
+
+  def period_hours(period)
+    params["#{period}_time".to_sym].split(":").first.to_i
+  end
+
+  def period_minutes(period)
+    params["#{period}_time".to_sym].split(":").second.to_i
+  end
+
+  def parsed_date(period)
+    DateTime.parse(params["event"]["#{period}_date"])
   end
 
   def event_params
