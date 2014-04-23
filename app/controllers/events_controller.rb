@@ -18,12 +18,15 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.permissions = @event.parse(params[:event][:parse_permission])
+    create_block(@event)
+  end
+
+  def create_block(event)
     respond_to do |f|
       if @event.valid?
         save_times
         @event.owner = current_person
         @family.events << @event
-        
         @event.save
         f.js { render js: "window.location='#{family_events_path}'" }
       else
