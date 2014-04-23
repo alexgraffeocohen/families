@@ -80,33 +80,28 @@ module Assignable
     member.gender = "F"
   end
 
-  def maternal_aunt_or_uncle=(member)
-    member.mother = self.mother.mother if self.mother.mother
-    member.father = self.mother.father if self.mother.father
+  def add_aunt_or_uncle(member, parent)
+    member.mother = (self.send(parent)).mother if (self.send(parent)).mother
+    member.father = (self.send(parent)).father if (self.send(parent)).father
   end
-
-  def paternal_aunt_or_uncle=(member)
-    member.mother = self.father.mother if self.father.mother
-    member.father = self.father.father if self.father.father
-  end
-
+  
   def maternal_aunt=(member)
-    self.maternal_aunt_or_uncle = member
+    self.add_aunt_or_uncle(member, "mother")
     member.gender = "F"
   end
 
   def paternal_aunt=(member)
-    self.paternal_aunt_or_uncle = member
+    self.add_aunt_or_uncle(member, "father")
     member.gender = "F"
   end
 
   def maternal_uncle=(member)
-    self.maternal_aunt_or_uncle = member
+    self.add_aunt_or_uncle(member, "mother")
     member.gender = "M"
   end
 
   def paternal_uncle=(member)
-    self.paternal_aunt_or_uncle = member
+    self.add_aunt_or_uncle(member, "father")
     member.gender = "M"
   end
 
