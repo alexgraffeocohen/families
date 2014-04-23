@@ -8,4 +8,8 @@ class Album < ActiveRecord::Base
   validates_presence_of :name, :permissions
 
   attr_reader :parse_permission
+
+  def set_family(params)
+    find_family(params[:id]).id
+  end
 end
