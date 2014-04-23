@@ -130,16 +130,29 @@ class FamilyController < ApplicationController
   end
 
   def generate_invalid_alert(result)
-    message = ""
+    check_val(result)
+    @message
+  end
+
+  def check_val(result)
+    partial_validation(result)
+    full_validation(result)
+  end
+
+  def partial_validation(result)
+    @message = ""
     validation_hash[:full_match_needed].each do |key, value|
       if result == key
-        message = "To add a #{key}, please also add #{value[0]}"
+        @message = "To add a #{key}, please also add #{value[0]}"
       end
     end
+  end
 
+  def full_validation(result)
+    @message = ""
     validation_hash[:partial_match_needed].each do |key, value|
       if result == key
-        message = "To add a #{key}, please also add 
+        @message = "To add a #{key}, please also add 
         #{if value[2]
           value[0]+' or '+value[1]+' and '+value[2]
         elsif value[1]
@@ -147,8 +160,6 @@ class FamilyController < ApplicationController
         end }"
       end
     end
-
-    message
   end
 
   def set_family
