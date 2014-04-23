@@ -4,7 +4,7 @@
 
 ## Description
 
-All in the Family is a closed social network for you and your family. We made it as easy as possible to share photos, plan events and have conversations with family members. The application also includes custom permissions so you don't have to share your bar-hopping photos with your grandparents. Interested? Give it a try [here](www.allinthefam.net) and let us know what you think!
+All in the Family is a closed social network for you and your family. We made it as easy as possible to share photos, plan events and have conversations with family members. The application also includes custom permissions so you don't have to share your bar-hopping photos with your grandparents. Interested? Give it a try [here](http://www.allinthefam.net) and let us know what you think!
 
 ## Screenshots
 
