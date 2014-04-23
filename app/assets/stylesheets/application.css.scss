@@ -186,3 +186,18 @@ $jumbotron-bg: white;
   padding: 5px;
   margin-right: 5px;
 }
+
+.left_about {
+  @extend .white_div;
+  height: 400px;
+  float: left;
+  width: 30%;
+}
+
+
+.right_about {
+  @extend .white_div;
+  height: 400px;
+  float: right;
+  width: 60%;
+}
