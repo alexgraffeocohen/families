@@ -59,9 +59,9 @@ class FamilyController < ApplicationController
   def create
     result = any_invalid?(params["people"]["relations"])
     if result == false 
-        @family = Family.find_or_create_by(family_params)
-        @family.person_families.build(person: current_person)
-        modify_families
+      @family = Family.find_or_create_by(family_params)
+      @family.person_families.build(person: current_person)
+      modify_families
     else
       @family = Family.new
       respond_to do |f|
