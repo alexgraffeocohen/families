@@ -5,3 +5,4 @@ require 'capybara/poltergeist'
 # require 'capybara/webkit/matchers'
 
 Capybara.javascript_driver = :poltergeist
+
