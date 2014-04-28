@@ -4,7 +4,7 @@ require 'spec_helper'
 include Warden::Test::Helpers
 Warden.test_mode!
 
-feature "Checkboxes as Greg" do
+feature "Group checkboxes as Greg" do
   before :each do
     make_brady_bunch
     login_as(@greg, :scope => :person)
@@ -47,7 +47,7 @@ feature "Checkboxes as Greg" do
   end
 end
 
-feature "Checkboxes as Connie" do
+feature "Group checkboxes as Connie" do
   before :each do
     make_brady_bunch
     login_as(@connie, :scope => :person)
@@ -81,7 +81,7 @@ feature "Checkboxes as Connie" do
   end
 end
 
-feature "Checkboxes as Mike" do
+feature "Group checkboxes as Mike" do
   before :each do
     make_brady_bunch
     login_as(@mike, :scope => :person)
