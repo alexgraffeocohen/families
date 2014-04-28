@@ -18,29 +18,33 @@ feature "Individual checkboxes as Greg" do
 
   scenario "sibling checkbox", js: true do
     page.check('conversation_parse_permission_1')
-    page.uncheck('conversation_parse_permission_#{@cindy.permission_slug}')
+    page.uncheck("conversation_parse_permission_#{@cindy.permission_slug}")
+    sleep 2
     expect(find("#conversation_parse_permission_1").checked?).to eq(false)
     expect(find("#conversation_parse_permission_#{@marcia.permission_slug}").checked?).to eq(true)
   end
 
-  xscenario "parent checkbox", js: true do
+  scenario "parent checkbox", js: true do    
     page.check('conversation_parse_permission_2')
-    expect(find('#conversation_parse_permission_9').checked?).to eq(false)
+    page.uncheck("conversation_parse_permission_#{@carol.permission_slug}")
+    sleep 2
+    expect(find("#conversation_parse_permission_2").checked?).to eq(false)
     expect(find("#conversation_parse_permission_#{@mike.permission_slug}").checked?).to eq(true)
-    expect(find("#conversation_parse_permission_#{@marcia.permission_slug}").checked?).to eq(false)
   end
 
-  xscenario "grandparent checkbox", js: true do
+  scenario "grandparent checkbox", js: true do
     page.check('conversation_parse_permission_4')
-    expect(find('#conversation_parse_permission_1').checked?).to eq(false)
-    expect(find("#conversation_parse_permission_#{@connie.permission_slug}").checked?).to eq(true)
-    expect(find("#conversation_parse_permission_#{@jon.permission_slug}").checked?).to eq(false)
+    page.uncheck("conversation_parse_permission_#{@connie.permission_slug}")
+    sleep 2
+    expect(find("#conversation_parse_permission_4").checked?).to eq(false)
+    expect(find("#conversation_parse_permission_#{@harold.permission_slug}").checked?).to eq(true)
   end
 
-  xscenario "aunts/uncles checkbox", js: true do
+  scenario "aunts/uncles checkbox", js: true do
     page.check('conversation_parse_permission_9')
-    expect(find('#conversation_parse_permission_2').checked?).to eq(false)
+    page.uncheck("conversation_parse_permission_#{@jon.permission_slug}")
+    sleep 2
+    expect(find("#conversation_parse_permission_9").checked?).to eq(false)
     expect(find("#conversation_parse_permission_#{@jenny.permission_slug}").checked?).to eq(true)
-    expect(find("#conversation_parse_permission_#{@bobby.permission_slug}").checked?).to eq(false)
   end
 end
