@@ -9,6 +9,7 @@ feature "Group checkboxes as Greg" do
     make_brady_bunch
     login_as(@greg, :scope => :person)
     visit "/families/#{@brady.name_slug}/conversations"
+    binding.pry
     find_link("By Person").trigger('click')
   end
 
