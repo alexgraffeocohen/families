@@ -22,7 +22,6 @@ We created this application because currently there is no great solution for fam
 * Create events and track them using our calendar
 * Use custom permissions to only share what you want to with specific members of your family
 
-
 ## Usage
 
 Create an account and see how much you enjoy having a closed social network for you and your family. Once you confirm, you'll be able to share all of your life's experiences with those closest to you.
