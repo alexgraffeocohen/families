@@ -5,7 +5,7 @@
 <br> 
   <% @relationships.each_with_index do |relation, index| %>
     <% unless current_person.send(relation).blank? || [current_person.send(relation)].flatten.none? {|member| member.confirmed?} %>
-      <%= f.check_box :parse_permission, {multiple: true, class: "group"}, (index+1), nil %> <%= capitalize_string(relation) %>
+      <%= f.check_box :parse_permission, {multiple: true, class: "group"}, (index+1), nil %> <%= relation.titleize %>
       <br>
     <% end %>
   <% end %>

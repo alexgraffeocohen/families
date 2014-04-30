@@ -1,5 +1,5 @@
 <div class="center">
-  <h1><%= capitalize_string(@event.name) %></h1>
+  <h1><%= @event.name.titleize %></h1>
   <h5>Who can view this event?</h5>
   <h5 id="permitted_members"><%= permitted_except_viewer(@event) %></h5>
   <h5>Event Owner: <%= @event.owner.first_name %></h5>

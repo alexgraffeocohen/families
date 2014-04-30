@@ -1,6 +1,6 @@
 <div class="center">
   <input type="text" value="<%= @album.name %>" id="album_title_field" class="large_font input_name hidden">
-  <span data-id= "<%= @album.id %>" data-family= "<%= @family.id %>" class="large_font album_name"><%= capitalize_string(@album.name) %></span><br>
+  <span data-id= "<%= @album.id %>" data-family= "<%= @family.id %>" class="large_font album_name"><%= @album.name.titleize %></span><br>
   <%= @album.created_at.strftime("%b %Y") %>
   <h5>Who can view this album? <span id="permitted_members"><%= permitted_except_viewer(@album) %></span></h5>
   <h5>Album Owner: <%= @album.owner.first_name %></h5>

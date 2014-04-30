@@ -11,11 +11,6 @@ class ApplicationController < ActionController::Base
     @family = find_family(params[:id])
   end
 
-  def capitalize_string(arg)
-    arg.gsub('_', ' ').split(' ').collect(&:capitalize).join(' ')
-  end
-  helper_method :capitalize_string
-
   def permitted_except_viewer(object)
     object.all_permitted_members.gsub(current_person.first_name, "You")
   end
