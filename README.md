@@ -32,7 +32,7 @@ We love pull requests! We've made incredible progress but we would love communit
 
 ## Future
 
-We're currently implementing several features to enhance user experience like in-app texting and custom album support. We would love to eventually create an iOS app using RubyMotion.
+We're currently implementing several features to enhance user experience like in-app texting, an activity feed and custom album support. We would love to eventually create an iOS app using RubyMotion. If you have any suggestions or would ust like to say hi please reach out!
 
 ## Author
 
