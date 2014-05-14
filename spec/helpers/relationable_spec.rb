@@ -226,6 +226,22 @@ describe Relationable do
 
     it "has maternal grandfather" do 
       expect(@greg.grandfathers).to include(@harold)
-    end 
+    end
+
+    it "has paternal great-grandfather" do
+      lysander = create(:person, gender: "M", first_name: "Lysander")
+      @robert.father = lysander
+      @robert.save
+      # this only works because it checks mike and then robert
+      expect(@greg.paternal_great_grandfather).to eq(lysander)
+    end
+
+    it "has maternal great-grandfather" do
+      jobe = create(:person, gender: "M", first_name: "Jobe")
+      @connie.father = jobe
+      @connie.save
+      # this only works because it checks carol and then connie
+      expect(@greg.maternal_great_grandfather).to eq(jobe)
+    end
   end
 end

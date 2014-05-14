@@ -55,6 +55,17 @@ class Person < ActiveRecord::Base
     member.gender = "M"
   end
 
+  def method_missing(method_name, *args)
+    parts = method_name.to_s.split('_')
+    parent = determine_family_side(parts.first)
+    if parts[-2] == "great"
+      relation_method = "#{parts.first}_#{parts.last}"
+      self.send(parent).send(relation_method)
+    else
+      super
+    end
+  end
+
   def male?
     gender == "M"
   end
@@ -142,6 +153,16 @@ class Person < ActiveRecord::Base
   end
 
   private 
+
+  def determine_family_side(designation)
+    if designation == "maternal"
+      "mother"
+    elsif designation == "paternal"
+      "father"
+    else
+     nil
+    end  
+  end
 
   def set_permission_slug
     if self.permission_slug.nil?
