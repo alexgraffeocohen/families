@@ -56,11 +56,15 @@ class Person < ActiveRecord::Base
   end
 
   def method_missing(method_name, *args)
+    # now that I do not call the paternal/maternal version of the method to avoid over-specificity, 
+    # I might want to make paternal_grandfather plural so that I can call fathers on father
+    # and keep method_missing logic consistent
+
     parts = method_name.to_s.split('_')
-    parent = determine_family_side(parts.first)
-    if parts[-2] == "great"
-      relation_method = "#{parts.first}_#{parts.last}"
-      self.send(parent).send(relation_method)
+    specified_parent = determine_family_side(parts.first)
+    relation = parts.last
+    if parts.include?("great")
+      handle_great_relations(specified_parent, relation)
     else
       super
     end
@@ -162,6 +166,14 @@ class Person < ActiveRecord::Base
     else
      nil
     end  
+  end
+
+  def handle_great_relations(specified_parent, relation)
+    if specified_parent
+      self.try(specified_parent).try(relation)
+    else
+      [self.try(:mother).try(relation), self.try(:father).try(relation)].flatten.compact
+    end
   end
 
   def set_permission_slug

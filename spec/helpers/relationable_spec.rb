@@ -180,17 +180,15 @@ describe Relationable do
     end
 
     it "can have great aunts" do
-      great_aunt = create(:person, gender: "F")
-      mother = create(:person, gender: "F")
-      @carol.mother, great_aunt.mother = mother, mother
-      @carol.save
-      great_aunt.save
+      bennie = create(:person, gender: "F", first_name: "Bennie")
+      bennie.mother = @connie
+      bennie.save
 
       marcia_son = create(:person, gender: "M")
       marcia_son.mother = @marcia
       marcia_son.save
 
-      expect(marcia_son.great_aunts).to include(great_aunt)
+      expect(marcia_son.great_aunts).to include(bennie)
     end
 
     it "can have nephews" do
@@ -228,20 +226,20 @@ describe Relationable do
       expect(@greg.grandfathers).to include(@harold)
     end
 
-    it "has paternal great-grandfather" do
+    it "has paternal great-grandfathers" do
       lysander = create(:person, gender: "M", first_name: "Lysander")
       @robert.father = lysander
       @robert.save
-      # this only works because it checks mike and then robert
-      expect(@greg.paternal_great_grandfather).to eq(lysander)
+      
+      expect(@greg.paternal_great_grandfathers).to include(lysander)
     end
 
-    it "has maternal great-grandfather" do
+    it "has maternal great-grandfathers" do
       jobe = create(:person, gender: "M", first_name: "Jobe")
-      @connie.father = jobe
-      @connie.save
-      # this only works because it checks carol and then connie
-      expect(@greg.maternal_great_grandfather).to eq(jobe)
+      @harold.father = jobe
+      @harold.save
+      
+      expect(@greg.maternal_great_grandfathers).to include(jobe)
     end
   end
 end
