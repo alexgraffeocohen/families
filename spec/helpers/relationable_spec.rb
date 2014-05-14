@@ -115,13 +115,7 @@ describe Relationable do
   end
 
   it "can determine daughter-in-law" do
-    husband = create(:person)
-    wife = create(:person, gender: "F")
-    husbands_mother = create(:person, gender: "F")
-    husband.mother_id = husbands_mother.id
-    husband.add_spouse(wife)
-
-    expect(wife.relationship_to(husbands_mother)).to eq('daughter-in-law')
+    expect(@carol.relationship_to(@rachel)).to eq('daughter-in-law')
   end
 
   describe "relationable can tell if a person" do
@@ -166,29 +160,20 @@ describe Relationable do
     end
 
     it "can have great uncles" do
-      great_uncle = create(:person, gender: "M")
-      father = create(:person, gender: "M")
-      @mike.father, great_uncle.father = father, father
-      @mike.save
-      great_uncle.save
-
       greg_daughter = create(:person, gender: "F")
       greg_daughter.father = @greg
       greg_daughter.save
-
-      expect(greg_daughter.great_uncles).to include(great_uncle)
+      binding.pry
+      
+      expect(greg_daughter.great_uncles).to include(@jon, @dan)
     end
 
     it "can have great aunts" do
-      bennie = create(:person, gender: "F", first_name: "Bennie")
-      bennie.mother = @connie
-      bennie.save
-
       marcia_son = create(:person, gender: "M")
       marcia_son.mother = @marcia
       marcia_son.save
-
-      expect(marcia_son.great_aunts).to include(bennie)
+     
+      expect(marcia_son.great_aunts).to include(@rebekah, @jenny)
     end
 
     it "can have nephews" do
