@@ -5,47 +5,47 @@ describe 'Relationable and Extendable' do
     make_brady_bunch
   end
 
-  it "has mother" do
+  it "can determine mother" do
     expect(@marcia.mother).to eq(@carol)
   end
 
-  it "can have a wife" do
+  it "can determine a wife" do
     expect(@harold.wife).to eq(@connie)
   end
 
-  it "can have a husband" do
+  it "can determine a husband" do
     expect(@carol.husband).to eq(@mike)
   end
 
-  it "can have sons" do
+  it "can determine sons" do
     expect(@carol.sons).to include(@greg)
   end
 
-  it "can have daughters" do
+  it "can determine daughters" do
     expect(@carol.daughters).to include(@marcia)
   end
 
-  it "has father" do 
+  it "can determine father" do 
     expect(@greg.father).to eq(@mike)
   end
 
-  it "has brothers" do
+  it "can determine brothers" do
     expect(@marcia.brothers).to include(@greg)
   end
 
-  it "has sisters" do 
+  it "can determinecan determine sisters" do 
     expect(@greg.sisters).to include(@marcia)
   end
 
-  it "can have aunts" do
+  it "can determine aunts" do
     expect(@greg.aunts).to include(@jenny)
   end
 
-  it "can have uncles" do
+  it "can determine uncles" do
     expect(@greg.uncles).to include(@jon)
   end
 
-  it "can have great uncles" do
+  it "can determine great uncles" do
     greg_daughter = create(:person, gender: "F")
     greg_daughter.father = @greg
     greg_daughter.save
@@ -53,7 +53,7 @@ describe 'Relationable and Extendable' do
     expect(greg_daughter.great_uncles).to include(@jon, @dan)
   end
 
-  it "can have great aunts" do
+  it "can determine great aunts" do
     marcia_son = create(:person, gender: "M")
     marcia_son.mother = @marcia
     marcia_son.save
@@ -61,23 +61,23 @@ describe 'Relationable and Extendable' do
     expect(marcia_son.great_aunts).to include(@rebekah, @jenny)
   end
 
-  it "can have nephews" do
+  it "can determine nephews" do
     expect(@jon.nephews).to include(@greg)
   end
 
-  it "can have nieces" do
+  it "can determine nieces" do
     expect(@jenny.nieces).to include(@marcia)
   end
 
-  it "can have cousins" do
+  it "can determine cousins" do
     expect(@marcia.cousins).to include(@jon_jr)
   end
 
-  it "can have brothers_in_law" do
+  it "can determine brothers_in_law" do
     expect(@jenny.brother_in_laws).to include(@mike)
   end
 
-  it "can have sisters_in_law" do
+  it "can determinecan determine sisters_in_law" do
     expect(@mike.sister_in_laws).to include(@jenny)
   end
 
@@ -86,17 +86,25 @@ describe 'Relationable and Extendable' do
     expect(@carol.siblings_in_law).to include(@rebekah)
     expect(@mike.siblings_in_law).to include(@jenny)
     expect(@jenny.siblings_in_law).to include(@mike)
-  end  
-
-  it "has maternal grandmother" do 
-    expect(@greg.grandmothers).to include(@connie)
-  end 
-
-  it "has maternal grandfather" do 
-    expect(@greg.grandfathers).to include(@harold)
   end
 
-  it "has paternal great-grandfathers" do
+  it "can determine paternal grandfather" do
+    expect(@greg.paternal_grandfather).to eq(@robert)
+  end
+
+  it "can determine paternal grandmother" do
+    expect(@greg.paternal_grandmother).to eq(@rachel)
+  end  
+
+  it "can determine maternal grandmother" do 
+    expect(@greg.maternal_grandmother).to eq(@connie)
+  end 
+
+  it "can determine maternal grandfather" do 
+    expect(@greg.maternal_grandfather).to eq(@harold)
+  end
+
+  it "can determine paternal great-grandfathers" do
     lysander = create(:person, gender: "M", first_name: "Lysander")
     @robert.father = lysander
     @robert.save
@@ -104,7 +112,7 @@ describe 'Relationable and Extendable' do
     expect(@greg.paternal_great_grandfathers).to include(lysander)
   end
 
-  it "has maternal great-grandfathers" do
+  it "can determine maternal great-grandfathers" do
     jobe = create(:person, gender: "M", first_name: "Jobe")
     @harold.father = jobe
     @harold.save
