@@ -171,12 +171,21 @@ class Person < ActiveRecord::Base
 
   def handle_great_relations(specified_parent, relation, levels_up)
     if specified_parent
-      binding.pry
       ancestor = grab_ancestor(self, specified_parent, levels_up)
       ancestor.try(relation)
     else
-      [self.try(:mother).try(relation), self.try(:father).try(relation)].flatten.compact
+      ancestor_on_mothers_side = grab_ancestor(self, "mother", levels_up) if self.mother
+      ancestor_on_fathers_side = grab_ancestor(self, "father", levels_up) if self.father
+
+      construct_great_relations_array(ancestor_on_mothers_side, ancestor_on_fathers_side, relation)
     end
+  end
+
+  def construct_great_relations_array(mothers_ancestor, fathers_ancestor, relation)
+    relations = []
+    relations << mothers_ancestor.try(relation) if mothers_ancestor
+    relations << fathers_ancestor.try(relation) if fathers_ancestor
+    relations.flatten.compact
   end
 
   def count_greats(parts)

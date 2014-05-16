@@ -61,6 +61,17 @@ describe 'Relationable and Extendable' do
     expect(marcia_son.great_aunts).to include(@rebekah, @jenny)
   end
 
+  it "can determine great-great aunts" do
+    alex = create(:person, gender: "F", first_name: "Alex")
+    ophelia = create(:person, gender: "F", first_name: "Ophelia")
+    alex.mother = @marcia
+    ophelia.mother = alex
+    ophelia.save
+    alex.save
+
+    expect(ophelia.great_great_aunts).to include(@rebekah, @jenny)
+  end
+
   it "can determine nephews" do
     expect(@jon.nephews).to include(@greg)
   end
