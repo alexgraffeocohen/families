@@ -64,7 +64,8 @@ class Person < ActiveRecord::Base
     specified_parent = determine_family_side(parts.first)
     relation = parts.last
     if parts.include?("great")
-      handle_great_relations(specified_parent, relation)
+      levels_up = count_greats(parts)
+      handle_great_relations(specified_parent, relation, levels_up)
     else
       super
     end
@@ -168,13 +169,31 @@ class Person < ActiveRecord::Base
     end  
   end
 
-  def handle_great_relations(specified_parent, relation)
+  def handle_great_relations(specified_parent, relation, levels_up)
     if specified_parent
-      self.try(specified_parent).try(relation)
+      binding.pry
+      ancestor = grab_ancestor(self, specified_parent, levels_up)
+      ancestor.try(relation)
     else
       [self.try(:mother).try(relation), self.try(:father).try(relation)].flatten.compact
     end
   end
+
+  def count_greats(parts)
+    count = 0  
+    parts.each { |part| count+=1 if part == "great" }  
+    count
+  end
+
+  def grab_ancestor(person, parent, levels_up)
+    relation = person.send("#{parent}")
+    levels_up -= 1
+   if levels_up > 0
+     grab_ancestor(relation, parent, levels_up)
+   else
+    relation
+   end
+ end  
 
   def set_permission_slug
     if self.permission_slug.nil?

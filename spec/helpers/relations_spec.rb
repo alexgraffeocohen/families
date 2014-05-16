@@ -33,7 +33,7 @@ describe 'Relationable and Extendable' do
     expect(@marcia.brothers).to include(@greg)
   end
 
-  it "can determinecan determine sisters" do 
+  it "can determine sisters" do 
     expect(@greg.sisters).to include(@marcia)
   end
 
@@ -77,7 +77,7 @@ describe 'Relationable and Extendable' do
     expect(@jenny.brother_in_laws).to include(@mike)
   end
 
-  it "can determinecan determine sisters_in_law" do
+  it "can determine sisters_in_law" do
     expect(@mike.sister_in_laws).to include(@jenny)
   end
 
@@ -110,6 +110,17 @@ describe 'Relationable and Extendable' do
     @robert.save
     
     expect(@greg.paternal_great_grandfathers).to include(lysander)
+  end
+
+  it "can determine paternal great-great-grandfathers" do
+    lysander = create(:person, gender: "M", first_name: "Lysander")
+    demetrius = create(:person, gender: "M", first_name: "Demetrius")
+    @robert.father = lysander
+    lysander.father = demetrius
+    lysander.save
+    @robert.save
+
+    expect(@greg.paternal_great_great_grandfathers).to include(demetrius)
   end
 
   it "can determine maternal great-grandfathers" do
