@@ -56,10 +56,6 @@ class Person < ActiveRecord::Base
   end
 
   def method_missing(method_name, *args)
-    # now that I do not call the paternal/maternal version of the method to avoid over-specificity, 
-    # I might want to make paternal_grandfather plural so that I can call fathers on father
-    # and keep method_missing logic consistent
-
     parts = method_name.to_s.split('_')
     specified_parent = determine_parent(parts.first)
     relation = parts.last
@@ -208,8 +204,6 @@ class Person < ActiveRecord::Base
   end
 
   def grab_ancestors(person, parent, relation, levels_up)
-    # it's not working because it's doing all recursion within line 217
-    # and then just going around the loop again with levels_up - 1
     while levels_up > 0
       ancestor = person.send("#{parent}")
       levels_up -= 1

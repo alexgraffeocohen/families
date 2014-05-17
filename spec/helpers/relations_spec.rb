@@ -62,14 +62,31 @@ describe 'Relationable and Extendable' do
   end
 
   it "can determine great-great aunts" do
-    alex = create(:person, gender: "F", first_name: "Alex")
+    alex = create(:person, gender: "M", first_name: "Alex")
+    diane = create(:person, gender: "F", first_name: "Diane")
+    diane_father = create(:person, gender: "M", first_name: "Diane Father")
+    diane_great_aunt = create(:person, gender: "F", first_name: "Diane Great Aunt")
+    diane_grandfather = create(:person, gender: "M", first_name: "Diane Grandfather")
+    diane_great_grandfather = create(:person, gender: "M", first_name: "Diane Great-Grandfather")
     ophelia = create(:person, gender: "F", first_name: "Ophelia")
+
     alex.mother = @marcia
-    ophelia.mother = alex
+    ophelia.father = alex
+    ophelia.mother = diane
+    diane.father = diane_father
+    diane_father.father = diane_grandfather
+    diane_grandfather.father = diane_great_grandfather
+    diane_great_aunt.father = diane_great_grandfather
+    
+
+    diane_grandfather.save
+    diane_father.save
+    diane_great_aunt.save
+    diane.save
     ophelia.save
     alex.save
 
-    expect(ophelia.great_great_aunts).to include(@rebekah, @jenny)
+    expect(ophelia.great_great_aunts).to include(@rebekah, @jenny, diane_great_aunt)
   end
 
   it "can determine nephews" do
