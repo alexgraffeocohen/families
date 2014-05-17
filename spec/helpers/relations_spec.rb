@@ -46,11 +46,11 @@ describe 'Relationable and Extendable' do
   end
 
   it "can determine great uncles" do
-    greg_daughter = create(:person, gender: "F")
-    greg_daughter.father = @greg
-    greg_daughter.save
+    ally = create(:person, gender: "F", first_name: "Ally")
+    ally.father = @greg
+    ally.save
     
-    expect(greg_daughter.great_uncles).to include(@jon, @dan)
+    expect(ally.great_uncles).to include(@jon, @dan)
   end
 
   it "can determine great aunts" do

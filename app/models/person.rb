@@ -61,11 +61,12 @@ class Person < ActiveRecord::Base
     # and keep method_missing logic consistent
 
     parts = method_name.to_s.split('_')
-    specified_parent = determine_family_side(parts.first)
+    specified_parent = determine_parent(parts.first)
     relation = parts.last
     if parts.include?("great")
       levels_up = count_greats(parts)
       handle_great_relations(specified_parent, relation, levels_up)
+      binding.pry
     else
       super
     end
@@ -159,7 +160,7 @@ class Person < ActiveRecord::Base
 
   private 
 
-  def determine_family_side(designation)
+  def determine_parent(designation)
     if designation == "maternal"
       "mother"
     elsif designation == "paternal"
@@ -169,22 +170,29 @@ class Person < ActiveRecord::Base
     end  
   end
 
-  def handle_great_relations(specified_parent, relation, levels_up)
-    if specified_parent
-      ancestor = grab_ancestor(self, specified_parent, levels_up)
-      ancestor.try(relation)
-    else
-      ancestor_on_mothers_side = grab_ancestor(self, "mother", levels_up) if self.mother
-      ancestor_on_fathers_side = grab_ancestor(self, "father", levels_up) if self.father
-
-      construct_great_relations_array(ancestor_on_mothers_side, ancestor_on_fathers_side, relation)
+  def determine_familial_side(parent)
+    if parent == "mother"
+      "maternal"
+    elsif parent == "father"
+      "paternal"
     end
   end
 
-  def construct_great_relations_array(mothers_ancestor, fathers_ancestor, relation)
+  def handle_great_relations(specified_parent, relation, levels_up)
+    if specified_parent
+      grab_ancestors(self, specified_parent, relation, levels_up)
+    else
+      ancestors_on_mothers_side = grab_ancestors(self, "mother", relation, levels_up) if self.mother
+      ancestors_on_fathers_side = grab_ancestors(self, "father", relation, levels_up) if self.father
+      binding.pry
+      construct_great_relations_array(ancestors_on_mothers_side, ancestors_on_fathers_side, relation)
+    end
+  end
+
+  def construct_great_relations_array(mothers_ancestors, fathers_ancestors, relation)
     relations = []
-    relations << mothers_ancestor.try(relation) if mothers_ancestor
-    relations << fathers_ancestor.try(relation) if fathers_ancestor
+    relations << mothers_ancestors if mothers_ancestors
+    relations << fathers_ancestors if fathers_ancestors
     relations.flatten.compact
   end
 
@@ -194,15 +202,26 @@ class Person < ActiveRecord::Base
     count
   end
 
-  def grab_ancestor(person, parent, levels_up)
-    relation = person.send("#{parent}")
-    levels_up -= 1
-   if levels_up > 0
-     grab_ancestor(relation, parent, levels_up)
-   else
-    relation
-   end
- end  
+  def construct_relation_method(relation, levels_up)
+    parts = []
+    levels_up.times { parts << "great_" }
+    parts << relation
+    parts.join
+  end
+
+  def grab_ancestors(person, parent, relation, levels_up)
+    returned_people = []
+    while levels_up > 0
+      binding.pry
+      ancestor = person.send("#{parent}")
+      levels_up -= 1
+      relation_method = construct_relation_method(relation, levels_up)
+      ancestor.send(relation_method)
+    end
+    binding.pry
+    returned_people << ancestor.send(relation)
+    returned_people.flatten
+  end  
 
   def set_permission_slug
     if self.permission_slug.nil?
