@@ -65,8 +65,7 @@ class Person < ActiveRecord::Base
     relation = parts.last
     if parts.include?("great")
       levels_up = count_greats(parts)
-      handle_great_relations(specified_parent, relation, levels_up)
-      binding.pry
+      ancestors = find_great_relations(specified_parent, relation, levels_up)
     else
       super
     end
@@ -178,13 +177,12 @@ class Person < ActiveRecord::Base
     end
   end
 
-  def handle_great_relations(specified_parent, relation, levels_up)
+  def find_great_relations(specified_parent, relation, levels_up)
     if specified_parent
       grab_ancestors(self, specified_parent, relation, levels_up)
     else
       ancestors_on_mothers_side = grab_ancestors(self, "mother", relation, levels_up) if self.mother
       ancestors_on_fathers_side = grab_ancestors(self, "father", relation, levels_up) if self.father
-      binding.pry
       construct_great_relations_array(ancestors_on_mothers_side, ancestors_on_fathers_side, relation)
     end
   end
@@ -210,17 +208,15 @@ class Person < ActiveRecord::Base
   end
 
   def grab_ancestors(person, parent, relation, levels_up)
-    returned_people = []
+    # it's not working because it's doing all recursion within line 217
+    # and then just going around the loop again with levels_up - 1
     while levels_up > 0
-      binding.pry
       ancestor = person.send("#{parent}")
       levels_up -= 1
       relation_method = construct_relation_method(relation, levels_up)
-      ancestor.send(relation_method)
+      return ancestor.send(relation_method)
     end
-    binding.pry
-    returned_people << ancestor.send(relation)
-    returned_people.flatten
+    ancestor.send(relation)
   end  
 
   def set_permission_slug
